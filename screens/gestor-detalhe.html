@@ -11,7 +11,7 @@
 
 <div class="app-shell">
   <aside class="app-side">
-    <div class="brand"><div class="logo"><span class="mark">AM</span> Automonitoramento</div><small>SP-Águas · UGRHI-07</small></div>
+    <div class="brand"><div class="logo"><span class="mark">SP</span> Automonitoramento</div><small>SP-Águas · UGRHI-07</small></div>
     <div class="nav-sec">Operação</div>
     <a class="nav-i" href="gestor-dashboard.html"><span class="ic"></span>Dashboard</a>
     <a class="nav-i" href="gestor-mapa.html"><span class="ic"></span>Mapa</a>
@@ -26,72 +26,77 @@
     <div class="app-top">
       <div class="crumb"><a href="gestor-mapa.html">Pontos</a> / <b style="color:var(--ink)">07-1001</b></div>
       <span class="sp"></span>
-      <span class="pill bad"><i class="dot"></i>Desvio: volume &gt; outorga</span>
+      <span class="pill bad">Desvio: volume &gt; outorga</span>
       <span class="btn sub" style="padding:6px 12px">Exportar</span>
     </div>
 
-    <div class="app-body stack">
+    <div class="app-body">
+      <div class="bento">
 
-      <!-- header identity -->
-      <div class="card">
-        <div class="row" style="justify-content:space-between;align-items:flex-start">
-          <div>
-            <div class="eyebrow">Ponto de captação · 07-1001</div>
-            <h1 style="margin-top:6px">Indústria Cubatão S/A</h1>
-            <div class="muted" style="margin-top:4px">Polo industrial de Cubatão · Rio Cubatão</div>
+        <!-- header identity -->
+        <div class="card col-12">
+          <div class="row" style="justify-content:space-between;align-items:flex-start">
+            <div>
+              <div class="eyebrow">Ponto de captação · 07-1001</div>
+              <h1 style="margin-top:6px">Indústria Cubatão S/A</h1>
+              <div class="muted" style="margin-top:4px">Polo industrial de Cubatão · Rio Cubatão</div>
+            </div>
+            <div class="row" style="gap:8px"><span class="pill act">Faixa A</span><span class="pill">Telemetria</span></div>
           </div>
-          <div class="row" style="gap:8px"><span class="pill act"><i class="dot"></i>Faixa A</span><span class="pill"><i class="dot"></i>Telemetria</span></div>
+          <hr class="div">
+          <div class="grid g-4">
+            <div><div class="muted" style="font-size:11px">Nº da outorga</div><div class="mono" style="color:var(--ink)">OUT-07-2024-001234</div></div>
+            <div><div class="muted" style="font-size:11px">ID SiDeCC</div><div class="mono" style="color:var(--ink)">SDC-998877</div></div>
+            <div><div class="muted" style="font-size:11px">Finalidade</div><div class="mono" style="color:var(--ink)">Industrial</div></div>
+            <div><div class="muted" style="font-size:11px">Fonte</div><div class="mono" style="color:var(--ink)">Superficial</div></div>
+            <div><div class="muted" style="font-size:11px">Município</div><div class="mono" style="color:var(--ink)">Cubatão</div></div>
+            <div><div class="muted" style="font-size:11px">Coordenadas</div><div class="mono" style="color:var(--ink)">−23.879, −46.418</div></div>
+            <div><div class="muted" style="font-size:11px">Medidor</div><div class="mono" style="color:var(--ink)">SDC-R-4471 · ativo</div></div>
+            <div><div class="muted" style="font-size:11px">Transmissão (30d)</div><div class="mono" style="color:var(--ink)">98,6%</div></div>
+          </div>
         </div>
-        <hr class="div">
-        <div class="grid g-4">
-          <div><div class="muted" style="font-size:11px">Nº da outorga</div><div class="mono" style="color:var(--ink)">OUT-07-2024-001234</div></div>
-          <div><div class="muted" style="font-size:11px">ID SiDeCC</div><div class="mono" style="color:var(--ink)">SDC-998877</div></div>
-          <div><div class="muted" style="font-size:11px">Finalidade</div><div class="mono" style="color:var(--ink)">Industrial</div></div>
-          <div><div class="muted" style="font-size:11px">Fonte</div><div class="mono" style="color:var(--ink)">Superficial</div></div>
-          <div><div class="muted" style="font-size:11px">Município</div><div class="mono" style="color:var(--ink)">Cubatão</div></div>
-          <div><div class="muted" style="font-size:11px">Coordenadas</div><div class="mono" style="color:var(--ink)">−23.879, −46.418</div></div>
-          <div><div class="muted" style="font-size:11px">Medidor</div><div class="mono" style="color:var(--ink)">SDC-R-4471</div></div>
-          <div><div class="muted" style="font-size:11px">Transmissão</div><div class="mono" style="color:var(--ink)">98,6%</div></div>
-        </div>
-      </div>
 
-      <!-- volume comparison -->
-      <div class="grid g-3" style="align-items:start">
-        <div class="card kpi"><div class="k-label">Outorgado (ano)</div><div class="k-value">1.250.000</div><div class="k-meta">m³ · limite</div></div>
-        <div class="card kpi"><div class="k-label">Medido (acum.)</div><div class="k-value" style="color:var(--bad)">1.318.420</div><div class="k-meta">m³ · <span style="color:var(--bad)">105% do limite</span></div></div>
-        <div class="card kpi"><div class="k-label">Vazão atual</div><div class="k-value">38,2</div><div class="k-meta">L/s · última há 6 min</div></div>
-      </div>
+        <!-- volume comparison — KPI strip -->
+        <div class="card kpi col-4"><div class="k-label">Outorgado (ano)</div><div class="k-value">1.250.000</div><div class="k-meta">m³ · limite</div></div>
+        <div class="card kpi col-4"><div class="k-label">Medido (acum.)</div><div class="k-value">1.318.420</div><div class="k-meta">m³ · <b>105% do limite</b></div></div>
+        <div class="card kpi col-4"><div class="k-label">Vazão atual</div><div class="k-value">38,2</div><div class="k-meta">L/s · última há 6 min</div></div>
 
-      <div class="panel">
-        <header>Série temporal — medido × outorgado <span class="sp"></span><span class="pill">12 meses</span></header>
-        <div class="body">
-          <div class="ph ph--chart">Gráfico de linha — volume acumulado vs. limite outorgado<br><small>linha cruza o limite no mês 11 → desvio</small></div>
+        <!-- MAIN COLUMN (span 8): the series is why you open this point -->
+        <div class="zone col-8">
+          <div class="panel lead">
+            <header>Série temporal · medido × outorgado <span class="sp"></span><span class="pill label">12 meses</span></header>
+            <div class="body">
+              <div class="ph ph--chart">Gráfico de linha · volume acumulado vs. limite outorgado<br><small>linha cruza o limite no mês 11 → desvio</small></div>
+            </div>
+          </div>
+          <div class="panel">
+            <header>Histórico de medições (telemetria) <span class="sp"></span><span class="pill label">a cada 6 h</span></header>
+            <table class="table">
+              <thead><tr><th>Data</th><th class="num">Vol. acum.</th><th class="num">Vazão</th><th>Estado do dado</th></tr></thead>
+              <tbody>
+                <tr><td>04/06 09:35</td><td class="num">1.318.420</td><td class="num">38,2 L/s</td><td><span class="pill ok">Consolidado</span></td></tr>
+                <tr><td>04/06 03:35</td><td class="num">1.317.600</td><td class="num">37,9 L/s</td><td><span class="pill ok">Consolidado</span></td></tr>
+                <tr><td>03/06 21:35</td><td class="num">1.316.780</td><td class="num">39,1 L/s</td><td><span class="pill warn">Validado</span></td></tr>
+                <tr><td>03/06 15:35</td><td class="num">1.315.910</td><td class="num">37,4 L/s</td><td><span class="pill">Retificado</span></td></tr>
+                <tr class="faint"><td>03/06 15:35</td><td class="num">—</td><td class="num">—</td><td><span class="pill bad">Original substituído</span></td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
 
-      <div class="grid g-2" style="align-items:start">
-        <div class="panel">
-          <header>Histórico de leituras (telemetria)</header>
-          <table class="table">
-            <thead><tr><th>Data</th><th class="num">Vol. acum.</th><th class="num">Vazão</th><th>Qualidade</th></tr></thead>
-            <tbody>
-              <tr><td>04/06 09:35</td><td class="num">1.318.420</td><td class="num">38,2 L/s</td><td><span class="pill ok"><i class="dot"></i>Consistido</span></td></tr>
-              <tr><td>04/06 03:35</td><td class="num">1.317.600</td><td class="num">37,9 L/s</td><td><span class="pill ok"><i class="dot"></i>Consistido</span></td></tr>
-              <tr><td>03/06 21:35</td><td class="num">1.316.780</td><td class="num">39,1 L/s</td><td><span class="pill warn"><i class="dot"></i>Validado</span></td></tr>
-              <tr><td>03/06 15:35</td><td class="num">1.315.910</td><td class="num">—</td><td><span class="pill bad"><i class="dot"></i>Falha</span></td></tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="panel">
+        <!-- SIDE RAIL (span 4): alerts on this point -->
+        <div class="panel col-4">
           <header>Alertas deste ponto</header>
-          <div class="body stack">
-            <div class="card" style="border-color:#d8bcbc"><div class="row" style="justify-content:space-between"><b style="color:var(--ink);font-size:13px">Volume acima do outorgado</b><span class="pill bad"><i class="dot"></i>Aberto</span></div><div class="muted" style="font-size:12px;margin-top:4px">Detectado 04/06 · regra “medido &gt; outorgado”</div></div>
-            <div class="card"><div class="row" style="justify-content:space-between"><b style="color:var(--ink);font-size:13px">Falha de leitura pontual</b><span class="pill warn"><i class="dot"></i>Monitorando</span></div><div class="muted" style="font-size:12px;margin-top:4px">03/06 15:35 · 1 leitura ausente</div></div>
-            <div class="note" style="font-size:12px">“As built” do equipamento e trilha de auditoria ficam na aba <b>Cadastro</b>.</div>
+          <div class="body">
+            <div class="list">
+              <div class="lrow"><div class="lr-top"><span class="lr-title">Volume acima do outorgado</span><span class="pill">Aberto</span></div><div class="lr-sub">Detectado 04/06 · regra “medido maior que outorgado”</div></div>
+              <div class="lrow"><div class="lr-top"><span class="lr-title">Amostra isolada ausente</span><span class="pill">Em análise</span></div><div class="lr-sub">03/06 15:35 · 1 medição ausente, já retificada</div></div>
+            </div>
+            <div class="note" style="font-size:12px;margin-top:14px">Cadastro técnico (as built) do equipamento e trilha de auditoria ficam na aba <b>Cadastro</b>.</div>
           </div>
         </div>
-      </div>
 
+      </div>
     </div>
   </main>
 </div>

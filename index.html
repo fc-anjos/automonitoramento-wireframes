@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Wireframes · Sistema de Automonitoramento — UGRHI-07</title>
+<title>Wireframes · Sistema de Automonitoramento · UGRHI-07</title>
 <link rel="stylesheet" href="css/wireframe.css">
 </head>
 <body class="comms">
 
 <div class="wf-banner">
-  <span>● Rascunho — Wireframe de baixa fidelidade</span>
+  <span>● Rascunho · Wireframe de baixa fidelidade</span>
   <b>Alinhamento de fornecedor</b>
   <span>Dados fictícios</span>
   <span class="sp"></span>
@@ -19,25 +19,25 @@
 <div class="wrap stack">
 
   <header class="stack" style="--space:10px">
-    <div class="eyebrow">SP-Águas · FEHIDRO · CBH-BS — Bacia-piloto UGRHI-07</div>
+    <div class="eyebrow">SP-Águas · FEHIDRO · CBH-BS · Bacia-piloto UGRHI-07</div>
     <h1>Sistema de Automonitoramento de usos de recursos hídricos</h1>
-    <p class="lede">Conjunto de wireframes que ilustra, para alinhamento de escopo com o fornecedor, as três superfícies descritas no Termo de Referência: o <b>aplicativo próprio unificado</b> (roteado por porte de usuário — Curva ABC), a <b>plataforma de consolidação e alerta</b> do gestor, e o <b>portal público de transparência</b>. Telas estáticas, intencionalmente cruas. Nenhum dado é real.</p>
+    <p class="lede">Conjunto de wireframes que ilustra, para alinhamento de escopo com o fornecedor, as três superfícies descritas no Termo de Referência: o <b>aplicativo próprio unificado</b> (roteado por porte de usuário, Curva ABC), a <b>plataforma de consolidação e alerta</b> do gestor, e o <b>portal público de transparência</b>. Telas estáticas, intencionalmente cruas. Nenhum dado é real.</p>
   </header>
 
   <div class="note">
-    <b>Como ler estas telas.</b> São <b>rascunhos de estrutura</b>, não design final: blocos cinzas = conteúdo/imagem a definir, linhas tracejadas = região pendente, notas amarelas explicam a intenção do TR. Números, nomes e outorgas são <b>placeholders fictícios</b>. As faixas da Curva ABC aparecem como <code>Faixa A/B/C</code> sem limites — a definir com a SP-Águas.
+    <b>Como ler estas telas.</b> São <b>rascunhos de estrutura</b>, não design final: blocos cinzas = conteúdo/imagem a definir, linhas tracejadas = região pendente, notas em texto neutro explicam a intenção do projeto. Números, nomes e outorgas são <b>placeholders fictícios</b>. As faixas da Curva ABC aparecem como <code>Faixa A/B/C</code> sem limites, a definir com a SP-Águas.
   </div>
 
   <!-- ===================== SURFACE 1 — APP ===================== -->
   <section class="stack">
     <div class="row" style="align-items:baseline">
-      <h2>1 · Aplicativo próprio unificado — usuário outorgado <span class="pill">mobile</span></h2>
+      <h2>1 · Aplicativo próprio unificado · usuário outorgado <span class="pill">mobile</span></h2>
       <span class="sp" style="flex:1"></span>
     </div>
     <p class="muted" style="margin:0">Um único app, duas experiências sobre a mesma base. <b>Grandes usuários</b> (Faixa A) acompanham telemetria; <b>pequenos/médios</b> (Faixas B/C) fazem autodeclaração com foto e geolocalização.</p>
     <div class="grid g-4">
-      <a class="launch-card" href="screens/app-painel.html"><div class="thumb"></div><span class="num">APP · 01</span><h3>Painel do outorgado</h3><p>Home roteada por porte — identidade da outorga, status e atalho para o fluxo correto.</p></a>
-      <a class="launch-card" href="screens/app-telemetria.html"><div class="thumb"></div><span class="num">APP · 02</span><h3>Acompanhamento de consumo</h3><p>Telemetria (grandes usuários): série medido × outorgado, vazão e status do equipamento.</p></a>
+      <a class="launch-card" href="screens/app-painel.html"><div class="thumb"></div><span class="num">APP · 01</span><h3>Painel do outorgado</h3><p>Home roteada por porte: identidade da outorga, status e atalho para o fluxo correto.</p></a>
+      <a class="launch-card" href="screens/app-telemetria.html"><div class="thumb"></div><span class="num">APP · 02</span><h3>Acompanhamento de captação</h3><p>Telemetria (grandes usuários): série medido × outorgado, vazão e status do equipamento.</p></a>
       <a class="launch-card" href="screens/app-autodeclaracao.html"><div class="thumb"></div><span class="num">APP · 03</span><h3>Autodeclaração</h3><p>Pequenos/médios: leitura do hidrômetro, modo offline, geolocalização e foto.</p></a>
       <a class="launch-card" href="screens/app-confirmacao.html"><div class="thumb"></div><span class="num">APP · 04</span><h3>Confirmação & histórico</h3><p>Comprovante de envio, declarações anteriores e pendências em atraso.</p></a>
     </div>
@@ -47,14 +47,14 @@
 
   <!-- ===================== SURFACE 2 — GESTOR ===================== -->
   <section class="stack">
-    <h2>2 · Plataforma de consolidação, acompanhamento e alerta — gestor <span class="pill">web</span></h2>
+    <h2>2 · Plataforma de consolidação, acompanhamento e alerta · gestor <span class="pill">web</span></h2>
     <p class="muted" style="margin:0">Ferramenta interna de fiscalização da SP-Águas. Base única consolidando telemetria + autodeclaração (substitui SiDeCC / SiDeCC-R).</p>
     <div class="grid g-3">
       <a class="launch-card" href="screens/gestor-dashboard.html"><div class="thumb"></div><span class="num">GESTOR · 01</span><h3>Dashboard de fiscalização</h3><p>KPIs e painéis por usuário, sub-bacia, município, finalidade e faixa de VM.</p></a>
       <a class="launch-card" href="screens/gestor-mapa.html"><div class="thumb"></div><span class="num">GESTOR · 02</span><h3>Mapa georreferenciado</h3><p>UGRHI-07 + sub-bacias + pontos de captação (pontos de exemplo).</p></a>
       <a class="launch-card" href="screens/gestor-detalhe.html"><div class="thumb"></div><span class="num">GESTOR · 03</span><h3>Detalhe do ponto / outorgado</h3><p>Outorga, fonte, VM outorgado × medido, série temporal e equipamento.</p></a>
       <a class="launch-card" href="screens/gestor-alertas.html"><div class="thumb"></div><span class="num">GESTOR · 04</span><h3>Central de alertas</h3><p>Regras configuráveis: excesso de volume, ausência de transmissão, fraude, vazão reversa.</p></a>
-      <a class="launch-card" href="screens/gestor-ingestao.html"><div class="thumb"></div><span class="num">GESTOR · 05</span><h3>Ingestão & qualidade de dados</h3><p>Estados bruto / validado / consistido; limites físicos e continuidade de série.</p></a>
+      <a class="launch-card" href="screens/gestor-ingestao.html"><div class="thumb"></div><span class="num">GESTOR · 05</span><h3>Ingestão & qualidade de dados</h3><p>Estados recebido / validado / consolidado; limites físicos e continuidade de série.</p></a>
       <a class="launch-card" href="screens/gestor-cadastro.html"><div class="thumb"></div><span class="num">GESTOR · 06</span><h3>Cadastro & administração</h3><p>Registro de outorgas, usuários e trilhas de auditoria.</p></a>
     </div>
   </section>

@@ -12,7 +12,7 @@
 <div class="app-shell">
   <aside class="app-side">
     <div class="brand">
-      <div class="logo"><span class="mark">AM</span> Automonitoramento</div>
+      <div class="logo"><span class="mark">SP</span> Automonitoramento</div>
       <small>SP-Águas · UGRHI-07</small>
     </div>
     <div class="nav-sec">Operação</div>
@@ -30,73 +30,82 @@
       <div class="crumb">Operação / <b style="color:var(--ink)">Dashboard</b></div>
       <span class="sp"></span>
       <div class="input search" style="min-height:36px"><span class="faint">Buscar outorga, usuário, ponto…</span></div>
-      <span class="pill"><i class="dot"></i>Período: 2026</span>
+      <span class="pill label">Período: 2026</span>
     </div>
 
     <div class="app-body stack">
 
       <div class="note">
-        <b>Painéis segmentáveis (TR §6.3).</b> Todos os números abaixo recortáveis por <b>usuário · sub-bacia · município · finalidade · faixa de VM</b>. Aqui mostramos a visão geral da bacia.
+        <b>Painéis segmentáveis.</b> Todos os números abaixo são recortáveis por usuário, sub-bacia, município, finalidade e faixa de VM. Aqui mostramos a visão geral da bacia.
       </div>
 
-      <!-- KPIs -->
-      <div class="grid g-4">
-        <div class="card kpi"><div class="k-label">Pontos monitorados</div><div class="k-value">312</div><div class="k-meta">248 telemetria · 64 autodeclaração</div></div>
-        <div class="card kpi"><div class="k-label">Taxa de transmissão</div><div class="k-value">94,8%</div><div class="k-meta">meta ≥ 95% · <span style="color:var(--warn)">−0,2 pp</span></div></div>
-        <div class="card kpi"><div class="k-label">Adesão declaratória</div><div class="k-value">87%</div><div class="k-meta">64 de 73 no prazo</div></div>
-        <div class="card kpi"><div class="k-label">Desvios vs. outorga</div><div class="k-value" style="color:var(--bad)">9</div><div class="k-meta">pontos acima do volume</div></div>
-      </div>
+      <div class="bento">
 
-      <div class="grid g-2" style="align-items:start">
-        <div class="panel">
-          <header>Volume captado × outorgado <span class="sp"></span><span class="pill">por mês</span></header>
-          <div class="body"><div class="ph ph--chart">Gráfico de barras/linha — agregado da bacia</div></div>
+        <!-- KPI strip — 4 × span-3, edges at 25/50/75% -->
+        <div class="card kpi col-3"><div class="k-label">Pontos monitorados</div><div class="k-value">312</div><div class="k-meta">64 telemetria · 248 autodeclaração</div></div>
+        <div class="card kpi col-3"><div class="k-label">Transmissão (30d)</div><div class="k-value">94,8%</div><div class="k-meta">telemetria · meta ≥ 95%</div></div>
+        <div class="card kpi col-3"><div class="k-label">Adesão declaratória</div><div class="k-value">87%</div><div class="k-meta">216 de 248 no prazo</div></div>
+        <div class="card kpi col-3"><div class="k-label">Desvios vs. outorga</div><div class="k-value" style="color:var(--bad)">9</div><div class="k-meta">pontos acima do volume</div></div>
+
+        <!-- LEAD OBJECT: the reason a fiscal opens this screen — triage today -->
+        <div class="panel lead col-12">
+          <header>Exige ação hoje <span class="sp"></span><span class="pill">9 ocorrências</span><a class="btn sub" style="padding:6px 12px" href="gestor-alertas.html">Central de alertas →</a></header>
+          <table class="table">
+            <thead><tr><th>Ocorrência</th><th>Ponto / outorgado</th><th class="num">Medido × outorgado</th><th class="num">Desde</th><th>Ação</th></tr></thead>
+            <tbody>
+              <tr><td>Volume acima do outorgado</td><td>07-1001 · Indústria Cubatão S/A</td><td class="num">1,32 / 1,25 hm³ <b>(105%)</b></td><td class="num">há 2 h</td><td><a href="gestor-detalhe.html" class="btn sub" style="padding:5px 12px">Abrir →</a></td></tr>
+              <tr><td>Vazão reversa</td><td>07-1188 · Lava-rápido Maré Alta</td><td class="num">medição negativa</td><td class="num">ontem</td><td><a href="gestor-detalhe.html" class="btn sub" style="padding:5px 12px">Abrir →</a></td></tr>
+              <tr><td>Ausência de transmissão</td><td>07-3320 · Terminal Marítimo da Alemoa</td><td class="num">36 h sem dados</td><td class="num">há 5 h</td><td><a href="gestor-detalhe.html" class="btn sub" style="padding:5px 12px">Abrir →</a></td></tr>
+              <tr><td>Declaração vencida</td><td>07-8842 · Sítio Boa Vista</td><td class="num">venceu 31/05</td><td class="num">4 dias</td><td><a href="gestor-detalhe.html" class="btn sub" style="padding:5px 12px">Abrir →</a></td></tr>
+              <tr><td>Suspeita de fraude</td><td>07-2207 · padrão atípico de captação</td><td class="num">−38% vs. média</td><td class="num">2 dias</td><td><a href="gestor-detalhe.html" class="btn sub" style="padding:5px 12px">Abrir →</a></td></tr>
+            </tbody>
+          </table>
         </div>
-        <div class="panel">
-          <header>Distribuição por faixa (Curva ABC) <span class="sp"></span><span class="pill act">VM</span></header>
-          <div class="body">
-            <div class="stack">
-              <div><div class="row" style="justify-content:space-between"><small>Faixa A — grandes usuários</small><small class="mono">22 pts · 71% do volume</small></div><div class="meter"><i style="width:71%"></i></div></div>
-              <div><div class="row" style="justify-content:space-between"><small>Faixa B — médios</small><small class="mono">96 pts · 23%</small></div><div class="meter"><i style="width:23%"></i></div></div>
-              <div><div class="row" style="justify-content:space-between"><small>Faixa C — pequenos</small><small class="mono">194 pts · 6%</small></div><div class="meter"><i style="width:6%"></i></div></div>
-            </div>
-            <div class="note" style="margin-top:14px;font-size:12px">Limites de cada faixa <b>a definir com a SP-Águas</b> — exibidos como rótulos no rascunho.</div>
+
+        <!-- MAIN COLUMN (span 8): trend + sub-bacia, sharing a left edge -->
+        <div class="zone col-8">
+          <div class="panel">
+            <header>Volume captado × outorgado <span class="sp"></span><span class="pill">por mês</span></header>
+            <div class="body"><div class="ph ph--chart">Gráfico de barras/linha — agregado da bacia</div></div>
+          </div>
+          <div class="panel">
+            <header>Acompanhamento por sub-bacia <span class="sp"></span><a class="btn sub" style="padding:6px 12px" href="gestor-mapa.html">Ver no mapa →</a></header>
+            <table class="table">
+              <thead><tr><th>Sub-bacia</th><th class="num">Pontos</th><th class="num">Transmissão</th><th class="num">Vol. medido</th><th class="num">Vol. outorgado</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>Rio Cubatão</td><td class="num">141</td><td class="num">96,1%</td><td class="num">8,4 hm³</td><td class="num">11,9 hm³</td><td><span class="pill ok">Normal</span></td></tr>
+                <tr><td>Rio Itapanhaú</td><td class="num">73</td><td class="num">92,0%</td><td class="num">2,1 hm³</td><td class="num">3,0 hm³</td><td><span class="pill warn">Atenção</span></td></tr>
+                <tr><td>Drenagem direta (costeira)</td><td class="num">98</td><td class="num">95,3%</td><td class="num">3,7 hm³</td><td class="num">4,5 hm³</td><td><span class="pill ok">Normal</span></td></tr>
+              </tbody>
+            </table>
           </div>
         </div>
-      </div>
 
-      <div class="panel">
-        <header>Acompanhamento por sub-bacia <span class="sp"></span><a class="btn sub" style="padding:6px 12px" href="gestor-mapa.html">Ver no mapa →</a></header>
-        <table class="table">
-          <thead><tr><th>Sub-bacia</th><th class="num">Pontos</th><th class="num">Transmissão</th><th class="num">Vol. medido</th><th class="num">Vol. outorgado</th><th>Status</th></tr></thead>
-          <tbody>
-            <tr><td>Rio Cubatão</td><td class="num">141</td><td class="num">96,1%</td><td class="num">8,4 hm³</td><td class="num">11,9 hm³</td><td><span class="pill ok"><i class="dot"></i>Normal</span></td></tr>
-            <tr><td>Rio Itapanhaú</td><td class="num">73</td><td class="num">92,0%</td><td class="num">2,1 hm³</td><td class="num">3,0 hm³</td><td><span class="pill warn"><i class="dot"></i>Atenção</span></td></tr>
-            <tr><td>Drenagem direta (costeira)</td><td class="num">98</td><td class="num">95,3%</td><td class="num">3,7 hm³</td><td class="num">4,5 hm³</td><td><span class="pill ok"><i class="dot"></i>Normal</span></td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="grid g-2" style="align-items:start">
-        <div class="panel">
-          <header>Por finalidade de uso</header>
-          <table class="table"><tbody>
-            <tr><td>Industrial</td><td class="num">61% do volume</td></tr>
-            <tr><td>Abastecimento público</td><td class="num">24%</td></tr>
-            <tr><td>Portuário / serviços</td><td class="num">9%</td></tr>
-            <tr><td>Irrigação / outros</td><td class="num">6%</td></tr>
-          </tbody></table>
+        <!-- SIDE RAIL (span 4): faixa + finalidade, sharing a right edge -->
+        <div class="zone col-4">
+          <div class="panel">
+            <header>Distribuição por faixa (Curva ABC) <span class="sp"></span><span class="pill act">VM</span></header>
+            <div class="body">
+              <div class="stack">
+                <div><div class="row" style="justify-content:space-between"><small>Faixa A · grandes usuários</small><small class="mono">64 pts · 71% vol.</small></div><div class="meter"><i style="width:71%"></i></div></div>
+                <div><div class="row" style="justify-content:space-between"><small>Faixa B · médios</small><small class="mono">108 pts · 23% vol.</small></div><div class="meter"><i style="width:23%"></i></div></div>
+                <div><div class="row" style="justify-content:space-between"><small>Faixa C · pequenos</small><small class="mono">140 pts · 6% vol.</small></div><div class="meter"><i style="width:6%"></i></div></div>
+              </div>
+              <div class="note" style="margin-top:14px;font-size:12px">Limites de cada faixa ainda <b>a definir com a SP-Águas</b>. No rascunho aparecem apenas como rótulos.</div>
+            </div>
+          </div>
+          <div class="panel">
+            <header>Por finalidade de uso</header>
+            <table class="table"><tbody>
+              <tr><td>Industrial</td><td class="num">61%</td></tr>
+              <tr><td>Abastecimento público</td><td class="num">24%</td></tr>
+              <tr><td>Portuário / serviços</td><td class="num">9%</td></tr>
+              <tr><td>Irrigação / outros</td><td class="num">6%</td></tr>
+            </tbody></table>
+          </div>
         </div>
-        <div class="panel">
-          <header>Alertas recentes <span class="sp"></span><a class="btn sub" style="padding:6px 12px" href="gestor-alertas.html">Central →</a></header>
-          <table class="table"><tbody>
-            <tr><td><span class="pill bad"><i class="dot"></i>Excesso</span></td><td>Indústria Cubatão S/A — volume &gt; outorga</td><td class="num">há 2 h</td></tr>
-            <tr><td><span class="pill warn"><i class="dot"></i>Sem transmissão</span></td><td>SDC-R-3320 — 36h sem dados</td><td class="num">há 5 h</td></tr>
-            <tr><td><span class="pill bad"><i class="dot"></i>Vazão reversa</span></td><td>Ponto 07-1188 — leitura negativa</td><td class="num">ontem</td></tr>
-          </tbody></table>
-        </div>
-      </div>
 
+      </div>
     </div>
   </main>
 </div>

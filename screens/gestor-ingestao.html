@@ -11,7 +11,7 @@
 
 <div class="app-shell">
   <aside class="app-side">
-    <div class="brand"><div class="logo"><span class="mark">AM</span> Automonitoramento</div><small>SP-Águas · UGRHI-07</small></div>
+    <div class="brand"><div class="logo"><span class="mark">SP</span> Automonitoramento</div><small>SP-Águas · UGRHI-07</small></div>
     <div class="nav-sec">Operação</div>
     <a class="nav-i" href="gestor-dashboard.html"><span class="ic"></span>Dashboard</a>
     <a class="nav-i" href="gestor-mapa.html"><span class="ic"></span>Mapa</a>
@@ -26,47 +26,49 @@
     <div class="app-top">
       <div class="crumb">Dados / <b style="color:var(--ink)">Ingestão & qualidade</b></div>
       <span class="sp"></span>
-      <span class="pill"><i class="dot"></i>Fontes: telemetria + autodeclaração</span>
+      <span class="pill">Fontes: telemetria + autodeclaração</span>
     </div>
 
-    <div class="app-body stack">
-      <div class="note">
-        <b>Pipeline de qualidade (TR §6.3).</b> Toda leitura passa por três estados — <b>bruto → validado → consistido</b> — com checagens de limites físicos, continuidade de série e sinais de fraude/vazão reversa. Base única consolida telemetria (SiDeCC-R) e autodeclaração (SiDeCC).
+    <div class="app-body">
+      <div class="note" style="margin-bottom:16px">
+        <b>Pipeline de qualidade.</b> Todo registro passa por três estados (recebido, validado, consolidado) com checagens de limites físicos, continuidade de série e sinais de fraude ou vazão reversa. Correção nunca sobrescreve: gera um novo registro que supersede o anterior, e o original fica na trilha de auditoria. Base única reúne telemetria e autodeclaração.
       </div>
 
-      <!-- pipeline stages -->
-      <div class="grid g-3">
-        <div class="card"><div class="row" style="justify-content:space-between"><b style="color:var(--ink)">1 · Bruto</b><span class="pill"><i class="dot"></i>recebido</span></div><div class="k-value mono" style="font-size:24px;margin-top:8px">42.118</div><div class="muted" style="font-size:12px">leituras nas últimas 24h</div></div>
-        <div class="card"><div class="row" style="justify-content:space-between"><b style="color:var(--ink)">2 · Validado</b><span class="pill warn"><i class="dot"></i>checagem</span></div><div class="k-value mono" style="font-size:24px;margin-top:8px">41.604</div><div class="muted" style="font-size:12px">98,8% aprovadas automaticamente</div></div>
-        <div class="card"><div class="row" style="justify-content:space-between"><b style="color:var(--ink)">3 · Consistido</b><span class="pill ok"><i class="dot"></i>final</span></div><div class="k-value mono" style="font-size:24px;margin-top:8px">41.230</div><div class="muted" style="font-size:12px">disponível para dashboards/portal</div></div>
-      </div>
+      <div class="bento">
 
-      <div class="grid g-2" style="align-items:start">
-        <div class="panel">
-          <header>Fila de exceções <span class="sp"></span><span class="pill bad"><i class="dot"></i>514 retidas</span></header>
+        <!-- pipeline stages — KPI strip -->
+        <div class="card col-4"><div class="row" style="justify-content:space-between"><b style="color:var(--ink)">1 · Recebido</b><span class="pill label">entrada</span></div><div class="k-value mono" style="font-size:24px;margin-top:8px">312</div><div class="muted" style="font-size:12px">pontos com registro nas últimas 24h</div></div>
+        <div class="card col-4"><div class="row" style="justify-content:space-between"><b style="color:var(--ink)">2 · Validado</b><span class="pill label">checagem automática</span></div><div class="k-value mono" style="font-size:24px;margin-top:8px">308</div><div class="muted" style="font-size:12px">passaram nas checagens automáticas</div></div>
+        <div class="card col-4"><div class="row" style="justify-content:space-between"><b style="color:var(--ink)">3 · Consolidado</b><span class="pill label">disponível</span></div><div class="k-value mono" style="font-size:24px;margin-top:8px">307</div><div class="muted" style="font-size:12px">prontos para fiscalização e portal</div></div>
+
+        <!-- exceptions queue — the task: clear what the pipeline held back -->
+        <div class="panel lead col-8">
+          <header>Fila de exceções <span class="sp"></span><span class="pill bad">5 pontos retidos</span></header>
           <table class="table">
-            <thead><tr><th>Leitura</th><th>Ponto</th><th>Motivo</th><th>Ação</th></tr></thead>
+            <thead><tr><th class="num">Registro</th><th>Ponto</th><th>Motivo</th><th>Ação</th></tr></thead>
             <tbody>
-              <tr><td class="num">1.315.910</td><td>07-1001</td><td><span class="pill bad"><i class="dot"></i>Salto fora do limite</span></td><td><span class="btn sub" style="padding:4px 10px">Revisar</span></td></tr>
-              <tr><td class="num">−42</td><td>07-1188</td><td><span class="pill bad"><i class="dot"></i>Vazão reversa</span></td><td><span class="btn sub" style="padding:4px 10px">Revisar</span></td></tr>
-              <tr><td class="num">004 281</td><td>07-8842</td><td><span class="pill warn"><i class="dot"></i>Foto ilegível</span></td><td><span class="btn sub" style="padding:4px 10px">Revisar</span></td></tr>
-              <tr><td class="num">—</td><td>07-3320</td><td><span class="pill warn"><i class="dot"></i>Lacuna de série</span></td><td><span class="btn sub" style="padding:4px 10px">Revisar</span></td></tr>
+              <tr><td class="num">1.315.910</td><td>07-1001</td><td><span class="pill bad">Salto fora do limite</span></td><td><span class="btn sub" style="padding:4px 10px">Revisar</span></td></tr>
+              <tr><td class="num">−42</td><td>07-1188</td><td><span class="pill bad">Vazão reversa</span></td><td><span class="btn sub" style="padding:4px 10px">Revisar</span></td></tr>
+              <tr><td class="num">004 281</td><td>07-8842</td><td><span class="pill warn">Foto ilegível</span></td><td><span class="btn sub" style="padding:4px 10px">Revisar</span></td></tr>
+              <tr><td class="num">—</td><td>07-3320</td><td><span class="pill warn">Lacuna de série</span></td><td><span class="btn sub" style="padding:4px 10px">Revisar</span></td></tr>
             </tbody>
           </table>
         </div>
 
-        <div class="panel">
+        <!-- SIDE RAIL (span 4): which checks run -->
+        <div class="panel col-4">
           <header>Regras de validação aplicadas</header>
           <div class="body stack">
-            <div class="mrow"><span class="ico ok" style="color:var(--ok);border-color:#bcd0bc">✓</span><div class="msp"><b style="color:var(--ink);font-size:13px">Limites físicos plausíveis</b><div class="muted" style="font-size:11.5px">leitura dentro de mín/máx do medidor</div></div></div>
-            <div class="mrow"><span class="ico ok" style="color:var(--ok);border-color:#bcd0bc">✓</span><div class="msp"><b style="color:var(--ink);font-size:13px">Continuidade da série</b><div class="muted" style="font-size:11.5px">leitura ≥ anterior, sem saltos abruptos</div></div></div>
-            <div class="mrow"><span class="ico ok" style="color:var(--ok);border-color:#bcd0bc">✓</span><div class="msp"><b style="color:var(--ink);font-size:13px">Fluxo não-negativo</b><div class="muted" style="font-size:11.5px">detecção de vazão reversa</div></div></div>
-            <div class="mrow"><span class="ico" style="color:var(--warn);border-color:#ddd2a8">~</span><div class="msp"><b style="color:var(--ink);font-size:13px">Anomalia / fraude</b><div class="muted" style="font-size:11.5px">padrão atípico → fila de apuração</div></div></div>
-            <div class="note" style="font-size:12px;margin-top:6px">Migração de dados legados (SiDeCC/SiDeCC-R) e integração DeclaraÁgua geram um <b>relatório de reconciliação</b> — back-end, sem UI dedicada.</div>
+            <div class="mrow"><span class="ico">✓</span><div class="msp"><b style="color:var(--ink);font-size:13px">Limites físicos plausíveis</b><div class="muted" style="font-size:11.5px">registro dentro de mín/máx do medidor</div></div></div>
+            <div class="mrow"><span class="ico">✓</span><div class="msp"><b style="color:var(--ink);font-size:13px">Continuidade da série</b><div class="muted" style="font-size:11.5px">registro maior ou igual ao anterior, sem saltos abruptos</div></div></div>
+            <div class="mrow"><span class="ico">✓</span><div class="msp"><b style="color:var(--ink);font-size:13px">Fluxo não-negativo</b><div class="muted" style="font-size:11.5px">detecção de vazão reversa</div></div></div>
+            <div class="mrow"><span class="ico">~</span><div class="msp"><b style="color:var(--ink);font-size:13px">Anomalia ou fraude</b><div class="muted" style="font-size:11.5px">padrão atípico vai para a fila de apuração</div></div></div>
+            <div class="mrow"><span class="ico">+</span><div class="msp"><b style="color:var(--ink);font-size:13px">Correção supersede</b><div class="muted" style="font-size:11.5px">retificação gera novo registro, nunca sobrescreve o original</div></div></div>
+            <div class="note" style="font-size:12px;margin-top:6px">Migração de dados legados (SiDeCC e SiDeCC-R) e integração DeclaraÁgua geram um <b>relatório de reconciliação</b>, processo de back-end sem tela dedicada.</div>
           </div>
         </div>
-      </div>
 
+      </div>
     </div>
   </main>
 </div>

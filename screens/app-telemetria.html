@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>APP 02 · Acompanhamento de consumo</title>
+<title>APP 02 · Acompanhamento de captação</title>
 <link rel="stylesheet" href="../css/wireframe.css">
 </head>
 <body>
-<div class="wf-banner"><a href="../index.html">‹ Índice</a><span>APP · 02</span><b>Acompanhamento de consumo (telemetria)</b><span class="sp"></span><span>Grandes usuários · Faixa A</span></div>
+<div class="wf-banner"><a href="../index.html">‹ Índice</a><span>APP · 02</span><b>Acompanhamento de captação (telemetria)</b><span class="sp"></span><span>Grandes usuários · Faixa A</span></div>
 
 <div class="wrap">
   <div class="note" style="max-width:760px;margin:0 auto 22px">
-    <b>Fluxo do grande usuário.</b> Aqui o outorgado <b>observa</b> o que o equipamento de telemetria já enviou — ele não digita leitura. Série medido × outorgado, vazão instantânea e saúde do equipamento.
+    <b>Fluxo do grande usuário.</b> Aqui o outorgado <b>observa</b> o que o equipamento de telemetria já enviou, sem digitar nada. Série de volume medido × outorgado, vazão instantânea e saúde do equipamento.
   </div>
 
   <div class="phone-stage" style="justify-content:center">
@@ -20,17 +20,17 @@
         <div class="notch"></div>
         <div class="statusbar"><span>9:41</span><span>▰▰▰ 5G ▮</span></div>
         <div class="pscroll">
-          <div class="appbar"><div class="back">‹</div><h2>Consumo</h2></div>
+          <div class="appbar"><div class="back">‹</div><h2>Captação</h2></div>
 
           <div class="seg" style="margin-bottom:14px">
-            <div class="s">Mês</div><div class="s on">Período</div><div class="s">Ano</div>
+            <div class="s">Mês</div><div class="s">Período</div><div class="s on">Ano</div>
           </div>
 
           <div class="card" style="padding:14px">
-            <div class="muted" style="font-size:12px">Volume medido no período</div>
+            <div class="muted" style="font-size:12px">Volume medido acumulado no ano</div>
             <div class="row" style="align-items:baseline;gap:8px"><div class="mono" style="font-size:26px;color:var(--ink)">775.000</div><span class="muted mono">m³</span></div>
             <div class="meter" style="margin-top:10px"><i style="width:62%"></i></div>
-            <div class="row" style="justify-content:space-between;margin-top:6px"><small class="mono faint">0</small><small class="mono">62% · outorgado 1.250.000 m³</small></div>
+            <div class="row" style="justify-content:space-between;margin-top:6px"><small class="mono faint">0</small><small class="mono">62% do limite anual (1.250.000 m³)</small></div>
           </div>
 
           <div class="card ph ph--chart" style="margin-top:12px">Gráfico de série temporal<br>medido × outorgado (linha)</div>
@@ -41,25 +41,25 @@
 
           <div class="row" style="gap:10px;margin-top:14px">
             <div class="card" style="flex:1;padding:12px"><div class="muted" style="font-size:11px">Vazão instantânea</div><div class="mono" style="font-size:17px;color:var(--ink)">38,2 L/s</div></div>
-            <div class="card" style="flex:1;padding:12px"><div class="muted" style="font-size:11px">Última leitura</div><div class="mono" style="font-size:17px;color:var(--ink)">há 6 min</div></div>
+            <div class="card" style="flex:1;padding:12px"><div class="muted" style="font-size:11px">Última medição</div><div class="mono" style="font-size:17px;color:var(--ink)">há 6 min</div></div>
           </div>
 
           <div class="card" style="margin-top:12px;padding:14px">
-            <div class="row" style="justify-content:space-between"><b style="font-size:13px;color:var(--ink)">Equipamento</b><span class="pill ok"><i class="dot"></i>Transmitindo</span></div>
+            <div class="row" style="justify-content:space-between"><b style="font-size:13px;color:var(--ink)">Equipamento</b><span class="pill ok">Transmitindo</span></div>
             <div class="mrow"><span class="msp muted" style="font-size:12.5px">ID do medidor</span><span class="mono" style="font-size:12.5px">SDC-R-4471</span></div>
-            <div class="mrow"><span class="msp muted" style="font-size:12.5px">Taxa de transmissão</span><span class="mono" style="font-size:12.5px">98,6%</span></div>
+            <div class="mrow"><span class="msp muted" style="font-size:12.5px">Transmissão (30d)</span><span class="mono" style="font-size:12.5px">98,6%</span></div>
             <div class="mrow"><span class="msp muted" style="font-size:12.5px">Fonte</span><span class="mono" style="font-size:12.5px">Superficial</span></div>
           </div>
         </div>
         <div class="tabbar">
           <a class="tab" href="app-painel.html"><div class="ic"></div>Início</a>
-          <a class="tab on" href="app-telemetria.html"><div class="ic"></div>Consumo</a>
+          <a class="tab on" href="app-telemetria.html"><div class="ic"></div>Captação</a>
           <a class="tab" href="app-confirmacao.html"><div class="ic"></div>Histórico</a>
           <a class="tab"><div class="ic"></div>Perfil</a>
         </div>
         <div class="homebar"></div>
       </div></div>
-      <div class="phone-label">Telemetria — somente leitura</div>
+      <div class="phone-label">Telemetria · somente consulta</div>
     </div>
   </div>
 </div>

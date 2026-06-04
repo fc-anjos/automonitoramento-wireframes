@@ -146,10 +146,28 @@ body.comms { font-family: var(--comm); }
 @media (min-width: 900px){ .g-3 { grid-template-columns: repeat(3,1fr); } }
 @media (min-width: 1000px){ .g-4 { grid-template-columns: repeat(4,1fr); } }
 
+/* Bento — one 12-col master grid so every block shares column edges.
+   Blocks span cells (col-N); a zone stacks panels inside a single cell so the
+   side rail and main column keep aligned left/right edges. */
+.bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; align-items: start; }
+.bento > * { min-width: 0; }
+.bento .zone { display: flex; flex-direction: column; gap: 16px; }
+.col-3, .col-4, .col-6, .col-8 { grid-column: 1 / -1; }   /* stacked on narrow */
+.col-12 { grid-column: 1 / -1; }
+@media (min-width: 640px){ .col-3, .col-6 { grid-column: span 6; } }
+@media (min-width: 1000px){
+  .col-3 { grid-column: span 3; }
+  .col-4 { grid-column: span 4; }
+  .col-6 { grid-column: span 6; }
+  .col-8 { grid-column: span 8; }
+}
+
 /* ---- type ---------------------------------------------------------------- */
-h1,h2,h3,h4 { color: var(--ink); margin: 0; line-height: 1.25; font-weight: 700; }
-h1 { font-size: 23px; }
-h2 { font-size: 18px; }
+h1,h2,h3,h4 { color: var(--ink); margin: 0; line-height: 1.22; font-weight: 700; }
+/* #5 — wider type jumps: hand-drawn type needs more size contrast to hold
+   hierarchy, so each screen has one obvious anchor. */
+h1 { font-size: 28px; }
+h2 { font-size: 20px; }
 h3 { font-size: 15px; }
 .eyebrow { font: 400 12px/1.4 var(--sketch); color: var(--muted); }
 .lede { color: var(--muted); max-width: 62ch; }
@@ -182,10 +200,43 @@ body.comms .muted { font-family: var(--comm); }
 .panel > header {
   display: flex; align-items: center; gap: 10px;
   padding: 11px 14px; border-bottom: 1.5px solid var(--ink);
-  font-weight: 700; color: var(--ink); font-size: 14px; font-family: var(--sketch);
+  font-weight: 700; color: var(--ink); font-size: 15px; font-family: var(--sketch);
 }
 .panel > header .sp { flex: 1; }
 .panel .body { padding: 14px; }
+
+/* #2 — lead object: the screen's primary task panel reads heavier than the
+   secondary context panels around it (thicker ink = emphasis, hand-drawn way). */
+.panel.lead { border-width: 2.5px; }
+.panel.lead > header { font-size: 17px; border-bottom-width: 2.5px; }
+
+/* #4 — decorative captions in a panel header are NOT status: render them as
+   plain muted labels, never as pills. Kills "por mês / VM / 12 meses" pill-slop. */
+.panel > header .pill,
+.app-top .pill.label {
+  border: 0; background: transparent; padding: 0;
+  color: var(--muted); font-weight: 400;
+}
+
+/* #1 — flatten nesting: a card dropped inside a panel/card body stops being a
+   bordered box and becomes a plain list row (heading + sub, hairline-separated).
+   No more russian-doll cards-in-cards. */
+.panel .body > .card, .card > .card {
+  background: transparent; border: 0; border-radius: 0;
+  border-bottom: 1.5px solid var(--line);
+  padding: 11px 0 !important;
+}
+.panel .body.stack > .card + .card { margin-top: 0; }
+.panel .body > .card:first-child, .card > .card:first-child { padding-top: 0 !important; }
+.panel .body > .card:last-child, .card > .card:last-child { border-bottom: 0; padding-bottom: 0 !important; }
+
+/* purpose-built flat list (use instead of nested cards going forward) */
+.list > .lrow { padding: 11px 0; border-bottom: 1.5px solid var(--line); }
+.list > .lrow:first-child { padding-top: 0; }
+.list > .lrow:last-child { border-bottom: 0; padding-bottom: 0; }
+.lrow .lr-top { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+.lrow .lr-title { font: 700 13.5px var(--sketch); color: var(--ink); }
+.lrow .lr-sub { font-size: 12px; color: var(--muted); margin-top: 3px; }
 
 /* ---- placeholders -------------------------------------------------------- */
 .ph {
@@ -389,4 +440,15 @@ hr.div { border: 0; border-top: 1.5px solid var(--line); margin: 16px 0; }
 
 .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--muted); font-family: var(--comm); }
 .legend span { display: inline-flex; align-items: center; gap: 6px; }
-.legend i { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+.legend i { width: 13px; height: 13px; display: inline-block; flex: none; }
+
+/* monochrome-safe status marks — meaning carried by SHAPE/FILL, not hue.
+   Used by map pins and the legend so they stay legible in greyscale. */
+.mk { display: inline-block; width: 13px; height: 13px; border: 1.5px solid var(--ink); border-radius: 50%; background: var(--surface); flex: none; }
+.mk.ok   { background: var(--surface); }                 /* hollow = normal       */
+.mk.warn { background: repeating-linear-gradient(45deg, var(--ink) 0 2px, var(--surface) 2px 4px); }  /* hatched = atenção */
+.mk.bad  { background: var(--ink); }                      /* solid = crítico       */
+.pin { position: absolute; width: 16px; height: 16px; border: 2px solid var(--ink); border-radius: 50%; background: var(--surface); transform: translate(-50%,-50%); }
+.pin.ok   { background: var(--surface); }
+.pin.warn { background: repeating-linear-gradient(45deg, var(--ink) 0 2.5px, var(--surface) 2.5px 5px); }
+.pin.bad  { background: var(--ink); }
