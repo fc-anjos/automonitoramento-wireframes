@@ -328,10 +328,19 @@ a[href] { cursor: pointer; }
 .launch-card:hover { border-color: #9a9a9a; }
 .launch-card .thumb {
   aspect-ratio: 16/10; border-radius: 4px; overflow: hidden;
+  position: relative;
   background:
     repeating-linear-gradient(45deg, transparent 0 9px, rgba(0,0,0,.04) 9px 10px),
     #e6e6e6;
-  border: 1px dashed #b5b5b5;
+  border: 1px solid #d8d8d8;
+}
+/* live, scaled preview of the real screen — non-interactive, click falls through to the card link */
+.launch-card .thumb iframe {
+  position: absolute; top: 0; left: 0;
+  width: 400%; height: 400%;
+  transform: scale(.25); transform-origin: 0 0;
+  border: 0; background: #fff;
+  pointer-events: none;
 }
 .launch-card .num { font: 600 11px var(--comm); letter-spacing: .06em; color: #9a9a9a; text-transform: uppercase; }
 .launch-card h3 { font-size: 14px; font-family: var(--comm); font-weight: 600; }
