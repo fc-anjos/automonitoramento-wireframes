@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GESTOR 01 · Dashboard de fiscalização</title>
+<link rel="stylesheet" href="../css/wireframe.css">
+</head>
+<body>
+<div class="wf-banner"><a href="../index.html">‹ Índice</a><span>GESTOR · 01</span><b>Dashboard de fiscalização</b><span class="sp"></span><span>Rascunho · dados fictícios</span></div>
+
+<div class="app-shell">
+  <aside class="app-side">
+    <div class="brand">
+      <div class="logo"><span class="mark">AM</span> Automonitoramento</div>
+      <small>SP-Águas · UGRHI-07</small>
+    </div>
+    <div class="nav-sec">Operação</div>
+    <a class="nav-i on" href="gestor-dashboard.html"><span class="ic"></span>Dashboard</a>
+    <a class="nav-i" href="gestor-mapa.html"><span class="ic"></span>Mapa</a>
+    <a class="nav-i" href="gestor-detalhe.html"><span class="ic"></span>Pontos / outorgados</a>
+    <a class="nav-i" href="gestor-alertas.html"><span class="ic"></span>Alertas</a>
+    <div class="nav-sec">Dados</div>
+    <a class="nav-i" href="gestor-ingestao.html"><span class="ic"></span>Ingestão & qualidade</a>
+    <a class="nav-i" href="gestor-cadastro.html"><span class="ic"></span>Cadastro & admin</a>
+  </aside>
+
+  <main class="app-main">
+    <div class="app-top">
+      <div class="crumb">Operação / <b style="color:var(--ink)">Dashboard</b></div>
+      <span class="sp"></span>
+      <div class="input search" style="min-height:36px"><span class="faint">Buscar outorga, usuário, ponto…</span></div>
+      <span class="pill"><i class="dot"></i>Período: 2026</span>
+    </div>
+
+    <div class="app-body stack">
+
+      <div class="note">
+        <b>Painéis segmentáveis (TR §6.3).</b> Todos os números abaixo recortáveis por <b>usuário · sub-bacia · município · finalidade · faixa de VM</b>. Aqui mostramos a visão geral da bacia.
+      </div>
+
+      <!-- KPIs -->
+      <div class="grid g-4">
+        <div class="card kpi"><div class="k-label">Pontos monitorados</div><div class="k-value">312</div><div class="k-meta">248 telemetria · 64 autodeclaração</div></div>
+        <div class="card kpi"><div class="k-label">Taxa de transmissão</div><div class="k-value">94,8%</div><div class="k-meta">meta ≥ 95% · <span style="color:var(--warn)">−0,2 pp</span></div></div>
+        <div class="card kpi"><div class="k-label">Adesão declaratória</div><div class="k-value">87%</div><div class="k-meta">64 de 73 no prazo</div></div>
+        <div class="card kpi"><div class="k-label">Desvios vs. outorga</div><div class="k-value" style="color:var(--bad)">9</div><div class="k-meta">pontos acima do volume</div></div>
+      </div>
+
+      <div class="grid g-2" style="align-items:start">
+        <div class="panel">
+          <header>Volume captado × outorgado <span class="sp"></span><span class="pill">por mês</span></header>
+          <div class="body"><div class="ph ph--chart">Gráfico de barras/linha — agregado da bacia</div></div>
+        </div>
+        <div class="panel">
+          <header>Distribuição por faixa (Curva ABC) <span class="sp"></span><span class="pill act">VM</span></header>
+          <div class="body">
+            <div class="stack">
+              <div><div class="row" style="justify-content:space-between"><small>Faixa A — grandes usuários</small><small class="mono">22 pts · 71% do volume</small></div><div class="meter"><i style="width:71%"></i></div></div>
+              <div><div class="row" style="justify-content:space-between"><small>Faixa B — médios</small><small class="mono">96 pts · 23%</small></div><div class="meter"><i style="width:23%"></i></div></div>
+              <div><div class="row" style="justify-content:space-between"><small>Faixa C — pequenos</small><small class="mono">194 pts · 6%</small></div><div class="meter"><i style="width:6%"></i></div></div>
+            </div>
+            <div class="note" style="margin-top:14px;font-size:12px">Limites de cada faixa <b>a definir com a SP-Águas</b> — exibidos como rótulos no rascunho.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <header>Acompanhamento por sub-bacia <span class="sp"></span><a class="btn sub" style="padding:6px 12px" href="gestor-mapa.html">Ver no mapa →</a></header>
+        <table class="table">
+          <thead><tr><th>Sub-bacia</th><th class="num">Pontos</th><th class="num">Transmissão</th><th class="num">Vol. medido</th><th class="num">Vol. outorgado</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Rio Cubatão</td><td class="num">141</td><td class="num">96,1%</td><td class="num">8,4 hm³</td><td class="num">11,9 hm³</td><td><span class="pill ok"><i class="dot"></i>Normal</span></td></tr>
+            <tr><td>Rio Itapanhaú</td><td class="num">73</td><td class="num">92,0%</td><td class="num">2,1 hm³</td><td class="num">3,0 hm³</td><td><span class="pill warn"><i class="dot"></i>Atenção</span></td></tr>
+            <tr><td>Drenagem direta (costeira)</td><td class="num">98</td><td class="num">95,3%</td><td class="num">3,7 hm³</td><td class="num">4,5 hm³</td><td><span class="pill ok"><i class="dot"></i>Normal</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="grid g-2" style="align-items:start">
+        <div class="panel">
+          <header>Por finalidade de uso</header>
+          <table class="table"><tbody>
+            <tr><td>Industrial</td><td class="num">61% do volume</td></tr>
+            <tr><td>Abastecimento público</td><td class="num">24%</td></tr>
+            <tr><td>Portuário / serviços</td><td class="num">9%</td></tr>
+            <tr><td>Irrigação / outros</td><td class="num">6%</td></tr>
+          </tbody></table>
+        </div>
+        <div class="panel">
+          <header>Alertas recentes <span class="sp"></span><a class="btn sub" style="padding:6px 12px" href="gestor-alertas.html">Central →</a></header>
+          <table class="table"><tbody>
+            <tr><td><span class="pill bad"><i class="dot"></i>Excesso</span></td><td>Indústria Cubatão S/A — volume &gt; outorga</td><td class="num">há 2 h</td></tr>
+            <tr><td><span class="pill warn"><i class="dot"></i>Sem transmissão</span></td><td>SDC-R-3320 — 36h sem dados</td><td class="num">há 5 h</td></tr>
+            <tr><td><span class="pill bad"><i class="dot"></i>Vazão reversa</span></td><td>Ponto 07-1188 — leitura negativa</td><td class="num">ontem</td></tr>
+          </tbody></table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+</body>
+</html>

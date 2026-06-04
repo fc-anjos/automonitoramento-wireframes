@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>APP 01 · Painel do outorgado</title>
+<link rel="stylesheet" href="../css/wireframe.css">
+</head>
+<body>
+<div class="wf-banner"><a href="../index.html">‹ Índice</a><span>APP · 01</span><b>Painel do outorgado</b><span class="sp"></span><span>Rascunho · dados fictícios</span></div>
+
+<div class="wrap">
+  <div class="note" style="max-width:760px;margin:0 auto 22px">
+    <b>Home roteada por porte (Curva ABC).</b> A mesma tela inicial muda o atalho principal conforme a faixa do usuário: <code>Faixa A</code> → acompanhar telemetria; <code>Faixa B/C</code> → autodeclarar leitura. Abaixo, os dois estados lado a lado no mesmo aparelho.
+  </div>
+
+  <div class="phone-stage" style="justify-content:center">
+
+    <!-- ESTADO A — grande usuário (telemetria) -->
+    <div>
+      <div class="phone"><div class="screen">
+        <div class="notch"></div>
+        <div class="statusbar"><span>9:41</span><span>▰▰▰ 5G ▮</span></div>
+        <div class="pscroll">
+          <div class="appbar"><h2>Olá, outorgado</h2><span class="sp" style="flex:1"></span><div class="back">≡</div></div>
+
+          <div class="card" style="padding:14px">
+            <div class="row" style="justify-content:space-between;align-items:center">
+              <span class="eyebrow">Outorga ativa</span>
+              <span class="pill act"><i class="dot"></i>Faixa A</span>
+            </div>
+            <div class="mono" style="font-size:13px;color:var(--ink);margin-top:8px">OUT-07-2024-001234</div>
+            <div class="muted" style="font-size:12.5px;margin-top:2px">Indústria Cubatão S/A — Captação superficial</div>
+            <hr class="div" style="margin:12px 0">
+            <div class="muted" style="font-size:12px">Volume outorgado</div>
+            <div class="mono" style="font-size:18px;color:var(--ink)">1.250.000 m³/ano</div>
+          </div>
+
+          <div class="card" style="margin-top:12px;padding:14px">
+            <div class="row" style="justify-content:space-between"><span class="muted" style="font-size:12px">Consumo no período</span><span class="pill ok"><i class="dot"></i>Em dia</span></div>
+            <div class="meter" style="margin-top:10px"><i style="width:62%"></i></div>
+            <div class="row" style="justify-content:space-between;margin-top:6px"><small class="mono">775.000 m³</small><small class="mono faint">62% do outorgado</small></div>
+          </div>
+
+          <a class="btn block lg" style="margin-top:14px" href="app-telemetria.html">Acompanhar consumo →</a>
+          <div class="note" style="margin-top:12px;font-size:12px">Usuário Faixa A não declara manualmente — o atalho principal abre a <b>telemetria</b>.</div>
+
+          <div style="margin-top:14px">
+            <div class="eyebrow" style="margin-bottom:8px">Atalhos</div>
+            <div class="mrow"><span class="ico">◷</span><div class="msp"><b style="font-size:13px;color:var(--ink)">Histórico de envios</b></div><span class="faint">›</span></div>
+            <div class="mrow"><span class="ico">⚷</span><div class="msp"><b style="font-size:13px;color:var(--ink)">Equipamento / telemetria</b><div class="muted" style="font-size:11.5px">Status: transmitindo</div></div><span class="faint">›</span></div>
+            <div class="mrow"><span class="ico">⊕</span><div class="msp"><b style="font-size:13px;color:var(--ink)">Suporte</b></div><span class="faint">›</span></div>
+          </div>
+        </div>
+        <div class="tabbar">
+          <a class="tab on"><div class="ic"></div>Início</a>
+          <a class="tab"><div class="ic"></div>Consumo</a>
+          <a class="tab"><div class="ic"></div>Histórico</a>
+          <a class="tab"><div class="ic"></div>Perfil</a>
+        </div>
+        <div class="homebar"></div>
+      </div></div>
+      <div class="phone-label">Estado A — Grande usuário · telemetria</div>
+    </div>
+
+    <!-- ESTADO B — pequeno/médio (autodeclaração) -->
+    <div>
+      <div class="phone"><div class="screen">
+        <div class="notch"></div>
+        <div class="statusbar"><span>9:41</span><span>▰▰▱ 4G ▮</span></div>
+        <div class="pscroll">
+          <div class="appbar"><h2>Olá, outorgado</h2><span class="sp" style="flex:1"></span><div class="back">≡</div></div>
+
+          <div class="card" style="padding:14px">
+            <div class="row" style="justify-content:space-between;align-items:center">
+              <span class="eyebrow">Outorga ativa</span>
+              <span class="pill"><i class="dot"></i>Faixa C</span>
+            </div>
+            <div class="mono" style="font-size:13px;color:var(--ink);margin-top:8px">OUT-07-2025-008842</div>
+            <div class="muted" style="font-size:12.5px;margin-top:2px">Sítio Boa Vista — Poço (subterrânea)</div>
+            <hr class="div" style="margin:12px 0">
+            <div class="muted" style="font-size:12px">Volume outorgado</div>
+            <div class="mono" style="font-size:18px;color:var(--ink)">18.000 m³/ano</div>
+          </div>
+
+          <div class="card" style="margin-top:12px;padding:14px;border-color:var(--warn)">
+            <div class="row" style="justify-content:space-between"><span class="muted" style="font-size:12px">Declaração do período</span><span class="pill warn"><i class="dot"></i>Pendente</span></div>
+            <div class="muted" style="font-size:12.5px;margin-top:8px">Prazo: até <b>10/06</b> · periodicidade mensal</div>
+          </div>
+
+          <a class="btn block lg" style="margin-top:14px" href="app-autodeclaracao.html">Declarar leitura →</a>
+          <div class="note" style="margin-top:12px;font-size:12px">Usuário Faixa B/C sem telemetria — o atalho principal abre a <b>autodeclaração</b> (com foto + GPS).</div>
+
+          <div style="margin-top:14px">
+            <div class="eyebrow" style="margin-bottom:8px">Atalhos</div>
+            <div class="mrow"><span class="ico">◷</span><div class="msp"><b style="font-size:13px;color:var(--ink)">Declarações anteriores</b></div><span class="faint">›</span></div>
+            <div class="mrow"><span class="ico">◔</span><div class="msp"><b style="font-size:13px;color:var(--ink)">Calendário de prazos</b></div><span class="faint">›</span></div>
+            <div class="mrow"><span class="ico">⊕</span><div class="msp"><b style="font-size:13px;color:var(--ink)">Suporte</b></div><span class="faint">›</span></div>
+          </div>
+        </div>
+        <div class="tabbar">
+          <a class="tab on"><div class="ic"></div>Início</a>
+          <a class="tab"><div class="ic"></div>Declarar</a>
+          <a class="tab"><div class="ic"></div>Histórico</a>
+          <a class="tab"><div class="ic"></div>Perfil</a>
+        </div>
+        <div class="homebar"></div>
+      </div></div>
+      <div class="phone-label">Estado B — Pequeno/médio · autodeclaração</div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>

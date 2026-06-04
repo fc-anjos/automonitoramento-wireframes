@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PORTAL 01 · Transparência da bacia</title>
+<link rel="stylesheet" href="../css/wireframe.css">
+</head>
+<body>
+<div class="wf-banner"><a href="../index.html">‹ Índice</a><span>PORTAL · 01</span><b>Portal público de transparência</b><span class="sp"></span><span>Dados agregados · LGPD</span></div>
+
+<!-- public site header -->
+<div style="background:var(--surface);border-bottom:1px solid var(--line)">
+  <div class="wrap" style="padding:14px 24px;display:flex;align-items:center;gap:14px">
+    <div class="logo" style="display:flex;align-items:center;gap:8px;font-weight:700;color:var(--ink)"><span style="width:28px;height:28px;border-radius:7px;background:var(--act);display:grid;place-items:center;color:#fff;font:700 12px var(--mono)">AM</span> Águas da Baixada — Transparência</div>
+    <span class="sp" style="flex:1"></span>
+    <a class="nav-i" style="display:none">x</a>
+    <span class="muted" style="font-size:13px">Indicadores</span>
+    <span class="muted" style="font-size:13px">Mapa</span>
+    <span class="muted" style="font-size:13px">Dados abertos</span>
+    <span class="btn sub" style="padding:6px 12px">Sobre</span>
+  </div>
+</div>
+
+<div class="wrap stack">
+
+  <div class="note">
+    <b>Superfície pública (TR §6.3).</b> Mostra o uso da água na bacia de forma <b>agregada</b> — sem expor dados pessoais do outorgado (LGPD). Tom mais leve que a ferramenta do gestor.
+  </div>
+
+  <header class="stack" style="margin-top:6px">
+    <div class="eyebrow">UGRHI-07 · Baixada Santista</div>
+    <h1 style="font-size:28px;max-width:20ch">Como a água outorgada é usada na nossa bacia</h1>
+    <p class="lede">Dados consolidados do sistema de automonitoramento, atualizados a partir das leituras de telemetria e autodeclaração. Valores agregados por sub-bacia, finalidade e período.</p>
+  </header>
+
+  <!-- public KPIs -->
+  <div class="grid g-4">
+    <div class="card kpi"><div class="k-label">Pontos monitorados</div><div class="k-value">312</div><div class="k-meta">na bacia</div></div>
+    <div class="card kpi"><div class="k-label">Volume captado (ano)</div><div class="k-value">14,2 hm³</div><div class="k-meta">de 19,4 hm³ outorgados</div></div>
+    <div class="card kpi"><div class="k-label">Cobertura de medição</div><div class="k-value">94,8%</div><div class="k-meta">pontos transmitindo</div></div>
+    <div class="card kpi"><div class="k-label">Atualizado em</div><div class="k-value" style="font-size:20px">04/06/2026</div><div class="k-meta">dados consistidos</div></div>
+  </div>
+
+  <div class="row" style="gap:16px;align-items:stretch">
+    <div class="panel" style="flex:2 1 520px;min-width:320px">
+      <header>Mapa público da bacia <span class="sp"></span><span class="pill">agregado</span></header>
+      <div class="ph ph--map" style="min-height:340px;border-radius:0;border:0;border-top:1px solid var(--line)">Mapa público — uso por sub-bacia<br><small>sem identificação individual de usuários</small></div>
+    </div>
+    <div class="panel" style="flex:1 1 280px;min-width:260px">
+      <header>Uso por finalidade</header>
+      <div class="body stack">
+        <div><div class="row" style="justify-content:space-between"><small>Industrial</small><small class="mono">61%</small></div><div class="meter"><i style="width:61%"></i></div></div>
+        <div><div class="row" style="justify-content:space-between"><small>Abastecimento público</small><small class="mono">24%</small></div><div class="meter"><i style="width:24%"></i></div></div>
+        <div><div class="row" style="justify-content:space-between"><small>Portuário / serviços</small><small class="mono">9%</small></div><div class="meter"><i style="width:9%"></i></div></div>
+        <div><div class="row" style="justify-content:space-between"><small>Irrigação / outros</small><small class="mono">6%</small></div><div class="meter"><i style="width:6%"></i></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid g-2" style="align-items:start">
+    <div class="panel">
+      <header>Captação por sub-bacia <span class="sp"></span><span class="pill">12 meses</span></header>
+      <div class="body"><div class="ph ph--chart">Gráfico de barras — volume agregado por sub-bacia</div></div>
+    </div>
+    <div class="panel">
+      <header>Dados abertos</header>
+      <div class="body stack">
+        <div class="mrow"><span class="ico">⤓</span><div class="msp"><b style="color:var(--ink);font-size:13px">Volume mensal por sub-bacia</b><div class="muted" style="font-size:11.5px">CSV · agregado</div></div><span class="btn sub" style="padding:4px 10px">Baixar</span></div>
+        <div class="mrow"><span class="ico">⤓</span><div class="msp"><b style="color:var(--ink);font-size:13px">Uso por finalidade</b><div class="muted" style="font-size:11.5px">CSV · agregado</div></div><span class="btn sub" style="padding:4px 10px">Baixar</span></div>
+        <div class="mrow"><span class="ico">⤓</span><div class="msp"><b style="color:var(--ink);font-size:13px">Pontos e cobertura de medição</b><div class="muted" style="font-size:11.5px">GeoJSON · sem dados pessoais</div></div><span class="btn sub" style="padding:4px 10px">Baixar</span></div>
+        <div class="note" style="font-size:12px">API pública e dicionário de dados entram conforme política de dados abertos da SP-Águas.</div>
+      </div>
+    </div>
+  </div>
+
+  <footer style="margin-top:30px;padding:18px 0;border-top:1px solid var(--line)" class="row">
+    <span class="muted" style="font-size:12.5px">Sistema de Automonitoramento · SP-Águas / FEHIDRO · CBH-BS</span>
+    <span class="sp" style="flex:1"></span>
+    <span class="faint mono" style="font-size:11px">Dados agregados — conforme LGPD · valores fictícios (rascunho)</span>
+  </footer>
+
+</div>
+</body>
+</html>

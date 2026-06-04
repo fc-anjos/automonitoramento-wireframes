@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GESTOR 02 · Mapa georreferenciado</title>
+<link rel="stylesheet" href="../css/wireframe.css">
+</head>
+<body>
+<div class="wf-banner"><a href="../index.html">‹ Índice</a><span>GESTOR · 02</span><b>Mapa georreferenciado</b><span class="sp"></span><span>Pontos de exemplo · SIRGAS 2000</span></div>
+
+<div class="app-shell">
+  <aside class="app-side">
+    <div class="brand"><div class="logo"><span class="mark">AM</span> Automonitoramento</div><small>SP-Águas · UGRHI-07</small></div>
+    <div class="nav-sec">Operação</div>
+    <a class="nav-i" href="gestor-dashboard.html"><span class="ic"></span>Dashboard</a>
+    <a class="nav-i on" href="gestor-mapa.html"><span class="ic"></span>Mapa</a>
+    <a class="nav-i" href="gestor-detalhe.html"><span class="ic"></span>Pontos / outorgados</a>
+    <a class="nav-i" href="gestor-alertas.html"><span class="ic"></span>Alertas</a>
+    <div class="nav-sec">Dados</div>
+    <a class="nav-i" href="gestor-ingestao.html"><span class="ic"></span>Ingestão & qualidade</a>
+    <a class="nav-i" href="gestor-cadastro.html"><span class="ic"></span>Cadastro & admin</a>
+  </aside>
+
+  <main class="app-main">
+    <div class="app-top">
+      <div class="crumb">Operação / <b style="color:var(--ink)">Mapa</b></div>
+      <span class="sp"></span>
+      <span class="pill"><i class="dot"></i>Sub-bacia: todas</span>
+      <span class="pill"><i class="dot"></i>Finalidade: todas</span>
+      <span class="pill act"><i class="dot"></i>Status: todos</span>
+    </div>
+
+    <div class="app-body">
+      <div class="note" style="margin-bottom:16px">
+        <b>Mapa da §4 tornado interativo.</b> A camada de <b>pontos de captação ainda não está disponível</b> (entra no Produto 1) — aqui usamos <b>pontos de exemplo</b> sobre as três sub-bacias da UGRHI-07: Rio Cubatão, Rio Itapanhaú e drenagem direta costeira.
+      </div>
+
+      <div class="row" style="gap:16px;align-items:stretch">
+        <div class="panel" style="flex:1 1 560px;min-width:320px">
+          <header>UGRHI-07 — Baixada Santista <span class="sp"></span><span class="mono faint" style="font-size:11px">EPSG:4674 · SIRGAS 2000</span></header>
+          <div style="position:relative">
+            <div class="ph ph--map" style="min-height:460px;border-radius:0;border:0;border-bottom:1px solid var(--line)">
+              Mapa base (sub-bacias + hidrografia)<br><small>camada de pontos = exemplos</small>
+            </div>
+            <!-- example pins -->
+            <span style="position:absolute;left:30%;top:35%;width:14px;height:14px;border-radius:50%;background:var(--bad);border:2px solid #fff;box-shadow:0 0 0 1px var(--bad)"></span>
+            <span style="position:absolute;left:46%;top:52%;width:14px;height:14px;border-radius:50%;background:var(--ok);border:2px solid #fff;box-shadow:0 0 0 1px var(--ok)"></span>
+            <span style="position:absolute;left:62%;top:44%;width:14px;height:14px;border-radius:50%;background:var(--warn);border:2px solid #fff;box-shadow:0 0 0 1px var(--warn)"></span>
+            <span style="position:absolute;left:55%;top:66%;width:14px;height:14px;border-radius:50%;background:var(--ok);border:2px solid #fff;box-shadow:0 0 0 1px var(--ok)"></span>
+            <span style="position:absolute;left:38%;top:60%;width:14px;height:14px;border-radius:50%;background:var(--ok);border:2px solid #fff;box-shadow:0 0 0 1px var(--ok)"></span>
+          </div>
+          <div class="body legend">
+            <span><i style="background:var(--ok)"></i>Normal</span>
+            <span><i style="background:var(--warn)"></i>Atenção / sem transmissão</span>
+            <span><i style="background:var(--bad)"></i>Desvio / alerta crítico</span>
+          </div>
+        </div>
+
+        <div class="panel" style="flex:1 1 300px;min-width:280px">
+          <header>Pontos visíveis <span class="sp"></span><span class="pill">5 de exemplo</span></header>
+          <div style="max-height:520px;overflow:auto">
+            <a class="mrow" href="gestor-detalhe.html" style="padding:12px 14px;text-decoration:none;color:inherit">
+              <span class="ico" style="color:var(--bad);border-color:#d8bcbc">●</span>
+              <div class="msp"><b style="font-size:13px;color:var(--ink)">07-1001 · Indústria Cubatão S/A</b><div class="muted" style="font-size:11.5px">Cubatão · Industrial · Faixa A</div></div><span class="faint">›</span></a>
+            <a class="mrow" href="gestor-detalhe.html" style="padding:12px 14px;text-decoration:none;color:inherit">
+              <span class="ico" style="color:var(--warn);border-color:#ddd2a8">●</span>
+              <div class="msp"><b style="font-size:13px;color:var(--ink)">07-3320 · Terminal Portuário XPTO</b><div class="muted" style="font-size:11.5px">Santos · Portuário · Faixa A</div></div><span class="faint">›</span></a>
+            <a class="mrow" href="gestor-detalhe.html" style="padding:12px 14px;text-decoration:none;color:inherit">
+              <span class="ico" style="color:var(--ok);border-color:#bcd0bc">●</span>
+              <div class="msp"><b style="font-size:13px;color:var(--ink)">07-2207 · SABESP — ETA Itapanhaú</b><div class="muted" style="font-size:11.5px">Bertioga · Abastecimento · Faixa A</div></div><span class="faint">›</span></a>
+            <a class="mrow" href="gestor-detalhe.html" style="padding:12px 14px;text-decoration:none;color:inherit">
+              <span class="ico" style="color:var(--ok);border-color:#bcd0bc">●</span>
+              <div class="msp"><b style="font-size:13px;color:var(--ink)">07-8842 · Sítio Boa Vista</b><div class="muted" style="font-size:11.5px">São Vicente · Irrigação · Faixa C</div></div><span class="faint">›</span></a>
+            <a class="mrow" href="gestor-detalhe.html" style="padding:12px 14px;text-decoration:none;color:inherit">
+              <span class="ico" style="color:var(--ok);border-color:#bcd0bc">●</span>
+              <div class="msp"><b style="font-size:13px;color:var(--ink)">07-1188 · Lava-rápido Maré Alta</b><div class="muted" style="font-size:11.5px">Guarujá · Serviços · Faixa C</div></div><span class="faint">›</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>
