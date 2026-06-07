@@ -27,7 +27,7 @@
       <div class="crumb">Operação / <b style="color:var(--ink)">Alertas</b></div>
       <span class="sp"></span>
       <span class="pill bad">4 abertos</span>
-      <span class="pill warn">3 em análise</span>
+      <span class="pill warn">2 em análise</span>
       <span class="btn sub" style="padding:6px 12px">+ Nova regra</span>
     </div>
 
@@ -38,18 +38,19 @@
 
       <div class="bento">
 
-        <!-- fila de ocorrências — the task: triage open alerts -->
+        <!-- fila de ocorrências - the task: triage open alerts -->
         <div class="panel lead col-8">
           <header>Ocorrências <span class="sp"></span><span class="pill label">filtro: todas</span></header>
           <table class="table">
-            <thead><tr><th>Regra</th><th>Ponto / outorgado</th><th>Severidade</th><th class="num">Quando</th><th>Status</th></tr></thead>
+            <thead><tr><th>Regra</th><th>Ponto / outorgado</th><th class="num">Limite × medido</th><th>Severidade</th><th class="num">Desde</th><th>Status</th></tr></thead>
             <tbody>
-              <tr><td>Volume acima do outorgado</td><td>07-1001 · Indústria Cubatão S/A</td><td><span class="pill bad">Crítico</span></td><td class="num">há 2 h</td><td><span class="pill">Aberto</span></td></tr>
-              <tr><td>Vazão reversa</td><td>07-1188 · Lava-rápido Maré Alta</td><td><span class="pill bad">Crítico</span></td><td class="num">ontem</td><td><span class="pill">Aberto</span></td></tr>
-              <tr><td>Ausência de transmissão</td><td>07-3320 · Terminal Marítimo da Alemoa</td><td><span class="pill warn">Médio</span></td><td class="num">há 5 h</td><td><span class="pill">Em análise</span></td></tr>
-              <tr><td>Declaração vencida</td><td>07-8842 · Sítio Boa Vista</td><td><span class="pill warn">Médio</span></td><td class="num">4 dias</td><td><span class="pill">Aberto</span></td></tr>
-              <tr><td>Suspeita de fraude</td><td>07-2207 · padrão atípico</td><td><span class="pill warn">Médio</span></td><td class="num">2 dias</td><td><span class="pill">Em apuração</span></td></tr>
-              <tr><td>Valor inconsistente</td><td>07-2207 · SABESP ETA Itapanhaú</td><td><span class="pill">Baixo</span></td><td class="num">3 dias</td><td><span class="pill ok">Resolvido</span></td></tr>
+              <tr><td>Pico de vazão &gt; teto</td><td>07-1001 · Indústria Cubatão S/A</td><td class="num">45 / 53 L/s · 118%</td><td><span class="pill bad">Crítico</span></td><td class="num">04/06 08:20</td><td><span class="pill">Aberto</span></td></tr>
+              <tr><td>Volume anual em risco</td><td>07-1001 · Indústria Cubatão S/A</td><td class="num">58% · proj. 116%</td><td><span class="pill warn">Médio</span></td><td class="num">projeção</td><td><span class="pill">Aberto</span></td></tr>
+              <tr><td>Vazão reversa</td><td>07-1188 · Lava-rápido Maré Alta</td><td class="num">medição negativa</td><td><span class="pill bad">Crítico</span></td><td class="num">ontem</td><td><span class="pill">Aberto</span></td></tr>
+              <tr><td>Ausência de transmissão</td><td>07-3320 · Terminal Marítimo da Alemoa</td><td class="num">36 h sem dados</td><td><span class="pill warn">Médio</span></td><td class="num">há 5 h</td><td><span class="pill">Em análise</span></td></tr>
+              <tr><td>Declaração vencida</td><td>07-8842 · Sítio Boa Vista</td><td class="num">venceu 31/05</td><td><span class="pill warn">Médio</span></td><td class="num">4 dias</td><td><span class="pill">Aberto</span></td></tr>
+              <tr><td>Suspeita de fraude</td><td>07-2207 · padrão atípico</td><td class="num">−38% vs. média</td><td><span class="pill warn">Médio</span></td><td class="num">2 dias</td><td><span class="pill">Em apuração</span></td></tr>
+              <tr><td>Amostra isolada ausente</td><td>07-1001 · Indústria Cubatão S/A</td><td class="num">1 medição · retificada</td><td><span class="pill">Baixo</span></td><td class="num">03/06 15:35</td><td><span class="pill ok">Resolvido</span></td></tr>
             </tbody>
           </table>
         </div>
@@ -58,7 +59,8 @@
         <div class="panel col-4">
           <header>Catálogo de regras <span class="sp"></span><span class="pill label">exemplos</span></header>
           <div class="body list">
-            <div class="lrow"><div class="lr-top"><span class="lr-title">Volume acima do outorgado</span><span class="pill">ativa</span></div><div class="lr-sub">Acumulado medido excede o limite da outorga</div></div>
+            <div class="lrow"><div class="lr-top"><span class="lr-title">Pico de vazão &gt; teto</span><span class="pill">ativa</span></div><div class="lr-sub">Vazão instantânea excede a vazão máx. outorgada</div></div>
+            <div class="lrow"><div class="lr-top"><span class="lr-title">Volume anual em risco</span><span class="pill">ativa</span></div><div class="lr-sub">Projeção do acúmulo ultrapassa o limite anual</div></div>
             <div class="lrow"><div class="lr-top"><span class="lr-title">Ausência de transmissão</span><span class="pill">ativa</span></div><div class="lr-sub">Sem dados há mais de <span class="mono">24h</span> <span class="faint">(parametrizável)</span></div></div>
             <div class="lrow"><div class="lr-top"><span class="lr-title">Suspeita de fraude</span><span class="pill">ativa</span></div><div class="lr-sub">Padrão atípico de captação</div></div>
             <div class="lrow"><div class="lr-top"><span class="lr-title">Vazão reversa</span><span class="pill">ativa</span></div><div class="lr-sub">Medição negativa ou fluxo invertido</div></div>

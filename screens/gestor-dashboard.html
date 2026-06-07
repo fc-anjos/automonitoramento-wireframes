@@ -41,19 +41,19 @@
 
       <div class="bento">
 
-        <!-- KPI strip — 4 × span-3, edges at 25/50/75% -->
+        <!-- KPI strip - 4 × span-3, edges at 25/50/75% -->
         <div class="card kpi col-3"><div class="k-label">Pontos monitorados</div><div class="k-value">312</div><div class="k-meta">64 telemetria · 248 autodeclaração</div></div>
         <div class="card kpi col-3"><div class="k-label">Transmissão (30d)</div><div class="k-value">94,8%</div><div class="k-meta">telemetria · meta ≥ 95%</div></div>
         <div class="card kpi col-3"><div class="k-label">Adesão declaratória</div><div class="k-value">87%</div><div class="k-meta">216 de 248 no prazo</div></div>
-        <div class="card kpi col-3"><div class="k-label">Desvios vs. outorga</div><div class="k-value" style="color:var(--bad)">9</div><div class="k-meta">pontos acima do volume</div></div>
+        <div class="card kpi col-3"><div class="k-label">Desvios vs. outorga</div><div class="k-value" style="color:var(--bad)">9</div><div class="k-meta">pontos com limite excedido</div></div>
 
-        <!-- LEAD OBJECT: the reason a fiscal opens this screen — triage today -->
+        <!-- LEAD OBJECT: the reason a fiscal opens this screen - triage today -->
         <div class="panel lead col-12">
           <header>Exige ação hoje <span class="sp"></span><span class="pill">9 ocorrências</span><a class="btn sub" style="padding:6px 12px" href="gestor-alertas.html">Central de alertas →</a></header>
           <table class="table">
             <thead><tr><th>Ocorrência</th><th>Ponto / outorgado</th><th class="num">Medido × outorgado</th><th class="num">Desde</th><th>Ação</th></tr></thead>
             <tbody>
-              <tr><td>Volume acima do outorgado</td><td>07-1001 · Indústria Cubatão S/A</td><td class="num">1,32 / 1,25 hm³ <b>(105%)</b></td><td class="num">há 2 h</td><td><a href="gestor-detalhe.html" class="btn sub" style="padding:5px 12px">Abrir →</a></td></tr>
+              <tr><td>Pico de vazão &gt; teto</td><td>07-1001 · Indústria Cubatão S/A</td><td class="num">53 / 45 L/s <b>(118%)</b></td><td class="num">há 2 h</td><td><a href="gestor-detalhe.html" class="btn sub" style="padding:5px 12px">Abrir →</a></td></tr>
               <tr><td>Vazão reversa</td><td>07-1188 · Lava-rápido Maré Alta</td><td class="num">medição negativa</td><td class="num">ontem</td><td><a href="gestor-detalhe.html" class="btn sub" style="padding:5px 12px">Abrir →</a></td></tr>
               <tr><td>Ausência de transmissão</td><td>07-3320 · Terminal Marítimo da Alemoa</td><td class="num">36 h sem dados</td><td class="num">há 5 h</td><td><a href="gestor-detalhe.html" class="btn sub" style="padding:5px 12px">Abrir →</a></td></tr>
               <tr><td>Declaração vencida</td><td>07-8842 · Sítio Boa Vista</td><td class="num">venceu 31/05</td><td class="num">4 dias</td><td><a href="gestor-detalhe.html" class="btn sub" style="padding:5px 12px">Abrir →</a></td></tr>
@@ -62,23 +62,27 @@
           </table>
         </div>
 
-        <!-- MAIN COLUMN (span 8): trend + sub-bacia, sharing a left edge -->
-        <div class="zone col-8">
-          <div class="panel">
-            <header>Volume captado × outorgado <span class="sp"></span><span class="pill">por mês</span></header>
-            <div class="body"><div class="ph ph--chart">Gráfico de barras/linha — agregado da bacia</div></div>
-          </div>
-          <div class="panel">
-            <header>Acompanhamento por sub-bacia <span class="sp"></span><a class="btn sub" style="padding:6px 12px" href="gestor-mapa.html">Ver no mapa →</a></header>
-            <table class="table">
-              <thead><tr><th>Sub-bacia</th><th class="num">Pontos</th><th class="num">Transmissão</th><th class="num">Vol. medido</th><th class="num">Vol. outorgado</th><th>Status</th></tr></thead>
-              <tbody>
-                <tr><td>Rio Cubatão</td><td class="num">141</td><td class="num">96,1%</td><td class="num">8,4 hm³</td><td class="num">11,9 hm³</td><td><span class="pill ok">Normal</span></td></tr>
-                <tr><td>Rio Itapanhaú</td><td class="num">73</td><td class="num">92,0%</td><td class="num">2,1 hm³</td><td class="num">3,0 hm³</td><td><span class="pill warn">Atenção</span></td></tr>
-                <tr><td>Drenagem direta (costeira)</td><td class="num">98</td><td class="num">95,3%</td><td class="num">3,7 hm³</td><td class="num">4,5 hm³</td><td><span class="pill ok">Normal</span></td></tr>
-              </tbody>
-            </table>
-          </div>
+        <!-- two co-equal findings: monthly captado AND structural comprometimento -->
+        <div class="panel col-6">
+          <header>Volume captado × outorgado <span class="sp"></span><span class="pill">por mês</span></header>
+          <div class="body"><object type="image/svg+xml" data="../assets/wireframe-chart-dashboard.svg" style="display:block;width:100%;aspect-ratio:520/300" aria-label="Volume captado mensal × outorgado (agregado da bacia)"></object></div>
+        </div>
+        <div class="panel col-6">
+          <header>Comprometimento por sub-bacia <span class="sp"></span><span class="pill">outorga ÷ Q7,10</span></header>
+          <div class="body"><object type="image/svg+xml" data="../assets/wireframe-chart-comprometimento.svg" style="display:block;width:100%;aspect-ratio:460/280" aria-label="Comprometimento estrutural por sub-bacia: soma das outorgas dividida pela disponibilidade (Q7,10)"></object></div>
+        </div>
+
+        <!-- prioritization: sub-bacia table -->
+        <div class="panel col-8">
+          <header>Acompanhamento por sub-bacia <span class="sp"></span><a class="btn sub" style="padding:6px 12px" href="gestor-mapa.html">Ver no mapa →</a></header>
+          <table class="table">
+            <thead><tr><th>Sub-bacia</th><th class="num">Pontos</th><th class="num">Transmissão</th><th class="num">Vol. medido</th><th class="num">Vol. outorgado</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Rio Cubatão</td><td class="num">141</td><td class="num">96,1%</td><td class="num">8,4 hm³</td><td class="num">11,9 hm³</td><td><span class="pill warn">Atenção</span></td></tr>
+              <tr><td>Rio Itapanhaú</td><td class="num">73</td><td class="num">92,0%</td><td class="num">2,1 hm³</td><td class="num">3,0 hm³</td><td><span class="pill ok">Normal</span></td></tr>
+              <tr><td>Drenagem direta (costeira)</td><td class="num">98</td><td class="num">95,3%</td><td class="num">3,7 hm³</td><td class="num">4,5 hm³</td><td><span class="pill ok">Normal</span></td></tr>
+            </tbody>
+          </table>
         </div>
 
         <!-- SIDE RAIL (span 4): faixa + finalidade, sharing a right edge -->

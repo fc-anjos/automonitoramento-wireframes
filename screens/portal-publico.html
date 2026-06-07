@@ -36,7 +36,7 @@
 
   <div class="bento">
 
-    <!-- public KPIs — strip -->
+    <!-- public KPIs - strip -->
     <div class="card kpi col-3"><div class="k-label">Pontos monitorados</div><div class="k-value">312</div><div class="k-meta">na bacia</div></div>
     <div class="card kpi col-3"><div class="k-label">Volume captado (ano)</div><div class="k-value">14,2 hm³</div><div class="k-meta">de 19,4 hm³ outorgados</div></div>
     <div class="card kpi col-3"><div class="k-label">Pontos com dados recentes</div><div class="k-value">94,8%</div><div class="k-meta">últimos 30 dias</div></div>
@@ -45,7 +45,7 @@
     <!-- map = the public headline -->
     <div class="panel lead col-8">
       <header>Mapa público da bacia <span class="sp"></span><span class="pill label">agregado</span></header>
-      <div class="ph ph--map" style="min-height:340px;border-radius:0;border:0;border-top:1.5px solid var(--ink)">Mapa público · uso por sub-bacia<br><small>sem identificação individual de usuários</small></div>
+      <object type="image/svg+xml" data="../assets/wireframe-mapa-publico.svg" style="display:block;width:100%;aspect-ratio:760/577;border-top:1.5px solid var(--ink)" aria-label="Mapa público da bacia: uso agregado por sub-bacia, sem identificação individual de usuários"></object>
     </div>
     <div class="panel col-4">
       <header>Uso por finalidade</header>
@@ -59,9 +59,14 @@
 
     <div class="panel col-6">
       <header>Captação por sub-bacia <span class="sp"></span><span class="pill label">12 meses</span></header>
-      <div class="body"><div class="ph ph--chart">Gráfico de barras · volume agregado por sub-bacia</div></div>
+      <div class="body"><object type="image/svg+xml" data="../assets/wireframe-chart-portal-bars.svg" style="display:block;width:100%;aspect-ratio:460/280" aria-label="Volume agregado por sub-bacia"></object></div>
     </div>
     <div class="panel col-6">
+      <header>Comprometimento por sub-bacia <span class="sp"></span><span class="pill label">outorga ÷ Q7,10</span></header>
+      <div class="body"><object type="image/svg+xml" data="../assets/wireframe-chart-comprometimento.svg" style="display:block;width:100%;aspect-ratio:460/280" aria-label="Comprometimento estrutural por sub-bacia: soma das outorgas dividida pela disponibilidade (Q7,10)"></object></div>
+    </div>
+
+    <div class="panel col-12">
       <header>Dados abertos</header>
       <div class="body stack">
         <div class="mrow"><span class="ico">⤓</span><div class="msp"><b style="color:var(--ink);font-size:13px">Volume mensal por sub-bacia</b><div class="muted" style="font-size:11.5px">CSV · agregado</div></div><span class="btn sub" style="padding:4px 10px">Baixar</span></div>

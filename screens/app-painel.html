@@ -16,7 +16,7 @@
 
   <div class="phone-stage" style="justify-content:center">
 
-    <!-- ESTADO A — grande usuário (telemetria) -->
+    <!-- ESTADO A - grande usuário (telemetria) -->
     <div>
       <div class="phone"><div class="screen">
         <div class="notch"></div>
@@ -36,10 +36,16 @@
             <div class="mono" style="font-size:18px;color:var(--ink)">1.250.000 m³/ano</div>
           </div>
 
-          <div class="card" style="margin-top:12px;padding:14px">
-            <div class="row" style="justify-content:space-between"><span class="muted" style="font-size:12px">Captação acumulada (ano)</span><span class="pill ok">Em dia</span></div>
-            <div class="meter" style="margin-top:10px"><i style="width:62%"></i></div>
-            <div class="row" style="justify-content:space-between;margin-top:6px"><small class="mono">775.000 m³</small><small class="mono faint">62% do limite anual</small></div>
+          <div class="card" style="margin-top:12px;padding:14px;border-color:var(--warn)">
+            <div class="row" style="justify-content:space-between"><span class="muted" style="font-size:12px">Captação acumulada (ano)</span><span class="pill warn">Projeção 116%</span></div>
+            <div class="meter warn" style="margin-top:10px"><i style="width:58%"></i></div>
+            <div class="row" style="justify-content:space-between;margin-top:6px"><small class="mono">725.000 m³</small><small class="mono faint">58% do limite anual</small></div>
+          </div>
+
+          <!-- the two open apontamentos for this user -->
+          <div style="margin-top:12px">
+            <div class="mrow"><span class="ico"><i class="mk bad"></i></span><div class="msp"><b style="font-size:13px;color:var(--ink)">Pico de vazão &gt; teto</b><div class="muted" style="font-size:11.5px">04/06 · 53 L/s (teto 45) · desvio aberto</div></div><span class="faint">›</span></div>
+            <div class="mrow"><span class="ico"><i class="mk warn"></i></span><div class="msp"><b style="font-size:13px;color:var(--ink)">Orçamento anual em risco</b><div class="muted" style="font-size:11.5px">No ritmo atual, excede o limite ~início de nov</div></div><span class="faint">›</span></div>
           </div>
 
           <a class="btn block lg" style="margin-top:14px" href="app-telemetria.html">Acompanhar captação →</a>
@@ -63,7 +69,7 @@
       <div class="phone-label">Estado A · grande usuário (telemetria)</div>
     </div>
 
-    <!-- ESTADO B — pequeno/médio (autodeclaração) -->
+    <!-- ESTADO B - pequeno/médio (autodeclaração) -->
     <div>
       <div class="phone"><div class="screen">
         <div class="notch"></div>

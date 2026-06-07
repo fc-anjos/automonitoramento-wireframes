@@ -26,7 +26,8 @@
     <div class="app-top">
       <div class="crumb"><a href="gestor-mapa.html">Pontos</a> / <b style="color:var(--ink)">07-1001</b></div>
       <span class="sp"></span>
-      <span class="pill bad">Desvio: volume &gt; outorga</span>
+      <span class="pill bad">Desvio: pico de vazão &gt; teto</span>
+      <span class="pill warn">Volume anual: projeção excede ~nov</span>
       <span class="btn sub" style="padding:6px 12px">Exportar</span>
     </div>
 
@@ -56,43 +57,77 @@
           </div>
         </div>
 
-        <!-- volume comparison — KPI strip -->
-        <div class="card kpi col-4"><div class="k-label">Outorgado (ano)</div><div class="k-value">1.250.000</div><div class="k-meta">m³ · limite</div></div>
-        <div class="card kpi col-4"><div class="k-label">Medido (acum.)</div><div class="k-value">1.318.420</div><div class="k-meta">m³ · <b>105% do limite</b></div></div>
-        <div class="card kpi col-4"><div class="k-label">Vazão atual</div><div class="k-value">38,2</div><div class="k-meta">L/s · última há 6 min</div></div>
+        <!-- KPI strip: dois apontamentos distintos + um indicador de confiança -->
+        <div class="card kpi col-4"><div class="k-label">Pico de vazão (4 h)</div><div class="k-value">53</div><div class="k-meta">L/s · <b>118% do teto · desvio</b></div></div>
+        <div class="card kpi col-4"><div class="k-label">Volume anual</div><div class="k-value">58%</div><div class="k-meta">consumido · <b>projeção 116%</b></div></div>
+        <div class="card kpi col-4"><div class="k-label">Transmissão (30 d)</div><div class="k-value">98,6%</div><div class="k-meta">% · 1 lacuna retificada</div></div>
 
-        <!-- MAIN COLUMN (span 8): the series is why you open this point -->
-        <div class="zone col-8">
-          <div class="panel lead">
-            <header>Série temporal · medido × outorgado <span class="sp"></span><span class="pill label">12 meses</span></header>
-            <div class="body">
-              <div class="ph ph--chart">Gráfico de linha · volume acumulado vs. limite outorgado<br><small>linha cruza o limite no mês 11 → desvio</small></div>
+        <!-- THE SPINE: outorga é um CONJUNTO de limites, verificados juntos -->
+        <div class="panel col-8">
+          <header>Limites outorgados × medido <span class="sp"></span><span class="pill label">conformidade por dimensão</span></header>
+          <table class="table">
+            <thead><tr><th>Limite</th><th class="num">Outorgado</th><th class="num">Medido</th><th>Situação</th></tr></thead>
+            <tbody>
+              <tr><td>Vazão máx. instantânea</td><td class="num">45 L/s</td><td class="num">pico 53 L/s · 118%</td><td><span class="pill bad">Desvio</span></td></tr>
+              <tr><td>Volume diário</td><td class="num">3.425 m³/dia</td><td class="num">3.180 m³/dia</td><td><span class="pill ok">Conforme</span></td></tr>
+              <tr><td>Volume mensal</td><td class="num">104.000 m³/mês</td><td class="num">110.200 m³/mês · 106%</td><td><span class="pill warn">Atenção</span></td></tr>
+              <tr><td>Volume anual</td><td class="num">1.250.000 m³</td><td class="num">58% · projeção 116%</td><td><span class="pill warn">Em risco</span></td></tr>
+              <tr><td>Regime de operação</td><td class="num">contínuo (24 h)</td><td class="num">conforme</td><td><span class="pill ok">Conforme</span></td></tr>
+              <tr><td>Transmissão (30 d)</td><td class="num">≥ 95%</td><td class="num">98,6%</td><td><span class="pill ok">Conforme</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- typed findings list (each row = which limit, since when, status) -->
+        <div class="panel col-4">
+          <header>Apontamentos <span class="sp"></span><span class="pill label">3</span></header>
+          <div class="body">
+            <div class="list">
+              <div class="lrow"><div class="lr-top"><span class="lr-title">Pico de vazão &gt; teto</span><span class="pill bad">Aberto</span></div><div class="lr-sub">04/06 08:20 · 53 L/s (teto 45)</div></div>
+              <div class="lrow"><div class="lr-top"><span class="lr-title">Volume anual em risco</span><span class="pill warn">Projeção</span></div><div class="lr-sub">No ritmo atual, excede o limite ~início de nov</div></div>
+              <div class="lrow"><div class="lr-top"><span class="lr-title">Amostra isolada ausente</span><span class="pill">Resolvido</span></div><div class="lr-sub">03/06 15:35 · 1 medição, já retificada</div></div>
             </div>
-          </div>
-          <div class="panel">
-            <header>Histórico de medições (telemetria) <span class="sp"></span><span class="pill label">a cada 6 h</span></header>
-            <table class="table">
-              <thead><tr><th>Data</th><th class="num">Vol. acum.</th><th class="num">Vazão</th><th>Estado do dado</th></tr></thead>
-              <tbody>
-                <tr><td>04/06 09:35</td><td class="num">1.318.420</td><td class="num">38,2 L/s</td><td><span class="pill ok">Consolidado</span></td></tr>
-                <tr><td>04/06 03:35</td><td class="num">1.317.600</td><td class="num">37,9 L/s</td><td><span class="pill ok">Consolidado</span></td></tr>
-                <tr><td>03/06 21:35</td><td class="num">1.316.780</td><td class="num">39,1 L/s</td><td><span class="pill warn">Validado</span></td></tr>
-                <tr><td>03/06 15:35</td><td class="num">1.315.910</td><td class="num">37,4 L/s</td><td><span class="pill">Retificado</span></td></tr>
-                <tr class="faint"><td>03/06 15:35</td><td class="num">—</td><td class="num">—</td><td><span class="pill bad">Original substituído</span></td></tr>
-              </tbody>
-            </table>
           </div>
         </div>
 
-        <!-- SIDE RAIL (span 4): alerts on this point -->
-        <div class="panel col-4">
-          <header>Alertas deste ponto</header>
+        <!-- instantaneous flow spiked above the ceiling -->
+        <div class="panel col-6">
+          <header>Vazão instantânea × teto <span class="sp"></span><span class="pill label">janela 4 h</span></header>
           <div class="body">
-            <div class="list">
-              <div class="lrow"><div class="lr-top"><span class="lr-title">Volume acima do outorgado</span><span class="pill">Aberto</span></div><div class="lr-sub">Detectado 04/06 · regra “medido maior que outorgado”</div></div>
-              <div class="lrow"><div class="lr-top"><span class="lr-title">Amostra isolada ausente</span><span class="pill">Em análise</span></div><div class="lr-sub">03/06 15:35 · 1 medição ausente, já retificada</div></div>
-            </div>
-            <div class="note" style="font-size:12px;margin-top:14px">Cadastro técnico (as built) do equipamento e trilha de auditoria ficam na aba <b>Cadastro</b>.</div>
+            <object type="image/svg+xml" data="../assets/wireframe-chart-vazao.svg" style="display:block;width:100%;aspect-ratio:520/280" aria-label="Vazão instantânea numa janela de 4 h, com um pico de 53 L/s acima do teto de 45 L/s"></object>
+            <div class="note" style="font-size:12px;margin-top:10px">Mede o <b>momento</b>: vazão instantânea contra o teto outorgado. O pico de 53 L/s é desvio já consumado.</div>
+          </div>
+        </div>
+
+        <!-- annual budget on pace to be exceeded -->
+        <div class="panel col-6">
+          <header>Orçamento anual · projeção <span class="sp"></span><span class="pill label">12 meses</span></header>
+          <div class="body">
+            <object type="image/svg+xml" data="../assets/wireframe-chart-burndown.svg" style="display:block;width:100%;aspect-ratio:520/280" aria-label="Consumo do orçamento anual: acúmulo acima do ritmo, projeção cruza 100% por volta de início de novembro"></object>
+            <div class="note" style="font-size:12px;margin-top:10px">Mede a <b>tendência</b>: orçamento anual contra o ritmo de consumo. Acima do ritmo, a projeção estoura o limite ~início de nov.</div>
+          </div>
+        </div>
+
+        <!-- TRUST: is the data even good? (automonitoramento depends on it) -->
+        <div class="panel col-8">
+          <header>Histórico de medições (telemetria) <span class="sp"></span><span class="pill label">amostras recentes</span></header>
+          <table class="table">
+            <thead><tr><th>Data</th><th class="num">Vol. acum.</th><th class="num">Vazão</th><th>Estado do dado</th></tr></thead>
+            <tbody>
+              <tr><td>04/06 09:35</td><td class="num">725.040</td><td class="num">37,0 L/s</td><td><span class="pill ok">Consolidado</span></td></tr>
+              <tr><td>04/06 08:20</td><td class="num">723.900</td><td class="num">53,0 L/s</td><td><span class="pill bad">Pico &gt; teto</span></td></tr>
+              <tr><td>04/06 03:35</td><td class="num">722.700</td><td class="num">38,4 L/s</td><td><span class="pill ok">Consolidado</span></td></tr>
+              <tr><td>03/06 21:35</td><td class="num">721.520</td><td class="num">36,1 L/s</td><td><span class="pill warn">Validado</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- TRUST chart: transmission over 30 days, the gap day stands out -->
+        <div class="panel col-4">
+          <header>Transmissão (30 d) <span class="sp"></span><span class="pill label">98,6%</span></header>
+          <div class="body">
+            <object type="image/svg+xml" data="../assets/wireframe-chart-transmissao.svg" style="display:block;width:100%;aspect-ratio:520/200" aria-label="Transmissão diária nos últimos 30 dias, com uma lacuna isolada já retificada"></object>
+            <div class="note" style="font-size:12px;margin-top:10px">A confiança no diagnóstico depende deste indicador: transmissão a <b>98,6%</b>, uma lacuna isolada (dia 20) já retificada. Trilha de auditoria na aba <b>Cadastro</b>.</div>
           </div>
         </div>
 

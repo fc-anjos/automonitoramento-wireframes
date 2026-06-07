@@ -36,21 +36,27 @@
 
       <div class="bento">
 
-        <!-- pipeline stages — KPI strip -->
+        <!-- pipeline stages - KPI strip -->
         <div class="card col-4"><div class="row" style="justify-content:space-between"><b style="color:var(--ink)">1 · Recebido</b><span class="pill label">entrada</span></div><div class="k-value mono" style="font-size:24px;margin-top:8px">312</div><div class="muted" style="font-size:12px">pontos com registro nas últimas 24h</div></div>
         <div class="card col-4"><div class="row" style="justify-content:space-between"><b style="color:var(--ink)">2 · Validado</b><span class="pill label">checagem automática</span></div><div class="k-value mono" style="font-size:24px;margin-top:8px">308</div><div class="muted" style="font-size:12px">passaram nas checagens automáticas</div></div>
         <div class="card col-4"><div class="row" style="justify-content:space-between"><b style="color:var(--ink)">3 · Consolidado</b><span class="pill label">disponível</span></div><div class="k-value mono" style="font-size:24px;margin-top:8px">307</div><div class="muted" style="font-size:12px">prontos para fiscalização e portal</div></div>
 
-        <!-- exceptions queue — the task: clear what the pipeline held back -->
+        <!-- data-trust headline: transmission quality over 30 days -->
+        <div class="panel col-12">
+          <header>Qualidade de transmissão (30 d) <span class="sp"></span><span class="pill">94,8% · meta ≥ 95%</span></header>
+          <div class="body"><object type="image/svg+xml" data="../assets/wireframe-chart-transmissao.svg" style="display:block;width:100%;aspect-ratio:520/200" aria-label="Transmissão diária da bacia nos últimos 30 dias, com uma lacuna isolada"></object></div>
+        </div>
+
+        <!-- exceptions queue - the task: clear what the pipeline held back -->
         <div class="panel lead col-8">
           <header>Fila de exceções <span class="sp"></span><span class="pill bad">5 pontos retidos</span></header>
           <table class="table">
             <thead><tr><th class="num">Registro</th><th>Ponto</th><th>Motivo</th><th>Ação</th></tr></thead>
             <tbody>
-              <tr><td class="num">1.315.910</td><td>07-1001</td><td><span class="pill bad">Salto fora do limite</span></td><td><span class="btn sub" style="padding:4px 10px">Revisar</span></td></tr>
+              <tr><td class="num">53,0 L/s</td><td>07-1001</td><td><span class="pill bad">Vazão &gt; teto</span></td><td><span class="btn sub" style="padding:4px 10px">Revisar</span></td></tr>
               <tr><td class="num">−42</td><td>07-1188</td><td><span class="pill bad">Vazão reversa</span></td><td><span class="btn sub" style="padding:4px 10px">Revisar</span></td></tr>
               <tr><td class="num">004 281</td><td>07-8842</td><td><span class="pill warn">Foto ilegível</span></td><td><span class="btn sub" style="padding:4px 10px">Revisar</span></td></tr>
-              <tr><td class="num">—</td><td>07-3320</td><td><span class="pill warn">Lacuna de série</span></td><td><span class="btn sub" style="padding:4px 10px">Revisar</span></td></tr>
+              <tr><td class="num">–</td><td>07-3320</td><td><span class="pill warn">Lacuna de série</span></td><td><span class="btn sub" style="padding:4px 10px">Revisar</span></td></tr>
             </tbody>
           </table>
         </div>
