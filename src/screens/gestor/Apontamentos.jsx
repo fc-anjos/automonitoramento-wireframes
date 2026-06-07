@@ -75,7 +75,7 @@ export default function Apontamentos() {
   const navigate = useNavigate()
   const go = () => navigate('/gestor/apontamento')
   return (
-    <GestorShell tag="GESTOR · 04" title="Apontamentos da bacia" active="apontamentos" top={top}>
+    <GestorShell tag="GESTOR · 05" title="Apontamentos da bacia" active="apontamentos" top={top}>
       <Bento>
 
         {/* worklist: o que cruzou uma linha e precisa de desfecho */}

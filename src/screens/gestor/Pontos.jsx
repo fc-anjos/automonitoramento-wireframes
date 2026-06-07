@@ -35,7 +35,7 @@ const top = (
 export default function Pontos() {
   const navigate = useNavigate()
   return (
-    <GestorShell tag="GESTOR" title="Pontos / outorgas" active="pontos" top={top}>
+    <GestorShell tag="GESTOR · 03" title="Pontos / outorgas" active="pontos" top={top}>
       <Bento>
         <Panel lead col={12} header={<>Pontos / outorgas <Sp /><Pill variant="label">situação pelo apontamento mais grave aberto</Pill></>}>
           <Body style={{ paddingBottom: 0 }}>

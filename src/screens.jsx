@@ -14,7 +14,6 @@ import GestorDetalhe from './screens/gestor/Detalhe.jsx'
 import GestorApontamentos from './screens/gestor/Apontamentos.jsx'
 import GestorApontamento from './screens/gestor/Apontamento.jsx'
 import GestorSolicitacoes from './screens/gestor/Solicitacoes.jsx'
-import GestorIngestao from './screens/gestor/Ingestao.jsx'
 import GestorCadastro from './screens/gestor/Cadastro.jsx'
 import PortalPublico from './screens/portal/Publico.jsx'
 
@@ -58,8 +57,7 @@ export const SCREENS = [
   { id: 'gestor-apontamentos', surface: 'gestor', num: 'GESTOR · 05', path: '/gestor/apontamentos', title: 'Apontamentos', blurb: 'Fila de apontamentos a partir das regras: excesso de volume, ausência de transmissão, fraude, vazão reversa.', Component: GestorApontamentos },
   { id: 'gestor-apontamento', surface: 'gestor', num: 'GESTOR · 06', path: '/gestor/apontamento', title: 'Apontamento (gestor)', blurb: 'A mesma peça do lado de quem dispõe: fases, trilha de auditoria e verbos do gestor (notificar, autuar, julgar, encerrar).', Component: GestorApontamento },
   { id: 'gestor-solicitacoes', surface: 'gestor', num: 'GESTOR · 07', path: '/gestor/solicitacoes', title: 'Solicitações', blurb: 'Fila de pedidos do outorgado: renovação, ampliação, redução, transferência, dispensa e desativação.', Component: GestorSolicitacoes },
-  { id: 'gestor-ingestao', surface: 'gestor', num: 'GESTOR · 08', path: '/gestor/ingestao', title: 'Ingestão & qualidade de dados', blurb: 'Estados recebido / validado / consolidado; limites físicos e continuidade de série.', Component: GestorIngestao },
-  { id: 'gestor-cadastro', surface: 'gestor', num: 'GESTOR · 09', path: '/gestor/cadastro', title: 'Cadastro & administração', blurb: 'Registro de outorgas, usuários e trilhas de auditoria.', Component: GestorCadastro },
+  { id: 'gestor-cadastro', surface: 'gestor', num: 'GESTOR · 08', path: '/gestor/cadastro', title: 'Cadastro & administração', blurb: 'Registro de outorgas, usuários e trilhas de auditoria.', Component: GestorCadastro },
 
   { id: 'portal-publico', surface: 'portal', num: 'PORTAL · 01', path: '/portal/publico', title: 'Transparência da bacia', blurb: 'Indicadores agregados de uso, mapa público e dados abertos para download.', Component: PortalPublico },
 ]

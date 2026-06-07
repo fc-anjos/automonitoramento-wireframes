@@ -74,7 +74,6 @@ const GESTOR_NAV = [
   { key: 'apontamentos', label: 'Apontamentos', to: '/gestor/apontamentos' },
   { key: 'solicitacoes', label: 'Solicitações', to: '/gestor/solicitacoes' },
   { sec: 'Dados' },
-  { key: 'ingestao', label: 'Ingestão & qualidade', to: '/gestor/ingestao' },
   { key: 'cadastro', label: 'Cadastro & admin', to: '/gestor/cadastro' },
 ]
 export const GestorSidebar = ({ active }) => (

@@ -14,7 +14,7 @@ const top = (
 
 export default function Apontamento() {
   return (
-    <GestorShell tag="GESTOR · 07" title="Apontamento · visão do gestor" active="apontamentos" top={top}>
+    <GestorShell tag="GESTOR · 06" title="Apontamento · visão do gestor" active="apontamentos" top={top}>
       <Bento>
 
         {/* header identity */}

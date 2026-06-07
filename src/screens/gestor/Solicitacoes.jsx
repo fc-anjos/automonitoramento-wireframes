@@ -34,7 +34,7 @@ const top = (
 
 export default function Solicitacoes() {
   return (
-    <GestorShell tag="GESTOR" title="Solicitações" active="solicitacoes" top={top}>
+    <GestorShell tag="GESTOR · 07" title="Solicitações" active="solicitacoes" top={top}>
       <Note style={{ marginBottom: 16 }}>
         <b>A fila de pedidos do outorgado sobre a própria outorga.</b> O outorgado protocola o pedido e o gestor o despacha. Renovação, ampliação, transferência, dispensa e desativação são pedidos sobre o ciclo de vida da outorga, cada um com sua situação. Aqui o gestor exerce os verbos de despacho: <b>deferir</b>, <b>indeferir</b> ou <b>pedir documento</b> quando a instrução está incompleta. Nada se apaga: ao decidir, o pedido muda de situação e fica arquivado com a trilha de quem despachou e quando.
       </Note>

@@ -161,6 +161,15 @@ export default function Dashboard() {
             </tbody></table>
             <Note style={{ margin: 14, fontSize: 12 }}>Contadores estruturais, não filas de ação. A meta de transmissão é ≥ 95%; a bacia está em 94,8%, e as lacunas viram apontamentos de qualidade do dado quando passam do limiar.</Note>
           </Panel>
+          <Panel header={<>Qualidade do dado da bacia <Sp /><Pill variant="label">agregado · 24h</Pill></>}>
+            <table className="table"><tbody>
+              <tr><td>Recebido</td><td className="num">312</td></tr>
+              <tr><td>Validado</td><td className="num">308</td></tr>
+              <tr><td>Consolidado</td><td className="num">307</td></tr>
+              <tr><td>Registros retidos</td><td className="num">4</td></tr>
+            </tbody></table>
+            <Note style={{ margin: 14, fontSize: 12 }}>Estados do dado antes da fiscalização: recebido, validado e consolidado. Quatro registros ficaram retidos nas checagens automáticas (limites físicos, continuidade de série, fluxo reverso); retificar gera um novo registro e nunca sobrescreve o original. Quando a checagem aponta integridade comprometida, abre-se um apontamento do tipo qualidade do dado, que entra na fila de apontamentos. Validar o dado é tratativa de leitura, não de mérito.</Note>
+          </Panel>
           <Panel header="Por finalidade de uso">
             <table className="table"><tbody>
               <tr><td>Industrial</td><td className="num">61%</td></tr>

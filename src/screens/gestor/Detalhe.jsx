@@ -14,7 +14,7 @@ const top = (
 
 export default function Detalhe() {
   return (
-    <GestorShell tag="GESTOR · 03" title="Detalhe do ponto / outorgado" active="pontos" top={top}>
+    <GestorShell tag="GESTOR · 04" title="Detalhe do ponto / outorgado" active="pontos" top={top}>
       <Bento>
         <Card col={12}>
           <Row style={{ justifyContent: 'space-between', alignItems: 'flex-start' }}>

@@ -36,7 +36,7 @@ const top = (
 
 export default function Cadastro() {
   return (
-    <GestorShell tag="GESTOR · 06" title="Cadastro & administração" active="cadastro" top={top}>
+    <GestorShell tag="GESTOR · 08" title="Cadastro & administração" active="cadastro" top={top}>
       <Note style={{ marginBottom: 16 }}>
         <b>Registro e ciclo de vida da outorga.</b> A outorga é uma licença com prazo: nasce no cadastro, vence, pode ser renovada, revista, revogada, e extingue-se ou perece sozinha por desuso. Esta tela concentra esse ciclo de vida do lado do gestor: o cadastro das outorgas, a fila de solicitações do outorgado (renovação, redução, transferência, desativação) que o gestor defere ou indefere, e a trilha de auditoria. Outorga não é apagada: ao encerrar, muda de estado e preserva o histórico. Os verbos de disposição (deferir, revisar, revogar) são exclusivos do gestor; o outorgado apenas solicita.
       </Note>
