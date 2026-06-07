@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>APP · Meus apontamentos</title>
+<link rel="stylesheet" href="../css/wireframe.css">
+</head>
+<body>
+<div class="wf-banner"><a href="../index.html">‹ Índice</a><span>APP · 04</span><b>Meus apontamentos (visão do outorgado)</b><span class="sp"></span><span>Grandes usuários · Faixa A</span></div>
+
+<div class="wrap">
+  <div class="note" style="max-width:760px;margin:0 auto 22px">
+    <b>A lista do outorgado.</b> Reúne os achados sobre o ponto deste usuário, cada um com seu tom e a próxima ação. Os três não têm a mesma natureza: o pico de vazão é uma <b>exceção</b> (o sistema detectou e pede justificativa em prazo, sem presumir infração); o orçamento anual é um <b>sinal de gestão</b> (nada foi excedido, é um aviso para reduzir o ritmo, e por isso não tem grau); a amostra ausente já foi encerrada. Cada linha abre o detalhe, onde o outorgado responde, sem nunca dar baixa.
+  </div>
+
+  <div class="phone-stage" style="justify-content:center">
+    <div>
+      <div class="phone"><div class="screen">
+        <div class="notch"></div>
+        <div class="statusbar"><span>9:41</span><span>▰▰▰ 5G ▮</span></div>
+        <div class="pscroll">
+          <div class="appbar"><a class="back" href="app-painel.html" style="text-decoration:none">‹</a><h2>Apontamentos</h2></div>
+
+          <div class="card" style="padding:12px 14px">
+            <div class="row" style="justify-content:space-between;align-items:baseline">
+              <span class="eyebrow">Ponto 07-1001</span>
+              <span class="mono faint" style="font-size:11px">Indústria Cubatão S/A</span>
+            </div>
+            <div class="row" style="gap:6px;margin-top:8px;flex-wrap:wrap">
+              <span class="pill warn">1 a justificar</span>
+              <span class="pill label">1 sinal de gestão</span>
+              <span class="pill ok">1 encerrada</span>
+            </div>
+          </div>
+
+          <!-- LISTA dos apontamentos do usuário -->
+          <div class="panel" style="margin-top:14px">
+            <header>Sobre o seu ponto <span class="sp"></span><span class="pill label">3</span></header>
+            <div class="body">
+              <div class="list">
+
+                <!-- Exceção · pico de vazão · pede justificativa -->
+                <a class="lrow" href="app-apontamento.html" style="display:block;text-decoration:none;color:inherit">
+                  <div class="lr-top">
+                    <span class="lr-title">Pico de vazão acima do teto</span>
+                    <span class="pill warn">justifique até 25/06</span>
+                  </div>
+                  <div class="lr-sub">
+                    <span class="pill label" style="padding:0 7px;font-size:10.5px">Exceção</span>
+                    <span style="margin-left:6px">Volume · grau média · fase Notificada · pico 53 L/s (teto 45)</span>
+                  </div>
+                </a>
+
+                <!-- Sinal de gestão · volume anual · sem grau -->
+                <a class="lrow" href="app-apontamento.html" style="display:block;text-decoration:none;color:inherit">
+                  <div class="lr-top">
+                    <span class="lr-title">Volume anual em risco</span>
+                    <span class="pill label">reduzir o ritmo</span>
+                  </div>
+                  <div class="lr-sub">
+                    <span class="pill label" style="padding:0 7px;font-size:10.5px">Sinal de gestão</span>
+                    <span style="margin-left:6px">Volume · sem grau · desde jun · 58% · projeção 116%</span>
+                  </div>
+                </a>
+
+                <!-- Exceção encerrada · amostra ausente · grau leve -->
+                <a class="lrow" href="app-apontamento.html" style="display:block;text-decoration:none;color:inherit">
+                  <div class="lr-top">
+                    <span class="lr-title faint">Amostra isolada ausente</span>
+                    <span class="pill ok">encerrada</span>
+                  </div>
+                  <div class="lr-sub">
+                    <span class="pill label" style="padding:0 7px;font-size:10.5px">Exceção</span>
+                    <span style="margin-left:6px">Qualidade do dado · grau leve · 03/06 · 1 lacuna, retificada</span>
+                  </div>
+                </a>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="tabbar">
+          <a class="tab" href="app-painel.html"><div class="ic"></div>Início</a>
+          <a class="tab" href="app-telemetria.html"><div class="ic"></div>Captação</a>
+          <a class="tab on" href="app-apontamentos.html"><div class="ic"></div>Apontamentos</a>
+          <a class="tab" href="#"><div class="ic"></div>Perfil</a>
+        </div>
+        <div class="homebar"></div>
+      </div></div>
+      <div class="phone-label">Lista do outorgado · cada linha abre o detalhe</div>
+    </div>
+  </div>
+
+  <div class="note" style="max-width:760px;margin:22px auto 0">
+    <b>Por que os tons diferem.</b> O tom de cada linha carrega o comportamento: a exceção em curso pede uma resposta em prazo (auto-baixa se corrigida ou aguarda justificativa); o sinal de gestão não cobra prazo, só orienta; o encerrado fica como registro. Nada nesta tela presume infração nem permite ao outorgado encerrar um apontamento, esses verbos são de outra instância.
+  </div>
+</div>
+</body>
+</html>

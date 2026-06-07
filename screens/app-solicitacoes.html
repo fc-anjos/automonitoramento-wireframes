@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>APP 06 · Solicitações e vencimento</title>
+<link rel="stylesheet" href="../css/wireframe.css">
+</head>
+<body>
+<div class="wf-banner"><a href="../index.html">‹ Índice</a><span>APP · 06</span><b>Solicitações e vencimento</b><span class="sp"></span><span>Rascunho · dados fictícios</span></div>
+
+<div class="wrap">
+  <div class="note" style="max-width:760px;margin:0 auto 22px">
+    <b>A dimensão temporal da outorga, do lado do outorgado.</b> A outorga vence, renova e perece por calendário, não por volume. A tela lidera pelo vencimento próximo (renovar antes da data) e abre o catálogo das solicitações que o outorgado pode protocolar sobre a própria outorga. Sem rigidez: é um CRUD de pedidos, cada um com seu estado.
+  </div>
+
+  <div class="phone-stage" style="justify-content:center">
+    <div>
+      <div class="phone"><div class="screen">
+        <div class="notch"></div>
+        <div class="statusbar"><span>9:41</span><span>▰▰▰ 5G ▮</span></div>
+        <div class="pscroll">
+          <div class="appbar"><a class="back" href="app-painel.html" style="text-decoration:none">‹</a><h2>Solicitações</h2></div>
+
+          <!-- LEAD: vencimento próximo (inspirado no caso 07-0830) -->
+          <div class="card" style="padding:14px">
+            <div class="row" style="justify-content:space-between;align-items:baseline">
+              <span class="eyebrow">Validade da outorga</span>
+              <span class="pill warn">calendário</span>
+            </div>
+            <div class="row" style="align-items:baseline;gap:8px;margin-top:8px">
+              <div class="mono" style="font-size:22px;color:var(--ink)">vence em 40 dias</div>
+            </div>
+            <div class="meter warn" style="margin-top:10px"><i style="width:78%"></i></div>
+            <div class="row" style="justify-content:space-between;margin-top:6px">
+              <small class="mono faint">hoje 07/06</small>
+              <small class="mono">vencimento 17/07</small>
+            </div>
+            <a class="btn block lg" style="margin-top:12px">Renovar outorga →</a>
+          </div>
+
+          <!-- AFFORDANCE: nova solicitação -->
+          <a class="btn block" style="margin-top:14px">+ Nova solicitação</a>
+
+          <!-- CATÁLOGO de solicitações possíveis, cada uma com estado -->
+          <div class="panel" style="margin-top:14px">
+            <header>Solicitações sobre sua outorga</header>
+            <div class="body">
+              <div class="list">
+
+                <a class="lrow" href="#" style="display:block;text-decoration:none;color:inherit">
+                  <div class="lr-top"><span class="lr-title">Renovação</span><span class="pill warn">a fazer · vence em 40 dias</span></div>
+                  <div class="lr-sub">Prorrogar a validade antes do vencimento (17/07).</div>
+                </a>
+
+                <a class="lrow" href="#" style="display:block;text-decoration:none;color:inherit">
+                  <div class="lr-top"><span class="lr-title">Ampliação</span><span class="pill label">disponível</span></div>
+                  <div class="lr-sub">Pedir aumento de vazão ou volume outorgado.</div>
+                </a>
+
+                <a class="lrow" href="#" style="display:block;text-decoration:none;color:inherit">
+                  <div class="lr-top"><span class="lr-title">Redução</span><span class="pill label">disponível</span></div>
+                  <div class="lr-sub">Diminuir o volume outorgado conforme o uso real.</div>
+                </a>
+
+                <a class="lrow" href="#" style="display:block;text-decoration:none;color:inherit">
+                  <div class="lr-top"><span class="lr-title">Transferência</span><span class="pill label">disponível</span></div>
+                  <div class="lr-sub">Transferir a titularidade da outorga.</div>
+                </a>
+
+                <a class="lrow" href="#" style="display:block;text-decoration:none;color:inherit">
+                  <div class="lr-top"><span class="lr-title">Dispensa</span><span class="pill label">disponível</span></div>
+                  <div class="lr-sub">Requerer dispensa de outorga para uso insignificante.</div>
+                </a>
+
+                <a class="lrow" href="#" style="display:block;text-decoration:none;color:inherit">
+                  <div class="lr-top"><span class="lr-title">Desativação</span><span class="pill label">disponível</span></div>
+                  <div class="lr-sub">Encerrar o uso e baixar a outorga (evita perecimento por inércia).</div>
+                </a>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ESTADO: pedidos em andamento -->
+          <div class="panel" style="margin-top:14px">
+            <header>Em andamento <span class="sp"></span><span class="pill label">1</span></header>
+            <div class="body">
+              <div class="list">
+                <a class="lrow" href="#" style="display:block;text-decoration:none;color:inherit">
+                  <div class="lr-top"><span class="lr-title">Redução de volume anual</span><span class="pill label">em análise</span></div>
+                  <div class="lr-sub">Protocolada em 12/05 · aguardando o gestor.</div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tabbar">
+          <a class="tab" href="app-painel.html"><div class="ic"></div>Início</a>
+          <a class="tab" href="app-telemetria.html"><div class="ic"></div>Captação</a>
+          <a class="tab" href="app-apontamentos.html"><div class="ic"></div>Apontamentos</a>
+          <a class="tab" href="#"><div class="ic"></div>Perfil</a>
+        </div>
+        <div class="homebar"></div>
+      </div></div>
+      <div class="phone-label">Solicitações · CRUD de pedidos sobre a outorga</div>
+    </div>
+  </div>
+
+  <div class="note" style="max-width:760px;margin:22px auto 0">
+    Obrigações dirigidas por calendário: o pedido de <b>renovação</b> deve ser protocolado <b>antes</b> do vencimento. A outorga sem uso <b>perece em 3 anos</b>; se o usuário não capta mais, vale registrar a desativação para não perder o direito por inércia.
+  </div>
+
+  <div class="note" style="max-width:760px;margin:14px auto 0">
+    O outorgado <b>protocola</b> a solicitação; o deferimento é do gestor. A renovação tem efeito de silêncio positivo: se o gestor silenciar por 30 dias após o pedido tempestivo, renova-se automaticamente.
+  </div>
+</div>
+</body>
+</html>

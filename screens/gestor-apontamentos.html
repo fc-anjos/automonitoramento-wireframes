@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GESTOR 04 · Apontamentos da bacia</title>
+<link rel="stylesheet" href="../css/wireframe.css">
+</head>
+<body>
+<div class="wf-banner"><a href="../index.html">‹ Índice</a><span>GESTOR · 04</span><b>Apontamentos da bacia</b><span class="sp"></span><span>Rascunho · dados fictícios</span></div>
+
+<div class="app-shell">
+  <aside class="app-side">
+    <div class="brand"><div class="logo"><span class="mark">SP</span> Automonitoramento</div><small>SP-Águas · UGRHI-07</small></div>
+    <div class="nav-sec">Operação</div>
+    <a class="nav-i" href="gestor-dashboard.html"><span class="ic"></span>Dashboard</a>
+    <a class="nav-i" href="gestor-mapa.html"><span class="ic"></span>Mapa</a>
+    <a class="nav-i" href="gestor-pontos.html"><span class="ic"></span>Pontos / outorgas</a>
+    <a class="nav-i on" href="gestor-apontamentos.html"><span class="ic"></span>Apontamentos</a>
+    <a class="nav-i" href="gestor-solicitacoes.html"><span class="ic"></span>Solicitações</a>
+    <div class="nav-sec">Dados</div>
+    <a class="nav-i" href="gestor-ingestao.html"><span class="ic"></span>Ingestão & qualidade</a>
+    <a class="nav-i" href="gestor-cadastro.html"><span class="ic"></span>Cadastro & admin</a>
+  </aside>
+
+  <main class="app-main">
+    <div class="app-top">
+      <div class="crumb">Operação / <b style="color:var(--ink)">Apontamentos</b></div>
+      <span class="sp"></span>
+      <span class="pill bad">2 graves+</span>
+      <span class="pill warn">4 em curso</span>
+      <span class="pill label">8 no total</span>
+      <span class="btn sub" style="padding:6px 12px">Exportar</span>
+    </div>
+
+    <div class="app-body">
+
+      <div class="bento">
+
+        <!-- the task: a triage queue of the whole basin's findings, by gravity -->
+        <div class="panel lead col-12">
+          <header>Fila da bacia
+            <span class="sp"></span>
+            <span class="pill label">ordenado por gravidade</span>
+          </header>
+
+          <!-- filtros: chips de UI de produto (sem racional embutido) -->
+          <div class="body" style="padding-bottom:0">
+            <div class="row" style="gap:18px;align-items:flex-start">
+              <div>
+                <div class="muted" style="font-size:11px;margin-bottom:6px">Natureza</div>
+                <div class="row" style="gap:6px">
+                  <span class="pill act">Todas</span>
+                  <span class="pill">Sinal de gestão</span>
+                  <span class="pill">Exceção</span>
+                  <span class="pill">Ato administrativo</span>
+                </div>
+              </div>
+              <div>
+                <div class="muted" style="font-size:11px;margin-bottom:6px">Tipo</div>
+                <div class="row" style="gap:6px">
+                  <span class="pill act">Todos</span>
+                  <span class="pill">Volume</span>
+                  <span class="pill">Qualidade do dado</span>
+                  <span class="pill">Calendário</span>
+                  <span class="pill">Condicionante</span>
+                </div>
+              </div>
+              <div>
+                <div class="muted" style="font-size:11px;margin-bottom:6px">Grau</div>
+                <div class="row" style="gap:6px">
+                  <span class="pill act">Todos</span>
+                  <span class="pill">gravíssima</span>
+                  <span class="pill">grave</span>
+                  <span class="pill">média</span>
+                  <span class="pill">leve</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <table class="table" style="margin-top:6px">
+            <thead>
+              <tr>
+                <th>Ponto</th>
+                <th>Apontamento</th>
+                <th>Natureza</th>
+                <th>Tipo</th>
+                <th>Grau</th>
+                <th>Fase</th>
+                <th class="num">Desde</th>
+                <th>Prazo / dono</th>
+                <th>Próxima ação</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <!-- AP-1100-A · gravíssima · ato administrativo · qualidade do dado · autuada -->
+              <tr style="cursor:pointer" onclick="location.href='gestor-apontamento.html'">
+                <td><a href="gestor-apontamento.html" style="color:var(--ink);text-decoration:none"><b>07-1100</b><br><span class="muted" style="font-size:11px">Ind. Química Cubatão</span><br><span class="muted" style="font-size:10px">protocolo AP-1100-A</span></a></td>
+                <td>Indício de fraude na medição</td>
+                <td><span class="pill label" style="padding:0 7px;font-size:10.5px">Ato administrativo</span></td>
+                <td>Qualidade do dado</td>
+                <td><span class="pill bad">grau gravíssima</span></td>
+                <td>Autuada</td>
+                <td class="num">auto 02/06</td>
+                <td>ciência e defesa · <b>gestor</b></td>
+                <td>Dar ciência ao usuário; cabível embargo</td>
+              </tr>
+
+              <!-- AP-1042-A · grave · ato administrativo · volume · em defesa -->
+              <tr style="cursor:pointer" onclick="location.href='gestor-apontamento.html'">
+                <td><a href="gestor-apontamento.html" style="color:var(--ink);text-decoration:none"><b>07-1042</b><br><span class="muted" style="font-size:11px">Petroquímica Baixada</span><br><span class="muted" style="font-size:10px">protocolo AP-1042-A</span></a></td>
+                <td>Volume mensal acima do outorgado</td>
+                <td><span class="pill label" style="padding:0 7px;font-size:10.5px">Ato administrativo</span></td>
+                <td>Volume</td>
+                <td><span class="pill bad">grau grave</span></td>
+                <td>Em defesa/recurso</td>
+                <td class="num">auto 12/05</td>
+                <td>defesa até 04/06 · <b>outorgado</b></td>
+                <td>Aguardar defesa (prazo correndo)</td>
+              </tr>
+
+              <!-- AP-1001-A · média · exceção · volume · notificada -->
+              <tr style="cursor:pointer" onclick="location.href='gestor-apontamento.html'">
+                <td><a href="gestor-apontamento.html" style="color:var(--ink);text-decoration:none"><b>07-1001</b><br><span class="muted" style="font-size:11px">Indústria Cubatão S/A</span><br><span class="muted" style="font-size:10px">protocolo AP-1001-A</span></a></td>
+                <td>Pico de vazão acima do teto</td>
+                <td><span class="pill label" style="padding:0 7px;font-size:10.5px">Exceção</span></td>
+                <td>Volume</td>
+                <td><span class="pill warn">grau média</span></td>
+                <td>Notificada</td>
+                <td class="num">04/06</td>
+                <td>justificativa até 25/06 · <b>outorgado</b></td>
+                <td>Aguardar justificativa ou correção</td>
+              </tr>
+
+              <!-- AP-0712-A · leve · exceção · condicionante · notificada -->
+              <tr style="cursor:pointer" onclick="location.href='gestor-apontamento.html'">
+                <td><a href="gestor-apontamento.html" style="color:var(--ink);text-decoration:none"><b>07-0712</b><br><span class="muted" style="font-size:11px">Laticínios Itanhaém</span><br><span class="muted" style="font-size:10px">protocolo AP-0712-A</span></a></td>
+                <td>Calibração do hidrômetro vencida</td>
+                <td><span class="pill label" style="padding:0 7px;font-size:10.5px">Exceção</span></td>
+                <td>Condicionante</td>
+                <td><span class="pill warn">grau leve</span></td>
+                <td>Notificada</td>
+                <td class="num">01/05</td>
+                <td>recalibrar até 30/06 · <b>outorgado</b></td>
+                <td>Aguardar recalibração credenciada</td>
+              </tr>
+
+              <!-- AP-0830-A · calendário · exceção · sem grau · notificada -->
+              <tr style="cursor:pointer" onclick="location.href='gestor-apontamento.html'">
+                <td><a href="gestor-apontamento.html" style="color:var(--ink);text-decoration:none"><b>07-0830</b><br><span class="muted" style="font-size:11px">Águas de Praia Grande</span><br><span class="muted" style="font-size:10px">protocolo AP-0830-A</span></a></td>
+                <td>Outorga a vencer</td>
+                <td><span class="pill label" style="padding:0 7px;font-size:10.5px">Exceção</span></td>
+                <td>Calendário</td>
+                <td><span class="muted" style="font-size:11px">sem grau</span></td>
+                <td>Notificada</td>
+                <td class="num">–</td>
+                <td>renovar até 17/07 · <b>outorgado</b></td>
+                <td>Aguardar pedido de renovação</td>
+              </tr>
+
+              <!-- AP-0455-A · calendário · exceção · sem grau · detectada · dono gestor -->
+              <tr style="cursor:pointer" onclick="location.href='gestor-apontamento.html'">
+                <td><a href="gestor-apontamento.html" style="color:var(--ink);text-decoration:none"><b>07-0455</b><br><span class="muted" style="font-size:11px">Têxtil Mongaguá</span><br><span class="muted" style="font-size:10px">protocolo AP-0455-A</span></a></td>
+                <td>Sem uso há 2 anos (risco de perecimento)</td>
+                <td><span class="pill label" style="padding:0 7px;font-size:10.5px">Exceção</span></td>
+                <td>Calendário</td>
+                <td><span class="muted" style="font-size:11px">sem grau</span></td>
+                <td>Detectada</td>
+                <td class="num">jun/2024</td>
+                <td>regularizar em 12 meses · <b>gestor</b></td>
+                <td>Confirmar uso ou desativar; perece em 3 anos</td>
+              </tr>
+
+              <!-- AP-1001-C · leve · exceção · qualidade do dado · encerrada -->
+              <tr style="cursor:pointer" onclick="location.href='gestor-apontamento.html'">
+                <td><a href="gestor-apontamento.html" style="color:var(--ink);text-decoration:none"><b>07-1001</b><br><span class="muted" style="font-size:11px">Indústria Cubatão S/A</span><br><span class="muted" style="font-size:10px">protocolo AP-1001-C</span></a></td>
+                <td>Amostra isolada ausente</td>
+                <td><span class="pill label" style="padding:0 7px;font-size:10.5px">Exceção</span></td>
+                <td>Qualidade do dado</td>
+                <td><span class="pill ok">grau leve</span></td>
+                <td>Encerrada</td>
+                <td class="num">03/06</td>
+                <td>nenhum · <b>outorgado</b></td>
+                <td>Nenhuma (já retificada)</td>
+              </tr>
+
+              <!-- AP-1001-B · sinal de gestão · volume · sem grau -->
+              <tr style="cursor:pointer" onclick="location.href='gestor-apontamento.html'">
+                <td><a href="gestor-apontamento.html" style="color:var(--ink);text-decoration:none"><b>07-1001</b><br><span class="muted" style="font-size:11px">Indústria Cubatão S/A</span><br><span class="muted" style="font-size:10px">protocolo AP-1001-B</span></a></td>
+                <td>Volume anual em risco</td>
+                <td><span class="pill label" style="padding:0 7px;font-size:10.5px">Sinal de gestão</span></td>
+                <td>Volume</td>
+                <td><span class="muted" style="font-size:11px">sem grau</span></td>
+                <td>–</td>
+                <td class="num">jun</td>
+                <td>sem prazo · <b>outorgado</b></td>
+                <td>Reduzir o ritmo para não estourar o limite anual</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <!-- racional só em .note, fora da cromagem de produto -->
+        <div class="note col-8" style="margin-top:4px">
+          <b>Uma fila, um vocabulário.</b> Todo achado é um <b>apontamento</b> tipado por três eixos. A <b>natureza</b> diz como ele se comporta: um <b>sinal de gestão</b> é o sistema se autorregulando e dá baixa sozinho quando o ritmo volta ao normal; uma <b>exceção</b> é um desvio à espera de explicação e só fecha com justificativa ou correção; um <b>ato administrativo</b> corre o rito legal, com prazos de ciência e defesa. O <b>tipo</b> diz sobre o quê (volume, qualidade do dado, calendário, condicionante) e o <b>grau</b> dimensiona o problema. Sinal de gestão não tem grau, porque nada foi excedido ainda. A ordenação é por gravidade, então o que corre rito legal sobe ao topo.
+        </div>
+
+        <div class="note col-4" style="margin-top:4px">
+          <b>Prazo e dono.</b> Cada linha mostra de quem é a próxima ação. Quando o dono é o <b>outorgado</b>, o gestor acompanha o prazo correr; quando é o <b>gestor</b>, a fila vira lista de trabalho dele. Os prazos contam da ciência, não da emissão. O <b>protocolo</b> identifica cada apontamento na tramitação.
+        </div>
+
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

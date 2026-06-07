@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Wireframe kit — Sistema de Automonitoramento (UGRHI-07 / Baixada Santista)
+   Wireframe kit – Sistema de Automonitoramento (UGRHI-07 / Baixada Santista)
    TWO REGISTERS, kept deliberately apart:
 
    1. SKETCHED PRODUCT  → Balsamiq-style hand-drawn. Wobbly ink boxes,
@@ -11,7 +11,7 @@
    proposed product surface; anything neutral/flat is meta-commentary.
    ========================================================================== */
 
-/* Balsamiq Sans — vendored locally (assets/fonts), no network dependency */
+/* Balsamiq Sans, vendored locally (assets/fonts), no network dependency */
 @font-face {
   font-family: 'Balsamiq Sans';
   font-style: normal;
@@ -42,7 +42,7 @@
 }
 
 :root {
-  /* monochrome foundation — no brand color, on purpose */
+  /* monochrome foundation (no brand color, on purpose) */
   --paper:    #ededed;   /* canvas behind the sketch        */
   --surface:  #ffffff;   /* sketched panels / fills          */
   --ink:      #2b2b2b;   /* hand-drawn stroke + headings     */
@@ -53,11 +53,11 @@
   --line-2:   #d9d9d9;   /* placeholder fill / skeleton      */
   --fill:     #e6e6e6;   /* grey block                       */
 
-  /* "interactive"/selected — Balsamiq convention = heavier ink, no color */
+  /* "interactive"/selected (Balsamiq convention = heavier ink, no color) */
   --act:      #2b2b2b;
   --act-soft: #e3e3e3;
 
-  /* status kept MONOCHROME — meaning carried by the label text, not hue */
+  /* status kept MONOCHROME (meaning carried by the label text, not hue) */
   --ok:   #3f3f3f;
   --warn: #3f3f3f;
   --bad:  #2b2b2b;
@@ -96,7 +96,7 @@ body {
 body.comms { font-family: var(--comm); }
 
 /* =========================================================================
-   COMMUNICATION LAYER  — neutral, flat, clearly "not the product"
+   COMMUNICATION LAYER, neutral, flat, clearly "not the product"
    ========================================================================= */
 
 /* ---- draft banner -------------------------------------------------------- */
@@ -120,14 +120,14 @@ body.comms { font-family: var(--comm); }
   background: #fbfbfb;
   border: 1px solid #d7d7d7;
   border-left: 3px solid #b8b8b8;
-  border-radius: 2px;        /* flat — NOT hand-drawn */
+  border-radius: 2px;        /* flat, NOT hand-drawn */
   padding: 12px 14px 12px 16px;
   color: #4a4a4a;
   font-size: 12.5px; line-height: 1.55;
   box-shadow: none;
 }
 .note::after {
-  content: "NOTA · intenção do TR";
+  content: "NOTA";
   position: absolute; top: -8px; left: 12px;
   background: #fbfbfb; padding: 0 6px;
   font: 600 9px/1 var(--comm); letter-spacing: .12em; color: #9a9a9a;
@@ -146,7 +146,7 @@ body.comms { font-family: var(--comm); }
 @media (min-width: 900px){ .g-3 { grid-template-columns: repeat(3,1fr); } }
 @media (min-width: 1000px){ .g-4 { grid-template-columns: repeat(4,1fr); } }
 
-/* Bento — one 12-col master grid so every block shares column edges.
+/* Bento: one 12-col master grid so every block shares column edges.
    Blocks span cells (col-N); a zone stacks panels inside a single cell so the
    side rail and main column keep aligned left/right edges. */
 .bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; align-items: start; }
@@ -164,7 +164,7 @@ body.comms { font-family: var(--comm); }
 
 /* ---- type ---------------------------------------------------------------- */
 h1,h2,h3,h4 { color: var(--ink); margin: 0; line-height: 1.22; font-weight: 700; }
-/* #5 — wider type jumps: hand-drawn type needs more size contrast to hold
+/* #5, wider type jumps: hand-drawn type needs more size contrast to hold
    hierarchy, so each screen has one obvious anchor. */
 h1 { font-size: 28px; }
 h2 { font-size: 20px; }
@@ -187,7 +187,7 @@ body.comms .lede { font-family: var(--comm); }
 body.comms .muted { font-family: var(--comm); }
 
 /* =========================================================================
-   SKETCH VOCABULARY — hand-drawn boxes (the product)
+   SKETCH VOCABULARY, hand-drawn boxes (the product)
    ========================================================================= */
 .card, .panel {
   background: var(--surface);
@@ -205,12 +205,12 @@ body.comms .muted { font-family: var(--comm); }
 .panel > header .sp { flex: 1; }
 .panel .body { padding: 14px; }
 
-/* #2 — lead object: the screen's primary task panel reads heavier than the
+/* #2, lead object: the screen's primary task panel reads heavier than the
    secondary context panels around it (thicker ink = emphasis, hand-drawn way). */
 .panel.lead { border-width: 2.5px; }
 .panel.lead > header { font-size: 17px; border-bottom-width: 2.5px; }
 
-/* #4 — decorative captions in a panel header are NOT status: render them as
+/* #4, decorative captions in a panel header are NOT status: render them as
    plain muted labels, never as pills. Kills "por mês / VM / 12 meses" pill-slop. */
 .panel > header .pill,
 .app-top .pill.label {
@@ -218,7 +218,7 @@ body.comms .muted { font-family: var(--comm); }
   color: var(--muted); font-weight: 400;
 }
 
-/* #1 — flatten nesting: a card dropped inside a panel/card body stops being a
+/* #1, flatten nesting: a card dropped inside a panel/card body stops being a
    bordered box and becomes a plain list row (heading + sub, hairline-separated).
    No more russian-doll cards-in-cards. */
 .panel .body > .card, .card > .card {
@@ -271,7 +271,7 @@ body.comms .muted { font-family: var(--comm); }
   font: 400 12px/1.6 var(--sketch); letter-spacing: 0;
   border: 1.5px solid var(--ink); color: var(--ink); background: var(--surface);
 }
-/* monochrome — every variant looks the same; meaning lives in the words */
+/* monochrome (every variant looks the same; meaning lives in the words) */
 .pill.act, .pill.ok, .pill.warn, .pill.bad {
   color: var(--ink); border-color: var(--ink); background: var(--surface);
 }
@@ -317,7 +317,7 @@ a[href] { cursor: pointer; }
 .kpi .k-value { font: 700 26px/1.1 var(--sketch); color: var(--ink); margin-top: 6px; font-variant-numeric: tabular-nums; }
 .kpi .k-meta { font-size: 12px; color: var(--muted); margin-top: 4px; }
 
-/* ---- launcher (index — COMMUNICATION, kept neutral & flat) --------------- */
+/* ---- launcher (index – COMMUNICATION, kept neutral & flat) --------------- */
 .launch-card {
   display: flex; flex-direction: column; gap: 10px;
   background: #fff; border: 1px solid #dcdcdc; border-radius: 6px;
@@ -334,7 +334,7 @@ a[href] { cursor: pointer; }
     #e6e6e6;
   border: 1px solid #d8d8d8;
 }
-/* live, scaled preview of the real screen — non-interactive, click falls through to the card link */
+/* live, scaled preview of the real screen, non-interactive, click falls through to the card link */
 .launch-card .thumb iframe {
   position: absolute; top: 0; left: 0;
   width: 400%; height: 400%;
@@ -387,7 +387,7 @@ a[href] { cursor: pointer; }
 }
 
 /* =========================================================================
-   PHONE FRAME (sketched product — rough hand-drawn device)
+   PHONE FRAME (sketched product, rough hand-drawn device)
    ========================================================================= */
 .phone-stage { display: flex; gap: 28px; flex-wrap: wrap; align-items: flex-start; font-family: var(--sketch); }
 .phone {
@@ -451,7 +451,7 @@ hr.div { border: 0; border-top: 1.5px solid var(--line); margin: 16px 0; }
 .legend span { display: inline-flex; align-items: center; gap: 6px; }
 .legend i { width: 13px; height: 13px; display: inline-block; flex: none; }
 
-/* monochrome-safe status marks — meaning carried by SHAPE/FILL, not hue.
+/* monochrome-safe status marks (meaning carried by SHAPE/FILL, not hue).
    Used by map pins and the legend so they stay legible in greyscale. */
 .mk { display: inline-block; width: 13px; height: 13px; border: 1.5px solid var(--ink); border-radius: 50%; background: var(--surface); flex: none; }
 .mk.ok   { background: var(--surface); }                 /* hollow = normal       */

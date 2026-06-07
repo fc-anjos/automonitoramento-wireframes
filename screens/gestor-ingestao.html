@@ -15,8 +15,9 @@
     <div class="nav-sec">Operação</div>
     <a class="nav-i" href="gestor-dashboard.html"><span class="ic"></span>Dashboard</a>
     <a class="nav-i" href="gestor-mapa.html"><span class="ic"></span>Mapa</a>
-    <a class="nav-i" href="gestor-detalhe.html"><span class="ic"></span>Pontos / outorgados</a>
-    <a class="nav-i" href="gestor-alertas.html"><span class="ic"></span>Alertas</a>
+    <a class="nav-i" href="gestor-pontos.html"><span class="ic"></span>Pontos / outorgas</a>
+    <a class="nav-i" href="gestor-apontamentos.html"><span class="ic"></span>Apontamentos</a>
+    <a class="nav-i" href="gestor-solicitacoes.html"><span class="ic"></span>Solicitações</a>
     <div class="nav-sec">Dados</div>
     <a class="nav-i on" href="gestor-ingestao.html"><span class="ic"></span>Ingestão & qualidade</a>
     <a class="nav-i" href="gestor-cadastro.html"><span class="ic"></span>Cadastro & admin</a>
@@ -31,7 +32,7 @@
 
     <div class="app-body">
       <div class="note" style="margin-bottom:16px">
-        <b>Pipeline de qualidade.</b> Todo registro passa por três estados (recebido, validado, consolidado) com checagens de limites físicos, continuidade de série e sinais de fraude ou vazão reversa. Correção nunca sobrescreve: gera um novo registro que supersede o anterior, e o original fica na trilha de auditoria. Base única reúne telemetria e autodeclaração.
+        <b>Painel de confiança do dado.</b> O automonitoramento só vale o que vale o dado que o sustenta. Todo registro passa por três estados (recebido, validado, consolidado) com checagens de limites físicos, continuidade de série e sinais de fraude ou fluxo reverso. Correção nunca sobrescreve: gera um novo registro que supersede o anterior, e o original fica na trilha de auditoria. Quando uma checagem reprova, o que sai daqui é um apontamento do tipo qualidade do dado, da exceção detectada ao ato administrativo conforme a gravidade. Base única reúne telemetria e autodeclaração.
       </div>
 
       <div class="bento">
@@ -47,18 +48,19 @@
           <div class="body"><object type="image/svg+xml" data="../assets/wireframe-chart-transmissao.svg" style="display:block;width:100%;aspect-ratio:520/200" aria-label="Transmissão diária da bacia nos últimos 30 dias, com uma lacuna isolada"></object></div>
         </div>
 
-        <!-- exceptions queue - the task: clear what the pipeline held back -->
+        <!-- validation queue - the task: clear what the pipeline held back -->
         <div class="panel lead col-8">
-          <header>Fila de exceções <span class="sp"></span><span class="pill bad">5 pontos retidos</span></header>
+          <header>Fila de validação <span class="sp"></span><span class="pill bad">4 registros retidos</span></header>
           <table class="table">
-            <thead><tr><th class="num">Registro</th><th>Ponto</th><th>Motivo</th><th>Ação</th></tr></thead>
+            <thead><tr><th class="num">Registro</th><th>Ponto</th><th>Checagem reprovada</th><th>Tratativa do gestor</th></tr></thead>
             <tbody>
-              <tr><td class="num">53,0 L/s</td><td>07-1001</td><td><span class="pill bad">Vazão &gt; teto</span></td><td><span class="btn sub" style="padding:4px 10px">Revisar</span></td></tr>
-              <tr><td class="num">−42</td><td>07-1188</td><td><span class="pill bad">Vazão reversa</span></td><td><span class="btn sub" style="padding:4px 10px">Revisar</span></td></tr>
-              <tr><td class="num">004 281</td><td>07-8842</td><td><span class="pill warn">Foto ilegível</span></td><td><span class="btn sub" style="padding:4px 10px">Revisar</span></td></tr>
-              <tr><td class="num">–</td><td>07-3320</td><td><span class="pill warn">Lacuna de série</span></td><td><span class="btn sub" style="padding:4px 10px">Revisar</span></td></tr>
+              <tr><td class="num">53,0 L/s</td><td>07-1001</td><td><span class="pill warn">Vazão acima do teto</span></td><td><span class="btn sub" style="padding:4px 10px">Validar / retificar</span></td></tr>
+              <tr><td class="num">−42</td><td>07-1188</td><td><span class="pill bad">Fluxo reverso</span></td><td><span class="btn sub" style="padding:4px 10px">Validar / retificar</span></td></tr>
+              <tr><td class="num">004 281</td><td>07-8842</td><td><span class="pill warn">Foto ilegível</span></td><td><span class="btn sub" style="padding:4px 10px">Validar / retificar</span></td></tr>
+              <tr><td class="num">–</td><td>07-3320</td><td><span class="pill warn">Lacuna de série</span></td><td><span class="btn sub" style="padding:4px 10px">Validar / retificar</span></td></tr>
             </tbody>
           </table>
+          <div class="note" style="font-size:12px;margin:0 14px 14px">Validar ou retificar um registro é tratativa de dado, não de mérito: resolve a confiança na leitura. Reprovar uma checagem não é, por si, infração. Quando a checagem aponta integridade comprometida, abre-se um apontamento do tipo qualidade do dado, que segue abaixo.</div>
         </div>
 
         <!-- SIDE RAIL (span 4): which checks run -->
@@ -71,6 +73,41 @@
             <div class="mrow"><span class="ico">~</span><div class="msp"><b style="color:var(--ink);font-size:13px">Anomalia ou fraude</b><div class="muted" style="font-size:11.5px">padrão atípico vai para a fila de apuração</div></div></div>
             <div class="mrow"><span class="ico">+</span><div class="msp"><b style="color:var(--ink);font-size:13px">Correção supersede</b><div class="muted" style="font-size:11.5px">retificação gera novo registro, nunca sobrescreve o original</div></div></div>
             <div class="note" style="font-size:12px;margin-top:6px">Migração de dados legados (SiDeCC e SiDeCC-R) e integração DeclaraÁgua geram um <b>relatório de reconciliação</b>, processo de back-end sem tela dedicada.</div>
+          </div>
+        </div>
+
+        <!-- typed findings: apontamentos do tipo "qualidade do dado" que nascem aqui -->
+        <div class="panel col-12">
+          <header>Apontamentos · tipo qualidade do dado <span class="sp"></span><span class="pill label">2</span></header>
+          <div class="body">
+            <div class="list">
+
+              <a class="lrow" href="gestor-apontamento.html" style="display:block;text-decoration:none;color:inherit">
+                <div class="lr-top">
+                  <span class="lr-title">Indício de fraude na medição · 07-1100</span>
+                  <span class="pill bad">grau gravíssima</span>
+                </div>
+                <div class="lr-sub">
+                  <span class="pill label" style="padding:0 7px;font-size:10.5px">Ato administrativo</span>
+                  <span style="margin-left:6px">fase Autuada · auto 02/06 · telemetria diverge da declaração, fluxo reverso</span>
+                </div>
+                <div class="lr-sub" style="margin-top:4px">Próxima ação: gestor dá ciência ao usuário · tratativa: cabível embargo</div>
+              </a>
+
+              <a class="lrow" href="gestor-apontamento.html" style="display:block;text-decoration:none;color:inherit">
+                <div class="lr-top">
+                  <span class="lr-title">Amostra isolada ausente · 07-1001</span>
+                  <span class="pill ok">grau leve</span>
+                </div>
+                <div class="lr-sub">
+                  <span class="pill label" style="padding:0 7px;font-size:10.5px">Exceção</span>
+                  <span style="margin-left:6px">fase Encerrada · 03/06 · 1 lacuna de transmissão, já retificada</span>
+                </div>
+                <div class="lr-sub" style="margin-top:4px">Próxima ação: nenhuma · tratativa: encerrada</div>
+              </a>
+
+            </div>
+            <div class="note" style="font-size:12px;margin-top:12px">Dois apontamentos do mesmo tipo, com naturezas distintas. A lacuna de transmissão em 07-1001 era uma exceção de grau leve, baixada pela retificação assim que o dado foi corrigido. O indício de fraude em 07-1100 é de outra ordem: integridade da medição comprometida é ato administrativo, que aguarda o rito formal e a disposição reservada ao gestor.</div>
           </div>
         </div>
 

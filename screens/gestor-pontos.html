@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GESTOR · Pontos / outorgas</title>
+<link rel="stylesheet" href="../css/wireframe.css">
+</head>
+<body>
+<div class="wf-banner"><a href="../index.html">‹ Índice</a><span>GESTOR</span><b>Pontos / outorgas</b><span class="sp"></span><span>Rascunho · dados fictícios</span></div>
+
+<div class="app-shell">
+  <aside class="app-side">
+    <div class="brand"><div class="logo"><span class="mark">SP</span> Automonitoramento</div><small>SP-Águas · UGRHI-07</small></div>
+    <div class="nav-sec">Operação</div>
+    <a class="nav-i" href="gestor-dashboard.html"><span class="ic"></span>Dashboard</a>
+    <a class="nav-i" href="gestor-mapa.html"><span class="ic"></span>Mapa</a>
+    <a class="nav-i on" href="gestor-pontos.html"><span class="ic"></span>Pontos / outorgas</a>
+    <a class="nav-i" href="gestor-apontamentos.html"><span class="ic"></span>Apontamentos</a>
+    <a class="nav-i" href="gestor-solicitacoes.html"><span class="ic"></span>Solicitações</a>
+    <div class="nav-sec">Dados</div>
+    <a class="nav-i" href="gestor-ingestao.html"><span class="ic"></span>Ingestão & qualidade</a>
+    <a class="nav-i" href="gestor-cadastro.html"><span class="ic"></span>Cadastro & admin</a>
+  </aside>
+
+  <main class="app-main">
+    <div class="app-top">
+      <div class="crumb">Operação / <b style="color:var(--ink)">Pontos / outorgas</b></div>
+      <span class="sp"></span>
+      <span class="pill label">6 pontos</span>
+      <span class="pill warn">5 com apontamento aberto</span>
+      <span class="btn sub" style="padding:6px 12px">Exportar</span>
+    </div>
+
+    <div class="app-body">
+
+      <div class="bento">
+
+        <!-- the task: every outorga point in the basin, situation = worst open finding -->
+        <div class="panel lead col-12">
+          <header>Pontos / outorgas
+            <span class="sp"></span>
+            <span class="pill label">situação pelo apontamento mais grave aberto</span>
+          </header>
+
+          <!-- filtros: chips de UI de produto (sem racional embutido) -->
+          <div class="body" style="padding-bottom:0">
+            <div class="row" style="gap:18px;align-items:flex-start">
+              <div>
+                <div class="muted" style="font-size:11px;margin-bottom:6px">Faixa</div>
+                <div class="row" style="gap:6px">
+                  <span class="pill act">Todas</span>
+                  <span class="pill">A</span>
+                  <span class="pill">B</span>
+                  <span class="pill">C</span>
+                </div>
+              </div>
+              <div>
+                <div class="muted" style="font-size:11px;margin-bottom:6px">Sub-bacia</div>
+                <div class="row" style="gap:6px">
+                  <span class="pill act">Todas</span>
+                  <span class="pill">Rio Cubatão</span>
+                  <span class="pill">Drenagem direta</span>
+                </div>
+              </div>
+              <div>
+                <div class="muted" style="font-size:11px;margin-bottom:6px">Situação</div>
+                <div class="row" style="gap:6px">
+                  <span class="pill act">Todas</span>
+                  <span class="pill">Em rito</span>
+                  <span class="pill">Em curso</span>
+                  <span class="pill">Conforme</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <table class="table" style="margin-top:6px">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>Sub-bacia</th>
+                <th>Município</th>
+                <th>Finalidade</th>
+                <th>Faixa</th>
+                <th>Situação</th>
+                <th class="num">Apontamentos</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <!-- 07-1100 · pior aberto: ato administrativo gravíssima (fraude) -->
+              <tr style="cursor:pointer" onclick="location.href='gestor-detalhe.html'">
+                <td><a href="gestor-detalhe.html" style="color:var(--ink);text-decoration:none"><b>07-1100</b></a></td>
+                <td>Indústria Química Cubatão</td>
+                <td>Rio Cubatão</td>
+                <td>Cubatão</td>
+                <td>Industrial</td>
+                <td><span class="pill act">A</span></td>
+                <td><span class="pill bad">Ato administrativo · grau gravíssima</span></td>
+                <td class="num">1</td>
+              </tr>
+
+              <!-- 07-1042 · pior aberto: ato administrativo grave, em defesa -->
+              <tr style="cursor:pointer" onclick="location.href='gestor-detalhe.html'">
+                <td><a href="gestor-detalhe.html" style="color:var(--ink);text-decoration:none"><b>07-1042</b></a></td>
+                <td>Petroquímica Baixada S/A</td>
+                <td>Rio Cubatão</td>
+                <td>Cubatão</td>
+                <td>Industrial</td>
+                <td><span class="pill act">A</span></td>
+                <td><span class="pill bad">Ato administrativo · grau grave</span></td>
+                <td class="num">1</td>
+              </tr>
+
+              <!-- 07-1001 · herói · pior aberto: exceção grau média (vazão) -->
+              <tr style="cursor:pointer" onclick="location.href='gestor-detalhe.html'">
+                <td><a href="gestor-detalhe.html" style="color:var(--ink);text-decoration:none"><b>07-1001</b></a></td>
+                <td>Indústria Cubatão S/A</td>
+                <td>Rio Cubatão</td>
+                <td>Cubatão</td>
+                <td>Industrial</td>
+                <td><span class="pill act">A</span></td>
+                <td><span class="pill warn">Exceção · grau média</span></td>
+                <td class="num">2 abertos · 1 encerrado</td>
+              </tr>
+
+              <!-- 07-0830 · pior aberto: exceção calendário (outorga a vencer) -->
+              <tr style="cursor:pointer" onclick="location.href='gestor-detalhe.html'">
+                <td><a href="gestor-detalhe.html" style="color:var(--ink);text-decoration:none"><b>07-0830</b></a></td>
+                <td>Serviço de Águas de Praia Grande</td>
+                <td>Drenagem direta</td>
+                <td>Praia Grande</td>
+                <td>Abastecimento público</td>
+                <td><span class="pill">B</span></td>
+                <td><span class="pill warn">Exceção · a vencer em 40 dias</span></td>
+                <td class="num">1</td>
+              </tr>
+
+              <!-- 07-0712 · pior aberto: exceção condicionante (calibração vencida) -->
+              <tr style="cursor:pointer" onclick="location.href='gestor-detalhe.html'">
+                <td><a href="gestor-detalhe.html" style="color:var(--ink);text-decoration:none"><b>07-0712</b></a></td>
+                <td>Laticínios Itanhaém</td>
+                <td>Drenagem direta</td>
+                <td>Itanhaém</td>
+                <td>Industrial</td>
+                <td><span class="pill">B</span></td>
+                <td><span class="pill warn">Exceção · calibração vencida</span></td>
+                <td class="num">1</td>
+              </tr>
+
+              <!-- 07-0455 · pior aberto: exceção calendário (dormência) -->
+              <tr style="cursor:pointer" onclick="location.href='gestor-detalhe.html'">
+                <td><a href="gestor-detalhe.html" style="color:var(--ink);text-decoration:none"><b>07-0455</b></a></td>
+                <td>Indústria Têxtil Mongaguá</td>
+                <td>Drenagem direta</td>
+                <td>Mongaguá</td>
+                <td>Industrial</td>
+                <td><span class="pill">C</span></td>
+                <td><span class="pill warn">Exceção · sem uso há 2 anos</span></td>
+                <td class="num">1</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+        <!-- racional só em .note, fora da cromagem de produto -->
+        <div class="note col-8" style="margin-top:4px">
+          <b>Esta é a lista; o detalhe é o ponto.</b> Aqui o gestor vê todos os pontos de captação da bacia de uma vez. Cada linha abre o ponto, onde aparecem os limites outorgados, as séries de telemetria e a tramitação de cada apontamento. A coluna <b>Situação</b> mostra só o apontamento aberto mais grave de cada ponto: um <b>ato administrativo</b> (rito legal correndo) pesa mais que uma <b>exceção</b> (à espera de justificativa), que por sua vez pesa mais que um <b>sinal de gestão</b> (nada excedido ainda). Por isso fraude e reincidência sobem ao topo.
+        </div>
+
+        <div class="note col-4" style="margin-top:4px">
+          <b>Pontos sem apontamento.</b> Um ponto pode aparecer sem nenhum apontamento aberto: significa que mede, transmite e está dentro dos limites. A lista é o ponto de partida; o trabalho do dia mora na fila de apontamentos.
+        </div>
+
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>
