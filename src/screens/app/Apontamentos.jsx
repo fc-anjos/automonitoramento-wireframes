@@ -9,7 +9,7 @@ export default function Apontamentos() {
 
       <div className="wrap">
         <Note style={{ maxWidth: 760, margin: '0 auto 22px' }}>
-          <b>A lista do outorgado.</b> Reúne os achados sobre o ponto deste usuário, cada um com seu tom e a próxima ação. Os três não têm a mesma natureza: o pico de vazão é uma <b>exceção</b> (o sistema detectou e pede justificativa em prazo, sem presumir infração); o orçamento anual é um <b>sinal de gestão</b> (nada foi excedido, é um aviso para reduzir o ritmo, e por isso não tem grau); a amostra ausente já foi encerrada. Cada linha abre o detalhe, onde o outorgado responde, sem nunca dar baixa.
+          <b>A lista do outorgado.</b> Reúne os apontamentos sobre o ponto deste usuário, cada um com a sua próxima ação. As naturezas diferem entre si. O pico de vazão é uma <b>exceção</b>: o sistema detectou e pede justificativa em prazo, sem presumir infração. O orçamento anual é um <b>sinal de gestão</b>, em que nada foi excedido; é um aviso para reduzir o ritmo e por isso não tem grau. A amostra ausente já foi encerrada. Cada linha abre o detalhe, em que o outorgado responde sem dar baixa.
         </Note>
 
         <div className="phone-stage" style={{ justifyContent: 'center' }}>
@@ -86,7 +86,7 @@ export default function Apontamentos() {
         </div>
 
         <Note style={{ maxWidth: 760, margin: '22px auto 0' }}>
-          <b>Por que os tons diferem.</b> O tom de cada linha carrega o comportamento: a exceção em curso pede uma resposta em prazo (auto-baixa se corrigida ou aguarda justificativa); o sinal de gestão não cobra prazo, só orienta; o encerrado fica como registro. Nada nesta tela presume infração nem permite ao outorgado encerrar um apontamento, esses verbos são de outra instância.
+          <b>Como ler cada linha.</b> O comportamento varia conforme a natureza. A exceção em curso pede resposta em prazo, com baixa automática se corrigida ou espera de justificativa; o sinal de gestão não cobra prazo, apenas orienta; o item encerrado permanece como registro. Esta tela não presume infração nem permite ao outorgado encerrar um apontamento; notificar, julgar e encerrar são atos do gestor.
         </Note>
       </div>
     </>

@@ -14,7 +14,7 @@ export default function Ingestao() {
   return (
     <GestorShell tag="GESTOR · 05" title="Ingestão & qualidade de dados" active="ingestao" top={top}>
       <Note style={{ marginBottom: 16 }}>
-        <b>Painel de confiança do dado.</b> O automonitoramento só vale o que vale o dado que o sustenta. Todo registro passa por três estados (recebido, validado, consolidado) com checagens de limites físicos, continuidade de série e sinais de fraude ou fluxo reverso. Correção nunca sobrescreve: gera um novo registro que supersede o anterior, e o original fica na trilha de auditoria. Quando uma checagem reprova, o que sai daqui é um apontamento do tipo qualidade do dado, da exceção detectada ao ato administrativo conforme a gravidade. Base única reúne telemetria e autodeclaração.
+        <b>Painel de confiança do dado.</b> O automonitoramento depende inteiramente da qualidade do dado que o sustenta. Todo registro passa por três estados (recebido, validado, consolidado) com checagens de limites físicos, continuidade de série e sinais de fraude ou fluxo reverso. Correção nunca sobrescreve: gera um novo registro que supersede o anterior, e o original fica na trilha de auditoria. Quando uma checagem reprova, o que sai daqui é um apontamento do tipo qualidade do dado, da exceção detectada ao ato administrativo conforme a gravidade. Base única reúne telemetria e autodeclaração.
       </Note>
 
       <Bento>
@@ -40,7 +40,7 @@ export default function Ingestao() {
               <tr><td className="num">–</td><td>07-3320</td><td><Pill variant="warn">Lacuna de série</Pill></td><td><Btn sub style={{ padding: '4px 10px' }}>Validar / retificar</Btn></td></tr>
             </tbody>
           </table>
-          <Note style={{ fontSize: 12, margin: '0 14px 14px' }}>Validar ou retificar um registro é tratativa de dado, não de mérito: resolve a confiança na leitura. Reprovar uma checagem não é, por si, infração. Quando a checagem aponta integridade comprometida, abre-se um apontamento do tipo qualidade do dado, que segue abaixo.</Note>
+          <Note style={{ fontSize: 12, margin: '0 14px 14px' }}>Validar ou retificar um registro é tratativa de dado, e não de mérito; resolve a confiança na leitura. Reprovar uma checagem não é, por si, infração. Quando a checagem aponta integridade comprometida, abre-se um apontamento do tipo qualidade do dado, que segue abaixo.</Note>
         </Panel>
 
         {/* SIDE RAIL (span 4): which checks run */}
@@ -85,7 +85,7 @@ export default function Ingestao() {
               </Link>
 
             </div>
-            <Note style={{ fontSize: 12, marginTop: 12 }}>Dois apontamentos do mesmo tipo, com naturezas distintas. A lacuna de transmissão em 07-1001 era uma exceção de grau leve, baixada pela retificação assim que o dado foi corrigido. O indício de fraude em 07-1100 é de outra ordem: integridade da medição comprometida é ato administrativo, que aguarda o rito formal e a disposição reservada ao gestor.</Note>
+            <Note style={{ fontSize: 12, marginTop: 12 }}>Dois apontamentos do mesmo tipo, com naturezas distintas. A lacuna de transmissão em 07-1001 era uma exceção de grau leve, baixada pela retificação assim que o dado foi corrigido. O indício de fraude em 07-1100 é mais grave: integridade de medição comprometida configura ato administrativo, que aguarda o rito formal e a disposição reservada ao gestor.</Note>
           </Body>
         </Panel>
 

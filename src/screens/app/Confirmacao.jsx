@@ -9,7 +9,7 @@ export default function Confirmacao() {
 
       <div className="wrap">
         <Note style={{ maxWidth: 780, margin: '0 auto 22px' }}>
-          <b>O que o histórico fecha.</b> Esta aba registra, em ordem, tudo que aconteceu com o ponto: cada <b>apontamento</b> e cada confirmação do outorgado (ciência, justificativa, retificação). Nada é apagado; ao baixar, o item fica arquivado com a trilha. A confirmação à esquerda é o comprovante de um ato isolado; a linha do tempo à direita mostra a vida de cada apontamento, com seu tipo, grau e fase.
+          <b>O que o histórico registra.</b> Esta aba registra, em ordem, tudo que aconteceu com o ponto: cada <b>apontamento</b> e cada confirmação do outorgado (ciência, justificativa, retificação). Nada é apagado; ao baixar, o item fica arquivado com a trilha. A confirmação à esquerda é o comprovante de um ato isolado; a linha do tempo à direita mostra o andamento de cada apontamento, com seu tipo, grau e fase.
         </Note>
 
         <div className="phone-stage" style={{ justifyContent: 'center' }}>

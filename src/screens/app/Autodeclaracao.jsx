@@ -70,7 +70,7 @@ export default function Autodeclaracao() {
         </div>
 
         <Note style={{ maxWidth: 760, margin: '22px auto 0', fontSize: 12.5 }}>
-          O volume declarado alimenta a <b>cobrança pelo uso da água</b> (FEHIDRO). Declarar a menos não reduz a conta: <b>subdeclarar é, a um só tempo, erro de cobrança e infração</b>, sujeito a apuração retroativa. A plausibilidade mostrada na tela é só autovigilância do próprio usuário; ela não substitui a reconciliação que o gestor faz do declarado contra o outorgado.
+          O volume declarado alimenta a <b>cobrança pelo uso da água</b> (FEHIDRO). Declarar a menos não reduz a conta. A <b>subdeclaração</b> é, ao mesmo tempo, erro de cobrança e infração, sujeita a apuração retroativa. A plausibilidade mostrada na tela é só autovigilância do próprio usuário; ela não substitui a reconciliação que o gestor faz do declarado contra o outorgado.
         </Note>
 
         <Note style={{ maxWidth: 760, margin: '14px auto 0', fontSize: 12.5 }}>

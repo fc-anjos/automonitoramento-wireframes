@@ -31,7 +31,7 @@ export default function Mapa() {
   return (
     <GestorShell tag="GESTOR · 02" title="Mapa georreferenciado" right="Pontos de exemplo · SIRGAS 2000" active="mapa" top={top}>
       <Note style={{ marginBottom: 16 }}>
-        <b>O mapa é uma entrada para a triagem, não um painel de cores.</b> Cada ponto aparece com a <b>situação do seu pior apontamento aberto</b>: ponto cheio para apontamento crítico (fraude, infração reincidente), ponto hachurado para algo a vencer ou a justificar, ponto vazado para conforme. O gestor lê o território e desce no ponto; a régua é a mesma da fila de Apontamentos e do Detalhe. A base real de captações entra na etapa de validação; aqui usamos os pontos do cenário sobre as sub-bacias da UGRHI-07.
+        <b>O mapa como entrada para a triagem.</b> Cada ponto aparece com a <b>situação do seu pior apontamento aberto</b>: ponto cheio para apontamento crítico (fraude, infração reincidente), ponto hachurado para algo a vencer ou a justificar, ponto vazado para conforme. O gestor lê o território e desce no ponto; a régua é a mesma da fila de Apontamentos e do Detalhe. A base real de captações entra na etapa de validação; aqui usamos os pontos do cenário sobre as sub-bacias da UGRHI-07.
       </Note>
 
       <Bento>

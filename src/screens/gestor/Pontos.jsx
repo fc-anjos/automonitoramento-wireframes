@@ -80,11 +80,11 @@ export default function Pontos() {
         </Panel>
 
         <Note col={8} style={{ marginTop: 4 }}>
-          <b>Esta é a lista; o detalhe é o ponto.</b> Aqui o gestor vê todos os pontos de captação da bacia de uma vez. Cada linha abre o ponto, onde aparecem os limites outorgados, as séries de telemetria e a tramitação de cada apontamento. A coluna <b>Situação</b> mostra só o apontamento aberto mais grave de cada ponto: um <b>ato administrativo</b> (rito legal correndo) pesa mais que uma <b>exceção</b> (à espera de justificativa), que por sua vez pesa mais que um <b>sinal de gestão</b> (nada excedido ainda). Por isso fraude e reincidência sobem ao topo.
+          <b>A lista de pontos.</b> Aqui o gestor vê todos os pontos de captação da bacia de uma vez. Cada linha abre o ponto, onde aparecem os limites outorgados, as séries de telemetria e a tramitação de cada apontamento. A coluna <b>Situação</b> mostra só o apontamento aberto mais grave de cada ponto: um <b>ato administrativo</b> (rito legal correndo) pesa mais que uma <b>exceção</b> (à espera de justificativa), que por sua vez pesa mais que um <b>sinal de gestão</b> (nada excedido ainda). Por isso fraude e reincidência sobem ao topo.
         </Note>
 
         <Note col={4} style={{ marginTop: 4 }}>
-          <b>Pontos sem apontamento.</b> Um ponto pode aparecer sem nenhum apontamento aberto: significa que mede, transmite e está dentro dos limites. A lista é o ponto de partida; o trabalho do dia mora na fila de apontamentos.
+          <b>Pontos sem apontamento.</b> Um ponto pode aparecer sem nenhum apontamento aberto: significa que mede, transmite e está dentro dos limites. A lista serve de ponto de partida; o trabalho do dia está na fila de apontamentos.
         </Note>
       </Bento>
     </GestorShell>

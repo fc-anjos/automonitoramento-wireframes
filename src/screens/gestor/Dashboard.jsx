@@ -14,7 +14,7 @@ export default function Dashboard() {
   return (
     <GestorShell tag="GESTOR · 01" title="Dashboard de fiscalização" active="dashboard" top={top} bodyStack>
       <Note>
-        <b>Visão por exceção, não por volume de tela.</b> O gestor abre o dashboard para saber o que precisa de ação, então a leitura começa pelos apontamentos por tipo e termina nos contadores estruturais da bacia. Os números são recortáveis por usuário, sub-bacia, município, finalidade e faixa de VM; aqui é a visão geral.
+        <b>Uma visão orientada por exceção.</b> O gestor abre o dashboard para saber o que precisa de ação, então a leitura começa pelos apontamentos por tipo e termina nos contadores estruturais da bacia. Os números são recortáveis por usuário, sub-bacia, município, finalidade e faixa de VM; aqui é a visão geral.
       </Note>
 
       <Bento>
@@ -53,7 +53,7 @@ export default function Dashboard() {
         </Card>
 
         <Note col={12} style={{ marginTop: -2 }}>
-          As exceções aparecem por <b>tipo</b> (volume, calendário, condicionante, qualidade do dado), não num balde único de desvios. Calendário e condicionante são dirigidos por data e por obrigação acessória, não por uma leitura cruzada de telemetria, então um pico de vazão e uma calibração vencida não competem pela mesma fila. O <b>grau</b> ordena dentro de cada tipo. Acima do grau está o que o apontamento exige: um <b>sinal de gestão</b> se autorregula e baixa sozinho quando o uso volta ao previsto; uma <b>exceção</b> aguarda a justificativa do outorgado em prazo; um <b>ato administrativo</b> já corre o rito sancionador.
+          As exceções aparecem por <b>tipo</b> (volume, calendário, condicionante, qualidade do dado), e não reunidas num único grupo de desvios. Calendário e condicionante são dirigidos por data e por obrigação acessória, não por uma leitura cruzada de telemetria, de modo que um pico de vazão e uma calibração vencida não competem pela mesma fila. O <b>grau</b> ordena dentro de cada tipo, e a natureza define o que o apontamento exige: um <b>sinal de gestão</b> se autorregula e baixa sozinho quando o uso volta ao previsto; uma <b>exceção</b> aguarda a justificativa do outorgado em prazo; um <b>ato administrativo</b> já corre o rito sancionador.
         </Note>
 
         {/* TRIAGE: led by gravest first */}
@@ -126,7 +126,7 @@ export default function Dashboard() {
         </Panel>
 
         <Note col={12} style={{ marginTop: -2 }}>
-          A fila lidera pela <b>gravidade</b>: a fraude gravíssima (07-1100) e o volume grave reincidente (07-1042) vêm antes do pico de vazão de grau média e dos achados de calendário sem grau. Um pico isolado de telemetria é uma <b>exceção</b> com ação pedida ao usuário, não infração consumada; a leitura de desvio sancionável é dos <b>atos administrativos</b>, como os dois primeiros da fila, que já correm o rito.
+          A fila lidera pela <b>gravidade</b>: a fraude gravíssima (07-1100) e o volume grave reincidente (07-1042) vêm antes do pico de vazão de grau média e dos achados de calendário sem grau. Um pico isolado de telemetria é uma <b>exceção</b> com ação pedida ao usuário; não constitui infração consumada. O desvio sancionável corre como <b>ato administrativo</b>, caso dos dois primeiros da fila, que já seguem o rito.
         </Note>
 
         {/* two co-equal findings */}

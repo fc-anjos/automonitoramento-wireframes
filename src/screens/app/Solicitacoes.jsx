@@ -8,7 +8,7 @@ export default function Solicitacoes() {
 
       <div className="wrap">
         <Note style={{ maxWidth: 760, margin: '0 auto 22px' }}>
-          <b>A dimensão temporal da outorga, do lado do outorgado.</b> A outorga vence, renova e perece por calendário, não por volume. A tela lidera pelo vencimento próximo (renovar antes da data) e abre o catálogo das solicitações que o outorgado pode protocolar sobre a própria outorga. Sem rigidez: é um CRUD de pedidos, cada um com seu estado.
+          <b>O lado temporal da outorga.</b> A outorga vence, renova-se e perece por calendário, e não por volume. A tela lidera pelo vencimento próximo, com a renovação feita antes da data, e abre o catálogo de solicitações que o outorgado pode protocolar sobre a própria outorga, cada uma com o seu estado.
         </Note>
 
         <div className="phone-stage" style={{ justifyContent: 'center' }}>

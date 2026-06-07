@@ -8,7 +8,7 @@ export default function Apontamento() {
 
       <div className="wrap">
         <Note style={{ maxWidth: 760, margin: '0 auto 22px' }}>
-          <b>Um apontamento, do lado de quem responde.</b> A tela abre o pico de vazão do ponto 07-1001: cabeçalho com a tipagem (natureza, tipo, grau, fase), a linha do tempo das fases e a contagem de prazo. Trata-se de uma <b>exceção</b>: o sistema detectou e pede justificativa em prazo, sem presumir infração, e ela só se baixa por ato do gestor (diferente do sinal de gestão, que se resolve sozinho quando o ritmo cede). O outorgado recebe os verbos de quem responde, nunca os de quem dispõe: ele pode tomar ciência, justificar, anexar documento e comprovar regularização, mas <b>não encerra</b> o apontamento.
+          <b>Um apontamento, do lado de quem responde.</b> A tela abre o pico de vazão do ponto 07-1001: cabeçalho com a tipagem (natureza, tipo, grau, fase), a linha do tempo das fases e a contagem de prazo. Trata-se de uma <b>exceção</b>: o sistema detectou e pede justificativa em prazo, sem presumir infração, e ela só se baixa por ato do gestor (diferente do sinal de gestão, que se resolve sozinho quando o ritmo cede). O outorgado dispõe apenas dos atos de resposta: pode tomar ciência, justificar, anexar documento e comprovar regularização, mas <b>não encerra</b> o apontamento.
         </Note>
 
         <div className="phone-stage" style={{ justifyContent: 'center' }}>

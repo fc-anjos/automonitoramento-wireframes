@@ -38,7 +38,7 @@ export default function Cadastro() {
   return (
     <GestorShell tag="GESTOR · 06" title="Cadastro & administração" active="cadastro" top={top}>
       <Note style={{ marginBottom: 16 }}>
-        <b>Registro, ciclo de vida e governança.</b> A outorga é uma licença com prazo: nasce no cadastro, vence, pode ser renovada, revista, revogada, e extingue-se ou perece sozinha por desuso. Esta tela concentra esse ciclo de vida do lado do gestor: o cadastro das outorgas, a fila de solicitações do outorgado (renovação, redução, transferência, desativação) que o gestor defere ou indefere, e a trilha de auditoria. Outorga não é apagada: ao encerrar, muda de estado e preserva o histórico. Os verbos de disposição (deferir, revisar, revogar) são exclusivos do gestor; o outorgado apenas solicita.
+        <b>Registro e ciclo de vida da outorga.</b> A outorga é uma licença com prazo: nasce no cadastro, vence, pode ser renovada, revista, revogada, e extingue-se ou perece sozinha por desuso. Esta tela concentra esse ciclo de vida do lado do gestor: o cadastro das outorgas, a fila de solicitações do outorgado (renovação, redução, transferência, desativação) que o gestor defere ou indefere, e a trilha de auditoria. Outorga não é apagada: ao encerrar, muda de estado e preserva o histórico. Os verbos de disposição (deferir, revisar, revogar) são exclusivos do gestor; o outorgado apenas solicita.
       </Note>
 
       <Bento>
@@ -57,7 +57,7 @@ export default function Cadastro() {
         </Panel>
 
         <Note col={12}>
-          O <b>estado</b> é a vida da outorga, não um status genérico. "A vencer" e "Dormente" são exceções dirigidas por calendário, abertas automaticamente pela reconciliação contra a própria data da outorga: a primeira chama renovação antes do vencimento; a segunda antecipa o perecimento, que opera de pleno direito após três anos de não uso. "Extinta" é o término do prazo sem pedido tempestivo de renovação. Nenhuma some por exclusão: muda de estado e fica registrada.
+          O <b>estado</b> corresponde à etapa do ciclo de vida da outorga, e não a um status genérico. "A vencer" e "Dormente" são exceções dirigidas por calendário, abertas automaticamente pela reconciliação contra a própria data da outorga: a primeira chama renovação antes do vencimento; a segunda antecipa o perecimento, que opera de pleno direito após três anos de não uso. "Extinta" é o término do prazo sem pedido tempestivo de renovação. Nenhuma some por exclusão: muda de estado e fica registrada.
         </Note>
 
         {/* solicitações: the gestor's CRUD verb over outorgado requests (defer/indefer) */}
@@ -105,7 +105,7 @@ export default function Cadastro() {
         </Panel>
 
         <Note col={12}>
-          O gestor pode tudo o que muda a vida do registro; o outorgado só pode <b>solicitar</b>. Deferir uma renovação grava nova validade e fecha a exceção "a vencer"; indeferir devolve o pedido com fundamento. A desativação fecha quando o outorgado comprova a remoção dos equipamentos, por isso a situação fica "aguardando comprovação", não deferida de imediato. Cada despacho é um ato datado na trilha.
+          O gestor detém os atos que alteram o registro; o outorgado apenas <b>solicita</b>. Deferir uma renovação grava nova validade e fecha a exceção "a vencer"; indeferir devolve o pedido com fundamento. A desativação fecha quando o outorgado comprova a remoção dos equipamentos, por isso a situação fica "aguardando comprovação", não deferida de imediato. Cada despacho é um ato datado na trilha.
         </Note>
 
         {/* users & roles: kept, narrowed to the role-asymmetry the firewall cares about */}

@@ -42,7 +42,7 @@ export default function Apontamento() {
 
         {/* ESCOPO D1-b: o que a plataforma faz e o que é ato do gestor */}
         <Note col={12} style={{ fontSize: 12.5 }}>
-          <b>O que a plataforma faz e o que é ato do gestor.</b> O sistema cobre detecção → notificação → ciência → defesa/justificativa → acompanhamento da regularização. O <b>auto e o julgamento formais são atos do gestor, registrados no sistema, não adjudicados por ele</b>: a plataforma dá os marcos, as datas e a trilha; a decisão de mérito é humana. Nada se apaga: dar baixa é arquivar ou encerrar com trilha completa, nunca remover.
+          <b>O que a plataforma faz e o que é ato do gestor.</b> O sistema cobre detecção → notificação → ciência → defesa/justificativa → acompanhamento da regularização. O <b>auto de infração e o julgamento são atos do gestor, registrados no sistema e não adjudicados por ele</b>: a plataforma fornece os marcos, as datas e a trilha, e a decisão de mérito permanece humana. Nada se apaga; dar baixa significa arquivar ou encerrar com trilha completa, sem remover o registro.
         </Note>
 
         {/* TIMELINE de fases */}
@@ -89,7 +89,7 @@ export default function Apontamento() {
               <Btn block>Registrar regularização</Btn>
               <Btn block sub>Encerrar (arquivar com trilha)</Btn>
             </Row>
-            <Note style={{ fontSize: 12, marginTop: 12 }}>Poderes assimétricos: o app do outorgado só oferece tomar ciência, justificar, anexar e comprovar. Estes verbos de disposição existem só aqui. Cada um vira um registro datado na trilha.</Note>
+            <Note style={{ fontSize: 12, marginTop: 12 }}>Os poderes são assimétricos: o app do outorgado só oferece tomar ciência, justificar, anexar e comprovar. Os verbos de disposição existem apenas aqui, e cada um gera um registro datado na trilha.</Note>
           </Body>
         </Panel>
 

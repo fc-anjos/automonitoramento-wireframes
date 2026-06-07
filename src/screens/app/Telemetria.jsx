@@ -9,7 +9,7 @@ export default function Telemetria() {
 
       <div className="wrap">
         <Note style={{ maxWidth: 760, margin: '0 auto 22px' }}>
-          <b>Fluxo do grande usuário.</b> A tela lidera pelo que o outorgado mede, o volume acumulado no ano e quanto ainda resta do orçamento. Só depois aparecem os apontamentos abertos sobre o ponto. O outorgado <b>observa</b> o que o equipamento já transmitiu, sem digitar nada. O pico de vazão é uma <b>exceção</b>, um achado com ação pedida ao usuário (justificar o pico) e prazo para resposta, não uma infração. A leitura de infração, se houver, corre em outra instância.
+          <b>Fluxo do grande usuário.</b> A tela lidera pelo que o outorgado mede, o volume acumulado no ano e quanto ainda resta do orçamento. Só depois aparecem os apontamentos abertos sobre o ponto. O outorgado <b>observa</b> o que o equipamento já transmitiu, sem digitar nada. O pico de vazão é uma <b>exceção</b>, um achado com ação pedida ao usuário (justificar o pico) e prazo de resposta; não constitui, por si, infração. A caracterização de infração, quando cabível, segue rito próprio.
         </Note>
 
         <div className="phone-stage" style={{ justifyContent: 'center' }}>

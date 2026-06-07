@@ -36,7 +36,7 @@ export default function Solicitacoes() {
   return (
     <GestorShell tag="GESTOR" title="Solicitações" active="solicitacoes" top={top}>
       <Note style={{ marginBottom: 16 }}>
-        <b>A fila de pedidos do outorgado sobre a própria outorga.</b> O outorgado protocola; o gestor despacha. Renovação, ampliação, transferência, dispensa e desativação são pedidos sobre o ciclo de vida da outorga, cada um com sua situação. Aqui o gestor exerce os verbos de despacho: <b>deferir</b>, <b>indeferir</b> ou <b>pedir documento</b> quando a instrução está incompleta. Nada se apaga: ao decidir, o pedido muda de situação e fica arquivado com a trilha de quem despachou e quando.
+        <b>A fila de pedidos do outorgado sobre a própria outorga.</b> O outorgado protocola o pedido e o gestor o despacha. Renovação, ampliação, transferência, dispensa e desativação são pedidos sobre o ciclo de vida da outorga, cada um com sua situação. Aqui o gestor exerce os verbos de despacho: <b>deferir</b>, <b>indeferir</b> ou <b>pedir documento</b> quando a instrução está incompleta. Nada se apaga: ao decidir, o pedido muda de situação e fica arquivado com a trilha de quem despachou e quando.
       </Note>
 
       <Bento>
@@ -54,7 +54,7 @@ export default function Solicitacoes() {
         </Panel>
 
         <Note col={12}>
-          A <b>situação</b> acompanha a vida do pedido, não um status genérico. "Aguardando análise" é o pedido recém-protocolado, ainda na mesa do gestor; "Em análise" é o que já está sob instrução, às vezes esperando uma peça do outorgado (contrato de transferência, comprovação de remoção de equipamentos). "Deferida" e "Indeferida" são terminais, mas não somem: o pedido fica arquivado com o despacho fundamentado. A renovação do 07-0830 corre contra o calendário, porque a outorga vence em 17/07; despachar antes disso evita a descontinuidade do direito.
+          A <b>situação</b> acompanha a etapa do pedido, e não um status genérico. "Aguardando análise" é o pedido recém-protocolado, ainda na mesa do gestor; "Em análise" é o que já está sob instrução, às vezes esperando uma peça do outorgado (contrato de transferência, comprovação de remoção de equipamentos). "Deferida" e "Indeferida" são terminais, mas não somem: o pedido fica arquivado com o despacho fundamentado. A renovação do 07-0830 corre contra o calendário, porque a outorga vence em 17/07; despachar antes disso evita a descontinuidade do direito.
         </Note>
 
         {/* disposition panel: the verbs the gestor applies to a request */}
@@ -77,7 +77,7 @@ export default function Solicitacoes() {
         </Panel>
 
         <Note col={12}>
-          O outorgado <b>solicita</b>; só o gestor <b>despacha</b>. Cada despacho é um ato datado e imutável na trilha, o que sustenta o devido processo, já que os prazos correm da ciência. Pedir documento não nega o pedido: suspende a contagem e formaliza o que falta na instrução. A renovação tempestiva tem efeito de silêncio positivo, então o gestor que pretende indeferir precisa fazê-lo dentro do prazo, sob pena de renovação automática.
+          O despacho é exclusivo do gestor; ao outorgado cabe <b>solicitar</b>. Cada despacho é um ato datado e imutável na trilha, o que sustenta o devido processo, já que os prazos correm da ciência. Pedir documento não nega o pedido: suspende a contagem e formaliza o que falta na instrução. A renovação tempestiva tem efeito de silêncio positivo, então o gestor que pretende indeferir precisa fazê-lo dentro do prazo, sob pena de renovação automática.
         </Note>
 
       </Bento>
