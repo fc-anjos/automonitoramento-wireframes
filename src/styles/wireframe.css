@@ -335,13 +335,17 @@ a[href] { cursor: pointer; }
   border: 1px solid #d8d8d8;
 }
 /* live, scaled preview of the real screen, non-interactive, click falls through to the card link */
-.launch-card .thumb iframe {
+.launch-card .thumb iframe,
+.launch-card .thumb .thumb-frame {
   position: absolute; top: 0; left: 0;
   width: 400%; height: 400%;
   transform: scale(.25); transform-origin: 0 0;
   border: 0; background: #fff;
   pointer-events: none;
 }
+/* React thumbnails render the real screen component (no iframe); clip + ignore clicks */
+.launch-card .thumb .thumb-frame { overflow: hidden; }
+.launch-card .thumb .thumb-frame * { pointer-events: none; }
 .launch-card .num { font: 600 11px var(--comm); letter-spacing: .06em; color: #9a9a9a; text-transform: uppercase; }
 .launch-card h3 { font-size: 14px; font-family: var(--comm); font-weight: 600; }
 .launch-card p { margin: 0; font-size: 12.5px; color: #6f6f6f; }

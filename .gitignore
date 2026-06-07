@@ -2,3 +2,7 @@
 *.log
 .od/
 .od-skills/
+
+# node / vite
+node_modules/
+dist/
