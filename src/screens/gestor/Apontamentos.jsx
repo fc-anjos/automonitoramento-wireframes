@@ -1,6 +1,35 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { GestorShell } from '../../components/shell.jsx'
-import { Bento, Panel, Note, Pill, Btn, Row, Sp } from '../../components/ui.jsx'
+import { Bento, Panel, Note, Pill, Btn, Row, Sp, DataTable } from '../../components/ui.jsx'
+
+const FILA = [
+  { codigo: '07-1100', nome: 'Ind. Química Cubatão', protocolo: 'AP-1100-A', apontamento: 'Indício de fraude na medição', natureza: 'Ato administrativo', tipo: 'Qualidade do dado', grau: 'gravíssima', grauVar: 'bad', fase: 'Autuada', desde: 'auto 02/06', prazo: 'ciência e defesa', dono: 'gestor', proxima: 'Dar ciência ao usuário; cabível embargo' },
+  { codigo: '07-1042', nome: 'Petroquímica Baixada', protocolo: 'AP-1042-A', apontamento: 'Volume mensal acima do outorgado', natureza: 'Ato administrativo', tipo: 'Volume', grau: 'grave', grauVar: 'bad', fase: 'Em defesa/recurso', desde: 'auto 12/05', prazo: 'defesa até 04/06', dono: 'outorgado', proxima: 'Aguardar defesa (prazo correndo)' },
+  { codigo: '07-1001', nome: 'Indústria Cubatão S/A', protocolo: 'AP-1001-A', apontamento: 'Pico de vazão acima do teto', natureza: 'Exceção', tipo: 'Volume', grau: 'média', grauVar: 'warn', fase: 'Notificada', desde: '04/06', prazo: 'justificativa até 25/06', dono: 'outorgado', proxima: 'Aguardar justificativa ou correção' },
+  { codigo: '07-0712', nome: 'Laticínios Itanhaém', protocolo: 'AP-0712-A', apontamento: 'Calibração do hidrômetro vencida', natureza: 'Exceção', tipo: 'Condicionante', grau: 'leve', grauVar: 'warn', fase: 'Notificada', desde: '01/05', prazo: 'recalibrar até 30/06', dono: 'outorgado', proxima: 'Aguardar recalibração credenciada' },
+  { codigo: '07-0830', nome: 'Águas de Praia Grande', protocolo: 'AP-0830-A', apontamento: 'Outorga a vencer', natureza: 'Exceção', tipo: 'Calendário', grau: null, fase: 'Notificada', desde: '–', prazo: 'renovar até 17/07', dono: 'outorgado', proxima: 'Aguardar pedido de renovação' },
+  { codigo: '07-0455', nome: 'Têxtil Mongaguá', protocolo: 'AP-0455-A', apontamento: 'Sem uso há 2 anos (risco de perecimento)', natureza: 'Exceção', tipo: 'Calendário', grau: null, fase: 'Detectada', desde: 'jun/2024', prazo: 'regularizar em 12 meses', dono: 'gestor', proxima: 'Confirmar uso ou desativar; perece em 3 anos' },
+  { codigo: '07-1001', nome: 'Indústria Cubatão S/A', protocolo: 'AP-1001-C', apontamento: 'Amostra isolada ausente', natureza: 'Exceção', tipo: 'Qualidade do dado', grau: 'leve', grauVar: 'ok', fase: 'Encerrada', desde: '03/06', prazo: 'nenhum', dono: 'outorgado', proxima: 'Nenhuma (já retificada)' },
+  { codigo: '07-1001', nome: 'Indústria Cubatão S/A', protocolo: 'AP-1001-B', apontamento: 'Volume anual em risco', natureza: 'Sinal de gestão', tipo: 'Volume', grau: null, fase: '–', desde: 'jun', prazo: 'sem prazo', dono: 'outorgado', proxima: 'Reduzir o ritmo para não estourar o limite anual' },
+]
+
+const FILA_COLS = [
+  { key: 'ponto', label: 'Ponto', render: (r) => (
+    <Link to="/gestor/apontamento" style={{ color: 'var(--ink)', textDecoration: 'none' }}>
+      <b>{r.codigo}</b><br /><span className="muted" style={{ fontSize: 11 }}>{r.nome}</span><br /><span className="muted" style={{ fontSize: 10 }}>protocolo {r.protocolo}</span>
+    </Link>
+  ) },
+  { key: 'apontamento', label: 'Apontamento' },
+  { key: 'natureza', label: 'Natureza', render: (r) => <Pill variant="label" style={{ padding: '0 7px', fontSize: 10.5 }}>{r.natureza}</Pill> },
+  { key: 'tipo', label: 'Tipo' },
+  { key: 'grau', label: 'Grau', render: (r) => r.grau
+    ? <Pill variant={r.grauVar}>grau {r.grau}</Pill>
+    : <span className="muted" style={{ fontSize: 11 }}>sem grau</span> },
+  { key: 'fase', label: 'Fase' },
+  { key: 'desde', label: 'Desde', num: true },
+  { key: 'prazo', label: 'Prazo / dono', render: (r) => <>{r.prazo} · <b>{r.dono}</b></> },
+  { key: 'proxima', label: 'Próxima ação' },
+]
 
 const top = (
   <>
@@ -61,128 +90,14 @@ export default function Apontamentos() {
             </Row>
           </div>
 
-          <table className="table" style={{ marginTop: 6 }}>
-            <thead>
-              <tr>
-                <th>Ponto</th>
-                <th>Apontamento</th>
-                <th>Natureza</th>
-                <th>Tipo</th>
-                <th>Grau</th>
-                <th>Fase</th>
-                <th className="num">Desde</th>
-                <th>Prazo / dono</th>
-                <th>Próxima ação</th>
-              </tr>
-            </thead>
-            <tbody>
-
-              {/* AP-1100-A · gravíssima · ato administrativo · qualidade do dado · autuada */}
-              <tr style={{ cursor: 'pointer' }} onClick={go}>
-                <td><Link to="/gestor/apontamento" style={{ color: 'var(--ink)', textDecoration: 'none' }}><b>07-1100</b><br /><span className="muted" style={{ fontSize: 11 }}>Ind. Química Cubatão</span><br /><span className="muted" style={{ fontSize: 10 }}>protocolo AP-1100-A</span></Link></td>
-                <td>Indício de fraude na medição</td>
-                <td><Pill variant="label" style={{ padding: '0 7px', fontSize: 10.5 }}>Ato administrativo</Pill></td>
-                <td>Qualidade do dado</td>
-                <td><Pill variant="bad">grau gravíssima</Pill></td>
-                <td>Autuada</td>
-                <td className="num">auto 02/06</td>
-                <td>ciência e defesa · <b>gestor</b></td>
-                <td>Dar ciência ao usuário; cabível embargo</td>
-              </tr>
-
-              {/* AP-1042-A · grave · ato administrativo · volume · em defesa */}
-              <tr style={{ cursor: 'pointer' }} onClick={go}>
-                <td><Link to="/gestor/apontamento" style={{ color: 'var(--ink)', textDecoration: 'none' }}><b>07-1042</b><br /><span className="muted" style={{ fontSize: 11 }}>Petroquímica Baixada</span><br /><span className="muted" style={{ fontSize: 10 }}>protocolo AP-1042-A</span></Link></td>
-                <td>Volume mensal acima do outorgado</td>
-                <td><Pill variant="label" style={{ padding: '0 7px', fontSize: 10.5 }}>Ato administrativo</Pill></td>
-                <td>Volume</td>
-                <td><Pill variant="bad">grau grave</Pill></td>
-                <td>Em defesa/recurso</td>
-                <td className="num">auto 12/05</td>
-                <td>defesa até 04/06 · <b>outorgado</b></td>
-                <td>Aguardar defesa (prazo correndo)</td>
-              </tr>
-
-              {/* AP-1001-A · média · exceção · volume · notificada */}
-              <tr style={{ cursor: 'pointer' }} onClick={go}>
-                <td><Link to="/gestor/apontamento" style={{ color: 'var(--ink)', textDecoration: 'none' }}><b>07-1001</b><br /><span className="muted" style={{ fontSize: 11 }}>Indústria Cubatão S/A</span><br /><span className="muted" style={{ fontSize: 10 }}>protocolo AP-1001-A</span></Link></td>
-                <td>Pico de vazão acima do teto</td>
-                <td><Pill variant="label" style={{ padding: '0 7px', fontSize: 10.5 }}>Exceção</Pill></td>
-                <td>Volume</td>
-                <td><Pill variant="warn">grau média</Pill></td>
-                <td>Notificada</td>
-                <td className="num">04/06</td>
-                <td>justificativa até 25/06 · <b>outorgado</b></td>
-                <td>Aguardar justificativa ou correção</td>
-              </tr>
-
-              {/* AP-0712-A · leve · exceção · condicionante · notificada */}
-              <tr style={{ cursor: 'pointer' }} onClick={go}>
-                <td><Link to="/gestor/apontamento" style={{ color: 'var(--ink)', textDecoration: 'none' }}><b>07-0712</b><br /><span className="muted" style={{ fontSize: 11 }}>Laticínios Itanhaém</span><br /><span className="muted" style={{ fontSize: 10 }}>protocolo AP-0712-A</span></Link></td>
-                <td>Calibração do hidrômetro vencida</td>
-                <td><Pill variant="label" style={{ padding: '0 7px', fontSize: 10.5 }}>Exceção</Pill></td>
-                <td>Condicionante</td>
-                <td><Pill variant="warn">grau leve</Pill></td>
-                <td>Notificada</td>
-                <td className="num">01/05</td>
-                <td>recalibrar até 30/06 · <b>outorgado</b></td>
-                <td>Aguardar recalibração credenciada</td>
-              </tr>
-
-              {/* AP-0830-A · calendário · exceção · sem grau · notificada */}
-              <tr style={{ cursor: 'pointer' }} onClick={go}>
-                <td><Link to="/gestor/apontamento" style={{ color: 'var(--ink)', textDecoration: 'none' }}><b>07-0830</b><br /><span className="muted" style={{ fontSize: 11 }}>Águas de Praia Grande</span><br /><span className="muted" style={{ fontSize: 10 }}>protocolo AP-0830-A</span></Link></td>
-                <td>Outorga a vencer</td>
-                <td><Pill variant="label" style={{ padding: '0 7px', fontSize: 10.5 }}>Exceção</Pill></td>
-                <td>Calendário</td>
-                <td><span className="muted" style={{ fontSize: 11 }}>sem grau</span></td>
-                <td>Notificada</td>
-                <td className="num">–</td>
-                <td>renovar até 17/07 · <b>outorgado</b></td>
-                <td>Aguardar pedido de renovação</td>
-              </tr>
-
-              {/* AP-0455-A · calendário · exceção · sem grau · detectada · dono gestor */}
-              <tr style={{ cursor: 'pointer' }} onClick={go}>
-                <td><Link to="/gestor/apontamento" style={{ color: 'var(--ink)', textDecoration: 'none' }}><b>07-0455</b><br /><span className="muted" style={{ fontSize: 11 }}>Têxtil Mongaguá</span><br /><span className="muted" style={{ fontSize: 10 }}>protocolo AP-0455-A</span></Link></td>
-                <td>Sem uso há 2 anos (risco de perecimento)</td>
-                <td><Pill variant="label" style={{ padding: '0 7px', fontSize: 10.5 }}>Exceção</Pill></td>
-                <td>Calendário</td>
-                <td><span className="muted" style={{ fontSize: 11 }}>sem grau</span></td>
-                <td>Detectada</td>
-                <td className="num">jun/2024</td>
-                <td>regularizar em 12 meses · <b>gestor</b></td>
-                <td>Confirmar uso ou desativar; perece em 3 anos</td>
-              </tr>
-
-              {/* AP-1001-C · leve · exceção · qualidade do dado · encerrada */}
-              <tr style={{ cursor: 'pointer' }} onClick={go}>
-                <td><Link to="/gestor/apontamento" style={{ color: 'var(--ink)', textDecoration: 'none' }}><b>07-1001</b><br /><span className="muted" style={{ fontSize: 11 }}>Indústria Cubatão S/A</span><br /><span className="muted" style={{ fontSize: 10 }}>protocolo AP-1001-C</span></Link></td>
-                <td>Amostra isolada ausente</td>
-                <td><Pill variant="label" style={{ padding: '0 7px', fontSize: 10.5 }}>Exceção</Pill></td>
-                <td>Qualidade do dado</td>
-                <td><Pill variant="ok">grau leve</Pill></td>
-                <td>Encerrada</td>
-                <td className="num">03/06</td>
-                <td>nenhum · <b>outorgado</b></td>
-                <td>Nenhuma (já retificada)</td>
-              </tr>
-
-              {/* AP-1001-B · sinal de gestão · volume · sem grau */}
-              <tr style={{ cursor: 'pointer' }} onClick={go}>
-                <td><Link to="/gestor/apontamento" style={{ color: 'var(--ink)', textDecoration: 'none' }}><b>07-1001</b><br /><span className="muted" style={{ fontSize: 11 }}>Indústria Cubatão S/A</span><br /><span className="muted" style={{ fontSize: 10 }}>protocolo AP-1001-B</span></Link></td>
-                <td>Volume anual em risco</td>
-                <td><Pill variant="label" style={{ padding: '0 7px', fontSize: 10.5 }}>Sinal de gestão</Pill></td>
-                <td>Volume</td>
-                <td><span className="muted" style={{ fontSize: 11 }}>sem grau</span></td>
-                <td>–</td>
-                <td className="num">jun</td>
-                <td>sem prazo · <b>outorgado</b></td>
-                <td>Reduzir o ritmo para não estourar o limite anual</td>
-              </tr>
-
-            </tbody>
-          </table>
+          <DataTable
+            columns={FILA_COLS}
+            rows={FILA.map((r) => ({ ...r, onClick: go }))}
+            search={['codigo', 'nome', 'protocolo', 'apontamento', 'tipo', 'natureza']}
+            searchPlaceholder="Buscar ponto / protocolo / tipo…"
+            pageSize={6}
+            empty="Nenhum apontamento corresponde à busca."
+          />
         </Panel>
 
         {/* racional só em .note, fora da cromagem de produto */}

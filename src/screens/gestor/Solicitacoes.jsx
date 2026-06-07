@@ -1,6 +1,27 @@
 import { Link } from 'react-router-dom'
 import { GestorShell } from '../../components/shell.jsx'
-import { Bento, Panel, Body, Note, Pill, Btn, Sp } from '../../components/ui.jsx'
+import { Bento, Panel, Body, Note, Pill, Btn, Sp, DataTable } from '../../components/ui.jsx'
+
+const SOLICITACOES = [
+  { id: 'SOL-2026-0461', ponto: '07-0830 · Serviço de Águas de Praia Grande', tipo: 'Renovação', recebida: '02/06', situacao: 'Aguardando análise · outorga vence 17/07', situacaoVar: 'warn' },
+  { id: 'SOL-2026-0455', ponto: '07-0455 · Indústria Têxtil Mongaguá', tipo: 'Desativação', recebida: '28/05', situacao: 'Em análise · dormência ~24 meses', situacaoVar: 'warn' },
+  { id: 'SOL-2026-0448', ponto: '07-1001 · Indústria Cubatão S/A', tipo: 'Ampliação', recebida: '26/05', situacao: 'Aguardando análise', situacaoVar: 'warn' },
+  { id: 'SOL-2026-0432', ponto: '07-1042 · Petroquímica Baixada S/A', tipo: 'Transferência', recebida: '15/05', situacao: 'Em análise · aguardando contrato', situacaoVar: 'warn' },
+  { id: 'SOL-2026-0419', ponto: '07-0712 · Laticínios Itanhaém', tipo: 'Dispensa', recebida: '08/05', situacao: 'Aguardando análise · uso insignificante', situacaoVar: 'warn' },
+  { id: 'SOL-2026-0398', ponto: '07-1100 · Indústria Química Cubatão', tipo: 'Renovação', recebida: '22/04', situacao: 'Indeferida · processo de infração em curso', situacaoVar: 'bad', terminal: true },
+  { id: 'SOL-2026-0377', ponto: '07-1001 · Indústria Cubatão S/A', tipo: 'Redução', recebida: '02/04', situacao: 'Deferida · 18/04', situacaoVar: 'ok', terminal: true },
+]
+
+const SOL_COLS = [
+  { key: 'id', label: 'Protocolo', render: (r) => <span className={r.terminal ? 'mono faint' : 'mono'}>{r.id}</span> },
+  { key: 'ponto', label: 'Ponto / outorgado' },
+  { key: 'tipo', label: 'Tipo' },
+  { key: 'recebida', label: 'Recebida', num: true },
+  { key: 'situacao', label: 'Situação', render: (r) => <Pill variant={r.situacaoVar}>{r.situacao}</Pill> },
+  { key: 'acoes', label: 'Ações do gestor', render: (r) => r.terminal
+    ? <Link className="pill" to="/gestor/detalhe">Ver despacho</Link>
+    : <><Link className="pill ok" to="/gestor/apontamento">Deferir</Link> <Link className="pill bad" to="/gestor/apontamento">Indeferir</Link> <Link className="pill" to="/gestor/apontamento">Pedir documento</Link></> },
+]
 
 const top = (
   <>
@@ -21,68 +42,15 @@ export default function Solicitacoes() {
       <Bento>
 
         {/* the request queue is the main object: each row carries type, date and situation */}
-        <Panel lead col={12} header={<>Solicitações recebidas <Sp /><Pill variant="label">5 abertas</Pill><Pill variant="label">filtro: todas</Pill></>}>
-          <table className="table">
-            <thead><tr><th>Protocolo</th><th>Ponto / outorgado</th><th>Tipo</th><th className="num">Recebida</th><th>Situação</th><th>Ações do gestor</th></tr></thead>
-            <tbody>
-              <tr>
-                <td className="mono">SOL-2026-0461</td>
-                <td>07-0830 · Serviço de Águas de Praia Grande</td>
-                <td>Renovação</td>
-                <td className="num">02/06</td>
-                <td><Pill variant="warn">Aguardando análise · outorga vence 17/07</Pill></td>
-                <td><Link className="pill ok" to="/gestor/apontamento">Deferir</Link> <Link className="pill bad" to="/gestor/apontamento">Indeferir</Link> <Link className="pill" to="/gestor/apontamento">Pedir documento</Link></td>
-              </tr>
-              <tr>
-                <td className="mono">SOL-2026-0455</td>
-                <td>07-0455 · Indústria Têxtil Mongaguá</td>
-                <td>Desativação</td>
-                <td className="num">28/05</td>
-                <td><Pill variant="warn">Em análise · dormência ~24 meses</Pill></td>
-                <td><Link className="pill ok" to="/gestor/apontamento">Deferir</Link> <Link className="pill bad" to="/gestor/apontamento">Indeferir</Link> <Link className="pill" to="/gestor/apontamento">Pedir documento</Link></td>
-              </tr>
-              <tr>
-                <td className="mono">SOL-2026-0448</td>
-                <td>07-1001 · Indústria Cubatão S/A</td>
-                <td>Ampliação</td>
-                <td className="num">26/05</td>
-                <td><Pill variant="warn">Aguardando análise</Pill></td>
-                <td><Link className="pill ok" to="/gestor/apontamento">Deferir</Link> <Link className="pill bad" to="/gestor/apontamento">Indeferir</Link> <Link className="pill" to="/gestor/apontamento">Pedir documento</Link></td>
-              </tr>
-              <tr>
-                <td className="mono">SOL-2026-0432</td>
-                <td>07-1042 · Petroquímica Baixada S/A</td>
-                <td>Transferência</td>
-                <td className="num">15/05</td>
-                <td><Pill variant="warn">Em análise · aguardando contrato</Pill></td>
-                <td><Link className="pill ok" to="/gestor/apontamento">Deferir</Link> <Link className="pill bad" to="/gestor/apontamento">Indeferir</Link> <Link className="pill" to="/gestor/apontamento">Pedir documento</Link></td>
-              </tr>
-              <tr>
-                <td className="mono">SOL-2026-0419</td>
-                <td>07-0712 · Laticínios Itanhaém</td>
-                <td>Dispensa</td>
-                <td className="num">08/05</td>
-                <td><Pill variant="warn">Aguardando análise · uso insignificante</Pill></td>
-                <td><Link className="pill ok" to="/gestor/apontamento">Deferir</Link> <Link className="pill bad" to="/gestor/apontamento">Indeferir</Link> <Link className="pill" to="/gestor/apontamento">Pedir documento</Link></td>
-              </tr>
-              <tr>
-                <td className="mono faint">SOL-2026-0398</td>
-                <td>07-1100 · Indústria Química Cubatão</td>
-                <td>Renovação</td>
-                <td className="num">22/04</td>
-                <td><Pill variant="bad">Indeferida · processo de infração em curso</Pill></td>
-                <td><Link className="pill" to="/gestor/detalhe">Ver despacho</Link></td>
-              </tr>
-              <tr>
-                <td className="mono faint">SOL-2026-0377</td>
-                <td>07-1001 · Indústria Cubatão S/A</td>
-                <td>Redução</td>
-                <td className="num">02/04</td>
-                <td><Pill variant="ok">Deferida · 18/04</Pill></td>
-                <td><Link className="pill" to="/gestor/detalhe">Ver despacho</Link></td>
-              </tr>
-            </tbody>
-          </table>
+        <Panel lead col={12} header={<>Solicitações recebidas <Sp /><Pill variant="label">5 abertas</Pill></>}>
+          <DataTable
+            columns={SOL_COLS}
+            rows={SOLICITACOES}
+            search={['id', 'ponto', 'tipo', 'situacao']}
+            searchPlaceholder="Buscar protocolo / outorgado / tipo…"
+            pageSize={5}
+            empty="Nenhuma solicitação corresponde à busca."
+          />
         </Panel>
 
         <Note col={12}>

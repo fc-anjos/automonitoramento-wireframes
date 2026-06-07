@@ -1,6 +1,7 @@
 // Design-system primitives: thin wrappers over the classes in wireframe.css.
 // They exist to encode structure and kill repetition; one-off styling stays as
 // `className`/`style` props, which every component forwards.
+import { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
 import { cx, asset } from '../lib.js'
 
@@ -82,3 +83,83 @@ export const Svg = ({ src, label, ratio, className, style, ...p }) => (
     {...p}
   />
 )
+
+// ---- data table: search + pagination + count + empty state ----------------
+// The affordances a sketched <table> lacks once the row count is unknown:
+// a search box that filters live, a result count, client pagination and an
+// empty state. Built for wireframe sample data, not a production grid.
+//   columns: [{ key, label, num, cls, render(row) }]  render defaults to row[key]
+//   rows:    object[]  (a row may carry `onClick` to navigate, and `id` as key)
+//   search:  array of row keys to match; presence enables the search box
+//   universe: real total behind the loaded sample, shown as context in the count
+export function DataTable({
+  columns, rows, pageSize = 6, search, searchPlaceholder = 'Buscar…',
+  universe, empty = 'Nenhum resultado.', className,
+}) {
+  const [query, setQuery] = useState('')
+  const [page, setPage] = useState(0)
+
+  const needle = query.trim().toLowerCase()
+  const filtered = useMemo(() => {
+    if (!search || !needle) return rows
+    return rows.filter((r) => search.some((k) => String(r[k] ?? '').toLowerCase().includes(needle)))
+  }, [rows, search, needle])
+
+  const pageCount = Math.max(1, Math.ceil(filtered.length / pageSize))
+  const current = Math.min(page, pageCount - 1)
+  const start = current * pageSize
+  const slice = filtered.slice(start, start + pageSize)
+
+  const count = needle
+    ? `${filtered.length} de ${rows.length}`
+    : universe != null ? `${rows.length} de ${universe}`
+    : `${rows.length} ${rows.length === 1 ? 'registro' : 'registros'}`
+
+  return (
+    <div className={cx('dt', className)}>
+      {search && (
+        <div className="dt-toolbar">
+          <label className="input search" style={{ minHeight: 34 }}>
+            <span className="faint" aria-hidden>⌕</span>
+            <input
+              value={query}
+              onChange={(e) => { setQuery(e.target.value); setPage(0) }}
+              placeholder={searchPlaceholder}
+              aria-label={searchPlaceholder}
+            />
+          </label>
+          <Sp />
+          <span className="dt-count muted">{count}</span>
+        </div>
+      )}
+      <table className="table">
+        <thead><tr>{columns.map((c) => <th key={c.key} className={c.num ? 'num' : undefined}>{c.label}</th>)}</tr></thead>
+        <tbody>
+          {slice.length === 0
+            ? <tr><td className="dt-empty muted" colSpan={columns.length}>{empty}</td></tr>
+            : slice.map((r, i) => (
+              <tr
+                key={r.id ?? start + i}
+                className={r.onClick ? 'dt-rowlink' : undefined}
+                onClick={r.onClick}
+                style={r.onClick ? { cursor: 'pointer' } : undefined}
+              >
+                {columns.map((c) => (
+                  <td key={c.key} className={cx(c.num && 'num', c.cls)}>{c.render ? c.render(r) : r[c.key]}</td>
+                ))}
+              </tr>
+            ))}
+        </tbody>
+      </table>
+      {pageCount > 1 && (
+        <div className="dt-pager">
+          <button type="button" className="pill" disabled={current === 0} onClick={() => setPage(current - 1)} aria-label="Página anterior">‹</button>
+          <span className="muted">{start + 1}–{Math.min(start + pageSize, filtered.length)} de {filtered.length}</span>
+          <button type="button" className="pill" disabled={current >= pageCount - 1} onClick={() => setPage(current + 1)} aria-label="Próxima página">›</button>
+          <Sp />
+          <span className="faint">pág. {current + 1} / {pageCount}</span>
+        </div>
+      )}
+    </div>
+  )
+}

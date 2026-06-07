@@ -1,6 +1,26 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { GestorShell } from '../../components/shell.jsx'
-import { Bento, Panel, Body, Note, Pill, Btn, Row, Sp } from '../../components/ui.jsx'
+import { Bento, Panel, Body, Note, Pill, Btn, Row, Sp, DataTable } from '../../components/ui.jsx'
+
+const PONTOS = [
+  { id: '07-1100', nome: 'Indústria Química Cubatão', subbacia: 'Rio Cubatão', municipio: 'Cubatão', finalidade: 'Industrial', faixa: 'A', faixaVar: 'act', situacao: 'Ato administrativo · grau gravíssima', situacaoVar: 'bad', apont: '1' },
+  { id: '07-1042', nome: 'Petroquímica Baixada S/A', subbacia: 'Rio Cubatão', municipio: 'Cubatão', finalidade: 'Industrial', faixa: 'A', faixaVar: 'act', situacao: 'Ato administrativo · grau grave', situacaoVar: 'bad', apont: '1' },
+  { id: '07-1001', nome: 'Indústria Cubatão S/A', subbacia: 'Rio Cubatão', municipio: 'Cubatão', finalidade: 'Industrial', faixa: 'A', faixaVar: 'act', situacao: 'Exceção · grau média', situacaoVar: 'warn', apont: '2 abertos · 1 encerrado' },
+  { id: '07-0830', nome: 'Serviço de Águas de Praia Grande', subbacia: 'Drenagem direta', municipio: 'Praia Grande', finalidade: 'Abastecimento público', faixa: 'B', situacao: 'Exceção · a vencer em 40 dias', situacaoVar: 'warn', apont: '1' },
+  { id: '07-0712', nome: 'Laticínios Itanhaém', subbacia: 'Drenagem direta', municipio: 'Itanhaém', finalidade: 'Industrial', faixa: 'B', situacao: 'Exceção · calibração vencida', situacaoVar: 'warn', apont: '1' },
+  { id: '07-0455', nome: 'Indústria Têxtil Mongaguá', subbacia: 'Drenagem direta', municipio: 'Mongaguá', finalidade: 'Industrial', faixa: 'C', situacao: 'Exceção · sem uso há 2 anos', situacaoVar: 'warn', apont: '1' },
+]
+
+const PONTO_COLS = [
+  { key: 'id', label: 'Código', render: (r) => <Link to="/gestor/detalhe" style={{ color: 'var(--ink)', textDecoration: 'none' }}><b>{r.id}</b></Link> },
+  { key: 'nome', label: 'Nome' },
+  { key: 'subbacia', label: 'Sub-bacia' },
+  { key: 'municipio', label: 'Município' },
+  { key: 'finalidade', label: 'Finalidade' },
+  { key: 'faixa', label: 'Faixa', render: (r) => <Pill variant={r.faixaVar}>{r.faixa}</Pill> },
+  { key: 'situacao', label: 'Situação', render: (r) => <Pill variant={r.situacaoVar}>{r.situacao}</Pill> },
+  { key: 'apont', label: 'Apontamentos', num: true },
+]
 
 const top = (
   <>
@@ -49,87 +69,14 @@ export default function Pontos() {
             </Row>
           </Body>
 
-          <table className="table" style={{ marginTop: 6 }}>
-            <thead>
-              <tr>
-                <th>Código</th>
-                <th>Nome</th>
-                <th>Sub-bacia</th>
-                <th>Município</th>
-                <th>Finalidade</th>
-                <th>Faixa</th>
-                <th>Situação</th>
-                <th className="num">Apontamentos</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style={{ cursor: 'pointer' }} onClick={() => navigate('/gestor/detalhe')}>
-                <td><Link to="/gestor/detalhe" style={{ color: 'var(--ink)', textDecoration: 'none' }}><b>07-1100</b></Link></td>
-                <td>Indústria Química Cubatão</td>
-                <td>Rio Cubatão</td>
-                <td>Cubatão</td>
-                <td>Industrial</td>
-                <td><Pill variant="act">A</Pill></td>
-                <td><Pill variant="bad">Ato administrativo · grau gravíssima</Pill></td>
-                <td className="num">1</td>
-              </tr>
-
-              <tr style={{ cursor: 'pointer' }} onClick={() => navigate('/gestor/detalhe')}>
-                <td><Link to="/gestor/detalhe" style={{ color: 'var(--ink)', textDecoration: 'none' }}><b>07-1042</b></Link></td>
-                <td>Petroquímica Baixada S/A</td>
-                <td>Rio Cubatão</td>
-                <td>Cubatão</td>
-                <td>Industrial</td>
-                <td><Pill variant="act">A</Pill></td>
-                <td><Pill variant="bad">Ato administrativo · grau grave</Pill></td>
-                <td className="num">1</td>
-              </tr>
-
-              <tr style={{ cursor: 'pointer' }} onClick={() => navigate('/gestor/detalhe')}>
-                <td><Link to="/gestor/detalhe" style={{ color: 'var(--ink)', textDecoration: 'none' }}><b>07-1001</b></Link></td>
-                <td>Indústria Cubatão S/A</td>
-                <td>Rio Cubatão</td>
-                <td>Cubatão</td>
-                <td>Industrial</td>
-                <td><Pill variant="act">A</Pill></td>
-                <td><Pill variant="warn">Exceção · grau média</Pill></td>
-                <td className="num">2 abertos · 1 encerrado</td>
-              </tr>
-
-              <tr style={{ cursor: 'pointer' }} onClick={() => navigate('/gestor/detalhe')}>
-                <td><Link to="/gestor/detalhe" style={{ color: 'var(--ink)', textDecoration: 'none' }}><b>07-0830</b></Link></td>
-                <td>Serviço de Águas de Praia Grande</td>
-                <td>Drenagem direta</td>
-                <td>Praia Grande</td>
-                <td>Abastecimento público</td>
-                <td><Pill>B</Pill></td>
-                <td><Pill variant="warn">Exceção · a vencer em 40 dias</Pill></td>
-                <td className="num">1</td>
-              </tr>
-
-              <tr style={{ cursor: 'pointer' }} onClick={() => navigate('/gestor/detalhe')}>
-                <td><Link to="/gestor/detalhe" style={{ color: 'var(--ink)', textDecoration: 'none' }}><b>07-0712</b></Link></td>
-                <td>Laticínios Itanhaém</td>
-                <td>Drenagem direta</td>
-                <td>Itanhaém</td>
-                <td>Industrial</td>
-                <td><Pill>B</Pill></td>
-                <td><Pill variant="warn">Exceção · calibração vencida</Pill></td>
-                <td className="num">1</td>
-              </tr>
-
-              <tr style={{ cursor: 'pointer' }} onClick={() => navigate('/gestor/detalhe')}>
-                <td><Link to="/gestor/detalhe" style={{ color: 'var(--ink)', textDecoration: 'none' }}><b>07-0455</b></Link></td>
-                <td>Indústria Têxtil Mongaguá</td>
-                <td>Drenagem direta</td>
-                <td>Mongaguá</td>
-                <td>Industrial</td>
-                <td><Pill>C</Pill></td>
-                <td><Pill variant="warn">Exceção · sem uso há 2 anos</Pill></td>
-                <td className="num">1</td>
-              </tr>
-            </tbody>
-          </table>
+          <DataTable
+            columns={PONTO_COLS}
+            rows={PONTOS.map((p) => ({ ...p, onClick: () => navigate('/gestor/detalhe') }))}
+            search={['id', 'nome', 'municipio', 'finalidade', 'situacao']}
+            searchPlaceholder="Buscar código / nome / município…"
+            pageSize={5}
+            empty="Nenhum ponto corresponde à busca."
+          />
         </Panel>
 
         <Note col={8} style={{ marginTop: 4 }}>

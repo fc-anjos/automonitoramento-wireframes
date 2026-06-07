@@ -1,6 +1,29 @@
 import { Link } from 'react-router-dom'
 import { GestorShell } from '../../components/shell.jsx'
-import { Bento, Panel, Body, Note, Pill, Btn, Sp } from '../../components/ui.jsx'
+import { Bento, Panel, Body, Note, Pill, Btn, Sp, DataTable } from '../../components/ui.jsx'
+
+// The registry is the unbounded object (312 outorgas in the scenario); the rows
+// below are the loaded sample. DataTable adds the search / count / pager the
+// static sketch lacked.
+const OUTORGAS = [
+  { id: 'OUT-07-2024-001234', outorgado: 'Indústria Cubatão S/A', forma: 'Autorização', faixa: 'A', faixaVar: 'act', mon: 'Telemetria', validade: '12/03/2029', estado: 'Vigente', estadoVar: 'ok', acao: 'Abrir', to: '/gestor/detalhe' },
+  { id: 'OUT-07-2022-008301', outorgado: 'Serviço de Águas de Praia Grande', forma: 'Concessão', faixa: 'B', mon: 'Autodeclaração', validade: '17/07/2026', estado: 'A vencer · 40 dias', estadoVar: 'warn', acao: 'Triar renovação', to: '/gestor/apontamento' },
+  { id: 'OUT-07-2019-004551', outorgado: 'Indústria Têxtil Mongaguá', forma: 'Autorização', faixa: 'C', mon: 'Autodeclaração', validade: '08/2027', estado: 'Dormente · sem uso ~24 m', estadoVar: 'warn', acao: 'Confirmar uso', to: '/gestor/apontamento' },
+  { id: 'OUT-07-2021-007121', outorgado: 'Laticínios Itanhaém', forma: 'Autorização', faixa: 'B', mon: 'Autodeclaração', validade: '19/09/2026', estado: 'Condicionante pendente', estadoVar: 'warn', acao: 'Abrir', to: '/gestor/apontamento' },
+  { id: 'OUT-07-2023-011001', outorgado: 'Indústria Química Cubatão', forma: 'Autorização', faixa: 'A', faixaVar: 'act', mon: 'Telemetria', validade: '05/2028', estado: 'Sob auto de infração', estadoVar: 'bad', acao: 'Abrir processo', to: '/gestor/apontamento' },
+  { id: 'OUT-07-2018-009907', outorgado: 'Sítio Recanto · São Vicente', forma: 'Autorização', faixa: 'C', mon: 'Autodeclaração', validade: '31/05/2023', estado: 'Extinta · prazo vencido', acao: 'Ver histórico', to: '/gestor/detalhe' },
+]
+
+const OUTORGA_COLS = [
+  { key: 'id', label: 'Outorga', cls: 'mono' },
+  { key: 'outorgado', label: 'Outorgado' },
+  { key: 'forma', label: 'Forma' },
+  { key: 'faixa', label: 'Faixa', render: (r) => <Pill variant={r.faixaVar}>{r.faixa}</Pill> },
+  { key: 'mon', label: 'Monitoramento' },
+  { key: 'validade', label: 'Validade', num: true },
+  { key: 'estado', label: 'Estado', render: (r) => <Pill variant={r.estadoVar}>{r.estado}</Pill> },
+  { key: 'acao', label: 'Ação do gestor', render: (r) => <Link className="pill" to={r.to}>{r.acao}</Link> },
+]
 
 const top = (
   <>
@@ -21,54 +44,16 @@ export default function Cadastro() {
       <Bento>
 
         {/* the registry is the main object: each row carries the lifecycle state */}
-        <Panel lead col={12} header={<>Outorgas cadastradas <Sp /><Pill variant="label">312 registros</Pill><Pill variant="label">filtro: todas</Pill></>}>
-          <table className="table">
-            <thead><tr><th>Outorga</th><th>Outorgado</th><th>Forma</th><th>Faixa</th><th>Monitoramento</th><th className="num">Validade</th><th>Estado</th><th>Ação do gestor</th></tr></thead>
-            <tbody>
-              <tr>
-                <td className="mono">OUT-07-2024-001234</td><td>Indústria Cubatão S/A</td><td>Autorização</td>
-                <td><Pill variant="act">A</Pill></td><td>Telemetria</td>
-                <td className="num">12/03/2029</td>
-                <td><Pill variant="ok">Vigente</Pill></td>
-                <td><Link className="pill" to="/gestor/detalhe">Abrir</Link></td>
-              </tr>
-              <tr>
-                <td className="mono">OUT-07-2022-008301</td><td>Serviço de Águas de Praia Grande</td><td>Concessão</td>
-                <td><Pill>B</Pill></td><td>Autodeclaração</td>
-                <td className="num">17/07/2026</td>
-                <td><Pill variant="warn">A vencer · 40 dias</Pill></td>
-                <td><Link className="pill" to="/gestor/apontamento">Triar renovação</Link></td>
-              </tr>
-              <tr>
-                <td className="mono">OUT-07-2019-004551</td><td>Indústria Têxtil Mongaguá</td><td>Autorização</td>
-                <td><Pill>C</Pill></td><td>Autodeclaração</td>
-                <td className="num">08/2027</td>
-                <td><Pill variant="warn">Dormente · sem uso ~24 m</Pill></td>
-                <td><Link className="pill" to="/gestor/apontamento">Confirmar uso</Link></td>
-              </tr>
-              <tr>
-                <td className="mono">OUT-07-2021-007121</td><td>Laticínios Itanhaém</td><td>Autorização</td>
-                <td><Pill>B</Pill></td><td>Autodeclaração</td>
-                <td className="num">19/09/2026</td>
-                <td><Pill variant="warn">Condicionante pendente</Pill></td>
-                <td><Link className="pill" to="/gestor/apontamento">Abrir</Link></td>
-              </tr>
-              <tr>
-                <td className="mono">OUT-07-2023-011001</td><td>Indústria Química Cubatão</td><td>Autorização</td>
-                <td><Pill variant="act">A</Pill></td><td>Telemetria</td>
-                <td className="num">05/2028</td>
-                <td><Pill variant="bad">Sob auto de infração</Pill></td>
-                <td><Link className="pill" to="/gestor/apontamento">Abrir processo</Link></td>
-              </tr>
-              <tr>
-                <td className="mono">OUT-07-2018-009907</td><td>Sítio Recanto · São Vicente</td><td>Autorização</td>
-                <td><Pill>C</Pill></td><td>Autodeclaração</td>
-                <td className="num">31/05/2023</td>
-                <td><Pill>Extinta · prazo vencido</Pill></td>
-                <td><Link className="pill" to="/gestor/detalhe">Ver histórico</Link></td>
-              </tr>
-            </tbody>
-          </table>
+        <Panel lead col={12} header={<>Outorgas cadastradas <Sp /><Pill variant="label">ciclo de vida no estado</Pill></>}>
+          <DataTable
+            columns={OUTORGA_COLS}
+            rows={OUTORGAS}
+            search={['id', 'outorgado', 'forma', 'estado']}
+            searchPlaceholder="Buscar outorga / outorgado / estado…"
+            universe={312}
+            pageSize={5}
+            empty="Nenhuma outorga corresponde à busca."
+          />
         </Panel>
 
         <Note col={12}>

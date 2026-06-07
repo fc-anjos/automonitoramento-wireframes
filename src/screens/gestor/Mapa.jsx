@@ -1,6 +1,16 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { GestorShell } from '../../components/shell.jsx'
 import { Bento, Panel, Note, Pill, Svg, Sp } from '../../components/ui.jsx'
+
+const POINTS = [
+  { id: '07-1100', nome: 'Indústria Química Cubatão', meta: 'Cubatão · Industrial · Faixa A', situacao: 'Indício de fraude na medição · gravíssima', mk: 'bad' },
+  { id: '07-1042', nome: 'Petroquímica Baixada S/A', meta: 'Cubatão · Industrial · Faixa A', situacao: 'Volume mensal acima do outorgado · grave', mk: 'bad' },
+  { id: '07-1001', nome: 'Indústria Cubatão S/A', meta: 'Cubatão · Industrial · Faixa A', situacao: 'Pico de vazão acima do teto · média', mk: 'warn' },
+  { id: '07-0830', nome: 'Serviço de Águas de Praia Grande', meta: 'Praia Grande · Abastecimento público · Faixa B', situacao: 'Outorga a vencer · renovar até 17/07', mk: 'warn' },
+  { id: '07-0712', nome: 'Laticínios Itanhaém', meta: 'Itanhaém · Industrial · Faixa B', situacao: 'Calibração do hidrômetro vencida · leve', mk: 'warn' },
+  { id: '07-0455', nome: 'Indústria Têxtil Mongaguá', meta: 'Mongaguá · Industrial · Faixa C', situacao: 'Sem uso há 2 anos (risco de perecimento)', mk: 'warn' },
+]
 
 const top = (
   <>
@@ -13,6 +23,11 @@ const top = (
 )
 
 export default function Mapa() {
+  const [q, setQ] = useState('')
+  const needle = q.trim().toLowerCase()
+  const shown = needle
+    ? POINTS.filter((p) => `${p.id} ${p.nome} ${p.meta} ${p.situacao}`.toLowerCase().includes(needle))
+    : POINTS
   return (
     <GestorShell tag="GESTOR · 02" title="Mapa georreferenciado" right="Pontos de exemplo · SIRGAS 2000" active="mapa" top={top}>
       <Note style={{ marginBottom: 16 }}>
@@ -32,25 +47,23 @@ export default function Mapa() {
         </Panel>
 
         <Panel col={4} header={<>Pontos no mapa <Sp /><Pill variant="label">6 do cenário</Pill></>}>
+          <div className="dt-toolbar">
+            <label className="input search" style={{ minHeight: 34 }}>
+              <span className="faint" aria-hidden>⌕</span>
+              <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Filtrar ponto / município…" aria-label="Filtrar pontos no mapa" />
+            </label>
+            <Sp />
+            <span className="dt-count muted">{shown.length} de {POINTS.length}</span>
+          </div>
           <div style={{ maxHeight: 520, overflow: 'auto' }}>
-            <Link className="mrow" to="/gestor/detalhe" style={{ padding: '12px 14px', textDecoration: 'none', color: 'inherit' }}>
-              <span className="ico"><i className="mk bad" /></span>
-              <div className="msp"><b style={{ fontSize: 13, color: 'var(--ink)' }}>07-1100 · Indústria Química Cubatão</b><div className="muted" style={{ fontSize: 11.5 }}>Cubatão · Industrial · Faixa A</div><div className="muted" style={{ fontSize: 11.5, marginTop: 2 }}>Indício de fraude na medição · gravíssima</div></div><span className="faint">›</span></Link>
-            <Link className="mrow" to="/gestor/detalhe" style={{ padding: '12px 14px', textDecoration: 'none', color: 'inherit' }}>
-              <span className="ico"><i className="mk bad" /></span>
-              <div className="msp"><b style={{ fontSize: 13, color: 'var(--ink)' }}>07-1042 · Petroquímica Baixada S/A</b><div className="muted" style={{ fontSize: 11.5 }}>Cubatão · Industrial · Faixa A</div><div className="muted" style={{ fontSize: 11.5, marginTop: 2 }}>Volume mensal acima do outorgado · grave</div></div><span className="faint">›</span></Link>
-            <Link className="mrow" to="/gestor/detalhe" style={{ padding: '12px 14px', textDecoration: 'none', color: 'inherit' }}>
-              <span className="ico"><i className="mk warn" /></span>
-              <div className="msp"><b style={{ fontSize: 13, color: 'var(--ink)' }}>07-1001 · Indústria Cubatão S/A</b><div className="muted" style={{ fontSize: 11.5 }}>Cubatão · Industrial · Faixa A</div><div className="muted" style={{ fontSize: 11.5, marginTop: 2 }}>Pico de vazão acima do teto · média</div></div><span className="faint">›</span></Link>
-            <Link className="mrow" to="/gestor/detalhe" style={{ padding: '12px 14px', textDecoration: 'none', color: 'inherit' }}>
-              <span className="ico"><i className="mk warn" /></span>
-              <div className="msp"><b style={{ fontSize: 13, color: 'var(--ink)' }}>07-0830 · Serviço de Águas de Praia Grande</b><div className="muted" style={{ fontSize: 11.5 }}>Praia Grande · Abastecimento público · Faixa B</div><div className="muted" style={{ fontSize: 11.5, marginTop: 2 }}>Outorga a vencer · renovar até 17/07</div></div><span className="faint">›</span></Link>
-            <Link className="mrow" to="/gestor/detalhe" style={{ padding: '12px 14px', textDecoration: 'none', color: 'inherit' }}>
-              <span className="ico"><i className="mk warn" /></span>
-              <div className="msp"><b style={{ fontSize: 13, color: 'var(--ink)' }}>07-0712 · Laticínios Itanhaém</b><div className="muted" style={{ fontSize: 11.5 }}>Itanhaém · Industrial · Faixa B</div><div className="muted" style={{ fontSize: 11.5, marginTop: 2 }}>Calibração do hidrômetro vencida · leve</div></div><span className="faint">›</span></Link>
-            <Link className="mrow" to="/gestor/detalhe" style={{ padding: '12px 14px', textDecoration: 'none', color: 'inherit' }}>
-              <span className="ico"><i className="mk warn" /></span>
-              <div className="msp"><b style={{ fontSize: 13, color: 'var(--ink)' }}>07-0455 · Indústria Têxtil Mongaguá</b><div className="muted" style={{ fontSize: 11.5 }}>Mongaguá · Industrial · Faixa C</div><div className="muted" style={{ fontSize: 11.5, marginTop: 2 }}>Sem uso há 2 anos (risco de perecimento)</div></div><span className="faint">›</span></Link>
+            {shown.length === 0
+              ? <div className="dt-empty muted">Nenhum ponto corresponde ao filtro.</div>
+              : shown.map((p) => (
+                <Link key={p.id} className="mrow" to="/gestor/detalhe" style={{ padding: '12px 14px', textDecoration: 'none', color: 'inherit' }}>
+                  <span className="ico"><i className={`mk ${p.mk}`} /></span>
+                  <div className="msp"><b style={{ fontSize: 13, color: 'var(--ink)' }}>{p.id} · {p.nome}</b><div className="muted" style={{ fontSize: 11.5 }}>{p.meta}</div><div className="muted" style={{ fontSize: 11.5, marginTop: 2 }}>{p.situacao}</div></div><span className="faint">›</span>
+                </Link>
+              ))}
           </div>
         </Panel>
 
