@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { DraftBanner, Phone, Notch, StatusBar, PScroll, AppBar, AppTabBar, HomeBar, PhoneLabel } from '../../components/shell.jsx'
 import { Card, Pill, Btn, Meter, Note, Panel, Body, Row, Sp } from '../../components/ui.jsx'
 
@@ -85,10 +86,10 @@ export default function Solicitacoes() {
                   <Body>
                     <div className="list">
 
-                      <a className="lrow" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
+                      <Link className="lrow" to="/app/medidor" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
                         <div className="lr-top"><span className="lr-title">Medidor · inclusão, troca, desativação</span><span className="pill label">equipamento</span></div>
                         <div className="lr-sub">Cadastrar um novo medidor na captação, substituir ou desativar um existente.</div>
-                      </a>
+                      </Link>
 
                       <a className="lrow" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
                         <div className="lr-top"><span className="lr-title">Justificativa de ausência de declaração</span><span className="pill label">antecipada</span></div>

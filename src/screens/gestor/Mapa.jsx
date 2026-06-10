@@ -8,7 +8,7 @@ const POINTS = [
   { id: '07-1042', nome: 'Petroquímica Baixada S/A', meta: 'Cubatão · Industrial · Faixa A', situacao: 'Volume mensal acima do outorgado · grave', mk: 'bad' },
   { id: '07-1001', nome: 'Indústria Cubatão S/A', meta: 'Cubatão · Industrial · Faixa A', situacao: 'Pico de vazão acima do teto · média', mk: 'warn' },
   { id: '07-0830', nome: 'Serviço de Águas de Praia Grande', meta: 'Praia Grande · Abastecimento público · Faixa B', situacao: 'Outorga a vencer · renovar até 17/07', mk: 'warn' },
-  { id: '07-0712', nome: 'Laticínios Itanhaém', meta: 'Itanhaém · Industrial · Faixa B', situacao: 'Calibração do hidrômetro vencida · leve', mk: 'warn' },
+  { id: '07-0712', nome: 'Laticínios Itanhaém', meta: 'Itanhaém · Industrial · Faixa B', situacao: 'Calibração de hidrômetro vencida · leve', mk: 'warn' },
   { id: '07-0455', nome: 'Indústria Têxtil Mongaguá', meta: 'Mongaguá · Industrial · Faixa C', situacao: 'Sem uso há 2 anos (risco de perecimento)', mk: 'warn' },
 ]
 

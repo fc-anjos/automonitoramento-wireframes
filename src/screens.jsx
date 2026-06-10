@@ -9,6 +9,7 @@ import AppConfirmacao from './screens/app/Confirmacao.jsx'
 import AppSolicitacoes from './screens/app/Solicitacoes.jsx'
 import AppDefesa from './screens/app/Defesa.jsx'
 import AppPagamentos from './screens/app/Pagamentos.jsx'
+import AppMedidor from './screens/app/Medidor.jsx'
 import GestorDashboard from './screens/gestor/Dashboard.jsx'
 import GestorMapa from './screens/gestor/Mapa.jsx'
 import GestorPontos from './screens/gestor/Pontos.jsx'
@@ -51,16 +52,17 @@ export const SCREENS = [
   { id: 'app-telemetria', surface: 'app', num: 'APP · 02', path: '/app/telemetria', title: 'Captação', blurb: 'Telemetria (grandes usuários): série medido × outorgado, vazão e status do equipamento.', Component: AppTelemetria },
   { id: 'app-apontamentos', surface: 'app', num: 'APP · 03', path: '/app/apontamentos', title: 'Apontamentos', blurb: 'Lista dos apontamentos do outorgado: pendências, prazos de ciência e status de resposta.', Component: AppApontamentos },
   { id: 'app-apontamento', surface: 'app', num: 'APP · 04', path: '/app/apontamento', title: 'Apontamento', blurb: 'Um apontamento do lado de quem responde: tipagem, fases, prazo da ciência e verbos de resposta.', Component: AppApontamento },
-  { id: 'app-autodeclaracao', surface: 'app', num: 'APP · 05', path: '/app/autodeclaracao', title: 'Autodeclaração', blurb: 'Pequenos/médios: leitura do hidrômetro, modo offline, geolocalização e foto.', Component: AppAutodeclaracao },
+  { id: 'app-autodeclaracao', surface: 'app', num: 'APP · 05', path: '/app/autodeclaracao', title: 'Autodeclaração', blurb: 'Pequenos/médios: leitura por medidor (a captação pode ter mais de um), modo offline, geolocalização e foto.', Component: AppAutodeclaracao },
   { id: 'app-confirmacao', surface: 'app', num: 'APP · 06', path: '/app/confirmacao', title: 'Histórico', blurb: 'Comprovante de envio, declarações anteriores e pendências em atraso.', Component: AppConfirmacao },
   { id: 'app-solicitacoes', surface: 'app', num: 'APP · 07', path: '/app/solicitacoes', title: 'Solicitações', blurb: 'Renovação antes do vencimento e catálogo de pedidos: ampliação, redução, transferência, dispensa, desativação.', Component: AppSolicitacoes },
   { id: 'app-defesa', surface: 'app', num: 'APP · 08', path: '/app/defesa', title: 'Defesa e recurso', blurb: 'O processo sancionador do lado do outorgado: ciência do auto, defesa no prazo, recurso sem efeito suspensivo e cumprimento.', Component: AppDefesa },
   { id: 'app-pagamentos', surface: 'app', num: 'APP · 09', path: '/app/pagamentos', title: 'Pagamentos', blurb: 'Carteira de guias (cobrança pelo uso e multa): linha digitável, PIX, vencimento e conciliação automática do pagamento.', Component: AppPagamentos },
+  { id: 'app-medidor', surface: 'app', num: 'APP · 10', path: '/app/medidor', title: 'Medidor', blurb: 'Cadastro e ciclo de vida do equipamento pelo outorgado: vários hidrômetros por captação, troca com leituras de remoção e reinstalação, desativação sem apagar.', Component: AppMedidor },
 
   { id: 'gestor-dashboard', surface: 'gestor', num: 'GESTOR · 01', path: '/gestor/dashboard', title: 'Dashboard de fiscalização', blurb: 'KPIs e painéis por usuário, sub-bacia, município, finalidade e faixa de VM.', Component: GestorDashboard },
   { id: 'gestor-mapa', surface: 'gestor', num: 'GESTOR · 02', path: '/gestor/mapa', title: 'Mapa georreferenciado', blurb: 'UGRHI-07 + sub-bacias + pontos de captação (pontos de exemplo).', Component: GestorMapa },
   { id: 'gestor-pontos', surface: 'gestor', num: 'GESTOR · 03', path: '/gestor/pontos', title: 'Pontos / outorgas', blurb: 'Lista filtrável de pontos e outorgas: usuário, sub-bacia, finalidade, faixa de VM e status.', Component: GestorPontos },
-  { id: 'gestor-detalhe', surface: 'gestor', num: 'GESTOR · 04', path: '/gestor/detalhe', title: 'Detalhe do ponto / outorgado', blurb: 'Outorga, fonte, VM outorgado × medido, série temporal e equipamento.', Component: GestorDetalhe },
+  { id: 'gestor-detalhe', surface: 'gestor', num: 'GESTOR · 04', path: '/gestor/detalhe', title: 'Detalhe do ponto / outorgado', blurb: 'Outorga, fonte, VM outorgado × medido, série temporal e medidores da captação.', Component: GestorDetalhe },
   { id: 'gestor-apontamentos', surface: 'gestor', num: 'GESTOR · 05', path: '/gestor/apontamentos', title: 'Apontamentos', blurb: 'Fila de apontamentos a partir das regras: excesso de volume, ausência de transmissão, fraude, vazão reversa.', Component: GestorApontamentos },
   { id: 'gestor-apontamento', surface: 'gestor', num: 'GESTOR · 06', path: '/gestor/apontamento', title: 'Apontamento (gestor)', blurb: 'A mesma peça do lado de quem dispõe: fases, trilha de auditoria e verbos do gestor (notificar, autuar, julgar, encerrar).', Component: GestorApontamento },
   { id: 'gestor-solicitacoes', surface: 'gestor', num: 'GESTOR · 07', path: '/gestor/solicitacoes', title: 'Solicitações', blurb: 'Fila de pedidos do outorgado: renovação, ampliação, redução, transferência, dispensa e desativação.', Component: GestorSolicitacoes },

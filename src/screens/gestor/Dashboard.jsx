@@ -102,7 +102,7 @@ export default function Dashboard() {
                 <td><Btn sub to="/gestor/apontamento" style={{ padding: '5px 12px' }}>Abrir →</Btn></td>
               </tr>
               <tr>
-                <td>Calibração do hidrômetro vencida</td>
+                <td>Calibração de hidrômetro vencida</td>
                 <td>07-0712 · Laticínios Itanhaém</td>
                 <td>Condicionante</td>
                 <td><Pill variant="label">Exceção</Pill></td>

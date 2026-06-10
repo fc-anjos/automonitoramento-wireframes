@@ -89,6 +89,7 @@ export default function Telemetria() {
                   <div className="mrow"><span className="msp muted" style={{ fontSize: 12.5 }}>Recebidas × esperadas (30 d)</span><span className="mono" style={{ fontSize: 12.5 }}>2.840 / 2.880</span></div>
                   <div className="mrow"><span className="msp muted" style={{ fontSize: 12.5 }}>Falhas de transmissão</span><span className="pill ok">1,4% · tolerância 5%</span></div>
                   <div className="mrow"><span className="msp muted" style={{ fontSize: 12.5 }}>Fonte</span><span className="mono" style={{ fontSize: 12.5 }}>Superficial</span></div>
+                  <div className="muted" style={{ fontSize: 11, marginTop: 6 }}>Esta captação tem <b>2 medidores ativos</b>; o painel acompanha cada equipamento pela própria série. O outro: SDC-R-4472, também transmitindo.</div>
                 </Card>
               </PScroll>
               <AppTabBar active="captacao" />
