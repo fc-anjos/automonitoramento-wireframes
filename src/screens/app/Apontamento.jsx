@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { DraftBanner, Phone, Notch, StatusBar, PScroll, AppBar, AppTabBar, HomeBar, PhoneLabel } from '../../components/shell.jsx'
 import { Card, Pill, Btn, Meter, Note, Panel, Body, Row, Svg } from '../../components/ui.jsx'
 
@@ -50,9 +51,10 @@ export default function Apontamento() {
                         <div className="lr-top"><span className="lr-title">Ciência</span><span className="mono faint" style={{ fontSize: 11 }}>marco do prazo</span></div>
                         <div className="lr-sub">Ao tomar ciência, começa a contagem do prazo de resposta.</div>
                       </div>
+                      {/* defesa/recurso live in the processo vinculado, not as fases here */}
                       <div className="lrow">
-                        <div className="lr-top"><span className="lr-title faint">Em defesa / recurso</span><span className="mono faint" style={{ fontSize: 11 }}>a seguir</span></div>
-                        <div className="lr-sub faint">Caso a justificativa não seja aceita.</div>
+                        <div className="lr-top"><span className="lr-title faint">Defesa e recurso</span><Pill variant="label" style={{ fontSize: 10.5 }}>vínculo</Pill></div>
+                        <div className="lr-sub faint">Não são fases deste apontamento: se houver auto de infração, correm num processo vinculado, com prazos próprios · <Link to="/app/defesa">ver processo</Link>.</div>
                       </div>
                       <div className="lrow">
                         <div className="lr-top"><span className="lr-title faint">Regularizada</span><span className="mono faint" style={{ fontSize: 11 }}>a seguir</span></div>

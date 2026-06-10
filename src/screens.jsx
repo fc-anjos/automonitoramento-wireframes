@@ -7,6 +7,8 @@ import AppApontamento from './screens/app/Apontamento.jsx'
 import AppAutodeclaracao from './screens/app/Autodeclaracao.jsx'
 import AppConfirmacao from './screens/app/Confirmacao.jsx'
 import AppSolicitacoes from './screens/app/Solicitacoes.jsx'
+import AppDefesa from './screens/app/Defesa.jsx'
+import AppPagamentos from './screens/app/Pagamentos.jsx'
 import GestorDashboard from './screens/gestor/Dashboard.jsx'
 import GestorMapa from './screens/gestor/Mapa.jsx'
 import GestorPontos from './screens/gestor/Pontos.jsx'
@@ -15,6 +17,8 @@ import GestorApontamentos from './screens/gestor/Apontamentos.jsx'
 import GestorApontamento from './screens/gestor/Apontamento.jsx'
 import GestorSolicitacoes from './screens/gestor/Solicitacoes.jsx'
 import GestorCadastro from './screens/gestor/Cadastro.jsx'
+import GestorProcesso from './screens/gestor/Processo.jsx'
+import GestorArrecadacao from './screens/gestor/Arrecadacao.jsx'
 import PortalPublico from './screens/portal/Publico.jsx'
 
 export const SURFACES = [
@@ -49,6 +53,8 @@ export const SCREENS = [
   { id: 'app-autodeclaracao', surface: 'app', num: 'APP · 05', path: '/app/autodeclaracao', title: 'Autodeclaração', blurb: 'Pequenos/médios: leitura do hidrômetro, modo offline, geolocalização e foto.', Component: AppAutodeclaracao },
   { id: 'app-confirmacao', surface: 'app', num: 'APP · 06', path: '/app/confirmacao', title: 'Histórico', blurb: 'Comprovante de envio, declarações anteriores e pendências em atraso.', Component: AppConfirmacao },
   { id: 'app-solicitacoes', surface: 'app', num: 'APP · 07', path: '/app/solicitacoes', title: 'Solicitações', blurb: 'Renovação antes do vencimento e catálogo de pedidos: ampliação, redução, transferência, dispensa, desativação.', Component: AppSolicitacoes },
+  { id: 'app-defesa', surface: 'app', num: 'APP · 08', path: '/app/defesa', title: 'Defesa e recurso', blurb: 'O processo sancionador do lado do outorgado: ciência do auto, defesa no prazo, recurso sem efeito suspensivo e cumprimento.', Component: AppDefesa },
+  { id: 'app-pagamentos', surface: 'app', num: 'APP · 09', path: '/app/pagamentos', title: 'Pagamentos', blurb: 'Carteira de guias (cobrança pelo uso e multa): linha digitável, PIX, vencimento e conciliação automática do pagamento.', Component: AppPagamentos },
 
   { id: 'gestor-dashboard', surface: 'gestor', num: 'GESTOR · 01', path: '/gestor/dashboard', title: 'Dashboard de fiscalização', blurb: 'KPIs e painéis por usuário, sub-bacia, município, finalidade e faixa de VM.', Component: GestorDashboard },
   { id: 'gestor-mapa', surface: 'gestor', num: 'GESTOR · 02', path: '/gestor/mapa', title: 'Mapa georreferenciado', blurb: 'UGRHI-07 + sub-bacias + pontos de captação (pontos de exemplo).', Component: GestorMapa },
@@ -58,6 +64,8 @@ export const SCREENS = [
   { id: 'gestor-apontamento', surface: 'gestor', num: 'GESTOR · 06', path: '/gestor/apontamento', title: 'Apontamento (gestor)', blurb: 'A mesma peça do lado de quem dispõe: fases, trilha de auditoria e verbos do gestor (notificar, autuar, julgar, encerrar).', Component: GestorApontamento },
   { id: 'gestor-solicitacoes', surface: 'gestor', num: 'GESTOR · 07', path: '/gestor/solicitacoes', title: 'Solicitações', blurb: 'Fila de pedidos do outorgado: renovação, ampliação, redução, transferência, dispensa e desativação.', Component: GestorSolicitacoes },
   { id: 'gestor-cadastro', surface: 'gestor', num: 'GESTOR · 08', path: '/gestor/cadastro', title: 'Cadastro & administração', blurb: 'Registro de outorgas, usuários e trilhas de auditoria.', Component: GestorCadastro },
+  { id: 'gestor-processo', surface: 'gestor', num: 'GESTOR · 09', path: '/gestor/processo', title: 'Processo sancionador', blurb: 'Do auto de infração à decisão: enquadramento e grau, rito com prazos, evidência congelada na lavratura e penalidade.', Component: GestorProcesso },
+  { id: 'gestor-arrecadacao', surface: 'gestor', num: 'GESTOR · 10', path: '/gestor/arrecadacao', title: 'Arrecadação', blurb: 'Guias de multa e de cobrança pelo uso: emissão, conciliação bancária, divergências, inadimplência e dívida ativa.', Component: GestorArrecadacao },
 
   { id: 'portal-publico', surface: 'portal', num: 'PORTAL · 01', path: '/portal/publico', title: 'Transparência da bacia', blurb: 'Indicadores agregados de uso, mapa público e dados abertos para download.', Component: PortalPublico },
 ]

@@ -34,6 +34,30 @@ const FILA_COLS = [
   { key: 'proxima', label: 'Próxima ação' },
 ]
 
+// Fila própria de processos sancionadores: exceções e processos não competem
+// na mesma fila. O processo é objeto próprio (ver gestor/Processo.jsx), criado
+// quando o gestor lavra o auto; aqui a ordem é por prazo: defesas a julgar,
+// ciências pendentes, prazos a vencer. State-law deadlines render as params.
+const PROCESSOS = [
+  { num: 'PAS-07-2026-0042', codigo: '07-1100', nome: 'Indústria Química Cubatão', objeto: 'Indício de fraude na medição', grau: 'gravíssima', grauVar: 'bad', fase: 'Defesa a julgar', prazo: 'defesa protocolada em 18/06', dono: 'gestor', proxima: 'Julgar 1ª instância · decisão fundamentada' },
+  { num: 'PAS-07-2026-0051', codigo: '07-1042', nome: 'Petroquímica Baixada S/A', objeto: 'Volume mensal acima do outorgado', grau: 'grave', grauVar: 'bad', fase: 'Ciência pendente', prazo: 'lavrado em 06/06 · aguarda ciência', dono: 'outorgado', proxima: 'Registrar ciência · marco do prazo' },
+  { num: 'PAS-07-2026-0012', codigo: '07-1100', nome: 'Indústria Química Cubatão', objeto: 'Captação continuada acima do volume outorgado', grau: 'gravíssima', grauVar: 'bad', fase: 'Defesa · prazo correndo', prazo: 'prazo parametrizável · conferir DOE', dono: 'outorgado', proxima: 'Aguardar defesa ou decurso do prazo' },
+  { num: 'PAS-07-2025-0019', codigo: '07-1042', nome: 'Petroquímica Baixada S/A', objeto: 'Multa mantida em 1ª instância', grau: 'grave', grauVar: 'bad', fase: 'Recurso · 2ª instância', prazo: 'sem efeito suspensivo · guia exigível', dono: 'gestor', proxima: 'Julgar 2ª instância · definitivo' },
+]
+
+const PROCESSOS_COLS = [
+  { key: 'processo', label: 'Processo', render: (r) => (
+    <Link to="/gestor/processo" style={{ color: 'var(--ink)', textDecoration: 'none' }}>
+      <b className="mono">{r.num}</b><br /><span className="muted" style={{ fontSize: 11 }}>{r.codigo} · {r.nome}</span>
+    </Link>
+  ) },
+  { key: 'objeto', label: 'Objeto do auto' },
+  { key: 'grau', label: 'Grau', render: (r) => <Pill variant={r.grauVar}>grau {r.grau}</Pill> },
+  { key: 'fase', label: 'Fase do rito' },
+  { key: 'prazo', label: 'Prazo / dono', render: (r) => <>{r.prazo} · <b>{r.dono}</b></> },
+  { key: 'proxima', label: 'Próxima ação' },
+]
+
 // Sinais de gestão: projeções, não infrações. Nada foi excedido; o ritmo aponta
 // para o teto e o sistema avisa. Sem grau, sem prazo, dão baixa sozinhos.
 const SINAIS = [
@@ -67,6 +91,7 @@ const top = (
     <Pill variant="bad">2 graves+</Pill>
     <Pill variant="warn">7 em tratamento</Pill>
     <Pill variant="label">3 sinais</Pill>
+    <Pill variant="label">4 processos</Pill>
     <Btn sub style={{ padding: '6px 12px' }}>Exportar</Btn>
   </>
 )
@@ -74,6 +99,7 @@ const top = (
 export default function Apontamentos() {
   const navigate = useNavigate()
   const go = () => navigate('/gestor/apontamento')
+  const goProcesso = () => navigate('/gestor/processo')
   return (
     <GestorShell tag="GESTOR · 05" title="Apontamentos da bacia" active="apontamentos" top={top}>
       <Bento>
@@ -128,6 +154,21 @@ export default function Apontamentos() {
           />
         </Panel>
 
+        {/* own queue: processos follow rito próprio, ordered by prazo, never mixed with the triagem */}
+        <Panel
+          col={12}
+          header={<>Processos sancionadores <Sp /><Pill variant="label">rito próprio · ordenado por prazo</Pill><Btn sub to="/gestor/processo" style={{ padding: '6px 12px' }}>Abrir processo →</Btn></>}
+        >
+          <DataTable
+            columns={PROCESSOS_COLS}
+            rows={PROCESSOS.map((r) => ({ ...r, onClick: goProcesso }))}
+            search={['num', 'codigo', 'nome', 'objeto', 'fase']}
+            searchPlaceholder="Buscar processo / ponto / fase…"
+            pageSize={6}
+            empty="Nenhum processo sancionador em curso."
+          />
+        </Panel>
+
         {/* watchlist: projeções que o gestor acompanha, não trabalha */}
         <Panel
           col={12}
@@ -150,6 +191,10 @@ export default function Apontamentos() {
 
         <Note col={4} style={{ marginTop: 4 }}>
           <b>Os sinais de gestão ficam à parte.</b> Um sinal de gestão indica um risco antes que ele se concretize: o consumo ainda está dentro do outorgado, mas o ritmo projeta ultrapassar o limite, e o sistema avisa para que o outorgado corrija a tempo. Não há grau nem prazo associados, e o sinal se encerra quando o consumo desacelera. Ao gestor cabe acompanhá-los. Tratá-los na mesma fila atribuiria a um aviso preventivo o peso de um processo já instaurado.
+        </Note>
+
+        <Note col={12} style={{ marginTop: 4 }}>
+          <b>Exceções e processos não competem na mesma fila.</b> A triagem de apontamentos ordena por gravidade o que ainda aguarda justificativa ou correção; o processo sancionador, criado quando o gestor lavra o auto, é objeto próprio, com número, evidência congelada na lavratura e rito com prazos, e ordena-se pelo que vence primeiro: defesas a julgar, ciências pendentes, prazos a vencer. Os prazos do rito estadual (Portaria DAEE 4.905/2019) aparecem como parâmetros: prazo parametrizável · conferir DOE.
         </Note>
 
       </Bento>

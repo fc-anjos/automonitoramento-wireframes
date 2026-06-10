@@ -39,6 +39,13 @@ export default function Painel() {
                     <Pill variant="warn">1 ação no prazo</Pill>
                     <Pill variant="label">1 sinal de gestão</Pill>
                   </Row>
+                  {/* declaration frequency: managed attribute, always visible (gap 3.1.d) */}
+                  <hr className="div" style={{ margin: '12px 0' }} />
+                  <Row style={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
+                    <span className="muted" style={{ fontSize: 12 }}>Sua frequência</span>
+                    <span className="mono" style={{ fontSize: 12, color: 'var(--ink)' }}>diária · atendida pela telemetria</span>
+                  </Row>
+                  <div className="muted" style={{ fontSize: 11.5, marginTop: 4 }}>Em falha de transmissão, declare manualmente pela autodeclaração.</div>
                 </Card>
 
                 {/* NEXT ACTIONS: one row per apontamento, action + deadline */}
@@ -90,6 +97,46 @@ export default function Painel() {
 
                 <Btn block lg to="/app/telemetria" style={{ marginTop: 14 }}>Acompanhar captação →</Btn>
 
+                {/* payments entry point: next guia + situation, detail lives in /app/pagamentos */}
+                <Link className="card" to="/app/pagamentos" style={{ display: 'block', padding: 12, marginTop: 14, textDecoration: 'none' }}>
+                  <Row style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span className="eyebrow">Pagamentos</span>
+                    <Pill variant="ok">em dia</Pill>
+                  </Row>
+                  <div style={{ fontSize: 13, color: 'var(--ink)', marginTop: 6 }}><b>Próxima guia:</b> cobrança pelo uso · 2º trim/2026</div>
+                  <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
+                    <span className="mono" style={{ fontSize: 12 }}>venc. 30/06 · R$ 7.940,18 · emitida</span>
+                    <span className="faint">›</span>
+                  </Row>
+                </Link>
+
+                {/* institutional notices: the sidecc opens on a notices screen (gap 3.3.h) */}
+                <div style={{ marginTop: 14 }}>
+                  <div className="eyebrow" style={{ marginBottom: 8 }}>Avisos institucionais</div>
+                  <Card style={{ padding: '4px 12px' }}>
+                    <div className="mrow"><span className="mono faint" style={{ fontSize: 11, flex: 'none' }}>05/06</span><div className="msp muted" style={{ fontSize: 12 }}>Manutenção programada: sistema indisponível no domingo 14/06, das 6h às 8h.</div></div>
+                    <div className="mrow"><span className="mono faint" style={{ fontSize: 11, flex: 'none' }}>28/05</span><div className="msp muted" style={{ fontSize: 12 }}>Período de estiagem: acompanhe os comunicados sobre regras de restrição na UGRHI-07.</div></div>
+                    <div className="mrow"><span className="mono faint" style={{ fontSize: 11, flex: 'none' }}>12/05</span><div className="msp muted" style={{ fontSize: 12 }}>Nova versão do manual de declaração disponível na seção de ajuda.</div></div>
+                  </Card>
+                </div>
+
+                {/* contact channel: user/technical-team messages tied to the cadastro (gap 3.3.h) */}
+                <div style={{ marginTop: 14 }}>
+                  <div className="eyebrow" style={{ marginBottom: 8 }}>Canal de contato</div>
+                  <Card style={{ padding: 12 }}>
+                    <Row style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+                      <b style={{ fontSize: 13, color: 'var(--ink)' }}>Equipe técnica · SP-Águas</b>
+                      <Pill variant="act">1 nova</Pill>
+                    </Row>
+                    <div className="muted" style={{ fontSize: 12, marginTop: 6 }}>"Recebemos o laudo de calibração do SDC-R-4471; o registro do equipamento foi atualizado." · 03/06</div>
+                    <Row style={{ gap: 8, marginTop: 10 }}>
+                      <Btn block sub>Ver conversa</Btn>
+                      <Btn block>Nova mensagem</Btn>
+                    </Row>
+                    <div className="faint" style={{ fontSize: 11, marginTop: 8 }}>Mensagens vinculadas ao cadastro, com histórico permanente.</div>
+                  </Card>
+                </div>
+
                 <div style={{ marginTop: 14 }}>
                   <div className="eyebrow" style={{ marginBottom: 8 }}>Atalhos</div>
                   <Link className="mrow" to="/app/apontamentos" style={{ textDecoration: 'none' }}><span className="ico">◧</span><div className="msp"><b style={{ fontSize: 13, color: 'var(--ink)' }}>Apontamentos</b><div className="muted" style={{ fontSize: 11.5 }}>Tudo que pede ação ou aguarda baixa</div></div><span className="faint">›</span></Link>
@@ -128,6 +175,13 @@ export default function Painel() {
                   <Row style={{ gap: 8, marginTop: 8 }}>
                     <Pill variant="warn">1 ação no prazo</Pill>
                   </Row>
+                  {/* declaration frequency: the cadence is always on screen (gap 3.1.d) */}
+                  <hr className="div" style={{ margin: '12px 0' }} />
+                  <Row style={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
+                    <span className="muted" style={{ fontSize: 12 }}>Sua frequência</span>
+                    <span className="mono" style={{ fontSize: 12, color: 'var(--ink)' }}>semanal · próxima declaração até 10/06</span>
+                  </Row>
+                  <div className="muted" style={{ fontSize: 11.5, marginTop: 4 }}>Definida pela faixa de volume mensal · alterada apenas por ato do gestor.</div>
                 </Card>
 
                 <div style={{ marginTop: 14 }}>
@@ -162,11 +216,27 @@ export default function Painel() {
 
                 <Btn block lg to="/app/autodeclaracao" style={{ marginTop: 14 }}>Declarar leitura →</Btn>
 
+                {/* same payments entry point; smaller operation, smaller guia */}
+                <Link className="card" to="/app/pagamentos" style={{ display: 'block', padding: 12, marginTop: 14, textDecoration: 'none' }}>
+                  <Row style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span className="eyebrow">Pagamentos</span>
+                    <Pill variant="warn">1 a vencer</Pill>
+                  </Row>
+                  <div style={{ fontSize: 13, color: 'var(--ink)', marginTop: 6 }}><b>Próxima guia:</b> cobrança pelo uso · 2º trim/2026</div>
+                  <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
+                    <span className="mono" style={{ fontSize: 12 }}>venc. 30/06 · R$ 1.236,40 · registrada</span>
+                    <span className="faint">›</span>
+                  </Row>
+                </Link>
+
                 <div style={{ marginTop: 14 }}>
                   <div className="eyebrow" style={{ marginBottom: 8 }}>Atalhos</div>
                   <Link className="mrow" to="/app/apontamentos" style={{ textDecoration: 'none' }}><span className="ico">◧</span><div className="msp"><b style={{ fontSize: 13, color: 'var(--ink)' }}>Apontamentos</b><div className="muted" style={{ fontSize: 11.5 }}>Tudo que pede ação ou aguarda baixa</div></div><span className="faint">›</span></Link>
                   <Link className="mrow" to="/app/solicitacoes" style={{ textDecoration: 'none' }}><span className="ico">◔</span><div className="msp"><b style={{ fontSize: 13, color: 'var(--ink)' }}>Solicitações e calendário</b><div className="muted" style={{ fontSize: 11.5 }}>Renovação, vencimento e demais pedidos</div></div><span className="faint">›</span></Link>
                   <Link className="mrow" to="/app/confirmacao" style={{ textDecoration: 'none' }}><span className="ico">◷</span><div className="msp"><b style={{ fontSize: 13, color: 'var(--ink)' }}>Declarações anteriores</b></div><span className="faint">›</span></Link>
+                  {/* dead rows: avisos and contato are sketched in full on the phone beside */}
+                  <a className="mrow"><span className="ico">◌</span><div className="msp"><b style={{ fontSize: 13, color: 'var(--ink)' }}>Avisos institucionais</b><div className="muted" style={{ fontSize: 11.5 }}>3 avisos · último em 05/06</div></div><span className="faint">›</span></a>
+                  <a className="mrow"><span className="ico">✉</span><div className="msp"><b style={{ fontSize: 13, color: 'var(--ink)' }}>Canal de contato</b><div className="muted" style={{ fontSize: 11.5 }}>Mensagens com a equipe técnica · vinculadas ao cadastro</div></div><span className="faint">›</span></a>
                 </div>
               </PScroll>
               <AppTabBar active="inicio" />
@@ -177,6 +247,10 @@ export default function Painel() {
           </div>
 
         </div>
+
+        <Note style={{ maxWidth: 760, margin: '22px auto 0' }}>
+          <b>A frequência de declaração é atributo gerenciado, não convenção.</b> Cada uso carrega uma frequência (mensal, semanal ou diária) derivada das faixas de volume mensal outorgado (Portaria DAEE 5.579/2018, art. 5º; IT-DPO 15/2018), com histórico e alteração somente por ato administrativo do gestor; por isso o painel a exibe sempre, com a próxima data, e o usuário de telemetria conserva o caminho de contingência: em falha de transmissão, declara manualmente. Os <b>avisos institucionais</b> e o <b>canal de contato</b> recuperam superfícies do sistema substituído, que abre num quadro de avisos e mantém as mensagens entre usuário e equipe técnica <b>vinculadas ao cadastro</b>, não dispersas em e-mail. O cartão de <b>Pagamentos</b> é só o atalho da carteira: a guia mais próxima e a sua situação; boleto, PIX e comprovantes vivem na seção própria.
+        </Note>
       </div>
     </>
   )

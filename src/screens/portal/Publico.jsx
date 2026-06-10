@@ -95,6 +95,34 @@ export default function Publico() {
             </Body>
           </Panel>
 
+          {/* aggregate money rail: FEHIDRO destination, no personal data */}
+          <Panel col={8} header={<>Arrecadação destinada ao FEHIDRO <Sp /><Pill variant="label">agregado · exercício 2026</Pill></>}>
+            <Body>
+              <div className="grid g-3">
+                <div>
+                  <div className="k-value" style={{ font: '700 26px/1.1 var(--sketch)', color: 'var(--ink)' }}>R$ 1,21 mi</div>
+                  <div className="muted" style={{ fontSize: 12.5 }}>cobrado no exercício</div>
+                  <div className="faint" style={{ fontSize: 11.5 }}>87 guias emitidas · cobrança pelo uso e multas</div>
+                </div>
+                <div>
+                  <div className="k-value" style={{ font: '700 26px/1.1 var(--sketch)', color: 'var(--ink)' }}>R$ 1,10 mi</div>
+                  <div className="muted" style={{ fontSize: 12.5 }}>arrecadado (guias liquidadas)</div>
+                  <div className="faint" style={{ fontSize: 11.5 }}>R$ 112,4 mil em aberto após o vencimento</div>
+                </div>
+                <div>
+                  <div className="k-value" style={{ font: '700 26px/1.1 var(--sketch)', color: 'var(--ink)' }}>100%</div>
+                  <div className="muted" style={{ fontSize: 12.5 }}>destinado ao FEHIDRO</div>
+                  <div className="faint" style={{ fontSize: 11.5 }}>Lei estadual 12.183/2005 · Deliberação CBH-BS 157/2009</div>
+                </div>
+              </div>
+            </Body>
+          </Panel>
+          <Panel col={4} header="De onde vem">
+            <Body>
+              <Note style={{ fontSize: 12, marginTop: 0 }}>A cobrança pelo uso da água, alimentada pelos volumes declarados e medidos, e as multas do rito administrativo geram guias de recolhimento. O portal mostra apenas o <b>agregado destinado ao FEHIDRO</b>, sem identificar pagadores nem expor valores individuais (LGPD).</Note>
+            </Body>
+          </Panel>
+
           <Panel col={12} header="Dados abertos">
             <Body stack>
               <div className="mrow"><span className="ico">⤓</span><div className="msp"><b style={{ color: 'var(--ink)', fontSize: 13 }}>Volume mensal por sub-bacia</b><div className="muted" style={{ fontSize: 11.5 }}>CSV · agregado</div></div><span className="btn sub" style={{ padding: '4px 10px' }}>Baixar</span></div>

@@ -49,6 +49,7 @@ const APP_TABS = [
   { key: 'inicio', label: 'Início', to: '/app/painel' },
   { key: 'captacao', label: 'Captação', to: '/app/telemetria' },
   { key: 'apontamentos', label: 'Apontamentos', to: '/app/apontamentos' },
+  { key: 'pagamentos', label: 'Pagamentos', to: '/app/pagamentos' },
   { key: 'perfil', label: 'Perfil', to: null }, // dead (was href="#")
 ]
 export const AppTabBar = ({ active }) => (
@@ -73,6 +74,7 @@ const GESTOR_NAV = [
   { key: 'pontos', label: 'Pontos / outorgas', to: '/gestor/pontos' },
   { key: 'apontamentos', label: 'Apontamentos', to: '/gestor/apontamentos' },
   { key: 'solicitacoes', label: 'Solicitações', to: '/gestor/solicitacoes' },
+  { key: 'arrecadacao', label: 'Arrecadação', to: '/gestor/arrecadacao' },
   { sec: 'Dados' },
   { key: 'cadastro', label: 'Cadastro & admin', to: '/gestor/cadastro' },
 ]

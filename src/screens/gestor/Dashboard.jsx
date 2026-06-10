@@ -129,6 +129,41 @@ export default function Dashboard() {
           A fila lidera pela <b>gravidade</b>: a fraude gravíssima (07-1100) e o volume grave reincidente (07-1042) vêm antes do pico de vazão de grau média e dos achados de calendário sem grau. Um pico isolado de telemetria é uma <b>exceção</b> com ação pedida ao usuário; não constitui infração consumada. O desvio sancionável corre como <b>ato administrativo</b>, caso dos dois primeiros da fila, que já seguem o rito.
         </Note>
 
+        {/* sanction + money rails: own queues, never mixed with the triagem */}
+        <Panel col={7} header={<>Processos sancionadores <Sp /><Pill variant="label">rito próprio · ordenado por prazo</Pill><Btn sub to="/gestor/apontamentos" style={{ padding: '6px 12px' }}>Fila completa →</Btn></>}>
+          <table className="table">
+            <thead><tr><th>Processo</th><th>Ponto / outorgado</th><th>Fase do rito</th><th>Prazo / dono</th><th>Abrir</th></tr></thead>
+            <tbody>
+              <tr>
+                <td className="mono">PAS-07-2026-0042</td><td>07-1100 · Indústria Química Cubatão</td>
+                <td>Defesa a julgar</td><td>protocolada em 18/06 · <b>gestor</b></td>
+                <td><Btn sub to="/gestor/processo" style={{ padding: '5px 12px' }}>Abrir →</Btn></td>
+              </tr>
+              <tr>
+                <td className="mono">PAS-07-2026-0051</td><td>07-1042 · Petroquímica Baixada S/A</td>
+                <td>Ciência pendente</td><td>lavrado em 06/06 · <b>outorgado</b></td>
+                <td><Btn sub to="/gestor/processo" style={{ padding: '5px 12px' }}>Abrir →</Btn></td>
+              </tr>
+              <tr>
+                <td className="mono">PAS-07-2025-0019</td><td>07-1042 · Petroquímica Baixada S/A</td>
+                <td>Recurso · 2ª instância</td><td>sem efeito suspensivo · <b>gestor</b></td>
+                <td><Btn sub to="/gestor/processo" style={{ padding: '5px 12px' }}>Abrir →</Btn></td>
+              </tr>
+            </tbody>
+          </table>
+          <Note style={{ margin: 14, fontSize: 12 }}>Fila própria, fora da triagem de apontamentos: exceções e processos não competem na mesma fila. A ordem é pelo que vence primeiro (defesas a julgar, ciências pendentes, prazos a vencer), e os prazos do rito estadual aparecem como parâmetros: prazo parametrizável · conferir DOE.</Note>
+        </Panel>
+        <Panel col={5} header={<>Arrecadação <Sp /><Pill variant="label">emitidas × liquidadas</Pill><Btn sub to="/gestor/arrecadacao" style={{ padding: '6px 12px' }}>Abrir arrecadação →</Btn></>}>
+          <table className="table"><tbody>
+            <tr><td>Guias emitidas (exercício)</td><td className="num">87</td></tr>
+            <tr><td>Liquidadas</td><td className="num">71</td></tr>
+            <tr><td>Inadimplência</td><td className="num">9,2%</td></tr>
+            <tr><td>Divergências de conciliação</td><td className="num">3</td></tr>
+            <tr><td>Aptas à dívida ativa</td><td className="num">1</td></tr>
+          </tbody></table>
+          <Note style={{ margin: 14, fontSize: 12 }}>Multa do processo sancionador e cobrança pelo uso na mesma régua: a situação da guia muda por conciliação bancária, nunca à mão, e o agregado destinado ao FEHIDRO alimenta o portal público, sem dados pessoais.</Note>
+        </Panel>
+
         {/* two co-equal findings */}
         <Panel col={6} header={<>Volume captado × outorgado <Sp /><Pill>por mês</Pill></>}>
           <Body><Svg src="wireframe-chart-dashboard.svg" ratio="520/300" label="Volume captado mensal × outorgado (agregado da bacia)" /></Body>

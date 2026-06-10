@@ -9,10 +9,49 @@ export default function Confirmacao() {
 
       <div className="wrap">
         <Note style={{ maxWidth: 780, margin: '0 auto 22px' }}>
-          <b>O que o histórico registra.</b> Esta aba registra, em ordem, tudo que aconteceu com o ponto: cada <b>apontamento</b> e cada confirmação do outorgado (ciência, justificativa, retificação). Nada é apagado; ao baixar, o item fica arquivado com a trilha. A confirmação à esquerda é o comprovante de um ato isolado; a linha do tempo à direita mostra o andamento de cada apontamento, com seu tipo, grau e fase.
+          <b>O que o histórico registra.</b> Esta aba registra, em ordem, tudo que aconteceu com o ponto: cada <b>declaração</b> (que recebe <b>protocolo</b> próprio), cada <b>apontamento</b> e cada confirmação do outorgado (ciência, justificativa, retificação). Nada é apagado; ao baixar, o item fica arquivado com a trilha. À esquerda, o comprovante da declaração enviada; ao centro, o comprovante de ciência de um apontamento; à direita, a linha do tempo do ponto.
         </Note>
 
         <div className="phone-stage" style={{ justifyContent: 'center' }}>
+
+          {/* RECIBO DA DECLARACAO: every declaration gets its own protocolo */}
+          <div>
+            <Phone>
+              <Notch />
+              <StatusBar right="▰▰▱ 4G ▮" />
+              <PScroll>
+                <div style={{ textAlign: 'center', padding: '18px 0 8px' }}>
+                  <div style={{ width: 64, height: 64, borderRadius: '50%', border: '2px solid var(--ink)', color: 'var(--ink)', display: 'grid', placeItems: 'center', margin: '0 auto 12px', fontSize: 28 }}>✓</div>
+                  <h2 style={{ fontSize: 18 }}>Declaração registrada</h2>
+                  <p className="muted" style={{ fontSize: 13, margin: '6px 0 0' }}>Cada declaração recebe protocolo próprio. Guarde o comprovante.</p>
+                </div>
+
+                <Card style={{ padding: 14 }}>
+                  <Row style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+                    <b style={{ fontSize: 13, color: 'var(--ink)' }}>Leitura de rotina</b>
+                    <Pill variant="ok">Recebida</Pill>
+                  </Row>
+                  <Row style={{ gap: 6, marginTop: 6, alignItems: 'center' }}>
+                    <Pill variant="label" style={{ fontSize: 10.5 }}>Protocolo DCL-07-2026-045112</Pill>
+                  </Row>
+                  <hr className="div" style={{ margin: '12px 0' }} />
+                  <div className="mrow"><span className="msp muted" style={{ fontSize: 12.5 }}>Outorga</span><span className="mono" style={{ fontSize: 12.5, color: 'var(--ink)' }}>OUT-07-2025-008842</span></div>
+                  <div className="mrow"><span className="msp muted" style={{ fontSize: 12.5 }}>Medidor</span><span className="mono" style={{ fontSize: 12.5 }}>série H-99281</span></div>
+                  <div className="mrow"><span className="msp muted" style={{ fontSize: 12.5 }}>Leitura</span><span className="mono" style={{ fontSize: 12.5 }}>004 281 m³</span></div>
+                  {/* two distinct timestamps: when the dial was read vs when the record entered the system */}
+                  <div className="mrow"><span className="msp muted" style={{ fontSize: 12.5 }}>Data/hora da leitura</span><span className="mono" style={{ fontSize: 12.5 }}>04/06 · 16:40</span></div>
+                  <div className="mrow"><span className="msp muted" style={{ fontSize: 12.5 }}>Data/hora do cadastro</span><span className="mono" style={{ fontSize: 12.5, color: 'var(--ink)' }}>04/06 · 18:05</span></div>
+                </Card>
+
+                <Btn block lg style={{ marginTop: 14 }}>Imprimir comprovante (PDF)</Btn>
+                <Btn block sub to="/app/autodeclaracao" style={{ marginTop: 8 }}>Cancelar e refazer · disponível até o fim do dia</Btn>
+              </PScroll>
+              <AppTabBar active="captacao" />
+              <HomeBar />
+            </Phone>
+            <PhoneLabel>Comprovante · protocolo por declaração</PhoneLabel>
+            <Note style={{ marginTop: 14, fontSize: 12, maxWidth: 300 }}>As duas datas são distintas: a da <b>leitura</b> é o momento em que o mostrador foi lido; a do <b>cadastro</b>, o registro no sistema (no modo offline elas divergem). O <b>cancelamento no mesmo dia substitui</b> a declaração mantendo o histórico: a anterior fica gravada como cancelada e a nova recebe outro protocolo. Depois do dia, só a retificação corrige.</Note>
+          </div>
 
           {/* COMPROVANTE: o outorgado tomou ciência de um apontamento */}
           <div>

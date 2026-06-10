@@ -2,6 +2,16 @@ import { Link } from 'react-router-dom'
 import { GestorShell } from '../../components/shell.jsx'
 import { Bento, Card, Panel, Body, Note, Pill, Btn, Svg, Row, Sp } from '../../components/ui.jsx'
 
+// daily estimated volume, jun/2026 (starts on a monday); state vs the 3.000 m³/dia
+// permitido under the estiagem rule: ok | warn | partial | future
+const CAL = [
+  { d: 1, v: '2.940' }, { d: 2, v: '3.010', warn: true }, { d: 3, v: '2.870' },
+  { d: 4, v: '3.180', warn: true, pico: true }, { d: 5, v: '2.990' }, { d: 6, v: '2.760' },
+  { d: 7, v: '2.810' }, { d: 8, v: '3.060', warn: true }, { d: 9, v: '2.950' },
+  { d: 10, v: 'parcial', partial: true },
+  ...Array.from({ length: 20 }, (_, i) => ({ d: 11 + i, v: '–', future: true })),
+]
+
 const top = (
   <>
     <div className="crumb"><Link to="/gestor/mapa">Pontos</Link> / <b style={{ color: 'var(--ink)' }}>07-1001</b></div>
@@ -33,7 +43,7 @@ export default function Detalhe() {
             <div><div className="muted" style={{ fontSize: 11 }}>Fonte</div><div className="mono" style={{ color: 'var(--ink)' }}>Superficial</div></div>
             <div><div className="muted" style={{ fontSize: 11 }}>Município</div><div className="mono" style={{ color: 'var(--ink)' }}>Cubatão</div></div>
             <div><div className="muted" style={{ fontSize: 11 }}>Coordenadas</div><div className="mono" style={{ color: 'var(--ink)' }}>−23.879, −46.418</div></div>
-            <div><div className="muted" style={{ fontSize: 11 }}>Medidor</div><div className="mono" style={{ color: 'var(--ink)' }}>SDC-R-4471 · ativo</div></div>
+            <div><div className="muted" style={{ fontSize: 11 }}>Medidores</div><div className="mono" style={{ color: 'var(--ink)' }}>2 ativos · 1 desativado</div></div>
             <div><div className="muted" style={{ fontSize: 11 }}>Transmissão (30d)</div><div className="mono" style={{ color: 'var(--ink)' }}>98,6%</div></div>
           </div>
         </Card>
@@ -42,18 +52,23 @@ export default function Detalhe() {
         <Card kpi col={4}><div className="k-label">Volume anual</div><div className="k-value">58%</div><div className="k-meta">consumido · <b>projeção 116%</b></div></Card>
         <Card kpi col={4}><div className="k-label">Transmissão (30 d)</div><div className="k-value">98,6%</div><div className="k-meta">% · 1 lacuna retificada</div></Card>
 
-        <Panel col={8} header={<>Limites outorgados × medido <Sp /><Pill variant="label">conformidade por dimensão</Pill></>}>
+        {/* three series: outorgado x permitido x medido; "permitido" only exists where a restriction rule applies */}
+        <Panel col={8} header={<>Limites outorgados × permitido × medido <Sp /><Pill variant="warn">Estado da vazão · em restrição</Pill><Pill variant="label">conformidade por dimensão</Pill></>}>
           <table className="table">
-            <thead><tr><th>Limite</th><th className="num">Outorgado</th><th className="num">Medido</th><th>Situação</th></tr></thead>
+            <thead><tr><th>Limite</th><th className="num">Outorgado</th><th className="num">Permitido</th><th className="num">Medido</th><th>Situação</th></tr></thead>
             <tbody>
-              <tr><td>Vazão máx. instantânea</td><td className="num">45 L/s</td><td className="num">pico 53 L/s · 118%</td><td><Pill variant="warn">Exceção</Pill></td></tr>
-              <tr><td>Volume diário</td><td className="num">3.425 m³/dia</td><td className="num">3.180 m³/dia</td><td><Pill variant="ok">Conforme</Pill></td></tr>
-              <tr><td>Volume mensal</td><td className="num">104.000 m³/mês</td><td className="num">110.200 m³/mês · 106%</td><td><Pill variant="warn">Atenção</Pill></td></tr>
-              <tr><td>Volume anual</td><td className="num">1.250.000 m³</td><td className="num">58% · projeção 116%</td><td><Pill variant="warn">Em risco</Pill></td></tr>
-              <tr><td>Regime de operação</td><td className="num">contínuo (24 h)</td><td className="num">conforme</td><td><Pill variant="ok">Conforme</Pill></td></tr>
-              <tr><td>Transmissão (30 d)</td><td className="num">≥ 95%</td><td className="num">98,6%</td><td><Pill variant="ok">Conforme</Pill></td></tr>
+              <tr><td>Estado da vazão</td><td className="num">–</td><td className="num">regra de estiagem · desde 15/05</td><td className="num">–</td><td><Pill variant="warn">Em restrição</Pill></td></tr>
+              <tr><td>Vazão máx. instantânea</td><td className="num">45 L/s</td><td className="num">–</td><td className="num">pico 53 L/s · 118%</td><td><Pill variant="warn">Exceção</Pill></td></tr>
+              <tr><td>Volume diário</td><td className="num">3.425 m³/dia</td><td className="num">3.000 m³/dia · estiagem</td><td className="num">3.180 m³/dia · 106% do permitido</td><td><Pill variant="warn">Exceção · permitido</Pill></td></tr>
+              <tr><td>Volume mensal</td><td className="num">104.000 m³/mês</td><td className="num">–</td><td className="num">110.200 m³/mês · 106%</td><td><Pill variant="warn">Atenção</Pill></td></tr>
+              <tr><td>Volume anual</td><td className="num">1.250.000 m³</td><td className="num">–</td><td className="num">58% · projeção 116%</td><td><Pill variant="warn">Em risco</Pill></td></tr>
+              <tr><td>Horas de operação (dia)</td><td className="num">24 h/dia · contínuo</td><td className="num">–</td><td className="num">24 h captadas</td><td><Pill variant="ok">Conforme</Pill></td></tr>
+              <tr><td>Transmissão (30 d)</td><td className="num">≥ 95%</td><td className="num">–</td><td className="num">98,6%</td><td><Pill variant="ok">Conforme</Pill></td></tr>
             </tbody>
           </table>
+          <Note style={{ margin: 14, fontSize: 12 }}>
+            O <b>permitido</b> é o limite sob regra de restrição (estiagem, conflito de uso) e pode situar-se abaixo do outorgado. Havendo restrição vigente, a reconciliação corre contra o <b>permitido</b>; nos demais casos, contra o <b>outorgado</b>. O volume diário ilustra a diferença: 3.180 m³/dia é conforme contra os 3.425 m³/dia outorgados, mas excede os 3.000 m³/dia permitidos pela regra de estiagem. A conformidade diária é verificada em <b>dois eixos</b>, volume <b>e</b> horas de captação (outorgadas × captadas), com detalhamento hora a hora a partir do calendário abaixo.
+          </Note>
         </Panel>
 
         <Panel col={4} header={<>Apontamentos <Sp /><Pill variant="label">3</Pill></>}>
@@ -125,10 +140,80 @@ export default function Detalhe() {
           </table>
         </Panel>
 
-        <Panel col={4} header={<>Transmissão (30 d) <Sp /><Pill variant="label">98,6%</Pill></>}>
+        {/* the 98.6% indicator is derived here: received x expected samples vs tolerance */}
+        <Panel col={4} header={<>Falhas de transmissão (30 d) <Sp /><Pill variant="label">98,6%</Pill></>}>
           <Body>
             <Svg src="wireframe-chart-transmissao.svg" ratio="520/200" label="Transmissão diária nos últimos 30 dias, com uma lacuna isolada já retificada" />
-            <Note style={{ fontSize: 12, marginTop: 10 }}>A confiança no diagnóstico depende deste indicador: transmissão a <b>98,6%</b>, uma lacuna isolada (dia 20) já retificada. Trilha de auditoria na aba <b>Cadastro</b>.</Note>
+            <table className="table" style={{ marginTop: 10 }}>
+              <tbody>
+                <tr><td>Amostras esperadas</td><td className="num mono">8.640</td></tr>
+                <tr><td>Amostras recebidas</td><td className="num mono">8.519</td></tr>
+                <tr><td>Falhas</td><td className="num mono">121 · 1,4%</td></tr>
+                <tr><td>Tolerância de falhas</td><td className="num"><Pill variant="ok">≤ 5,0% · dentro</Pill></td></tr>
+              </tbody>
+            </table>
+            <Note style={{ fontSize: 12, marginTop: 10 }}>O indicador de <b>98,6%</b> deriva desta conta: amostras <b>recebidas × esperadas</b> no passo de 5 min. A lacuna do dia 20 foi suprida por declaração manual no SiDeCC (contingência da telemetria) e retificada. Acima da tolerância, abre-se exceção de falha de transmissão. Trilha de auditoria na aba <b>Cadastro</b>.</Note>
+          </Body>
+        </Panel>
+
+        {/* a captação may carry more than one medidor; each device has its own lifecycle dates */}
+        <Panel col={7} header={<>Medidores da captação <Sp /><Pill variant="label">2 ativos · 1 desativado</Pill></>}>
+          <table className="table">
+            <thead><tr><th>Nº de série</th><th>Fabricante / modelo</th><th className="num">Diâmetro</th><th className="num">Inclusão</th><th className="num">Desativação</th><th>Estado</th></tr></thead>
+            <tbody>
+              <tr><td className="mono">SDC-R-4471</td><td>Hidrotec · HT-300 (eletromagnético)</td><td className="num">DN 150</td><td className="num">12/03/2024</td><td className="num">–</td><td><Pill variant="ok">Ativo</Pill></td></tr>
+              <tr><td className="mono">SDC-R-4472</td><td>Hidrotec · HT-300 (eletromagnético)</td><td className="num">DN 100</td><td className="num">12/03/2024</td><td className="num">–</td><td><Pill variant="ok">Ativo</Pill></td></tr>
+              <tr><td className="mono">SDC-3198</td><td>Medix · M-200 (hidrômetro)</td><td className="num">DN 150</td><td className="num">03/02/2019</td><td className="num">12/03/2024</td><td><Pill>Desativado</Pill></td></tr>
+            </tbody>
+          </table>
+          <Note style={{ margin: 14, fontSize: 12 }}>
+            Uma captação pode ter <b>mais de um medidor</b>, e cada equipamento tem ciclo de vida próprio: tipo, número de série, fabricante, modelo, diâmetro e as datas de <b>inclusão</b> e <b>desativação</b>. O cadastro e a troca são atos do <b>outorgado</b>, no aplicativo, com as leituras de remoção e de reinstalação que fecham a série de cada aparelho; o gestor confere. Desativar não apaga: o medidor muda de estado e preserva o histórico de leituras.
+          </Note>
+        </Panel>
+
+        {/* declaration frequency is a managed attribute with history; changing it is a gestor verb */}
+        <Panel col={5} header={<>Frequência de declaração <Sp /><Pill variant="label">atributo gerenciado</Pill></>}>
+          <Body>
+            <Row style={{ gap: 8 }}>
+              <Pill variant="act">Diária · vigente</Pill>
+              <span className="muted" style={{ fontSize: 12 }}>derivada da faixa de volume mensal (104.000 m³/mês)</span>
+            </Row>
+            <table className="table" style={{ marginTop: 10 }}>
+              <thead><tr><th>Frequência</th><th className="num">Início</th><th className="num">Fim</th></tr></thead>
+              <tbody>
+                <tr><td>Diária</td><td className="num">12/03/2024</td><td className="num"><Pill variant="ok">vigente</Pill></td></tr>
+                <tr><td>Semanal</td><td className="num">03/02/2019</td><td className="num">12/03/2024</td></tr>
+                <tr><td>Mensal</td><td className="num">14/06/2016</td><td className="num">03/02/2019</td></tr>
+              </tbody>
+            </table>
+            <Row style={{ marginTop: 10 }}>
+              <Btn sub style={{ padding: '6px 12px' }}>Alterar frequência</Btn>
+            </Row>
+            <Note style={{ fontSize: 12, marginTop: 10 }}>
+              Cada uso carrega uma frequência declaratória (mensal, semanal ou diária) derivada da <b>faixa de volume mensal outorgado</b> (Portaria DAEE 5.579/2018, art. 5º; IT-DPO 15/2018). Alterar a frequência é <b>verbo do gestor</b>, datado na trilha: encerra a vigência anterior e abre a nova, sem apagar o histórico. Na falha de transmissão prolongada, o ponto de telemetria declara manualmente nesta mesma frequência, como contingência.
+            </Note>
+          </Body>
+        </Panel>
+
+        {/* monthly calendar of estimated daily volume, in the SiDeCC internal-access pattern */}
+        <Panel col={12} header={<>Calendário mensal · volume diário estimado <Sp /><Pill variant="label">junho/2026 · m³/dia</Pill></>}>
+          <Body>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 6 }}>
+              {['seg', 'ter', 'qua', 'qui', 'sex', 'sáb', 'dom'].map((w) => (
+                <div key={w} className="faint" style={{ fontSize: 11, textAlign: 'center' }}>{w}</div>
+              ))}
+              {CAL.map((c) => (
+                <div key={c.d} style={{ border: '1px solid var(--line)', borderRadius: 6, padding: '6px 8px', minHeight: 46, opacity: c.future ? 0.45 : 1 }}>
+                  <div className="mono faint" style={{ fontSize: 10.5 }}>{String(c.d).padStart(2, '0')}</div>
+                  {c.warn
+                    ? <Pill variant="warn" style={{ padding: '0 7px', fontSize: 10.5 }}>{c.v}{c.pico ? ' · pico' : ''}</Pill>
+                    : <div className={c.future || c.partial ? 'muted' : 'mono'} style={{ fontSize: 11.5, color: c.future ? undefined : 'var(--ink)' }}>{c.v}</div>}
+                </div>
+              ))}
+            </div>
+            <Note style={{ fontSize: 12, marginTop: 12 }}>
+              Visão de calendário do volume diário estimado, no padrão do acesso interno do SiDeCC. Os dias acima do <b>permitido</b> (3.000 m³/dia sob a regra de estiagem) ficam marcados; o dia 04 carrega também o pico de vazão da exceção aberta. Cada célula abre a <b>visão hora a hora</b> do dia, que confronta volume e horas de captação contra o regime outorgado. Dias futuros aparecem como previstos.
+            </Note>
           </Body>
         </Panel>
       </Bento>

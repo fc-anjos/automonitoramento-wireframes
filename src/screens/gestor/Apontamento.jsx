@@ -61,13 +61,10 @@ export default function Apontamento() {
                 <div className="lr-top"><span className="lr-title">Ciência</span><span className="pill warn" style={{ fontSize: 10.5 }}>fase atual</span></div>
                 <div className="lr-sub">Ciência registrada em 05/06. Contagem de prazo iniciada (20 dias).</div>
               </div>
+              {/* defesa/recurso and julgamento are no longer fases of the apontamento: they run in the processo vinculado */}
               <div className="lrow">
-                <div className="lr-top"><span className="lr-title faint">Em defesa / recurso</span><span className="mono faint" style={{ fontSize: 11 }}>a seguir</span></div>
-                <div className="lr-sub faint">Se a justificativa não for aceita.</div>
-              </div>
-              <div className="lrow">
-                <div className="lr-top"><span className="lr-title faint">Em julgamento → Decidida</span><span className="mono faint" style={{ fontSize: 11 }}>a seguir</span></div>
-                <div className="lr-sub faint">Julgar procede / improcede é ato do gestor.</div>
+                <div className="lr-top"><span className="lr-title faint">Defesa, recurso e julgamento</span><Pill variant="label" style={{ fontSize: 10.5 }}>vínculo</Pill></div>
+                <div className="lr-sub faint">Deixaram de ser fases do apontamento: se o gestor lavrar o auto, correm num processo vinculado, com número e prazos próprios (processo PAS-… em curso · <Link to="/gestor/processo">ver processo</Link>). O auto e o julgamento seguem sendo atos do gestor.</div>
               </div>
               <div className="lrow">
                 <div className="lr-top"><span className="lr-title faint">Aguardando regularização → Encerrada</span><span className="mono faint" style={{ fontSize: 11 }}>a seguir</span></div>
@@ -83,13 +80,14 @@ export default function Apontamento() {
             <Row style={{ gap: 10, flexDirection: 'column', alignItems: 'stretch' }}>
               <Btn block>Notificar</Btn>
               <Btn block>Classificar grau</Btn>
-              <Btn block>Lavrar auto de infração</Btn>
+              {/* lavrar creates the processo vinculado (gestor/Processo.jsx) */}
+              <Btn block to="/gestor/processo">Lavrar auto de infração</Btn>
               <Btn block>Registrar ciência</Btn>
               <Btn block>Julgar (procede / improcede)</Btn>
               <Btn block>Registrar regularização</Btn>
               <Btn block sub>Encerrar (arquivar com trilha)</Btn>
             </Row>
-            <Note style={{ fontSize: 12, marginTop: 12 }}>Os poderes são assimétricos: o app do outorgado só oferece tomar ciência, justificar, anexar e comprovar. Os verbos de disposição existem apenas aqui, e cada um gera um registro datado na trilha.</Note>
+            <Note style={{ fontSize: 12, marginTop: 12 }}>Os poderes são assimétricos: o app do outorgado só oferece tomar ciência, justificar, anexar e comprovar. Os verbos de disposição existem apenas aqui, e cada um gera um registro datado na trilha. <b>Lavrar auto de infração cria um processo vinculado</b> (GESTOR · 09), com número, linha do tempo e prazos próprios; o apontamento permanece como objeto de detecção e triagem.</Note>
           </Body>
         </Panel>
 

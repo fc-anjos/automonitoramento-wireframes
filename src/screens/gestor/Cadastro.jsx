@@ -133,6 +133,46 @@ export default function Cadastro() {
           A trilha registra <b>quem, quando e qual ato</b>, e mistura deliberadamente atos do gestor (despachos, classificação) com eventos do sistema (a abertura automática das exceções de calendário). É ela que sustenta o devido processo: como os prazos correm da ciência, a data de cada marco precisa estar gravada e ser imutável.
         </Note>
 
+        {/* credentials: gestor acts over accounts, the modern heir of the sidecc password oficio */}
+        <Panel col={7} header={<>Credenciais e acesso <Sp /><Pill variant="label">atos na trilha</Pill></>}>
+          <Body className="list">
+            <div className="lrow">
+              <div className="lr-top"><span className="lr-title">Criar usuário</span><Pill>ato do gestor</Pill></div>
+              <div className="lr-sub">Conta vinculada à outorga e ao papel; o convite de acesso faz as vezes do ofício de senha do SiDeCC (emissão, prazo e AR), com cada emissão datada na trilha.</div>
+            </div>
+            <div className="lrow">
+              <div className="lr-top"><span className="lr-title">Convite e recuperação de conta</span><Pill>substitui o reenvio de senha</Pill></div>
+              <div className="lr-sub">Reenvio de convite e recuperação de conta cobrem o que o reenvio de senha cobria; o uso do link cumpre o papel do AR, comprovando o recebimento.</div>
+            </div>
+            <div className="lrow">
+              <div className="lr-top"><span className="lr-title">Inativar usuário</span><Pill variant="warn">inativa, não exclui</Pill></div>
+              <div className="lr-sub">A conta muda de estado e perde o acesso, mas preserva a autoria dos registros já gravados; como a outorga, usuário não é apagado.</div>
+            </div>
+          </Body>
+        </Panel>
+
+        {/* telemetry credential follows the cot-r rite: experimental login precedes operational */}
+        <Panel col={5} header={<>Credencial de telemetria <Sp /><Pill variant="label" className="mono">COT-R</Pill></>}>
+          <Body className="list">
+            <div className="lrow">
+              <div className="lr-top"><span className="lr-title">07-1001 · Indústria Cubatão S/A</span><Pill variant="ok">login operacional</Pill></div>
+              <div className="lr-sub">Transmite em caráter definitivo.</div>
+            </div>
+            <div className="lrow">
+              <div className="lr-top"><span className="lr-title">07-1100 · Indústria Química Cubatão</span><Pill variant="ok">login operacional</Pill></div>
+              <div className="lr-sub">Transmite em caráter definitivo; o auto de infração não suspende a credencial.</div>
+            </div>
+            <div className="lrow">
+              <div className="lr-top"><span className="lr-title">07-1042 · Petroquímica Baixada S/A</span><Pill variant="warn">login experimental</Pill></div>
+              <div className="lr-sub">Transmissão em teste, validada contra as leituras locais; a promoção a operacional é ato do gestor.</div>
+            </div>
+          </Body>
+        </Panel>
+
+        <Note col={12}>
+          Criação e inativação de usuários são <b>atos do gestor</b>, datados na trilha de auditoria como qualquer despacho. O mecanismo de autenticação (convite por e-mail, recuperação de conta ou gov.br) é <b>decisão a explicitar no TR</b>, não a omitir: o equivalente moderno pode superar o desenho do SiDeCC (ofício de senha, prazo, AR, reenvio), mas a escolha precisa estar escrita. Para os usuários de telemetria, a credencial segue o rito do COT-R: nasce como <b>login experimental</b> e só vira <b>login operacional</b> após a validação da transmissão.
+        </Note>
+
       </Bento>
     </GestorShell>
   )
