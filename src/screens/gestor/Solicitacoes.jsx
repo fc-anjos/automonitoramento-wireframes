@@ -1,6 +1,5 @@
-import { Link } from 'react-router-dom'
 import { GestorShell } from '../../components/shell.jsx'
-import { Bento, Panel, Body, Note, Pill, Btn, Sp, DataTable } from '../../components/ui.jsx'
+import { Bento, Panel, Body, Note, Pill, Btn, Sp, Verb, DataTable } from '../../components/ui.jsx'
 
 // default dispatch verbs; a row may override with `verbos` (e.g. ausência is
 // acknowledged, not granted; telemetry advances by COT-R stage)
@@ -9,6 +8,18 @@ const VERBOS_PADRAO = [
   { label: 'Indeferir', cls: 'bad' },
   { label: 'Pedir documento', cls: '' },
 ]
+
+// each mutation verb opens the low-fidelity dispatch stub with its own inputs;
+// labels missing here are view verbs without a real screen and render dead
+const VERB_FORM = {
+  'Deferir': {},
+  'Indeferir': { note: 'O indeferimento é despacho com justificativa obrigatória; grava na trilha de auditoria e notifica o outorgado.' },
+  'Pedir documento': { fields: ['Documento ou peça solicitada…', 'Justificativa do despacho…'], note: 'O pedido de documento suspende o prazo de análise até a peça chegar.' },
+  'Registrar ciência': { fields: ['Data da ciência · 10/06/2026', 'Observação ao calendário de declaração…'], note: 'A ciência registra o efeito-calendário da parada no período declaratório do ponto.' },
+  'Deferir proposta': { fields: ['Prazo para interligação · 90 dias ▾', 'Justificativa do despacho…'] },
+  'Pedir complemento': { fields: ['Documento ou peça solicitada…', 'Justificativa do despacho…'], note: 'O pedido de documento suspende o prazo de análise até a peça chegar.' },
+  'Tornar operacional': { fields: ['Validação da transmissão · 72 h de série recebida', 'Justificativa do despacho…'], note: 'O login experimental passa a operacional por ato do gestor, após a validação da transmissão.' },
+}
 
 const SOLICITACOES = [
   { id: 'SOL-2026-0467', ponto: '07-1001 · Indústria Cubatão S/A', tipo: 'Medidor · troca', recebida: '05/06', situacao: 'Aguardando análise · HX-99213 substitui HX-2041', situacaoVar: 'warn' },
@@ -36,10 +47,10 @@ const SOL_COLS = [
   { key: 'recebida', label: 'Recebida', num: true },
   { key: 'situacao', label: 'Situação', render: (r) => <Pill variant={r.situacaoVar}>{r.situacao}</Pill> },
   { key: 'acoes', label: 'Ações do gestor', render: (r) => r.terminal
-    ? <Link className="pill" to="/gestor/detalhe">Ver despacho</Link>
-    : (r.verbos ?? VERBOS_PADRAO).map((v) => (
-        <Link key={v.label} className={v.cls ? `pill ${v.cls}` : 'pill'} to="/gestor/apontamento" style={{ marginRight: 4 }}>{v.label}</Link>
-      )) },
+    ? <a className="pill">Ver despacho</a>
+    : (r.verbos ?? VERBOS_PADRAO).map((v) => VERB_FORM[v.label]
+        ? <Verb key={v.label} pill label={v.label} variant={v.cls || undefined} style={{ marginRight: 4 }} {...VERB_FORM[v.label]} />
+        : <a key={v.label} className={v.cls ? `pill ${v.cls}` : 'pill'} style={{ marginRight: 4 }}>{v.label}</a>) },
 ]
 
 const top = (
@@ -84,8 +95,8 @@ export default function Solicitacoes() {
                 <div className="lr-top"><span className="lr-title mono">SOL-2026-0464</span><Pill variant="warn">aguardando ciência</Pill></div>
                 <div className="lr-sub">07-0712 · Laticínios Itanhaém · parada total programada · 01/07 a 31/07</div>
                 <div className="lr-sub" style={{ marginTop: 4 }}>
-                  <Link className="pill ok" to="/gestor/apontamento" style={{ marginRight: 4 }}>Registrar ciência</Link>
-                  <Link className="pill bad" to="/gestor/apontamento">Indeferir</Link>
+                  <Verb pill label="Registrar ciência" variant="ok" style={{ marginRight: 4 }} {...VERB_FORM['Registrar ciência']} />
+                  <Verb pill label="Indeferir" variant="bad" {...VERB_FORM['Indeferir']} />
                 </div>
               </div>
             </div>
@@ -101,22 +112,23 @@ export default function Solicitacoes() {
                 <div className="lr-top"><span className="lr-title mono">SOL-2026-0458</span><Pill variant="warn">etapa 1 · proposta em análise</Pill></div>
                 <div className="lr-sub">07-1042 · Petroquímica Baixada S/A · proposta técnica recebida 30/05</div>
                 <div className="lr-sub" style={{ marginTop: 4 }}>
-                  <Link className="pill ok" to="/gestor/apontamento" style={{ marginRight: 4 }}>Deferir proposta</Link>
-                  <Link className="pill" to="/gestor/apontamento">Pedir complemento</Link>
+                  <Verb pill label="Deferir proposta" variant="ok" style={{ marginRight: 4 }} {...VERB_FORM['Deferir proposta']} />
+                  <Verb pill label="Pedir complemento" {...VERB_FORM['Pedir complemento']} />
                 </div>
               </div>
               <div className="lrow">
                 <div className="lr-top"><span className="lr-title mono">SOL-2026-0322</span><Pill variant="act">etapa 3 · login experimental</Pill></div>
                 <div className="lr-sub">07-0830 · Serviço de Águas de Praia Grande · transmissão em paralelo com a autodeclaração desde 12/03</div>
                 <div className="lr-sub" style={{ marginTop: 4 }}>
-                  <Link className="pill ok" to="/gestor/apontamento">Tornar operacional</Link>
+                  <Verb pill label="Tornar operacional" variant="ok" {...VERB_FORM['Tornar operacional']} />
                 </div>
               </div>
               <div className="lrow">
                 <div className="lr-top"><span className="lr-title mono faint">SOL-2026-0301</span><Pill variant="ok">etapa 4 · operacional desde 02/04</Pill></div>
                 <div className="lr-sub">07-1001 · Indústria Cubatão S/A</div>
                 <div className="lr-sub" style={{ marginTop: 4 }}>
-                  <Link className="pill" to="/gestor/detalhe">Ver despacho</Link>
+                  {/* no despacho screen exists; the pill stays dead rather than lie */}
+                  <a className="pill">Ver despacho</a>
                 </div>
               </div>
             </div>

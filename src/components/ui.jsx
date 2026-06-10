@@ -65,6 +65,41 @@ export const Btn = ({ to, variant, block, lg, sub, ghost, className, children, .
     : <a className={cls} {...p}>{children}</a>
 }
 
+// ---- mutation verb → low-fidelity dispatch modal ---------------------------
+// action verbs never navigate: clicking opens a sketched stub of the despacho
+// form (required inputs + the legal effect in a note), instead of teleporting
+// to an unrelated screen. `pill` keeps the pill look for lr-top / table cells.
+export const Verb = ({ label, variant, fields = ['Justificativa do despacho…'], note, confirm, pill, className, style }) => {
+  const [open, setOpen] = useState(false)
+  // verbs act (open the stub), so they earn the pointer affordance
+  const trigger = { cursor: 'pointer', ...style }
+  return (
+    <>
+      {pill
+        ? <a className={cx('pill', variant, className)} style={trigger} onClick={() => setOpen(true)}>{label}</a>
+        : <Btn variant={variant} className={className} style={trigger} onClick={() => setOpen(true)}>{label}</Btn>}
+      {open && (
+        <div className="veil" onClick={() => setOpen(false)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-title">{label}</div>
+            {fields.map((f) => (
+              <div key={f} className="input" style={f.endsWith('…') ? { minHeight: 64, alignItems: 'flex-start' } : { minHeight: 34 }}>
+                <span className="faint">{f}</span>
+              </div>
+            ))}
+            {note && <Note style={{ fontSize: 12 }}>{note}</Note>}
+            <div className="modal-foot">Esboço de baixa fidelidade · campos ilustrativos; o formulário definitivo será especificado no detalhamento do TR.</div>
+            <Row style={{ gap: 8, justifyContent: 'flex-end' }}>
+              <Btn sub onClick={() => setOpen(false)}>Cancelar</Btn>
+              <Btn variant="act" onClick={() => setOpen(false)}>{confirm || label}</Btn>
+            </Row>
+          </div>
+        </div>
+      )}
+    </>
+  )
+}
+
 // ---- meter / progress -----------------------------------------------------
 // value: CSS width string e.g. '58%'. variant: 'warn' | 'bad'
 export const Meter = ({ value, variant, className, ...p }) => (

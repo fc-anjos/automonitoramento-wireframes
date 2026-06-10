@@ -306,6 +306,27 @@ a[href] { cursor: pointer; }
 }
 .input.tall { min-height: 80px; align-items: flex-start; }
 
+/* ---- verb modal (low-fidelity dispatch stub) ------------------------------ */
+.veil {
+  position: fixed; inset: 0; z-index: 80;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0, 0, 0, .35);
+  padding: 20px;
+}
+.modal {
+  background: var(--surface);
+  border: 1.5px solid var(--ink);
+  border-radius: var(--hand-1);
+  padding: 18px;
+  width: min(420px, 90vw);
+  display: flex; flex-direction: column; gap: 10px;
+  font-family: var(--sketch);
+}
+.modal-title { font: 700 14px/1.3 var(--sketch); color: var(--ink); }
+/* meta-commentary about the stub, so it speaks in the communication register */
+.modal-foot { font: 400 11.5px/1.45 var(--comm); color: var(--faint); }
+.modal .btn { cursor: pointer; }
+
 /* ---- tables -------------------------------------------------------------- */
 .table { width: 100%; border-collapse: collapse; font-size: 13px; font-family: var(--sketch); }
 .table th, .table td { text-align: left; padding: 9px 12px; border-bottom: 1.5px solid var(--ink); }

@@ -49,6 +49,10 @@ export default function Launcher() {
           <b>Como ler estas telas.</b> São <b>rascunhos de estrutura</b>, não design final: blocos cinzas = conteúdo/imagem a definir, linhas tracejadas = região pendente, notas em texto neutro explicam a intenção do projeto. Números, nomes e outorgas são <b>placeholders fictícios</b>. As faixas da Curva ABC aparecem como <code>Faixa A/B/C</code> sem limites, a definir com a SP-Águas.
         </div>
 
+        <div className="note">
+          <b>Convenção de navegação.</b> As pílulas de navegação conduzem à tela exemplar de cada módulo. Os verbos de ação (deferir, indeferir, registrar ciência…) abrem um <b>esboço de baixa fidelidade</b> do despacho, ilustrativo dos campos exigidos e do efeito jurídico do ato; não especificam o formulário definitivo, que será detalhado no TR.
+        </div>
+
         {SURFACES.map((surface, i) => (
           <div key={surface.id}>
             <section className="stack">

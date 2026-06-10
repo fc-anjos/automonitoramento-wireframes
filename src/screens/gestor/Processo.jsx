@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { GestorShell } from '../../components/shell.jsx'
-import { Bento, Card, Panel, Body, Note, Pill, Btn, Row, Grid, Sp } from '../../components/ui.jsx'
+import { Bento, Card, Panel, Body, Note, Pill, Btn, Row, Grid, Sp, Verb } from '../../components/ui.jsx'
 
 // the processo sancionador is its own object, created when the gestor lavra o
 // auto from an apontamento: own number, own timeline, own prazos. the two
@@ -154,7 +154,7 @@ export default function Processo() {
               <tr><td className="mono">1</td><td>Advertência com prazo de correção</td><td><Pill variant="label">superada · grau gravíssima</Pill></td></tr>
               <tr><td className="mono">2</td><td>Multa simples ou diária</td><td><Pill variant="bad">aplicada · diária</Pill></td></tr>
               <tr><td className="mono">3</td><td>Embargo provisório</td><td><Pill variant="warn">não aplicado · prazo de correção correndo</Pill></td></tr>
-              <tr><td className="mono">4</td><td>Embargo definitivo · revogação da outorga</td><td><Link className="pill bad" to="/gestor/cadastro">Encaminhar revogação ao processo de outorga</Link></td></tr>
+              <tr><td className="mono">4</td><td>Embargo definitivo · revogação da outorga</td><td><Verb pill label="Encaminhar revogação ao processo de outorga" variant="bad" note="O encaminhamento se dá a partir do embargo definitivo; a revogação é ato do processo de outorga e o novo estado entra pelo cadastro espelhado." /></td></tr>
             </tbody>
           </table>
           <Body>

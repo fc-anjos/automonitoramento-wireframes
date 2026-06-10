@@ -11,8 +11,8 @@ const OUTORGAS = [
   { id: 'OUT-07-2022-008301', outorgado: 'Serviço de Águas de Praia Grande', forma: 'Concessão', faixa: 'B', mon: 'Autodeclaração', validade: '17/07/2026', estado: 'A vencer · 40 dias', estadoVar: 'warn', acao: 'Triar renovação', to: '/gestor/apontamento' },
   { id: 'OUT-07-2019-004551', outorgado: 'Indústria Têxtil Mongaguá', forma: 'Autorização', faixa: 'C', mon: 'Autodeclaração', validade: '08/2027', estado: 'Dormente · sem uso ~24 m', estadoVar: 'warn', acao: 'Confirmar uso', to: '/gestor/apontamento' },
   { id: 'OUT-07-2021-007121', outorgado: 'Laticínios Itanhaém', forma: 'Autorização', faixa: 'B', mon: 'Autodeclaração', validade: '19/09/2026', estado: 'Condicionante pendente', estadoVar: 'warn', acao: 'Abrir', to: '/gestor/apontamento' },
-  { id: 'OUT-07-2023-011001', outorgado: 'Indústria Química Cubatão', forma: 'Autorização', faixa: 'A', faixaVar: 'act', mon: 'Telemetria', validade: '05/2028', estado: 'Sob auto de infração', estadoVar: 'bad', acao: 'Abrir processo', to: '/gestor/apontamento' },
-  { id: 'OUT-07-2018-009907', outorgado: 'Sítio Recanto · São Vicente', forma: 'Autorização', faixa: 'C', mon: 'Autodeclaração', validade: '31/05/2023', estado: 'Extinta · prazo vencido', acao: 'Ver histórico', to: '/gestor/detalhe' },
+  { id: 'OUT-07-2023-011001', outorgado: 'Indústria Química Cubatão', forma: 'Autorização', faixa: 'A', faixaVar: 'act', mon: 'Telemetria', validade: '05/2028', estado: 'Sob auto de infração', estadoVar: 'bad', acao: 'Abrir processo', to: '/gestor/processo' },
+  { id: 'OUT-07-2018-009907', outorgado: 'Sítio Recanto · São Vicente', forma: 'Autorização', faixa: 'C', mon: 'Autodeclaração', validade: '31/05/2023', estado: 'Extinta · prazo vencido', acao: 'Ver histórico' },
 ]
 
 const OUTORGA_COLS = [
@@ -23,7 +23,7 @@ const OUTORGA_COLS = [
   { key: 'mon', label: 'Monitoramento' },
   { key: 'validade', label: 'Validade', num: true },
   { key: 'estado', label: 'Estado', render: (r) => <Pill variant={r.estadoVar}>{r.estado}</Pill> },
-  { key: 'acao', label: 'Ação do gestor', render: (r) => <Link className="pill" to={r.to}>{r.acao}</Link> },
+  { key: 'acao', label: 'Ação do gestor', render: (r) => r.to ? <Link className="pill" to={r.to}>{r.acao}</Link> : <a className="pill">{r.acao}</a> },
 ]
 
 const top = (
@@ -73,7 +73,7 @@ export default function Cadastro() {
               <div className="lr-sub">Encaminhada a partir do processo sancionador.</div>
             </div>
             <div className="lrow">
-              <div className="lr-top"><span className="lr-title">Extinção e perecimento</span><Link className="pill" to="/gestor/detalhe">Ver histórico · OUT-07-2018-009907</Link></div>
+              <div className="lr-top"><span className="lr-title">Extinção e perecimento</span><a className="pill">Ver histórico · OUT-07-2018-009907</a></div>
               <div className="lr-sub">Formalizados no processo de outorga; OUT-07-2018-009907 extinta por prazo vencido em 31/05.</div>
             </div>
           </Body>

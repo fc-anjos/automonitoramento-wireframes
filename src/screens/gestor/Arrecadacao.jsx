@@ -1,19 +1,28 @@
 import { Link } from 'react-router-dom'
 import { GestorShell } from '../../components/shell.jsx'
-import { Bento, Panel, Body, Note, Pill, Btn, Sp, Row, DataTable } from '../../components/ui.jsx'
+import { Bento, Panel, Body, Note, Pill, Btn, Sp, Row, Verb, DataTable } from '../../components/ui.jsx'
+
+// the only mutation in the ledger: replacing an overdue guia with a 2ª via
+const SEGUNDA_VIA = {
+  fields: ['Novo vencimento · 30 dias ▾'],
+  note: 'A guia vencida é substituída por 2ª via com encargos; a guia original permanece vinculada à substituta.',
+}
 
 // guias are the unbounded object here (87 issued in the exercise across the
 // 312 outorgas); the rows below are the loaded sample. both origins share the
 // same table: multa (processo sancionador) and cobrança pelo uso (períodos).
+// a row keeps `to` only when a real destination exists (GR-2026-0291 → its own
+// processo); view actions without a screen render as dead pills, and the one
+// mutation ("Atualizar (2ª via)") carries `verb` and opens the dispatch stub.
 const GUIAS = [
   { id: 'GR-2026-0291', outorgado: '07-1100 · Indústria Química Cubatão', origem: 'Multa · PAS-07-2026-0007', origemVar: 'bad', valor: 'R$ 90.460,00', venc: '10/07/2026', estado: 'Registrada', acao: 'Ver processo', to: '/gestor/processo' },
-  { id: 'GR-2026-0288', outorgado: '07-1042 · Petroquímica Baixada S/A', origem: 'Multa · PAS-07-2025-0019 · em recurso', origemVar: 'bad', valor: 'R$ 45.230,00', venc: '29/05/2026', estado: 'Vencida · 12 dias', estadoVar: 'bad', acao: 'Atualizar (2ª via)', to: '/gestor/processo' },
-  { id: 'GR-2026-0275', outorgado: '07-1001 · Indústria Cubatão S/A', origem: 'Cobrança pelo uso · 1º tri/2026', valor: 'R$ 18.940,00', venc: '15/05/2026', estado: 'Quitada · PIX', estadoVar: 'ok', acao: 'Comprovante', to: '/gestor/detalhe' },
-  { id: 'GR-2026-0274', outorgado: '07-0830 · Serviço de Águas de Praia Grande', origem: 'Cobrança pelo uso · 1º tri/2026', valor: 'R$ 31.205,00', venc: '15/05/2026', estado: 'Paga · em conciliação', estadoVar: 'act', acao: 'Ver retorno', to: '/gestor/detalhe' },
-  { id: 'GR-2026-0269', outorgado: '07-0712 · Laticínios Itanhaém', origem: 'Cobrança pelo uso · 1º tri/2026', valor: 'R$ 2.184,00', venc: '15/05/2026', estado: 'Substituída · ver GR-2026-0301', estadoVar: 'label', acao: 'Ver vínculo', to: '/gestor/detalhe' },
-  { id: 'GR-2026-0301', outorgado: '07-0712 · Laticínios Itanhaém', origem: 'Cobrança pelo uso · 1º tri/2026 · 2ª via', valor: 'R$ 2.243,00', venc: '20/06/2026', estado: 'Registrada', acao: 'Acompanhar', to: '/gestor/detalhe' },
-  { id: 'GR-2025-0188', outorgado: '07-0455 · Indústria Têxtil Mongaguá', origem: 'Cobrança pelo uso · 4º tri/2025', valor: 'R$ 1.412,00', venc: '15/02/2026', estado: 'Inscrita em dívida ativa', estadoVar: 'bad', acao: 'Ver histórico', to: '/gestor/detalhe' },
-  { id: 'GR-2026-0244', outorgado: '07-1001 · Indústria Cubatão S/A', origem: 'Cobrança pelo uso · 4º tri/2025', valor: 'R$ 17.880,00', venc: '15/02/2026', estado: 'Quitada · CNAB', estadoVar: 'ok', acao: 'Comprovante', to: '/gestor/detalhe' },
+  { id: 'GR-2026-0288', outorgado: '07-1042 · Petroquímica Baixada S/A', origem: 'Multa · PAS-07-2025-0019 · em recurso', origemVar: 'bad', valor: 'R$ 45.230,00', venc: '29/05/2026', estado: 'Vencida · 12 dias', estadoVar: 'bad', acao: 'Atualizar (2ª via)', verb: SEGUNDA_VIA },
+  { id: 'GR-2026-0275', outorgado: '07-1001 · Indústria Cubatão S/A', origem: 'Cobrança pelo uso · 1º tri/2026', valor: 'R$ 18.940,00', venc: '15/05/2026', estado: 'Quitada · PIX', estadoVar: 'ok', acao: 'Comprovante' },
+  { id: 'GR-2026-0274', outorgado: '07-0830 · Serviço de Águas de Praia Grande', origem: 'Cobrança pelo uso · 1º tri/2026', valor: 'R$ 31.205,00', venc: '15/05/2026', estado: 'Paga · em conciliação', estadoVar: 'act', acao: 'Ver retorno' },
+  { id: 'GR-2026-0269', outorgado: '07-0712 · Laticínios Itanhaém', origem: 'Cobrança pelo uso · 1º tri/2026', valor: 'R$ 2.184,00', venc: '15/05/2026', estado: 'Substituída · ver GR-2026-0301', estadoVar: 'label', acao: 'Ver vínculo' },
+  { id: 'GR-2026-0301', outorgado: '07-0712 · Laticínios Itanhaém', origem: 'Cobrança pelo uso · 1º tri/2026 · 2ª via', valor: 'R$ 2.243,00', venc: '20/06/2026', estado: 'Registrada', acao: 'Acompanhar' },
+  { id: 'GR-2025-0188', outorgado: '07-0455 · Indústria Têxtil Mongaguá', origem: 'Cobrança pelo uso · 4º tri/2025', valor: 'R$ 1.412,00', venc: '15/02/2026', estado: 'Inscrita em dívida ativa', estadoVar: 'bad', acao: 'Ver histórico' },
+  { id: 'GR-2026-0244', outorgado: '07-1001 · Indústria Cubatão S/A', origem: 'Cobrança pelo uso · 4º tri/2025', valor: 'R$ 17.880,00', venc: '15/02/2026', estado: 'Quitada · CNAB', estadoVar: 'ok', acao: 'Comprovante' },
 ]
 
 const GUIA_COLS = [
@@ -23,7 +32,11 @@ const GUIA_COLS = [
   { key: 'valor', label: 'Valor', num: true },
   { key: 'venc', label: 'Vencimento', num: true },
   { key: 'estado', label: 'Situação', render: (r) => <Pill variant={r.estadoVar}>{r.estado}</Pill> },
-  { key: 'acao', label: 'Ação', render: (r) => <Link className="pill" to={r.to}>{r.acao}</Link> },
+  { key: 'acao', label: 'Ação', render: (r) => r.verb
+    ? <Verb pill label={r.acao} {...r.verb} />
+    : r.to
+      ? <Link className="pill" to={r.to}>{r.acao}</Link>
+      : <a className="pill">{r.acao}</a> },
 ]
 
 const top = (
@@ -80,7 +93,7 @@ export default function Arrecadacao() {
             <div className="lrow">
               <div className="lr-top"><span className="lr-title">Multa · PAS-07-2026-0007</span><Pill variant="bad">julgamento definitivo</Pill></div>
               <div className="lr-sub">07-1100 · Indústria Química Cubatão (OUT-07-2023-011001) · infração gravíssima</div>
-              <Row style={{ marginTop: 8 }}><Btn sub to="/gestor/processo" style={{ padding: '5px 12px' }}>Conferir cômputo</Btn><Btn variant="act" to="/gestor/processo" style={{ padding: '5px 12px' }}>Confirmar emissão · R$ 90.460,00</Btn></Row>
+              <Row style={{ marginTop: 8 }}><Btn sub to="/gestor/processo" style={{ padding: '5px 12px' }}>Conferir cômputo</Btn><Verb label="Confirmar emissão · R$ 90.460,00" variant="act" style={{ padding: '5px 12px' }} fields={['Memória do cálculo · base × grau · em dobro por reincidência', 'Justificativa da emissão…']} note="O gestor confirma a emissão, não digita o valor." /></Row>
             </div>
             <div className="lrow">
               <div className="lr-top"><span className="lr-title">Cobrança pelo uso · 2º tri/2026</span><Pill>lote periódico</Pill></div>
@@ -113,19 +126,19 @@ export default function Arrecadacao() {
                 <td className="mono">GR-2026-0263</td><td>07-0830 · Serviço de Águas de Praia Grande</td>
                 <td><Pill variant="warn">Pagamento a maior</Pill></td>
                 <td className="num">R$ 1.248,00 × R$ 1.284,00</td>
-                <td><Link className="pill" to="/gestor/detalhe">Resolver com justificativa</Link></td>
+                <td><Verb pill label="Resolver com justificativa" note="A resolução de divergência é ato com justificativa, gravado na trilha." /></td>
               </tr>
               <tr>
                 <td className="mono">GR-2026-0258</td><td>07-0712 · Laticínios Itanhaém</td>
                 <td><Pill variant="warn">Pagamento a menor</Pill></td>
                 <td className="num">R$ 2.184,00 × R$ 2.000,00</td>
-                <td><Link className="pill" to="/gestor/detalhe">Resolver com justificativa</Link></td>
+                <td><Verb pill label="Resolver com justificativa" note="A resolução de divergência é ato com justificativa, gravado na trilha." /></td>
               </tr>
               <tr>
                 <td className="mono">GR-2026-0269</td><td>07-0712 · Laticínios Itanhaém</td>
                 <td><Pill variant="bad">Pagamento após substituição</Pill></td>
                 <td className="num">paga a guia substituída</td>
-                <td><Link className="pill" to="/gestor/detalhe">Resolver com justificativa</Link></td>
+                <td><Verb pill label="Resolver com justificativa" note="A resolução de divergência é ato com justificativa, gravado na trilha." /></td>
               </tr>
             </tbody>
           </table>
@@ -140,7 +153,7 @@ export default function Arrecadacao() {
               <tr>
                 <td className="mono">GR-2026-0288</td><td>07-1042 · Petroquímica Baixada S/A</td>
                 <td className="num">12 dias</td>
-                <td><Link className="pill bad" to="/gestor/processo">Inscrever em dívida ativa</Link></td>
+                <td><Verb pill label="Inscrever em dívida ativa" variant="bad" fields={['Justificativa do encaminhamento…']} note="A inscrição encerra a cobrança administrativa e encaminha o crédito à dívida ativa." /></td>
               </tr>
               <tr>
                 <td className="mono">GR-2025-0188</td><td>07-0455 · Indústria Têxtil Mongaguá</td>
