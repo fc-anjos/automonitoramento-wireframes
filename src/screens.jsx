@@ -19,6 +19,7 @@ import GestorSolicitacoes from './screens/gestor/Solicitacoes.jsx'
 import GestorCadastro from './screens/gestor/Cadastro.jsx'
 import GestorProcesso from './screens/gestor/Processo.jsx'
 import GestorArrecadacao from './screens/gestor/Arrecadacao.jsx'
+import GestorRelatorios from './screens/gestor/Relatorios.jsx'
 import PortalPublico from './screens/portal/Publico.jsx'
 
 export const SURFACES = [
@@ -66,6 +67,7 @@ export const SCREENS = [
   { id: 'gestor-cadastro', surface: 'gestor', num: 'GESTOR · 08', path: '/gestor/cadastro', title: 'Cadastro & administração', blurb: 'Registro de outorgas, usuários e trilhas de auditoria.', Component: GestorCadastro },
   { id: 'gestor-processo', surface: 'gestor', num: 'GESTOR · 09', path: '/gestor/processo', title: 'Processo sancionador', blurb: 'Do auto de infração à decisão: enquadramento e grau, rito com prazos, evidência congelada na lavratura e penalidade.', Component: GestorProcesso },
   { id: 'gestor-arrecadacao', surface: 'gestor', num: 'GESTOR · 10', path: '/gestor/arrecadacao', title: 'Arrecadação', blurb: 'Guias de multa e de cobrança pelo uso: emissão, conciliação bancária, divergências, inadimplência e dívida ativa.', Component: GestorArrecadacao },
+  { id: 'gestor-relatorios', surface: 'gestor', num: 'GESTOR · 11', path: '/gestor/relatorios', title: 'Relatórios e exportações', blurb: 'Paridade com a página de relatórios do SiDeCC: saúde cadastral e fiscalização viram painéis vivos; volumes, consolidações e listagens de ofício seguem exportáveis.', Component: GestorRelatorios },
 
   { id: 'portal-publico', surface: 'portal', num: 'PORTAL · 01', path: '/portal/publico', title: 'Transparência da bacia', blurb: 'Indicadores agregados de uso, mapa público e dados abertos para download.', Component: PortalPublico },
 ]
