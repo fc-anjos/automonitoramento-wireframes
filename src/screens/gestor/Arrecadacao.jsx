@@ -79,14 +79,15 @@ export default function Arrecadacao() {
           <Body className="list">
             <div className="lrow">
               <div className="lr-top"><span className="lr-title">Multa · PAS-07-2026-0007</span><Pill variant="bad">julgamento definitivo</Pill></div>
-              <div className="lr-sub">07-1100 · Indústria Química Cubatão (OUT-07-2023-011001). Valor computado pelo sistema: base × grau (gravíssima) e modificadores, com dobra automática por reincidência em 3 anos quando houver (Resolução ANA 24/2020, art. 27). O gestor <b>confirma a emissão; não digita o valor</b>.</div>
+              <div className="lr-sub">07-1100 · Indústria Química Cubatão (OUT-07-2023-011001) · infração gravíssima</div>
               <Row style={{ marginTop: 8 }}><Btn sub to="/gestor/processo" style={{ padding: '5px 12px' }}>Conferir cômputo</Btn><Btn variant="act" to="/gestor/processo" style={{ padding: '5px 12px' }}>Confirmar emissão · R$ 90.460,00</Btn></Row>
             </div>
             <div className="lrow">
               <div className="lr-top"><span className="lr-title">Cobrança pelo uso · 2º tri/2026</span><Pill>lote periódico</Pill></div>
-              <div className="lr-sub">Calculada a partir dos <b>volumes validados</b> do período: 287 de 312 pontos consolidados. Os 25 restantes aguardam validação e entram no lote complementar; nenhuma guia é emitida a partir de volume retido.</div>
+              <div className="lr-sub">Volumes validados do período · 287 de 312 pontos consolidados</div>
               <Row style={{ marginTop: 8 }}><Btn sub style={{ padding: '5px 12px' }}>Prévia do lote</Btn><Btn variant="act" style={{ padding: '5px 12px' }}>Emitir lote do período</Btn></Row>
             </div>
+            <Note style={{ marginTop: 12, fontSize: 12 }}>Na multa, o valor é computado pelo sistema: base × grau e modificadores, com dobra automática por reincidência em 3 anos quando houver (Resolução ANA 24/2020, art. 27); o gestor <b>confirma a emissão, não digita o valor</b>. No lote periódico, os 25 pontos que aguardam validação entram no lote complementar; <b>nenhuma guia é emitida a partir de volume retido</b>.</Note>
           </Body>
         </Panel>
 

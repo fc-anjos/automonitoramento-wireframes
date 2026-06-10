@@ -61,19 +61,19 @@ export default function Processo() {
               </div>
               <div className="lrow">
                 <div className="lr-top"><span className="lr-title">Grau</span><Pill variant="bad">gravíssima</Pill></div>
-                <div className="lr-sub">Escala leve · média · grave · gravíssima. Sugerido pelo sistema a partir do excesso apurado; confirmado pelo gestor em 05/06.</div>
+                <div className="lr-sub">Sugerido a partir do excesso apurado; confirmado pelo gestor em 05/06.</div>
               </div>
               <div className="lrow">
                 <div className="lr-top"><span className="lr-title">Evento × condição</span><Pill variant="warn">condição · multa diária</Pill></div>
-                <div className="lr-sub">Evento isolado leva a multa simples; condição persistente, a multa diária. Aqui a irregularidade persiste na série telemétrica, por isso a sugestão é diária.</div>
+                <div className="lr-sub">A irregularidade persiste na série telemétrica de 01/05 a 05/06; por isso a sugestão é multa diária, não simples.</div>
               </div>
               <div className="lrow">
                 <div className="lr-top"><span className="lr-title">Atenuantes / agravantes</span><Pill variant="warn">agravante +20%</Pill></div>
-                <div className="lr-sub">20% cada, sobre o valor-base. Nenhuma atenuante reconhecida; uma agravante aplicada.</div>
+                <div className="lr-sub">Nenhuma atenuante reconhecida; uma agravante aplicada, de 20% sobre o valor-base.</div>
               </div>
               <div className="lrow">
                 <div className="lr-top"><span className="lr-title">Reincidência (checagem automática)</span><Pill variant="ok">não constatada</Pill></div>
-                <div className="lr-sub">O sistema varre os processos definitivos da outorga nos últimos 3 anos; reincidência dobra a multa (Resolução ANA 24/2020, art. 27). Nada constatado no triênio: a multa não dobra.</div>
+                <div className="lr-sub">Varredura dos processos definitivos da outorga nos últimos 3 anos · nada constatado · a multa não dobra (Resolução ANA 24/2020, art. 27).</div>
               </div>
             </div>
             <Note style={{ fontSize: 12, marginTop: 12 }}><b>O sistema sugere o enquadramento; o gestor decide.</b> A sugestão é gerada a partir dos dados do apontamento de origem; tipificação, grau e modificadores só valem depois de confirmados pelo gestor, e cada confirmação é um ato datado na trilha.</Note>
@@ -94,7 +94,7 @@ export default function Processo() {
               </div>
               <div className="lrow">
                 <div className="lr-top"><span className="lr-title">Ciência</span><span className="mono faint" style={{ fontSize: 11 }}>09/06 14:30</span></div>
-                <div className="lr-sub">Marco do prazo: toda a contagem corre da ciência, gravada na trilha.</div>
+                <div className="lr-sub">Gravada na trilha · início da contagem do prazo de defesa.</div>
               </div>
               <div className="lrow" style={{ background: 'var(--act-soft)', margin: '0 -14px', paddingLeft: 14, paddingRight: 14 }}>
                 <div className="lr-top"><span className="lr-title">Defesa</span><span className="pill warn" style={{ fontSize: 10.5 }}>fase atual</span></div>
@@ -106,17 +106,18 @@ export default function Processo() {
               </div>
               <div className="lrow">
                 <div className="lr-top"><span className="lr-title faint">Recurso</span><Pill variant="bad" style={{ fontSize: 10.5 }}>sem efeito suspensivo</Pill></div>
-                <div className="lr-sub faint">Prazo parametrizável · conferir DOE. A penalidade vige enquanto o recurso é decidido.</div>
+                <div className="lr-sub faint">Prazo parametrizável · conferir DOE.</div>
               </div>
               <div className="lrow">
                 <div className="lr-top"><span className="lr-title faint">Julgamento de 2ª instância → Definitivo</span><span className="mono faint" style={{ fontSize: 11 }}>a seguir</span></div>
-                <div className="lr-sub faint">O julgamento definitivo gera a guia de recolhimento; o gestor confirma a emissão, não digita o valor.</div>
+                <div className="lr-sub faint">A decisão definitiva gera a guia de recolhimento (bloco 4).</div>
               </div>
               <div className="lrow">
                 <div className="lr-top"><span className="lr-title faint">Cumprimento</span><span className="mono faint" style={{ fontSize: 11 }}>a seguir</span></div>
-                <div className="lr-sub faint">Exige os dois: multa quitada <b>e</b> irregularidade corrigida. O pagamento, isolado, não encerra o processo.</div>
+                <div className="lr-sub faint">Quitação da multa e comprovação da correção pelo outorgado · encerramento pelo gestor.</div>
               </div>
             </div>
+            <Note style={{ fontSize: 12, marginTop: 12 }}>O recurso não suspende a penalidade, que segue vigente enquanto a 2ª instância decide. O encerramento exige multa quitada <b>e</b> irregularidade corrigida; o pagamento, isolado, não encerra o processo.</Note>
           </Body>
         </Panel>
 
@@ -152,7 +153,7 @@ export default function Processo() {
             <tbody>
               <tr><td className="mono">1</td><td>Advertência com prazo de correção</td><td><Pill variant="label">superada · grau gravíssima</Pill></td></tr>
               <tr><td className="mono">2</td><td>Multa simples ou diária</td><td><Pill variant="bad">aplicada · diária</Pill></td></tr>
-              <tr><td className="mono">3</td><td>Embargo provisório</td><td><Pill variant="warn">se a correção descumprir o prazo</Pill></td></tr>
+              <tr><td className="mono">3</td><td>Embargo provisório</td><td><Pill variant="warn">não aplicado · prazo de correção correndo</Pill></td></tr>
               <tr><td className="mono">4</td><td>Embargo definitivo · revogação da outorga</td><td><Link className="pill bad" to="/gestor/cadastro">Encaminhar revogação ao processo de outorga</Link></td></tr>
             </tbody>
           </table>

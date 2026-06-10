@@ -50,17 +50,20 @@ export default function Relatorios() {
           <Body className="list">
             <div className="lrow">
               <div className="lr-top"><span className="lr-title">Usuários com pendências de cadastro</span><Link className="pill" to="/gestor/dashboard">Ver no Dashboard</Link></div>
-              <div className="lr-sub">Usuário ativo sem uso ativo, uso sem portaria ativa, portaria sem frequência. No SiDeCC era consulta manual; aqui é contador permanente no painel de saúde de dados, com drill-down. O relatório permanece para exportação e corte histórico.</div>
+              <div className="lr-sub">Usuário ativo sem uso ativo, uso sem portaria ativa, portaria sem frequência.</div>
             </div>
             <div className="lrow">
               <div className="lr-top"><span className="lr-title">Usos com ato vencido</span><Link className="pill" to="/gestor/pontos">Ver fila</Link></div>
-              <div className="lr-sub">Sem ato vigente após a data final informada, por período de vencimento. Alimenta a lista de pontos como filtro dinâmico; a exportação serve à cobrança de regularização.</div>
+              <div className="lr-sub">Sem ato vigente após a data final informada, por período de vencimento.</div>
             </div>
             <div className="lrow">
               <div className="lr-top"><span className="lr-title">Atos sem declarações ou sem medidores</span><Link className="pill" to="/gestor/dashboard">Ver no Dashboard</Link></div>
-              <div className="lr-sub">Atos vigentes e ativos, de usos ativos, com início de declaração até a data corrente e nenhuma declaração ou medidor cadastrado. É o estoque de omissos de declaração; no painel dinâmico, antecede o apontamento de ausência.</div>
+              <div className="lr-sub">Atos vigentes de usos ativos, com início de declaração até a data corrente e nenhuma declaração ou medidor cadastrado.</div>
             </div>
             <ExportRow act="Exportar corte histórico" />
+            <Note>
+              No SiDeCC eram consultas manuais; aqui são contadores permanentes, com drill-down: pendências de cadastro no painel de saúde de dados, atos vencidos como filtro dinâmico na lista de pontos, e atos sem declaração como estoque de omissos que antecede o apontamento de ausência. A exportação permanece para corte histórico e cobrança de regularização.
+            </Note>
           </Body>
         </Panel>
 
@@ -69,14 +72,17 @@ export default function Relatorios() {
           <Body className="list">
             <div className="lrow">
               <div className="lr-top"><span className="lr-title">Justificativas repetidas</span><Link className="pill warn" to="/gestor/apontamentos">Sinal na triagem</Link></div>
-              <div className="lr-sub">Repetidas por usuário ou por tipo, agrupadas, em período. A mesma justificativa reciclada mês a mês deixa de ser achado de relatório e passa a <b>indicador de recorrência na fila de apontamentos</b>; o relatório permanece para a análise de período.</div>
+              <div className="lr-sub">Justificativas repetidas por usuário ou por tipo, agrupadas, em período.</div>
             </div>
             <div className="lrow">
               <div className="lr-top"><span className="lr-title">Infrações constatadas · deferidas · e recursos</span><Link className="pill" to="/gestor/processo">Visões do processo</Link></div>
-              <div className="lr-sub">No legado, três consultas planas (constatadas por mês e dominialidade; deferidas com prazo de recurso expirado ou recurso analisado; completo com recursos). Aqui são visões do módulo de processo sancionador: cada linha abre o processo, com rito, prazos e evidência congelada.</div>
+              <div className="lr-sub">Infrações constatadas, deferidas e recursos, por mês e dominialidade.</div>
             </div>
             <Filters list={['Período', 'Dominialidade', 'Infração', 'Status']} />
             <ExportRow />
+            <Note>
+              A justificativa reciclada mês a mês deixa de ser achado de relatório e passa a indicador de recorrência na fila de apontamentos; o relatório serve à análise de período. As consultas planas de infrações do legado viraram visões do módulo de processo sancionador, em que cada linha abre o processo com rito, prazos e evidência congelada.
+            </Note>
           </Body>
         </Panel>
 

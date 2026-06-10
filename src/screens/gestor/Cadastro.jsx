@@ -66,21 +66,21 @@ export default function Cadastro() {
           <Body className="list">
             <div className="lrow">
               <div className="lr-top"><span className="lr-title">Renovação, revisão e demais alterações</span><Link className="pill" to="/gestor/solicitacoes">Fila de solicitações</Link></div>
-              <div className="lr-sub">O pedido do outorgado entra pelo aplicativo, é instruído na fila de solicitações e encaminhado ao processo de outorga; o ato que altera a outorga é daquele processo, e a nova validade ou condicionante entra aqui pelo espelho, fechando a exceção "a vencer".</div>
+              <div className="lr-sub">Instruídas na fila de solicitações e encaminhadas ao processo de outorga.</div>
             </div>
             <div className="lrow">
               <div className="lr-top"><span className="lr-title">Revogação por descumprimento</span><Link className="pill bad" to="/gestor/processo">Via processo sancionador</Link></div>
-              <div className="lr-sub">O embargo definitivo enseja a revogação; a plataforma registra o encaminhamento na trilha e o espelho reflete o novo estado. Não há verbo de revogação nesta tela.</div>
+              <div className="lr-sub">Encaminhada a partir do processo sancionador.</div>
             </div>
             <div className="lrow">
-              <div className="lr-top"><span className="lr-title">Extinção e perecimento</span><Pill variant="warn">antecipados pelas exceções</Pill></div>
-              <div className="lr-sub">As exceções "a vencer" e "dormente" antecipam o desfecho do lado da fiscalização; a baixa formal é do processo de outorga e retorna pelo espelho, com o histórico preservado.</div>
+              <div className="lr-top"><span className="lr-title">Extinção e perecimento</span><Link className="pill" to="/gestor/detalhe">Ver histórico · OUT-07-2018-009907</Link></div>
+              <div className="lr-sub">Formalizados no processo de outorga; OUT-07-2018-009907 extinta por prazo vencido em 31/05.</div>
             </div>
           </Body>
         </Panel>
 
         <Note col={12}>
-          O gestor não cria, não altera e não encerra outorga nesta plataforma; instrui, encaminha e fiscaliza. O que o sistema grava de próprio são os sinais de calendário, os encaminhamentos e a trilha, cada qual um ato datado.
+          O gestor não cria, não altera e não encerra outorga nesta plataforma; instrui, encaminha e fiscaliza. No descumprimento, é o embargo definitivo lavrado no processo sancionador que enseja a revogação. O que o sistema grava de próprio são os sinais de calendário, os encaminhamentos e a trilha, cada qual um ato datado.
         </Note>
 
         {/* users & roles: kept, narrowed to the role-asymmetry the firewall cares about */}
@@ -113,15 +113,15 @@ export default function Cadastro() {
           <Body className="list">
             <div className="lrow">
               <div className="lr-top"><span className="lr-title">Criar usuário</span><Pill>ato do gestor</Pill></div>
-              <div className="lr-sub">Conta vinculada à outorga e ao papel; o convite de acesso faz as vezes do ofício de senha do SiDeCC (emissão, prazo e AR), com cada emissão datada na trilha.</div>
+              <div className="lr-sub">Conta vinculada à outorga e ao papel; cada emissão de convite é datada na trilha.</div>
             </div>
             <div className="lrow">
-              <div className="lr-top"><span className="lr-title">Convite e recuperação de conta</span><Pill>substitui o reenvio de senha</Pill></div>
-              <div className="lr-sub">Reenvio de convite e recuperação de conta cobrem o que o reenvio de senha cobria; o uso do link cumpre o papel do AR, comprovando o recebimento.</div>
+              <div className="lr-top"><span className="lr-title">Convite e recuperação de conta</span></div>
+              <div className="lr-sub">O uso do link é registrado na trilha e comprova o recebimento.</div>
             </div>
             <div className="lrow">
-              <div className="lr-top"><span className="lr-title">Inativar usuário</span><Pill variant="warn">inativa, não exclui</Pill></div>
-              <div className="lr-sub">A conta muda de estado e perde o acesso, mas preserva a autoria dos registros já gravados; como a outorga, usuário não é apagado.</div>
+              <div className="lr-top"><span className="lr-title">Inativar usuário</span><Pill>ato do gestor</Pill></div>
+              <div className="lr-sub">A conta perde o acesso; a autoria dos registros já gravados é preservada.</div>
             </div>
           </Body>
         </Panel>
@@ -139,13 +139,13 @@ export default function Cadastro() {
             </div>
             <div className="lrow">
               <div className="lr-top"><span className="lr-title">07-1042 · Petroquímica Baixada S/A</span><Pill variant="warn">login experimental</Pill></div>
-              <div className="lr-sub">Transmissão em teste, validada contra as leituras locais; a promoção a operacional é ato do gestor.</div>
+              <div className="lr-sub">Transmissão em teste, validada contra as leituras locais.</div>
             </div>
           </Body>
         </Panel>
 
         <Note col={12}>
-          Criação e inativação de usuários são <b>atos do gestor</b>, datados na trilha de auditoria como qualquer despacho. O mecanismo de autenticação (convite por e-mail, recuperação de conta ou gov.br) é <b>decisão a explicitar no TR</b>, não a omitir: o equivalente moderno pode superar o desenho do SiDeCC (ofício de senha, prazo, AR, reenvio), mas a escolha precisa estar escrita. Para os usuários de telemetria, a credencial segue o rito do COT-R: é criada como <b>login experimental</b> e só passa a <b>login operacional</b> após a validação da transmissão.
+          Criação e inativação de usuários são <b>atos do gestor</b>, datados na trilha de auditoria como qualquer despacho. O mecanismo de autenticação (convite por e-mail, recuperação de conta ou gov.br) é <b>decisão a explicitar no TR</b>, não a omitir: o equivalente moderno pode superar o desenho do SiDeCC (ofício de senha, prazo, AR, reenvio), mas a escolha precisa estar escrita. Para os usuários de telemetria, a credencial segue o rito do COT-R: é criada como <b>login experimental</b> e só passa a <b>login operacional</b>, por ato do gestor, após a validação da transmissão.
         </Note>
 
       </Bento>

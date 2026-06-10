@@ -73,44 +73,54 @@ export default function Solicitacoes() {
         </Panel>
 
         <Note col={12}>
-          A <b>situação</b> acompanha a etapa do pedido, e não um status genérico. "Aguardando análise" é o pedido recém-protocolado; "Em análise" é o que já está sob instrução, às vezes esperando uma peça do outorgado. As ausências antecipadas ficam em "Aguardando ciência" até o gestor reconhecê-las. Nas interligações à telemetria a situação exibe a <b>etapa do COT-R</b> de cada pedido (proposta em análise · deferida · login experimental · operacional), de modo que a fila mostra onde cada onboarding parou. "Deferida" e "Indeferida" são terminais, mas não somem: o pedido fica arquivado com o despacho fundamentado. A renovação do 07-0830 corre contra o calendário, porque a outorga vence em 17/07.
+          A <b>situação</b> acompanha a etapa do pedido, e não um status genérico. "Aguardando análise" é o pedido recém-protocolado; "Em análise" é o que já está sob instrução, às vezes esperando uma peça do outorgado. As ausências antecipadas ficam em "Aguardando ciência" até o gestor reconhecê-las. Nas interligações à telemetria a situação exibe a <b>etapa do COT-R</b> de cada pedido (proposta em análise · deferida · login experimental · operacional), de modo que a fila mostra onde cada onboarding parou. "Deferida" e "Indeferida" são terminais, mas não somem: o pedido fica arquivado com o despacho fundamentado. Sem medidor ativo, como no 07-0455 após a desativação deferida em 30/04, o ponto declara por medição alternativa até novo equipamento deferido. A renovação do 07-0830 corre contra o calendário, porque a outorga vence em 17/07.
         </Note>
 
-        {/* meter requests: granting them writes the equipment into the point registry */}
-        <Panel col={4} header={<>Medidor · inclusão, troca, desativação <Sp /><Pill variant="label">equipamento</Pill></>}>
-          <Body className="list">
-            <div className="lrow"><div className="lr-top"><span className="lr-title">Inclusão</span><Pill variant="ok">grava no ponto</Pill></div><div className="lr-sub">Equipamento novo com tipo, unidade, número de série, fabricante, modelo e diâmetro. Uma captação pode ter mais de um medidor, cada um com data de inclusão própria.</div></div>
-            <div className="lrow"><div className="lr-top"><span className="lr-title">Troca</span><Pill variant="warn">leituras de remoção e reinstalação</Pill></div><div className="lr-sub">O medidor que sai recebe data de desativação e leitura final; o que entra, data de inclusão e leitura inicial. A série do ponto não se interrompe nem dispara falso retrocesso.</div></div>
-            <div className="lrow"><div className="lr-top"><span className="lr-title">Desativação</span><Pill variant="label">sem substituto</Pill></div><div className="lr-sub">Encerra o equipamento; até novo medidor, o ponto declara por medição alternativa (volume).</div></div>
+        {/* advance absence anchored on the live request: acknowledged, not granted */}
+        <Panel col={5} header={<>Ausência antecipada <Sp /><Pill variant="label">calendário</Pill></>}>
+          <Body>
+            <div className="list">
+              <div className="lrow">
+                <div className="lr-top"><span className="lr-title mono">SOL-2026-0464</span><Pill variant="warn">aguardando ciência</Pill></div>
+                <div className="lr-sub">07-0712 · Laticínios Itanhaém · parada total programada · 01/07 a 31/07</div>
+                <div className="lr-sub" style={{ marginTop: 4 }}>
+                  <Link className="pill ok" to="/gestor/apontamento" style={{ marginRight: 4 }}>Registrar ciência</Link>
+                  <Link className="pill bad" to="/gestor/apontamento">Indeferir</Link>
+                </div>
+              </div>
+            </div>
+            <Note style={{ fontSize: 12, marginTop: 12 }}>A justificativa é protocolada <b>antes</b> do período sem captação. A ciência cobre o calendário do período e suspende a exceção de declaração ausente; o indeferimento devolve o período ao calendário comum.</Note>
           </Body>
         </Panel>
 
-        {/* advance absence: acknowledged, not granted; covers the declaration calendar */}
-        <Panel col={4} header={<>Ausência antecipada <Sp /><Pill variant="label">calendário</Pill></>}>
-          <Body className="list">
-            <div className="lrow"><div className="lr-top"><span className="lr-title">Registrar ciência</span><Pill variant="ok">cobre o período</Pill></div><div className="lr-sub">Reconhece a paralisação informada (parada total, férias coletivas). O período justificado <b>não abre exceção de declaração ausente</b>: o calendário do ponto fica coberto pela justificativa.</div></div>
-            <div className="lrow"><div className="lr-top"><span className="lr-title">Indeferir</span><Pill variant="bad">nega com fundamento</Pill></div><div className="lr-sub">Recusa a justificativa; o período volta ao calendário comum e a falta de declaração gera exceção, como em qualquer ponto.</div></div>
-            <div className="lrow"><div className="lr-sub">A justificativa é <b>antecipada</b>: protocolada antes do período sem captação, com histórico permanente na trilha do ponto.</div></div>
-          </Body>
-        </Panel>
-
-        {/* telemetry onboarding ladder: each stage change is a dated dispatch */}
-        <Panel col={4} header={<>Interligação à telemetria <Sp /><Pill variant="label" className="mono">COT-R</Pill></>}>
-          <Body className="list">
-            <div className="lrow"><div className="lr-top"><span className="lr-title">Proposta em análise</span><Pill variant="warn">etapa 1</Pill></div><div className="lr-sub">Ofício de interligação respondido com a proposta técnica de transmissão em 30 dias, conforme o COT-R; o gestor analisa o desenho.</div></div>
-            <div className="lrow"><div className="lr-top"><span className="lr-title">Deferida</span><Pill variant="ok">etapa 2</Pill></div><div className="lr-sub">Proposta aceita; libera-se a instalação e agenda-se o login experimental.</div></div>
-            <div className="lrow"><div className="lr-top"><span className="lr-title">Login experimental</span><Pill variant="act">etapa 3</Pill></div><div className="lr-sub">Transmissão em paralelo com a autodeclaração, até a validação dos dados recebidos.</div></div>
-            <div className="lrow"><div className="lr-top"><span className="lr-title">Operacional</span><Pill variant="ok">etapa 4</Pill></div><div className="lr-sub">Login definitivo: o ponto passa a declarar por telemetria e a autodeclaração vira contingência para falhas de transmissão.</div></div>
-          </Body>
-        </Panel>
-
-        {/* disposition panel: the verbs the gestor applies to a request */}
-        <Panel col={8} header={<>Despacho da solicitação <Sp /><Pill variant="label">verbos do gestor</Pill></>}>
-          <Body className="list">
-            <div className="lrow"><div className="lr-top"><span className="lr-title">Deferir</span><Pill variant="ok">acata o pedido</Pill></div><div className="lr-sub">Concede o pedido e grava o efeito no objeto certo: o equipamento no cadastro do ponto ou o avanço de etapa da interligação. Nos pedidos sobre a outorga, o despacho instruído aqui é encaminhado ao processo de outorga, e o novo estado entra pelo cadastro espelhado.</div></div>
-            <div className="lrow"><div className="lr-top"><span className="lr-title">Indeferir</span><Pill variant="bad">nega com fundamento</Pill></div><div className="lr-sub">Devolve o pedido com a motivação; o outorgado pode recorrer ou protocolar novamente sanada a causa.</div></div>
-            <div className="lrow"><div className="lr-top"><span className="lr-title">Pedir documento</span><Pill variant="warn">instrução pendente</Pill></div><div className="lr-sub">Suspende o prazo e exige a peça que falta (contrato, projeto, laudo do medidor, complemento da proposta técnica). A solicitação volta para "em análise" quando o documento chega.</div></div>
-            <div className="lrow"><div className="lr-top"><span className="lr-title">Registrar ciência</span><Pill variant="act">reconhece sem deferir</Pill></div><div className="lr-sub">Exclusivo das justificativas antecipadas de ausência: não concede direito novo, apenas grava o reconhecimento e suspende a exceção de declaração ausente no período.</div></div>
+        {/* telemetry onboarding tracked on the live requests, each positioned on its COT-R stage */}
+        <Panel col={7} header={<>Interligação à telemetria <Sp /><Pill variant="label" className="mono">COT-R</Pill></>}>
+          <Body>
+            <div className="list">
+              <div className="lrow">
+                <div className="lr-top"><span className="lr-title mono">SOL-2026-0458</span><Pill variant="warn">etapa 1 · proposta em análise</Pill></div>
+                <div className="lr-sub">07-1042 · Petroquímica Baixada S/A · proposta técnica recebida 30/05</div>
+                <div className="lr-sub" style={{ marginTop: 4 }}>
+                  <Link className="pill ok" to="/gestor/apontamento" style={{ marginRight: 4 }}>Deferir proposta</Link>
+                  <Link className="pill" to="/gestor/apontamento">Pedir complemento</Link>
+                </div>
+              </div>
+              <div className="lrow">
+                <div className="lr-top"><span className="lr-title mono">SOL-2026-0322</span><Pill variant="act">etapa 3 · login experimental</Pill></div>
+                <div className="lr-sub">07-0830 · Serviço de Águas de Praia Grande · transmissão em paralelo com a autodeclaração desde 12/03</div>
+                <div className="lr-sub" style={{ marginTop: 4 }}>
+                  <Link className="pill ok" to="/gestor/apontamento">Tornar operacional</Link>
+                </div>
+              </div>
+              <div className="lrow">
+                <div className="lr-top"><span className="lr-title mono faint">SOL-2026-0301</span><Pill variant="ok">etapa 4 · operacional desde 02/04</Pill></div>
+                <div className="lr-sub">07-1001 · Indústria Cubatão S/A</div>
+                <div className="lr-sub" style={{ marginTop: 4 }}>
+                  <Link className="pill" to="/gestor/detalhe">Ver despacho</Link>
+                </div>
+              </div>
+            </div>
+            <Note style={{ fontSize: 12, marginTop: 12 }}>O onboarding percorre as etapas do COT-R (proposta em análise → deferida → login experimental → operacional), e cada mudança de etapa é um despacho datado.</Note>
           </Body>
         </Panel>
 
@@ -125,8 +135,8 @@ export default function Solicitacoes() {
           </Body>
         </Panel>
 
-        <Note col={12}>
-          O despacho é exclusivo do gestor; ao outorgado cabe <b>solicitar</b>. Cada despacho é um ato datado e imutável na trilha, o que sustenta o devido processo, já que os prazos correm da ciência. Registrar ciência é despacho de menor grau: não defere nem indefere, apenas reconhece e produz o efeito no calendário. Nas interligações, cada mudança de etapa do COT-R é um despacho datado, então a trilha reconstitui o onboarding inteiro. A renovação tempestiva tem efeito de silêncio positivo: o gestor que pretende indeferir precisa fazê-lo dentro do prazo, sob pena de renovação automática.
+        <Note col={8}>
+          O despacho é exclusivo do gestor; ao outorgado cabe <b>solicitar</b>. Cada despacho é um ato datado e imutável na trilha, o que sustenta o devido processo, já que os prazos correm da ciência. <b>Pedir documento</b> suspende o prazo até a peça chegar. Nos pedidos sobre a <b>outorga</b>, o deferimento é encaminhado ao processo de outorga e o novo estado entra pelo cadastro espelhado. Registrar ciência é despacho de menor grau: não defere nem indefere, apenas reconhece. A renovação tempestiva tem efeito de silêncio positivo: o gestor que pretende indeferir precisa fazê-lo dentro do prazo, sob pena de renovação automática.
         </Note>
 
       </Bento>
