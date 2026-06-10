@@ -138,6 +138,10 @@ export default function Detalhe() {
               <tr><td>03/06 21:35</td><td className="num">721.520</td><td className="num">36,1 L/s</td><td><Pill variant="warn">Validado</Pill></td></tr>
             </tbody>
           </table>
+          {/* the plotted series is the captacao aggregate; absence is flagged per medidor */}
+          <Note style={{ margin: 14, fontSize: 12 }}>
+            A série exibida (e os gráficos acima) é o <b>agregado da captação</b>: soma dos medidores ativos (SDC-R-4471 + SDC-R-4472), com decomposição por aparelho disponível. A <b>ausência de declaração</b> é sinalizada por medidor, não pelo ponto.
+          </Note>
         </Panel>
 
         {/* the 98.6% indicator is derived here: received x expected samples vs tolerance */}
@@ -163,11 +167,11 @@ export default function Detalhe() {
             <tbody>
               <tr><td className="mono">SDC-R-4471</td><td>Hidrotec · HT-300 (eletromagnético)</td><td className="num">DN 150</td><td className="num">12/03/2024</td><td className="num">–</td><td><Pill variant="ok">Ativo</Pill></td></tr>
               <tr><td className="mono">SDC-R-4472</td><td>Hidrotec · HT-300 (eletromagnético)</td><td className="num">DN 100</td><td className="num">12/03/2024</td><td className="num">–</td><td><Pill variant="ok">Ativo</Pill></td></tr>
-              <tr><td className="mono">SDC-3198</td><td>Medix · M-200 (hidrômetro)</td><td className="num">DN 150</td><td className="num">03/02/2019</td><td className="num">12/03/2024</td><td><Pill>Desativado</Pill></td></tr>
+              <tr><td className="mono">SDC-3198<br /><span className="muted" style={{ fontSize: 10.5 }}>substituído por SDC-R-4471 em 12/03/2024 · série da captação contínua</span></td><td>Medix · M-200 (hidrômetro)</td><td className="num">DN 150</td><td className="num">03/02/2019</td><td className="num">12/03/2024</td><td><Pill>Desativado</Pill></td></tr>
             </tbody>
           </table>
           <Note style={{ margin: 14, fontSize: 12 }}>
-            Uma captação pode ter <b>mais de um medidor</b>, e cada equipamento tem ciclo de vida próprio: tipo, número de série, fabricante, modelo, diâmetro e as datas de <b>inclusão</b> e <b>desativação</b>. O cadastro e a troca são atos do <b>outorgado</b>, no aplicativo, com as leituras de remoção e de reinstalação que fecham a série de cada aparelho; o gestor confere. Desativar não apaga: o medidor muda de estado e preserva o histórico de leituras.
+            Uma captação pode ter <b>mais de um medidor</b>, e cada equipamento tem ciclo de vida próprio: tipo, número de série, fabricante, modelo, diâmetro e as datas de <b>inclusão</b> e <b>desativação</b>. O cadastro e a troca são atos do <b>outorgado</b>, no aplicativo, com as leituras de remoção e de reinstalação que fecham a série de cada aparelho; o gestor confere. A troca guarda o <b>vínculo de sucessão</b> entre o aparelho desativado e o substituto, e a série de volumes da captação segue contínua. Desativar não apaga: o medidor muda de estado e preserva o histórico de leituras.
           </Note>
         </Panel>
 

@@ -29,7 +29,7 @@ export default function Medidor() {
                 <Btn block style={{ marginTop: 14 }}>+ Cadastrar medidor</Btn>
 
                 {/* one captacao, more than one medidor; each row carries its own lifecycle dates */}
-                <Panel style={{ marginTop: 14 }} header={<>Medidores desta captação <Sp /><Pill variant="label">2 ativos · 1 desativado</Pill></>}>
+                <Panel style={{ marginTop: 14 }} header={<>Medidores desta captação <Sp /><Pill variant="label">2 ativos · 1 aguardando deferimento · 1 desativado</Pill></>}>
                   <Body>
                     <div className="list">
 
@@ -53,11 +53,20 @@ export default function Medidor() {
                         </Row>
                       </div>
 
+                      {/* protocolado, ainda sem efeito: no readings until the gestor defers */}
+                      <div className="lrow">
+                        <div className="lr-top"><span className="lr-title mono">H-30412 · DN 25</span><Pill variant="warn">aguardando deferimento</Pill></div>
+                        <div className="lr-sub">Hidrômetro · Medix · MJ-25 multijato · m³</div>
+                        <div className="lr-sub">Cadastro protocolado em 10/06/2026 · aguarda conferência do gestor</div>
+                        <div className="lr-sub faint">Não recebe leituras até o deferimento.</div>
+                      </div>
+
                       {/* deactivation never deletes: the device keeps its dates and reading history */}
                       <div className="lrow">
                         <div className="lr-top"><span className="lr-title mono faint">H-29553 · DN 32</span><Pill variant="label">desativado</Pill></div>
                         <div className="lr-sub faint">Hidrômetro · Medix · M-32 · m³</div>
                         <div className="lr-sub faint">Incluído em 10/01/2019 · desativado em 14/03/2025 · leitura de remoção registrada</div>
+                        <div className="lr-sub faint">Substituído por H-99281 em 14/03/2025 · série da captação contínua</div>
                         <div className="lr-sub faint">Histórico de leituras preservado</div>
                       </div>
 
@@ -148,7 +157,7 @@ export default function Medidor() {
         </div>
 
         <Note style={{ maxWidth: 760, margin: '22px auto 0' }}>
-          A troca registra um par de leituras tipadas: o medidor que sai recebe a <b>leitura de remoção</b> e a data de desativação; o que entra, a <b>leitura de reinstalação</b> e a data de inclusão. É esse par que mantém a série de volumes contínua e auditável, sem que a queda do valor lido entre um aparelho e outro dispare falso retrocesso.
+          A troca registra um par de leituras tipadas: o medidor que sai recebe a <b>leitura de remoção</b> e a data de desativação; o que entra, a <b>leitura de reinstalação</b> e a data de inclusão. É esse par que cria o <b>vínculo de sucessão</b> entre o aparelho que sai e o substituto e mantém a série de volumes da captação contínua e auditável, sem que a queda do valor lido entre um aparelho e outro dispare falso retrocesso.
         </Note>
 
         <Note style={{ maxWidth: 760, margin: '14px auto 0' }}>

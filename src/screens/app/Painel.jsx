@@ -194,6 +194,10 @@ export default function Painel() {
                       <Pill variant="label">obrigação periódica</Pill>
                     </Row>
                     <div className="muted" style={{ fontSize: 12, marginTop: 5 }}>Periodicidade pela faixa de VM · com foto e GPS</div>
+                    {/* per-device pending count: the period is a set of per-medidor readings */}
+                    <Row style={{ gap: 6, marginTop: 6 }}>
+                      <Pill variant="warn" style={{ fontSize: 10.5 }}>1 de 2 medidores pendente · maio/2026</Pill>
+                    </Row>
                     <Row style={{ justifyContent: 'space-between', alignItems: 'center', marginTop: 8 }}>
                       <span className="mono" style={{ fontSize: 12, color: 'var(--ink)' }}>prazo: declarar até 10/06</span>
                       <span className="faint">›</span>

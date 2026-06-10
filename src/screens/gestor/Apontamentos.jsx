@@ -12,7 +12,7 @@ const FILA = [
   { codigo: '07-0712', nome: 'Laticínios Itanhaém', protocolo: 'AP-0712-A', apontamento: 'Calibração de hidrômetro vencida', natureza: 'Exceção', tipo: 'Condicionante', grau: 'leve', grauVar: 'warn', fase: 'Notificada', prazo: 'recalibrar até 30/06', dono: 'outorgado', proxima: 'Aguardar recalibração credenciada' },
   { codigo: '07-0830', nome: 'Águas de Praia Grande', protocolo: 'AP-0830-A', apontamento: 'Outorga a vencer', natureza: 'Exceção', tipo: 'Calendário', grau: null, fase: 'Notificada', prazo: 'renovar até 17/07', dono: 'outorgado', proxima: 'Aguardar pedido de renovação' },
   { codigo: '07-0455', nome: 'Têxtil Mongaguá', protocolo: 'AP-0455-A', apontamento: 'Sem uso há 2 anos (risco de perecimento)', natureza: 'Exceção', tipo: 'Calendário', grau: null, fase: 'Detectada', prazo: 'regularizar em 12 meses', dono: 'gestor', proxima: 'Confirmar uso ou desativar; perece em 3 anos' },
-  { codigo: '07-1001', nome: 'Indústria Cubatão S/A', protocolo: 'AP-1001-C', apontamento: 'Amostra isolada ausente', natureza: 'Exceção', tipo: 'Qualidade do dado', grau: 'leve', grauVar: 'ok', fase: 'Encerrada', prazo: 'nenhum', dono: 'outorgado', proxima: 'Nenhuma (já retificada)' },
+  { codigo: '07-1001', nome: 'Indústria Cubatão S/A', protocolo: 'AP-1001-C', apontamento: 'Amostra isolada ausente · medidor SDC-R-4472', natureza: 'Exceção', tipo: 'Qualidade do dado', grau: 'leve', grauVar: 'ok', fase: 'Encerrada', prazo: 'nenhum', dono: 'outorgado', proxima: 'Nenhuma (já retificada)' },
 ]
 
 const FILA_COLS = [

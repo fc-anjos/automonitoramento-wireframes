@@ -26,6 +26,31 @@ export default function Autodeclaracao() {
                   <div className="mono" style={{ fontSize: 13, color: 'var(--ink)' }}>OUT-07-2025-008842 · Sítio Boa Vista</div>
                 </Card>
 
+                {/* PERIOD CHECKLIST: the obligation is a set, one reading per active medidor */}
+                <Card style={{ marginTop: 14, padding: 12 }}>
+                  <Row style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+                    <b style={{ fontSize: 13, color: 'var(--ink)' }}>Declaração de maio/2026</b>
+                    <Pill variant="warn">1 de 2 declarada</Pill>
+                  </Row>
+                  <div className="mrow">
+                    <span className="ico">✓</span>
+                    <div className="msp">
+                      <span className="mono" style={{ fontSize: 12, color: 'var(--ink)' }}>H-99281 · DN 50</span>
+                      <div className="muted" style={{ fontSize: 11 }}>declarada em 02/06 · protocolo DCL-07-2026-044871</div>
+                    </div>
+                    <Pill variant="ok" style={{ fontSize: 10.5 }}>declarada</Pill>
+                  </div>
+                  <div className="mrow">
+                    <span className="ico faint">○</span>
+                    <div className="msp">
+                      <span className="mono" style={{ fontSize: 12, color: 'var(--ink)' }}>H-44107 · DN 25</span>
+                      <div className="muted" style={{ fontSize: 11 }}>pendente · é a leitura deste formulário</div>
+                    </div>
+                    <Pill variant="warn" style={{ fontSize: 10.5 }}>pendente</Pill>
+                  </div>
+                  <div className="muted" style={{ fontSize: 11, marginTop: 6 }}>O período fecha quando todos os medidores ativos tiverem leitura.</div>
+                </Card>
+
                 <div className="stack" style={{ marginTop: 14 }}>
                   {/* declaration type: the four sidecc types; equipment swap is a typed reading, not free text */}
                   <div className="field"><span>Tipo de declaração</span>
@@ -39,13 +64,13 @@ export default function Autodeclaracao() {
 
                   {/* meter picker: a captacao can carry more than one medidor; one reading per equipment */}
                   <div className="field"><span>Medidor</span>
-                    <div className="input"><span className="mono" style={{ color: 'var(--ink)', fontSize: 12.5 }}>Hidrômetro · série H-99281 · DN 50</span><span className="sp" style={{ flex: 1 }} /><span className="faint">▾</span></div>
-                    <div className="muted" style={{ fontSize: 11, marginTop: 4 }}>Esta captação tem <b>2 medidores</b> cadastrados (o outro: série H-44107 · DN 25). A leitura é declarada por equipamento.</div>
+                    <div className="input"><span className="mono" style={{ color: 'var(--ink)', fontSize: 12.5 }}>Hidrômetro · série H-44107 · DN 25</span><span className="sp" style={{ flex: 1 }} /><span className="faint">▾</span></div>
+                    <div className="muted" style={{ fontSize: 11, marginTop: 4 }}>Esta captação tem <b>2 medidores ativos</b>; o outro (série H-99281 · DN 50) já declarou neste período. A leitura é declarada por equipamento.</div>
                   </div>
 
                   <label className="field"><span>Leitura atual do hidrômetro (m³)</span>
-                    <div className="input mono" style={{ color: 'var(--ink)', fontSize: 18 }}>004 281,___</div></label>
-                  <div className="muted" style={{ fontSize: 11.5, marginTop: -8 }}>Leitura anterior deste medidor: 004 116 m³ (05/05) · volume captado estimado ~165 m³</div>
+                    <div className="input mono" style={{ color: 'var(--ink)', fontSize: 18 }}>001 938,___</div></label>
+                  <div className="muted" style={{ fontSize: 11.5, marginTop: -8 }}>Leitura anterior deste medidor: 001 893 m³ (05/05) · volume captado estimado ~45 m³</div>
 
                   {/* dial rollover: the one legitimate case where the reading drops on the same meter */}
                   <Card style={{ padding: 12 }}>
@@ -60,7 +85,7 @@ export default function Autodeclaracao() {
                   <Card style={{ padding: 12 }}>
                     <Row style={{ justifyContent: 'space-between', alignItems: 'center' }}><b style={{ fontSize: 13, color: 'var(--ink)' }}>Dentro da sua outorga</b><Pill variant="ok">Plausível</Pill></Row>
                     <div className="muted" style={{ fontSize: 11, marginTop: 2 }}>Sinal de gestão · autovigilância</div>
-                    <div className="mrow"><span className="msp muted" style={{ fontSize: 12 }}>Captado no mês</span><span className="mono" style={{ fontSize: 12 }}>~165 m³ (limite ~1.500/mês)</span></div>
+                    <div className="mrow"><span className="msp muted" style={{ fontSize: 12 }}>Captado no mês</span><span className="mono" style={{ fontSize: 12 }}>~210 m³ · 2 medidores (limite ~1.500/mês)</span></div>
                     <div className="mrow"><span className="msp muted" style={{ fontSize: 12 }}>Acumulado no ano</span><span className="mono" style={{ fontSize: 12 }}>1.142 / 18.000 m³ · 6%</span></div>
                     <Meter value="6%" style={{ marginTop: 6 }} />
                   </Card>
@@ -95,6 +120,10 @@ export default function Autodeclaracao() {
         </div>
 
         <Note style={{ maxWidth: 760, margin: '22px auto 0', fontSize: 12.5 }}>
+          A declaração do período é um <b>conjunto de leituras, uma por equipamento</b>: o período só fecha quando todo medidor ativo da captação tiver a sua. A completude é <b>derivada</b> do conjunto; ninguém a edita. A ausência de declaração é apurada <b>por medidor</b>, inclusive para a imputação pela regra do volume máximo diário: o aparelho silencioso é imputado ainda que o outro tenha declarado.
+        </Note>
+
+        <Note style={{ maxWidth: 760, margin: '14px auto 0', fontSize: 12.5 }}>
           O volume declarado alimenta a <b>cobrança pelo uso da água</b> (FEHIDRO). Declarar a menos não reduz a conta. A <b>subdeclaração</b> é, ao mesmo tempo, erro de cobrança e infração, sujeita a apuração retroativa. A plausibilidade mostrada na tela é só autovigilância do próprio usuário; ela não substitui a reconciliação que o gestor faz do declarado contra o outorgado.
         </Note>
 
