@@ -7,6 +7,7 @@ const POINTS = [
   { id: '07-1100', nome: 'Indústria Química Cubatão', meta: 'Cubatão · Industrial · Faixa A', situacao: 'Indício de fraude na medição · gravíssima', mk: 'bad' },
   { id: '07-1042', nome: 'Petroquímica Baixada S/A', meta: 'Cubatão · Industrial · Faixa A', situacao: 'Volume mensal acima do outorgado · grave', mk: 'bad' },
   { id: '07-1001', nome: 'Indústria Cubatão S/A', meta: 'Cubatão · Industrial · Faixa A', situacao: 'Pico de vazão acima do teto · média', mk: 'warn' },
+  { id: '07-1003', nome: 'Indústria Cubatão S/A', meta: 'Cubatão · Industrial · Faixa B', situacao: 'Conforme · sem apontamento aberto', mk: 'ok' },
   { id: '07-0830', nome: 'Serviço de Águas de Praia Grande', meta: 'Praia Grande · Abastecimento público · Faixa B', situacao: 'Outorga a vencer · renovar até 17/07', mk: 'warn' },
   { id: '07-0712', nome: 'Laticínios Itanhaém', meta: 'Itanhaém · Industrial · Faixa B', situacao: 'Calibração de hidrômetro vencida · leve', mk: 'warn' },
   { id: '07-0455', nome: 'Indústria Têxtil Mongaguá', meta: 'Mongaguá · Industrial · Faixa C', situacao: 'Sem uso há 2 anos (risco de perecimento)', mk: 'warn' },
@@ -16,7 +17,7 @@ const top = (
   <>
     <div className="crumb">Operação / <b style={{ color: 'var(--ink)' }}>Mapa</b></div>
     <span className="sp" />
-    <Pill>Sub-bacia: todas</Pill>
+    <Pill>Sub-bacia: todas ▾</Pill>
     <Pill>Finalidade: todas</Pill>
     <Pill variant="act">Situação: todas</Pill>
   </>
@@ -31,7 +32,7 @@ export default function Mapa() {
   return (
     <GestorShell tag="GESTOR · 02" title="Mapa georreferenciado" right="Pontos de exemplo · SIRGAS 2000" active="mapa" top={top}>
       <Note style={{ marginBottom: 16 }}>
-        <b>O mapa como entrada para a triagem.</b> Cada ponto aparece com a <b>situação do seu pior apontamento aberto</b>: ponto cheio para apontamento crítico (fraude, infração reincidente), ponto hachurado para algo a vencer ou a justificar, ponto vazado para conforme. O gestor parte do território e chega ao ponto; o critério é o mesmo da fila de Apontamentos e do Detalhe. A base real de captações entra na etapa de validação; aqui usamos os pontos do cenário sobre as sub-bacias da UGRHI-07.
+        <b>O mapa como entrada para a triagem.</b> Cada ponto aparece com a <b>situação do seu pior apontamento aberto</b>: ponto cheio para apontamento crítico (fraude, infração reincidente), ponto hachurado para algo a vencer ou a justificar, ponto vazado para conforme. O gestor parte do território e chega ao ponto; o critério é o mesmo da fila de Apontamentos e do Detalhe. A base real de captações entra na etapa de validação; aqui usamos os pontos do cenário sobre as sub-bacias da UGRHI-07. Clicar em uma sub-bacia leva à lista de pontos recortada por ela; clicar em um ponto abre o seu detalhe.
       </Note>
 
       <Bento>
@@ -46,7 +47,7 @@ export default function Mapa() {
           </div>
         </Panel>
 
-        <Panel col={4} header={<>Pontos no mapa <Sp /><Pill variant="label">6 do cenário</Pill></>}>
+        <Panel col={4} header={<>Pontos no mapa <Sp /><Pill variant="label">7 do cenário</Pill></>}>
           <div className="dt-toolbar">
             <label className="input search" style={{ minHeight: 34 }}>
               <span className="faint" aria-hidden>⌕</span>
@@ -68,7 +69,7 @@ export default function Mapa() {
         </Panel>
 
         <Note col={12} style={{ marginTop: 0 }}>
-          A situação de cada ponto é a do <b>pior apontamento aberto</b> sobre ele, pelo mesmo critério das três naturezas: um <b>ato administrativo</b> grave ou gravíssimo, que corre o rito, classifica o ponto como crítico (07-1100, fraude; 07-1042, infração reincidente em defesa); uma <b>exceção</b> a justificar ou um item a vencer deixa o ponto em atenção (07-1001, pico de vazão; 07-0830, renovação; 07-0712, calibração; 07-0455, dormência). Um <b>sinal de gestão</b> isolado, que se autorregula, não muda o pino. Nenhum ponto do cenário está conforme; o estado conforme aparece no Detalhe quando todos os limites do ponto fecham.
+          A situação de cada ponto é a do <b>pior apontamento aberto</b> sobre ele, pelo mesmo critério das três naturezas: um <b>ato administrativo</b> grave ou gravíssimo, que corre o rito, classifica o ponto como crítico (07-1100, fraude; 07-1042, infração reincidente em defesa); uma <b>exceção</b> a justificar ou um item a vencer deixa o ponto em atenção (07-1001, pico de vazão; 07-0830, renovação; 07-0712, calibração; 07-0455, dormência). Um <b>sinal de gestão</b> isolado, que se autorregula, não muda o pino. O ponto sem nenhum apontamento aberto recebe o pino vazado de conforme (07-1003, todos os limites fechados), o mesmo estado que o Detalhe exibe.
         </Note>
       </Bento>
     </GestorShell>

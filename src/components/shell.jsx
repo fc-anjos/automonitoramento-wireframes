@@ -83,7 +83,21 @@ export const GestorSidebar = ({ active }) => (
   <aside className="app-side">
     <div className="brand">
       <div className="logo"><span className="mark">SP</span> Automonitoramento</div>
-      <small>SP-Águas · UGRHI-07</small>
+      <small>SP-Águas</small>
+      {/* Seletor de bacia (sem comportamento, padrão do wireframe): o sistema
+          é multi-bacia; a UGRHI-07 é a bacia-piloto atualmente selecionada. */}
+      <div
+        style={{
+          marginTop: 6, padding: '4px 8px', border: '1.5px solid var(--ink)',
+          borderRadius: 'var(--hand-2)', background: 'var(--surface)',
+          display: 'flex', alignItems: 'baseline', gap: 6,
+          fontFamily: 'var(--sketch)', cursor: 'pointer',
+        }}
+      >
+        <span style={{ fontSize: 9, color: 'var(--muted)', textTransform: 'uppercase', letterSpacing: '0.04em' }}>Bacia</span>
+        <span style={{ fontSize: 11, color: 'var(--ink)', fontWeight: 700 }}>UGRHI-07 · Baixada Santista</span>
+        <span style={{ marginLeft: 'auto', fontSize: 10, color: 'var(--muted)' }}>▾</span>
+      </div>
     </div>
     {GESTOR_NAV.map((n, i) =>
       n.sec

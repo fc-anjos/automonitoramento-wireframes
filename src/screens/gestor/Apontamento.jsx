@@ -4,7 +4,7 @@ import { Bento, Card, Panel, Body, Note, Pill, Btn, Svg, Row, Grid, Sp } from '.
 
 const top = (
   <>
-    <div className="crumb"><Link to="/gestor/pontos">Pontos</Link> / <Link to="/gestor/detalhe">07-1001</Link> / <b style={{ color: 'var(--ink)' }}>protocolo AP-1001-A</b></div>
+    <div className="crumb"><Link to="/gestor/pontos">Pontos</Link> / <Link to="/gestor/pontos">Indústria Cubatão S/A</Link> / <Link to="/gestor/detalhe">07-1001</Link> / <b style={{ color: 'var(--ink)' }}>protocolo AP-1001-A</b></div>
     <span className="sp" />
     <Pill variant="warn">Exceção · grau média</Pill>
     <Pill variant="label">fase Notificada</Pill>

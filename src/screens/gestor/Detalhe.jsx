@@ -14,7 +14,7 @@ const CAL = [
 
 const top = (
   <>
-    <div className="crumb"><Link to="/gestor/mapa">Pontos</Link> / <b style={{ color: 'var(--ink)' }}>07-1001</b></div>
+    <div className="crumb"><Link to="/gestor/mapa">Pontos</Link> / <Link to="/gestor/pontos">Indústria Cubatão S/A</Link> / <b style={{ color: 'var(--ink)' }}>07-1001</b></div>
     <span className="sp" />
     <Pill variant="warn">Exceção · grau média</Pill>
     <Pill variant="label">Sinal de gestão</Pill>
@@ -46,6 +46,16 @@ export default function Detalhe() {
             <div><div className="muted" style={{ fontSize: 11 }}>Medidores</div><div className="mono" style={{ color: 'var(--ink)' }}>2 ativos · 1 desativado</div></div>
             <div><div className="muted" style={{ fontSize: 11 }}>Transmissão (30d)</div><div className="mono" style={{ color: 'var(--ink)' }}>98,6%</div></div>
           </div>
+          <hr className="div" />
+          {/* the outorgado is the titular and may hold other pontos; cross-link, not containment */}
+          <Row style={{ gap: 8, alignItems: 'baseline', flexWrap: 'wrap' }}>
+            <span className="muted" style={{ fontSize: 11 }}>Outras captações deste outorgado</span>
+            <Link to="/gestor/pontos" style={{ color: 'var(--ink)' }}><b className="mono">07-1003</b></Link>
+            <span className="muted" style={{ fontSize: 12 }}>Rio Cubatão · Cubatão · Industrial · Faixa B</span>
+            <Pill variant="ok">Conforme</Pill>
+            <Sp />
+            <Btn sub to="/gestor/pontos" style={{ padding: '4px 10px', fontSize: 11.5 }}>Ver na lista</Btn>
+          </Row>
         </Card>
 
         {/* three series: outorgado x permitido x medido; "permitido" only exists where a restriction rule applies */}

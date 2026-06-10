@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { GestorShell } from '../../components/shell.jsx'
 import { Bento, Panel, Body, Note, Zone, Pill, Btn, Svg, Row, Sp } from '../../components/ui.jsx'
 
@@ -154,11 +155,12 @@ export default function Dashboard() {
           <table className="table">
             <thead><tr><th>Sub-bacia</th><th className="num">Pontos</th><th className="num">Transmissão</th><th className="num">Vol. medido</th><th className="num">Vol. outorgado</th><th>Status</th></tr></thead>
             <tbody>
-              <tr><td>Rio Cubatão</td><td className="num">141</td><td className="num">96,1%</td><td className="num">8,4 hm³</td><td className="num">11,9 hm³</td><td><Pill variant="warn">Atenção</Pill></td></tr>
-              <tr><td>Rio Itapanhaú</td><td className="num">73</td><td className="num">92,0%</td><td className="num">2,1 hm³</td><td className="num">3,0 hm³</td><td><Pill variant="ok">Normal</Pill></td></tr>
-              <tr><td>Drenagem direta (costeira)</td><td className="num">98</td><td className="num">95,3%</td><td className="num">3,7 hm³</td><td className="num">4,5 hm³</td><td><Pill variant="ok">Normal</Pill></td></tr>
+              <tr><td><Link to="/gestor/pontos" style={{ color: 'var(--ink)', textDecoration: 'none' }}><b>Rio Cubatão</b></Link></td><td className="num">141</td><td className="num">96,1%</td><td className="num">8,4 hm³</td><td className="num">11,9 hm³</td><td><Pill variant="warn">Atenção</Pill></td></tr>
+              <tr><td><Link to="/gestor/pontos" style={{ color: 'var(--ink)', textDecoration: 'none' }}><b>Rio Itapanhaú</b></Link></td><td className="num">73</td><td className="num">92,0%</td><td className="num">2,1 hm³</td><td className="num">3,0 hm³</td><td><Pill variant="ok">Normal</Pill></td></tr>
+              <tr><td><Link to="/gestor/pontos" style={{ color: 'var(--ink)', textDecoration: 'none' }}><b>Drenagem direta (costeira)</b></Link></td><td className="num">98</td><td className="num">95,3%</td><td className="num">3,7 hm³</td><td className="num">4,5 hm³</td><td><Pill variant="ok">Normal</Pill></td></tr>
             </tbody>
           </table>
+          <Note style={{ margin: 14, fontSize: 12 }}>A sub-bacia é nível da cadeia de contenção (contém pontos de captação, não outorgados); na navegação, funciona como recorte: clicar no nome abre a lista de pontos já filtrada por ela.</Note>
         </Panel>
 
         {/* SIDE RAIL (span 4): contadores estruturais da bacia */}

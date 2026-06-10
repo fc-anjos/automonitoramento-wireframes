@@ -24,6 +24,12 @@ export default function Autodeclaracao() {
                 <Card style={{ padding: 14 }}>
                   <div className="muted" style={{ fontSize: 12 }}>Outorga</div>
                   <div className="mono" style={{ fontSize: 13, color: 'var(--ink)' }}>OUT-07-2025-008842 · Sítio Boa Vista</div>
+                  {/* captação scope: the declaração binds one level above the medidor; no selector (single-captação user) */}
+                  <hr className="div" style={{ margin: '10px 0' }} />
+                  <Row style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span className="mono" style={{ fontSize: 12.5, color: 'var(--ink)' }}>Captação 07-0884 · poço tubular</span>
+                  </Row>
+                  <div className="muted" style={{ fontSize: 11, marginTop: 4 }}>Única captação deste outorgado · a declaração abrange os medidores deste ponto.</div>
                 </Card>
 
                 {/* PERIOD CHECKLIST: the obligation is a set, one reading per active medidor */}

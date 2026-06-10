@@ -35,7 +35,7 @@ export default function Launcher() {
         <b>Alinhamento de fornecedor</b>
         <span>Dados fictícios</span>
         <span className="sp" />
-        <span>TR Automonitoramento · Baixada Santista · Cenário 4</span>
+        <span>TR Automonitoramento · Bacia-piloto UGRHI-07 (Baixada Santista) · Cenário 4</span>
       </div>
 
       <div className="wrap stack">
@@ -47,6 +47,10 @@ export default function Launcher() {
 
         <div className="note">
           <b>Como ler estas telas.</b> São <b>rascunhos de estrutura</b>, não design final: blocos cinzas = conteúdo/imagem a definir, linhas tracejadas = região pendente, notas em texto neutro explicam a intenção do projeto. Números, nomes e outorgas são <b>placeholders fictícios</b>. As faixas da Curva ABC aparecem como <code>Faixa A/B/C</code> sem limites, a definir com a SP-Águas.
+        </div>
+
+        <div className="note">
+          <b>Modelo de domínio.</b> O sistema é <b>multi-bacia por desenho</b>; estes wireframes instanciam a primeira bacia, a <b>bacia-piloto UGRHI-07 (Baixada Santista)</b>. A cadeia de contenção é <b>bacia → sub-bacia → ponto de captação → medidor</b>. O <b>outorgado</b> é entidade transversal, titular de uma ou mais outorgas/pontos, e não está contido numa sub-bacia.
         </div>
 
         <div className="note">
@@ -72,7 +76,7 @@ export default function Launcher() {
         ))}
 
         <footer style={{ marginTop: 40, paddingTop: 18, borderTop: '1px solid var(--line)' }} className="legend">
-          <span className="mono faint">17 telas · 3 superfícies · UGRHI-07 Baixada Santista</span>
+          <span className="mono faint">17 telas · 3 superfícies · Bacia-piloto UGRHI-07 (Baixada Santista)</span>
         </footer>
       </div>
     </>

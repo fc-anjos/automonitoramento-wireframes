@@ -26,9 +26,12 @@ export default function Publico() {
         </Note>
 
         <header className="stack" style={{ marginTop: 6 }}>
-          <div className="eyebrow">UGRHI-07 · Baixada Santista</div>
-          <h1 style={{ fontSize: 28, maxWidth: '22ch' }}>Uso da água outorgada na UGRHI-07 (Baixada Santista)</h1>
-          <p className="lede">Dados consolidados do sistema de automonitoramento, atualizados a partir das medições de telemetria e das autodeclarações. Valores agregados por sub-bacia, finalidade e período.</p>
+          <Row style={{ gap: 10 }}>
+            <span className="eyebrow">Portal por bacia</span>
+            <div className="input" style={{ minHeight: 32, fontSize: 12, display: 'inline-flex', width: 'auto' }}>Bacia: UGRHI-07 · Baixada Santista <span style={{ marginLeft: 8 }}>▾</span></div>
+          </Row>
+          <h1 style={{ fontSize: 28, maxWidth: '22ch' }}>Uso da água outorgada na bacia</h1>
+          <p className="lede">Dados consolidados do sistema de automonitoramento, atualizados a partir das medições de telemetria e das autodeclarações. Valores agregados por sub-bacia, finalidade e período. O portal é publicado por bacia; na fase piloto, apenas a UGRHI-07 (Baixada Santista) está povoada.</p>
           <div className="muted" style={{ fontSize: 12.5 }}>Dados consolidados até 04/06/2026.</div>
         </header>
 

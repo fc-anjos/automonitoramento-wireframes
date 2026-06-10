@@ -25,10 +25,11 @@ export default function Painel() {
                 {/* identity + situation summary */}
                 <Card style={{ padding: 14 }}>
                   <Row style={{ justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span className="eyebrow">Outorga ativa · 07-1001</span>
+                    {/* dead captação selector: this outorgado holds 2 pontos; the painel routes per captação */}
+                    <span className="eyebrow">Captação 07-1001 <span className="faint">▾</span> · 1 de 2</span>
                     <Pill variant="act">Faixa A</Pill>
                   </Row>
-                  <div className="mono" style={{ fontSize: 13, color: 'var(--ink)', marginTop: 8 }}>OUT-07-2024-001234</div>
+                  <div className="mono" style={{ fontSize: 13, color: 'var(--ink)', marginTop: 8 }}>OUT-07-2024-001234 · outorga ativa</div>
                   <div className="muted" style={{ fontSize: 12.5, marginTop: 2 }}>Indústria Cubatão S/A · Captação superficial</div>
                   <hr className="div" style={{ margin: '12px 0' }} />
                   <Row style={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
@@ -162,10 +163,11 @@ export default function Painel() {
 
                 <Card style={{ padding: 14 }}>
                   <Row style={{ justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span className="eyebrow">Outorga ativa · 07-0830</span>
+                    {/* captação única: no selector, compare with the Cubatão card */}
+                    <span className="eyebrow">Captação 07-0830</span>
                     <Pill>Faixa B</Pill>
                   </Row>
-                  <div className="mono" style={{ fontSize: 13, color: 'var(--ink)', marginTop: 8 }}>OUT-07-2020-000830</div>
+                  <div className="mono" style={{ fontSize: 13, color: 'var(--ink)', marginTop: 8 }}>OUT-07-2020-000830 · outorga ativa</div>
                   <div className="muted" style={{ fontSize: 12.5, marginTop: 2 }}>Serviço de Águas de Praia Grande · Abastecimento público</div>
                   <hr className="div" style={{ margin: '12px 0' }} />
                   <Row style={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
@@ -253,6 +255,10 @@ export default function Painel() {
         </div>
 
         <Note style={{ maxWidth: 760, margin: '22px auto 0' }}>
+          <b>O painel é roteado por captação, não por outorgado.</b> O outorgado que detém mais de um ponto de captação, caso da Indústria Cubatão (2 captações), alterna entre eles pelo seletor no cartão de identificação; cada captação carrega o próprio limite, a própria frequência de declaração e os próprios medidores. O usuário de captação única, como o de Praia Grande ao lado, não vê seletor.
+        </Note>
+
+        <Note style={{ maxWidth: 760, margin: '14px auto 0' }}>
           <b>A frequência de declaração é atributo gerenciado, não convenção.</b> Cada uso carrega uma frequência (mensal, semanal ou diária) derivada das faixas de volume mensal outorgado (Portaria DAEE 5.579/2018, art. 5º; IT-DPO 15/2018), com histórico e alteração somente por ato administrativo do gestor; por isso o painel a exibe sempre, com a próxima data, e o usuário de telemetria conserva o caminho de contingência: em falha de transmissão, declara manualmente. Os <b>avisos institucionais</b> e o <b>canal de contato</b> recuperam superfícies do sistema substituído, que abre num quadro de avisos e mantém as mensagens entre usuário e equipe técnica <b>vinculadas ao cadastro</b>, não dispersas em e-mail. O cartão de <b>Pagamentos</b> é só o atalho da carteira: a guia mais próxima e a sua situação; boleto, PIX e comprovantes vivem na seção própria.
         </Note>
       </div>
