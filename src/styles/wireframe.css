@@ -152,13 +152,15 @@ body.comms { font-family: var(--comm); }
 .bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; align-items: start; }
 .bento > * { min-width: 0; }
 .bento .zone { display: flex; flex-direction: column; gap: 16px; }
-.col-3, .col-4, .col-6, .col-8 { grid-column: 1 / -1; }   /* stacked on narrow */
+.col-3, .col-4, .col-5, .col-6, .col-7, .col-8 { grid-column: 1 / -1; }   /* stacked on narrow */
 .col-12 { grid-column: 1 / -1; }
 @media (min-width: 640px){ .col-3, .col-6 { grid-column: span 6; } }
 @media (min-width: 1000px){
   .col-3 { grid-column: span 3; }
   .col-4 { grid-column: span 4; }
+  .col-5 { grid-column: span 5; }
   .col-6 { grid-column: span 6; }
+  .col-7 { grid-column: span 7; }
   .col-8 { grid-column: span 8; }
 }
 
