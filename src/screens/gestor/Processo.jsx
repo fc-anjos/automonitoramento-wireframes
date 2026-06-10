@@ -76,7 +76,7 @@ export default function Processo() {
                 <div className="lr-sub">O sistema varre os processos definitivos da outorga nos últimos 3 anos; reincidência dobra a multa (Resolução ANA 24/2020, art. 27). Nada constatado no triênio: a multa não dobra.</div>
               </div>
             </div>
-            <Note style={{ fontSize: 12, marginTop: 12 }}><b>O sistema sugere o enquadramento; o gestor decide.</b> A sugestão nasce dos dados do apontamento de origem; tipificação, grau e modificadores só valem depois de confirmados pelo gestor, e cada confirmação é um ato datado na trilha.</Note>
+            <Note style={{ fontSize: 12, marginTop: 12 }}><b>O sistema sugere o enquadramento; o gestor decide.</b> A sugestão é gerada a partir dos dados do apontamento de origem; tipificação, grau e modificadores só valem depois de confirmados pelo gestor, e cada confirmação é um ato datado na trilha.</Note>
           </Body>
         </Panel>
 
@@ -114,7 +114,7 @@ export default function Processo() {
               </div>
               <div className="lrow">
                 <div className="lr-top"><span className="lr-title faint">Cumprimento</span><span className="mono faint" style={{ fontSize: 11 }}>a seguir</span></div>
-                <div className="lr-sub faint">Exige os dois: multa quitada <b>e</b> irregularidade corrigida. Pagar não encerra o processo sozinho.</div>
+                <div className="lr-sub faint">Exige os dois: multa quitada <b>e</b> irregularidade corrigida. O pagamento, isolado, não encerra o processo.</div>
               </div>
             </div>
           </Body>
@@ -145,8 +145,8 @@ export default function Processo() {
           </Body>
         </Panel>
 
-        {/* block 4: penalidade, the art. 50 ladder + computed value + guia */}
-        <Panel col={7} header={<>4 · Penalidade <Sp /><Pill variant="label">escada do art. 50 · Lei 9.433/1997</Pill></>}>
+        {/* block 4: penalidade, the art. 50 gradation + computed value + guia */}
+        <Panel col={7} header={<>4 · Penalidade <Sp /><Pill variant="label">gradação do art. 50 · Lei 9.433/1997</Pill></>}>
           <table className="table">
             <thead><tr><th>Degrau</th><th>Penalidade</th><th>Situação neste processo</th></tr></thead>
             <tbody>
@@ -167,7 +167,7 @@ export default function Processo() {
                 <div className="lr-sub">Emitida pelo sistema no julgamento definitivo, com o valor já computado; o gestor confirma, não digita. <Link to="/gestor/arrecadacao">Acompanhar na Arrecadação</Link>.</div>
               </div>
             </div>
-            <Note style={{ fontSize: 12, marginTop: 12 }}>O embargo definitivo é o desfecho terminal e enseja a <b>revogação por descumprimento</b>, ato do processo de outorga, fora da plataforma: o sistema registra o encaminhamento na trilha e o cadastro espelhado reflete o novo estado. Como em todo o sistema, nada se apaga; a outorga muda de estado com a trilha completa.</Note>
+            <Note style={{ fontSize: 12, marginTop: 12 }}>O embargo definitivo é o desfecho último do rito e enseja a <b>revogação por descumprimento</b>, ato do processo de outorga, fora da plataforma: o sistema registra o encaminhamento na trilha e o cadastro espelhado reflete o novo estado. Como em todo o sistema, nada se apaga; a outorga muda de estado com a trilha completa.</Note>
           </Body>
         </Panel>
 

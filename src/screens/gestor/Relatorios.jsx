@@ -46,7 +46,7 @@ export default function Relatorios() {
       <Bento>
 
         {/* saúde cadastral: referential-integrity queries, absorbed by live surfaces */}
-        <Panel col={6} header={<>Saúde cadastral <Sp /><Pill variant="ok">absorvido · painel vivo</Pill></>}>
+        <Panel col={6} header={<>Saúde cadastral <Sp /><Pill variant="ok">absorvido · painel dinâmico</Pill></>}>
           <Body className="list">
             <div className="lrow">
               <div className="lr-top"><span className="lr-title">Usuários com pendências de cadastro</span><Link className="pill" to="/gestor/dashboard">Ver no Dashboard</Link></div>
@@ -54,11 +54,11 @@ export default function Relatorios() {
             </div>
             <div className="lrow">
               <div className="lr-top"><span className="lr-title">Usos com ato vencido</span><Link className="pill" to="/gestor/pontos">Ver fila</Link></div>
-              <div className="lr-sub">Sem ato vigente após a data final informada, por período de vencimento. Alimenta a lista de pontos como filtro vivo; a exportação serve à cobrança de regularização.</div>
+              <div className="lr-sub">Sem ato vigente após a data final informada, por período de vencimento. Alimenta a lista de pontos como filtro dinâmico; a exportação serve à cobrança de regularização.</div>
             </div>
             <div className="lrow">
               <div className="lr-top"><span className="lr-title">Atos sem declarações ou sem medidores</span><Link className="pill" to="/gestor/dashboard">Ver no Dashboard</Link></div>
-              <div className="lr-sub">Atos vigentes e ativos, de usos ativos, com início de declaração até a data corrente e nenhuma declaração ou medidor cadastrado. É o estoque de silêncio declaratório; no painel vivo, antecede o apontamento de ausência.</div>
+              <div className="lr-sub">Atos vigentes e ativos, de usos ativos, com início de declaração até a data corrente e nenhuma declaração ou medidor cadastrado. É o estoque de omissos de declaração; no painel dinâmico, antecede o apontamento de ausência.</div>
             </div>
             <ExportRow act="Exportar corte histórico" />
           </Body>

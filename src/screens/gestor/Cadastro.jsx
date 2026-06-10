@@ -145,7 +145,7 @@ export default function Cadastro() {
         </Panel>
 
         <Note col={12}>
-          Criação e inativação de usuários são <b>atos do gestor</b>, datados na trilha de auditoria como qualquer despacho. O mecanismo de autenticação (convite por e-mail, recuperação de conta ou gov.br) é <b>decisão a explicitar no TR</b>, não a omitir: o equivalente moderno pode superar o desenho do SiDeCC (ofício de senha, prazo, AR, reenvio), mas a escolha precisa estar escrita. Para os usuários de telemetria, a credencial segue o rito do COT-R: nasce como <b>login experimental</b> e só vira <b>login operacional</b> após a validação da transmissão.
+          Criação e inativação de usuários são <b>atos do gestor</b>, datados na trilha de auditoria como qualquer despacho. O mecanismo de autenticação (convite por e-mail, recuperação de conta ou gov.br) é <b>decisão a explicitar no TR</b>, não a omitir: o equivalente moderno pode superar o desenho do SiDeCC (ofício de senha, prazo, AR, reenvio), mas a escolha precisa estar escrita. Para os usuários de telemetria, a credencial segue o rito do COT-R: é criada como <b>login experimental</b> e só passa a <b>login operacional</b> após a validação da transmissão.
         </Note>
 
       </Bento>

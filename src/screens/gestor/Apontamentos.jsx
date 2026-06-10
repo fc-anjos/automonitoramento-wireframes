@@ -34,7 +34,7 @@ const FILA_COLS = [
   { key: 'proxima', label: 'Próxima ação' },
 ]
 
-// Fila própria de processos sancionadores: exceções e processos não competem
+// Fila própria de processos sancionadores: exceções e processos não se misturam
 // na mesma fila. O processo é objeto próprio (ver gestor/Processo.jsx), criado
 // quando o gestor lavra o auto; aqui a ordem é por prazo: defesas a julgar,
 // ciências pendentes, prazos a vencer. State-law deadlines render as params.
@@ -59,10 +59,10 @@ const PROCESSOS_COLS = [
 ]
 
 // Sinais de gestão: projeções, não infrações. Nada foi excedido; o ritmo aponta
-// para o teto e o sistema avisa. Sem grau, sem prazo, dão baixa sozinhos.
+// para o teto e o sistema avisa. Sem grau, sem prazo, baixa automática.
 const SINAIS = [
   { codigo: '07-1001', nome: 'Indústria Cubatão S/A', base: 'Volume anual', sinal: 'Ritmo projeta estouro do limite', atual: '58%', meter: '58%', meterVar: 'bad', projecao: '116%', nota: 'Reduzir o ritmo para não estourar o anual outorgado' },
-  { codigo: '07-1042', nome: 'Petroquímica Baixada', base: 'Volume mensal', sinal: 'Mês acelerando acima do previsto', atual: '71%', meter: '71%', meterVar: 'warn', projecao: '108%', nota: 'Cai sozinho se o consumo desacelerar' },
+  { codigo: '07-1042', nome: 'Petroquímica Baixada', base: 'Volume mensal', sinal: 'Mês acelerando acima do previsto', atual: '71%', meter: '71%', meterVar: 'warn', projecao: '108%', nota: 'Baixa automática se o consumo desacelerar' },
   { codigo: '07-0830', nome: 'Águas de Praia Grande', base: 'Volume anual', sinal: 'Aproximação do teto', atual: '64%', meter: '64%', meterVar: 'warn', projecao: '103%', nota: 'Margem estreita para o restante do ano' },
 ]
 
@@ -194,7 +194,7 @@ export default function Apontamentos() {
         </Note>
 
         <Note col={12} style={{ marginTop: 4 }}>
-          <b>Exceções e processos não competem na mesma fila.</b> A triagem de apontamentos ordena por gravidade o que ainda aguarda justificativa ou correção; o processo sancionador, criado quando o gestor lavra o auto, é objeto próprio, com número, evidência congelada na lavratura e rito com prazos, e ordena-se pelo que vence primeiro: defesas a julgar, ciências pendentes, prazos a vencer. Os prazos do rito estadual (Portaria DAEE 4.905/2019) aparecem como parâmetros: prazo parametrizável · conferir DOE.
+          <b>Exceções e processos não se misturam na mesma fila.</b> A triagem de apontamentos ordena por gravidade o que ainda aguarda justificativa ou correção; o processo sancionador, criado quando o gestor lavra o auto, é objeto próprio, com número, evidência congelada na lavratura e rito com prazos, e ordena-se pelo que vence primeiro: defesas a julgar, ciências pendentes, prazos a vencer. Os prazos do rito estadual (Portaria DAEE 4.905/2019) aparecem como parâmetros: prazo parametrizável · conferir DOE.
         </Note>
 
       </Bento>

@@ -44,7 +44,7 @@ export default function Pagamentos() {
 
       <div className="wrap">
         <Note style={{ maxWidth: 780, margin: '0 auto 22px' }}>
-          <b>A guia de recolhimento como terceiro objeto.</b> Um módulo único de pagamentos serve às duas correntes financeiras da plataforma: a <b>cobrança pelo uso da água</b> (Lei estadual 12.183/2005, destinada ao FEHIDRO; na Baixada Santista, Deliberação CBH-BS 157/2009), alimentada pelos volumes declarados, e a <b>multa</b> do processo sancionador. A emissão é ato do sistema disparado por ato do gestor, nunca avulsa: o julgamento definitivo gera a guia da multa com valor já computado; a cobrança pelo uso é emitida periodicamente a partir dos volumes validados. Cada guia carrega o seu objeto de origem, o número do processo ou o período de cobrança.
+          <b>A guia de recolhimento como terceiro objeto.</b> Um módulo único de pagamentos serve às duas espécies de receita da plataforma: a <b>cobrança pelo uso da água</b> (Lei estadual 12.183/2005, destinada ao FEHIDRO; na Baixada Santista, Deliberação CBH-BS 157/2009), alimentada pelos volumes declarados, e a <b>multa</b> do processo sancionador. A emissão é ato do sistema disparado por ato do gestor, nunca avulsa: o julgamento definitivo gera a guia da multa com valor já computado; a cobrança pelo uso é emitida periodicamente a partir dos volumes validados. Cada guia carrega o seu objeto de origem, o número do processo ou o período de cobrança.
         </Note>
 
         <div className="phone-stage" style={{ justifyContent: 'center' }}>
@@ -94,7 +94,7 @@ export default function Pagamentos() {
               <HomeBar />
             </Phone>
             <PhoneLabel>Carteira de guias · cada linha abre o detalhe ao lado</PhoneLabel>
-            <Note style={{ marginTop: 14, fontSize: 12, maxWidth: 300 }}>O ciclo de vida da guia: <b>emitida → registrada → paga (aguardando conciliação) → quitada</b>; vencida → <b>atualizada</b> (segunda via com encargos); substituída ou cancelada. A escalada terminal, inscrição em dívida ativa após o prazo, é uma exceção de calendário: cai numa fila do gestor em vez de ocorrer em silêncio.</Note>
+            <Note style={{ marginTop: 14, fontSize: 12, maxWidth: 300 }}>O ciclo de vida da guia: <b>emitida → registrada → paga (aguardando conciliação) → quitada</b>; vencida → <b>atualizada</b> (segunda via com encargos); substituída ou cancelada. A etapa final, inscrição em dívida ativa após o prazo, é uma exceção de calendário: ingressa numa fila do gestor; a inscrição nunca é automática.</Note>
           </div>
 
           {/* DETALHE: a guia da multa, com boleto, pix e vínculo com o processo */}
@@ -158,7 +158,7 @@ export default function Pagamentos() {
         </div>
 
         <Note style={{ maxWidth: 780, margin: '22px auto 0' }}>
-          <b>Ninguém marca "pago" à mão.</b> A situação da guia muda por <b>conciliação bancária</b>: retorno do banco arrecadador (arquivo retorno CNAB 240 ou API de cobrança com webhook) para o boleto registrado, e webhook do prestador de pagamento para o PIX dinâmico, com confirmação instantânea. O ajuste manual existe apenas como ato do gestor com justificativa, gravado na trilha de auditoria como qualquer outro verbo; é a mesma assimetria de poderes dos demais fluxos, aplicada ao dinheiro.
+          <b>Não há baixa manual de pagamento.</b> A situação da guia muda por <b>conciliação bancária</b>: retorno do banco arrecadador (arquivo retorno CNAB 240 ou API de cobrança com webhook) para o boleto registrado, e webhook do prestador de pagamento para o PIX dinâmico, com confirmação instantânea. O ajuste manual existe apenas como ato do gestor com justificativa, gravado na trilha de auditoria como qualquer outro verbo; é a mesma assimetria de poderes dos demais fluxos, aplicada à arrecadação.
         </Note>
       </div>
     </>

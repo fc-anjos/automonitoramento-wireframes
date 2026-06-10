@@ -9,7 +9,7 @@ export default function Apontamento() {
 
       <div className="wrap">
         <Note style={{ maxWidth: 760, margin: '0 auto 22px' }}>
-          <b>Um apontamento, do lado de quem responde.</b> A tela abre o pico de vazão do ponto 07-1001: cabeçalho com a tipagem (natureza, tipo, grau, fase), a linha do tempo das fases e a contagem de prazo. Trata-se de uma <b>exceção</b>: o sistema detectou e pede justificativa em prazo, sem presumir infração, e ela só se baixa por ato do gestor (diferente do sinal de gestão, que se resolve sozinho quando o ritmo cede). O outorgado dispõe apenas dos atos de resposta: pode tomar ciência, justificar, anexar documento e comprovar regularização, mas <b>não encerra</b> o apontamento.
+          <b>Um apontamento, do lado de quem responde.</b> A tela abre o pico de vazão do ponto 07-1001: cabeçalho com a tipagem (natureza, tipo, grau, fase), a linha do tempo das fases e a contagem de prazo. Trata-se de uma <b>exceção</b>: o sistema detectou e pede justificativa em prazo, sem presumir infração, e ela só se baixa por ato do gestor (diferente do sinal de gestão, que tem baixa automática quando o ritmo cede). O outorgado dispõe apenas dos atos de resposta: pode tomar ciência, justificar, anexar documento e comprovar regularização, mas <b>não encerra</b> o apontamento.
         </Note>
 
         <div className="phone-stage" style={{ justifyContent: 'center' }}>
@@ -99,7 +99,7 @@ export default function Apontamento() {
             <PhoneLabel>Apontamento · o outorgado responde, não encerra</PhoneLabel>
 
             <Note style={{ maxWidth: 340, margin: '16px auto 0' }}>
-              A contagem só começa quando você <b>toma ciência</b>: antes disso, o relógio do prazo não corre. Você pode responder (justificar, anexar documento, comprovar correção), mas o apontamento <b>não se encerra por sua ação</b>; quem dá baixa é o gestor, e tudo o que você enviar fica registrado.
+              A contagem só começa quando você <b>toma ciência</b>: antes disso, o prazo não corre. Você pode responder (justificar, anexar documento, comprovar correção), mas o apontamento <b>não se encerra por sua ação</b>; quem dá baixa é o gestor, e tudo o que você enviar fica registrado.
             </Note>
             <Note style={{ maxWidth: 340, margin: '12px auto 0', fontSize: 12 }}>
               Os verbos aqui são só os de quem responde. <b>Notificar, classificar, lavrar auto, julgar e encerrar</b> são ações do gestor e não aparecem neste app.

@@ -101,14 +101,14 @@ export default function Defesa() {
             <PhoneLabel>Auto e defesa · a ciência abre o prazo</PhoneLabel>
 
             <Note style={{ maxWidth: 340, margin: '16px auto 0' }}>
-              O relógio do prazo de defesa só corre a partir da <b>ciência</b>, e o envio da defesa devolve um <b>protocolo com recibo</b>, que fica no histórico do processo. O pacote de evidência foi <b>congelado na lavratura</b>: o que você contesta é exatamente o que o gestor viu.
+              O prazo de defesa só corre a partir da <b>ciência</b>, e o envio da defesa devolve um <b>protocolo com recibo</b>, que fica no histórico do processo. O pacote de evidência foi <b>congelado na lavratura</b>: o que você contesta é exatamente o que o gestor viu.
             </Note>
             <Note style={{ maxWidth: 340, margin: '12px auto 0', fontSize: 12 }}>
               Os prazos do rito estadual (Portaria DAEE 4.905/2019) aparecem como <b>parâmetros</b>, nunca como constantes: prazo parametrizável · conferir DOE.
             </Note>
           </div>
 
-          {/* MOMENT 2: decisão publicada, recurso em prazo, cumprimento ao vivo */}
+          {/* MOMENT 2: decisão publicada, recurso em prazo, cumprimento em tempo real */}
           <div>
             <Phone>
               <Notch />
@@ -150,7 +150,7 @@ export default function Defesa() {
                   <Btn block lg style={{ marginTop: 12 }}>Interpor recurso</Btn>
                 </Card>
 
-                {/* CUMPRIMENTO: guia ao vivo + correção, os dois lado a lado */}
+                {/* CUMPRIMENTO: guia em tempo real + correção, os dois lado a lado */}
                 <Panel style={{ marginTop: 14 }} header={<>Cumprimento · multa e correção<span className="sp" /><Pill variant="warn" style={{ fontSize: 10.5 }}>pendente</Pill></>}>
                   <Body>
                     <div className="mrow">
@@ -158,7 +158,7 @@ export default function Defesa() {
                       <div className="msp">
                         <b style={{ fontSize: 13, color: 'var(--ink)' }}>Guia de recolhimento · multa</b>
                         <div className="muted" style={{ fontSize: 11.5 }}>GRE-07-2026-0090 · emitida em 15/07 · vence 14/08</div>
-                        <div className="faint" style={{ fontSize: 11 }}>situação atualizada por conciliação bancária, nunca à mão</div>
+                        <div className="faint" style={{ fontSize: 11 }}>situação atualizada por conciliação bancária, nunca por edição direta</div>
                       </div>
                       <Pill variant="warn" style={{ fontSize: 10.5 }}>em aberto</Pill>
                     </div>
@@ -189,10 +189,10 @@ export default function Defesa() {
               <AppTabBar active="apontamentos" />
               <HomeBar />
             </Phone>
-            <PhoneLabel>Decisão, recurso e cumprimento ao vivo</PhoneLabel>
+            <PhoneLabel>Decisão, recurso e cumprimento em tempo real</PhoneLabel>
 
             <Note style={{ maxWidth: 340, margin: '16px auto 0' }}>
-              A situação da guia muda por <b>conciliação bancária</b>; ninguém marca "pago" à mão. Cada ato seu (ciência, defesa, recurso) devolve um <b>recibo</b> e entra na trilha de auditoria, que nunca é apagada.
+              A situação da guia muda por <b>conciliação bancária</b>; não há baixa manual. Cada ato seu (ciência, defesa, recurso) devolve um <b>recibo</b> e entra na trilha de auditoria, que nunca é apagada.
             </Note>
             <Note style={{ maxWidth: 340, margin: '12px auto 0', fontSize: 12 }}>
               Os verbos aqui são só os de quem responde. <b>Lavrar, julgar e encerrar</b> são atos do gestor e não aparecem neste app.

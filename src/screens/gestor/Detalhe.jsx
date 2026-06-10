@@ -48,10 +48,6 @@ export default function Detalhe() {
           </div>
         </Card>
 
-        <Card kpi col={4}><div className="k-label">Pico de vazão (4 h)</div><div className="k-value">53</div><div className="k-meta">L/s · <b>118% do teto · exceção</b></div></Card>
-        <Card kpi col={4}><div className="k-label">Volume anual</div><div className="k-value">58%</div><div className="k-meta">consumido · <b>projeção 116%</b></div></Card>
-        <Card kpi col={4}><div className="k-label">Transmissão (30 d)</div><div className="k-value">98,6%</div><div className="k-meta">% · 1 lacuna retificada</div></Card>
-
         {/* three series: outorgado x permitido x medido; "permitido" only exists where a restriction rule applies */}
         <Panel col={8} header={<>Limites outorgados × permitido × medido <Sp /><Pill variant="warn">Estado da vazão · em restrição</Pill><Pill variant="label">conformidade por dimensão</Pill></>}>
           <table className="table">
@@ -110,7 +106,7 @@ export default function Detalhe() {
                 <div className="lr-sub" style={{ marginTop: 4 }}>Próxima ação: nenhuma · tratativa: encerrada</div>
               </Link>
             </div>
-            <Note style={{ fontSize: 12, marginTop: 12 }}>Cada linha é um apontamento tipado pela <b>natureza</b> (sinal de gestão, exceção, ato administrativo), pelo <b>grau</b> e pela <b>fase</b> da tramitação. Um sinal de gestão apenas acompanha e dá baixa sozinho; uma exceção aguarda justificativa em prazo; um ato administrativo segue rito próprio. Abrir um apontamento dá ao gestor os verbos de disposição: notificar, classificar, autuar, julgar. O sinal de gestão não tem grau, porque nada foi excedido ainda.</Note>
+            <Note style={{ fontSize: 12, marginTop: 12 }}>Cada linha é um apontamento tipado pela <b>natureza</b> (sinal de gestão, exceção, ato administrativo), pelo <b>grau</b> e pela <b>fase</b> da tramitação. Um sinal de gestão apenas acompanha e tem baixa automática; uma exceção aguarda justificativa em prazo; um ato administrativo segue rito próprio. Abrir um apontamento dá ao gestor os verbos de disposição: notificar, classificar, autuar, julgar. O sinal de gestão não tem grau, porque nada foi excedido ainda.</Note>
           </Body>
         </Panel>
 

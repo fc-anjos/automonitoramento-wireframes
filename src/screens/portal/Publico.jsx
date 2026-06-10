@@ -1,5 +1,5 @@
 import { DraftBanner } from '../../components/shell.jsx'
-import { Bento, Card, Panel, Body, Note, Pill, Svg, Meter, Row, Sp } from '../../components/ui.jsx'
+import { Bento, Panel, Body, Note, Pill, Svg, Meter, Row, Sp } from '../../components/ui.jsx'
 
 export default function Publico() {
   return (
@@ -29,15 +29,15 @@ export default function Publico() {
           <div className="eyebrow">UGRHI-07 · Baixada Santista</div>
           <h1 style={{ fontSize: 28, maxWidth: '22ch' }}>Uso da água outorgada na UGRHI-07 (Baixada Santista)</h1>
           <p className="lede">Dados consolidados do sistema de automonitoramento, atualizados a partir das medições de telemetria e das autodeclarações. Valores agregados por sub-bacia, finalidade e período.</p>
+          <div className="muted" style={{ fontSize: 12.5 }}>Dados consolidados até 04/06/2026.</div>
         </header>
 
         <Bento>
 
-          {/* public KPIs - strip */}
-          <Card kpi col={3}><div className="k-label">Pontos monitorados</div><div className="k-value">312</div><div className="k-meta">na bacia</div></Card>
-          <Card kpi col={3}><div className="k-label">Volume captado (ano)</div><div className="k-value">14,2 hm³</div><div className="k-meta">de 19,4 hm³ outorgados</div></Card>
-          <Card kpi col={3}><div className="k-label">Pontos com dados recentes</div><div className="k-value">94,8%</div><div className="k-meta">últimos 30 dias</div></Card>
-          <Card kpi col={3}><div className="k-label">Atualizado em</div><div className="k-value" style={{ fontSize: 20 }}>04/06/2026</div><div className="k-meta">dados consolidados</div></Card>
+          {/* figures fold into one caption row; the map is the public headline */}
+          <div className="muted col-12" style={{ fontSize: 13 }}>
+            A bacia em números: <span className="mono">312</span> pontos monitorados · <span className="mono">14,2</span> de <span className="mono">19,4 hm³</span> outorgados captados no ano · <span className="mono">94,8%</span> dos pontos com dados nos últimos 30 dias
+          </div>
 
           {/* map = the public headline */}
           <Panel lead col={8} header={<>Mapa público da bacia <Sp /><Pill variant="label">agregado</Pill></>}>

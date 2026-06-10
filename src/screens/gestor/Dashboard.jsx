@@ -1,5 +1,5 @@
 import { GestorShell } from '../../components/shell.jsx'
-import { Bento, Card, Panel, Body, Note, Zone, Pill, Btn, Svg, Row, Sp } from '../../components/ui.jsx'
+import { Bento, Panel, Body, Note, Zone, Pill, Btn, Svg, Row, Sp } from '../../components/ui.jsx'
 
 const top = (
   <>
@@ -14,50 +14,27 @@ export default function Dashboard() {
   return (
     <GestorShell tag="GESTOR · 01" title="Dashboard de fiscalização" active="dashboard" top={top} bodyStack>
       <Note>
-        <b>Uma visão orientada por exceção.</b> O gestor abre o dashboard para saber o que precisa de ação, então a leitura começa pelos apontamentos por tipo e termina nos contadores estruturais da bacia. Os números são recortáveis por usuário, sub-bacia, município, finalidade e faixa de VM; aqui é a visão geral.
+        <b>Uma visão orientada por exceção.</b> A tela abre pela fila de triagem, o objeto que o gestor veio tratar; os totais por tipo são filtros sobre a fila, não cartões. O recorte (sub-bacia, município, finalidade, faixa de VM) aplica-se a toda a página, e os contadores estruturais da bacia ficam no fim.
       </Note>
 
       <Bento>
-        {/* EXCEPTION TILES por TIPO - the lead */}
-        <Card kpi col={3}>
-          <Row style={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
-            <div className="k-label">Volume</div><Pill variant="label" style={{ padding: '0 7px', fontSize: 10.5 }}>Exceção / Ato administrativo</Pill>
-          </Row>
-          <div className="k-value" style={{ color: 'var(--bad)' }}>2</div>
-          <div className="k-meta">exceções abertas · pior: <b>grave</b> (3 meses acima)</div>
-          <div className="k-meta">+ 1 sinal de gestão (orçamento anual em risco)</div>
-        </Card>
-        <Card kpi col={3}>
-          <Row style={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
-            <div className="k-label">Calendário</div><Pill variant="label" style={{ padding: '0 7px', fontSize: 10.5 }}>Exceção</Pill>
-          </Row>
-          <div className="k-value">2</div>
-          <div className="k-meta">1 outorga a vencer (40 dias)</div>
-          <div className="k-meta">1 dormente · risco de perecimento (~24 meses)</div>
-        </Card>
-        <Card kpi col={3}>
-          <Row style={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
-            <div className="k-label">Condicionante</div><Pill variant="label" style={{ padding: '0 7px', fontSize: 10.5 }}>Exceção</Pill>
-          </Row>
-          <div className="k-value">1</div>
-          <div className="k-meta">calibração de hidrômetro vencida</div>
-          <div className="k-meta">grau leve · recalibrar até 30/06</div>
-        </Card>
-        <Card kpi col={3}>
-          <Row style={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
-            <div className="k-label">Qualidade do dado</div><Pill variant="label" style={{ padding: '0 7px', fontSize: 10.5 }}>Ato administrativo</Pill>
-          </Row>
-          <div className="k-value" style={{ color: 'var(--bad)' }}>1</div>
-          <div className="k-meta">indício de fraude na medição</div>
-          <div className="k-meta">grau <b>gravíssima</b> · autuada</div>
-        </Card>
-
-        <Note col={12} style={{ marginTop: -2 }}>
-          As exceções aparecem por <b>tipo</b> (volume, calendário, condicionante, qualidade do dado), e não reunidas num único grupo de desvios. Calendário e condicionante são dirigidos por data e por obrigação acessória, não por uma leitura cruzada de telemetria, de modo que um pico de vazão e uma calibração vencida não competem pela mesma fila. O <b>grau</b> ordena dentro de cada tipo, e a natureza define o que o apontamento exige: um <b>sinal de gestão</b> se autorregula e baixa sozinho quando o uso volta ao previsto; uma <b>exceção</b> aguarda a justificativa do outorgado em prazo; um <b>ato administrativo</b> já corre o rito sancionador.
-        </Note>
-
         {/* TRIAGE: led by gravest first */}
         <Panel lead col={12} header={<>Triagem por gravidade <Sp /><Pill>6 apontamentos abertos</Pill><Btn sub to="/gestor/apontamentos" style={{ padding: '6px 12px' }}>Todos os apontamentos →</Btn></>}>
+          {/* type chips filter the queue; they replace the old kpi tiles */}
+          <Row style={{ gap: 8, padding: '10px 14px 0', flexWrap: 'wrap' }}>
+            <Pill variant="act">todos · 6</Pill>
+            <Pill variant="label">volume · 2</Pill>
+            <Pill variant="label">calendário · 2</Pill>
+            <Pill variant="label">condicionante · 1</Pill>
+            <Pill variant="label">qualidade do dado · 1</Pill>
+          </Row>
+          {/* recorte applies to the whole page, not only the queue */}
+          <Row style={{ gap: 8, padding: '8px 14px 0', flexWrap: 'wrap' }}>
+            <div className="input" style={{ minHeight: 32, fontSize: 12 }}>Sub-bacia · todas ▾</div>
+            <div className="input" style={{ minHeight: 32, fontSize: 12 }}>Município · todos ▾</div>
+            <div className="input" style={{ minHeight: 32, fontSize: 12 }}>Finalidade · todas ▾</div>
+            <div className="input" style={{ minHeight: 32, fontSize: 12 }}>Faixa de VM · todas ▾</div>
+          </Row>
           <table className="table">
             <thead><tr><th>Apontamento</th><th>Ponto / outorgado</th><th>Tipo</th><th>Natureza</th><th>Grau</th><th className="num">Medido × outorgado</th><th>Fase</th><th>Abrir</th></tr></thead>
             <tbody>
@@ -126,7 +103,7 @@ export default function Dashboard() {
         </Panel>
 
         <Note col={12} style={{ marginTop: -2 }}>
-          A fila lidera pela <b>gravidade</b>: a fraude gravíssima (07-1100) e o volume grave reincidente (07-1042) vêm antes do pico de vazão de grau média e dos achados de calendário sem grau. Um pico isolado de telemetria é uma <b>exceção</b> com ação pedida ao usuário; não constitui infração consumada. O desvio sancionável corre como <b>ato administrativo</b>, caso dos dois primeiros da fila, que já seguem o rito.
+          A fila lidera pela <b>gravidade</b>: a fraude gravíssima (07-1100) e o volume grave reincidente (07-1042) vêm antes do pico de vazão de grau média e dos achados de calendário sem grau. Um pico isolado de telemetria é uma <b>exceção</b> com ação pedida ao usuário; não constitui infração consumada. O desvio sancionável corre como <b>ato administrativo</b>, caso dos dois primeiros da fila, que já seguem o rito. As exceções são tipadas (volume, calendário, condicionante, qualidade do dado) porque calendário e condicionante são dirigidos por data e por obrigação acessória, não por leitura de telemetria; o <b>grau</b> ordena dentro de cada tipo. A natureza define a tratativa: um <b>sinal de gestão</b> tem baixa automática quando o uso volta ao previsto; uma <b>exceção</b> aguarda justificativa em prazo.
         </Note>
 
         {/* sanction + money rails: own queues, never mixed with the triagem */}
@@ -151,7 +128,7 @@ export default function Dashboard() {
               </tr>
             </tbody>
           </table>
-          <Note style={{ margin: 14, fontSize: 12 }}>Fila própria, fora da triagem de apontamentos: exceções e processos não competem na mesma fila. A ordem é pelo que vence primeiro (defesas a julgar, ciências pendentes, prazos a vencer), e os prazos do rito estadual aparecem como parâmetros: prazo parametrizável · conferir DOE.</Note>
+          <Note style={{ margin: 14, fontSize: 12 }}>Fila própria, fora da triagem de apontamentos: exceções e processos não se misturam na mesma fila. A ordem é pelo que vence primeiro (defesas a julgar, ciências pendentes, prazos a vencer), e os prazos do rito estadual aparecem como parâmetros: prazo parametrizável · conferir DOE.</Note>
         </Panel>
         <Panel col={5} header={<>Arrecadação <Sp /><Pill variant="label">emitidas × liquidadas</Pill><Btn sub to="/gestor/arrecadacao" style={{ padding: '6px 12px' }}>Abrir arrecadação →</Btn></>}>
           <table className="table"><tbody>
@@ -161,7 +138,7 @@ export default function Dashboard() {
             <tr><td>Divergências de conciliação</td><td className="num">3</td></tr>
             <tr><td>Aptas à dívida ativa</td><td className="num">1</td></tr>
           </tbody></table>
-          <Note style={{ margin: 14, fontSize: 12 }}>Multa do processo sancionador e cobrança pelo uso na mesma régua: a situação da guia muda por conciliação bancária, nunca à mão, e o agregado destinado ao FEHIDRO alimenta o portal público, sem dados pessoais.</Note>
+          <Note style={{ margin: 14, fontSize: 12 }}>Multa do processo sancionador e cobrança pelo uso sob o mesmo critério: a situação da guia muda por conciliação bancária, nunca por edição direta, e o agregado destinado ao FEHIDRO alimenta o portal público, sem dados pessoais.</Note>
         </Panel>
 
         {/* two co-equal findings */}

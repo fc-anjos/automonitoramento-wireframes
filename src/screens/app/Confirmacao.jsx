@@ -151,7 +151,7 @@ export default function Confirmacao() {
                   <div className="msp">
                     <b style={{ fontSize: 13, color: 'var(--ink)' }}>Volume anual em risco</b>
                     <div className="muted" style={{ fontSize: 11.5 }}>Sinal de gestão · Volume · <b style={{ color: 'var(--ink)' }}>sem fase</b></div>
-                    <div className="faint" style={{ fontSize: 11 }}>desde jun · 58% · projeção 116% · cede sozinho se o ritmo baixar</div>
+                    <div className="faint" style={{ fontSize: 11 }}>desde jun · 58% · projeção 116% · baixa automática se o ritmo baixar</div>
                   </div>
                   <span className="faint">›</span>
                 </div>
@@ -176,7 +176,7 @@ export default function Confirmacao() {
               <HomeBar />
             </Phone>
             <PhoneLabel>Linha do tempo dos apontamentos</PhoneLabel>
-            <Note style={{ marginTop: 14, fontSize: 12, maxWidth: 300 }}>A linha do tempo nunca é apagada. Cada item guarda data, autor e anexos; ao baixar, o apontamento fica arquivado com a trilha completa. Os tipos separam o <b>sinal de gestão</b> (cede sozinho quando o ritmo baixa) da <b>exceção</b> (aguarda justificativa em prazo); só o ato administrativo, quando há, segue rito próprio.</Note>
+            <Note style={{ marginTop: 14, fontSize: 12, maxWidth: 300 }}>A linha do tempo nunca é apagada. Cada item guarda data, autor e anexos; ao baixar, o apontamento fica arquivado com a trilha completa. Os tipos separam o <b>sinal de gestão</b> (tem baixa automática quando o ritmo baixa) da <b>exceção</b> (aguarda justificativa em prazo); só o ato administrativo, quando há, segue rito próprio.</Note>
           </div>
 
         </div>

@@ -152,7 +152,7 @@ export default function Telemetria() {
         </Note>
 
         <Note style={{ maxWidth: 760, margin: '14px auto 0' }}>
-          Os dois apontamentos abertos têm naturezas distintas. O pico é uma <b>exceção</b>: o sistema detectou, atribuiu grau e pede justificativa em prazo, sem presumir infração, e a exceção fica aberta até a resposta. O orçamento em risco é um <b>sinal de gestão</b>: nada foi excedido, é um aviso para reduzir o ritmo e ele se baixa sozinho quando a projeção volta ao limite. Um sinal de gestão não recebe grau; a <b>exceção</b> recebe (aqui, média). Se a exceção não for tratada, pode evoluir para <b>ato administrativo</b>, que aí corre rito próprio.
+          Os dois apontamentos abertos têm naturezas distintas. O pico é uma <b>exceção</b>: o sistema detectou, atribuiu grau e pede justificativa em prazo, sem presumir infração, e a exceção fica aberta até a resposta. O orçamento em risco é um <b>sinal de gestão</b>: nada foi excedido, é um aviso para reduzir o ritmo e tem baixa automática quando a projeção volta ao limite. Um sinal de gestão não recebe grau; a <b>exceção</b> recebe (aqui, média). Se a exceção não for tratada, pode evoluir para <b>ato administrativo</b>, que aí corre rito próprio.
         </Note>
 
         <Note style={{ maxWidth: 760, margin: '14px auto 0', fontSize: 12.5 }}>

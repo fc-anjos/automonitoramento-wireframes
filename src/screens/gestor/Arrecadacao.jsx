@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { GestorShell } from '../../components/shell.jsx'
-import { Bento, Card, Panel, Body, Note, Pill, Btn, Sp, Row, DataTable } from '../../components/ui.jsx'
+import { Bento, Panel, Body, Note, Pill, Btn, Sp, Row, DataTable } from '../../components/ui.jsx'
 
 // guias are the unbounded object here (87 issued in the exercise across the
 // 312 outorgas); the rows below are the loaded sample. both origins share the
@@ -39,47 +39,23 @@ export default function Arrecadacao() {
   return (
     <GestorShell tag="GESTOR · 10" title="Arrecadação" active="arrecadacao" top={top} bodyStack>
       <Note>
-        <b>A guia de recolhimento é o terceiro objeto da plataforma</b>, a jusante do apontamento e do processo. Um módulo único serve às duas correntes financeiras: a <b>multa</b> do processo sancionador e a <b>cobrança pelo uso da água</b> (Lei estadual 12.183/2005, destinada ao FEHIDRO; na Baixada Santista, Deliberação CBH-BS 157/2009), alimentada pelos volumes validados. A situação da guia muda por <b>conciliação bancária</b>, nunca por edição direta; cada guia carrega boleto registrado (linha digitável), QR de PIX dinâmico, vencimento e o objeto de origem (número do processo ou período de cobrança).
+        <b>A guia de recolhimento é o terceiro objeto da plataforma</b>, emitida em decorrência do apontamento e do processo. Um módulo único serve às duas espécies de receita: a <b>multa</b> do processo sancionador e a <b>cobrança pelo uso da água</b> (Lei estadual 12.183/2005, destinada ao FEHIDRO; na Baixada Santista, Deliberação CBH-BS 157/2009), alimentada pelos volumes validados. A situação da guia muda por <b>conciliação bancária</b>, nunca por edição direta; cada guia carrega boleto registrado (linha digitável), QR de PIX dinâmico, vencimento e o objeto de origem (número do processo ou período de cobrança).
       </Note>
 
       <Bento>
-        {/* kpi row: emitidas × liquidadas + the money-side exception queues */}
-        <Card kpi col={3}>
-          <Row style={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
-            <div className="k-label">Guias emitidas</div><Pill variant="label" style={{ padding: '0 7px', fontSize: 10.5 }}>exercício</Pill>
-          </Row>
-          <div className="k-value">87</div>
-          <div className="k-meta">81 de cobrança pelo uso · 6 de multa</div>
-          <div className="k-meta">emissão sempre por ato do gestor</div>
-        </Card>
-        <Card kpi col={3}>
-          <Row style={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
-            <div className="k-label">Liquidadas</div><Pill variant="label" style={{ padding: '0 7px', fontSize: 10.5 }}>conciliação</Pill>
-          </Row>
-          <div className="k-value" style={{ color: 'var(--ok)' }}>71</div>
-          <div className="k-meta">68 quitadas · 3 pagas em conciliação</div>
-          <div className="k-meta">retorno CNAB 240 + webhook PIX</div>
-        </Card>
-        <Card kpi col={3}>
-          <Row style={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
-            <div className="k-label">Inadimplência</div><Pill variant="label" style={{ padding: '0 7px', fontSize: 10.5 }}>vencidas</Pill>
-          </Row>
-          <div className="k-value" style={{ color: 'var(--bad)' }}>9,2%</div>
-          <div className="k-meta">R$ 112,4 mil em aberto após o vencimento</div>
-          <div className="k-meta">1 guia apta à dívida ativa</div>
-        </Card>
-        <Card kpi col={3}>
-          <Row style={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
-            <div className="k-label">Divergências</div><Pill variant="label" style={{ padding: '0 7px', fontSize: 10.5 }}>fila do gestor</Pill>
-          </Row>
-          <div className="k-value" style={{ color: 'var(--warn)' }}>3</div>
-          <div className="k-meta">a maior · a menor · após substituição</div>
-          <div className="k-meta">resolução é ato com justificativa</div>
-        </Card>
-
-        <Note col={12} style={{ marginTop: -2 }}>
-          A leitura começa pelo confronto <b>emitidas × liquidadas</b> e termina nas duas filas que pedem ação: as divergências de conciliação e as guias aptas à dívida ativa. O que liquida sozinho não ocupa o gestor; o painel só destaca o que a conciliação automática não resolve.
-        </Note>
+        {/* the closing table replaces the old kpi cards; it is the boletim idiom,
+            and 9,2% is share of value, not of count (4 of 87 guias) */}
+        <Panel col={12} header={<>Arrecadação do exercício 2026 <Sp /><Pill variant="label">fechamento por origem</Pill></>}>
+          <table className="table">
+            <thead><tr><th>Origem</th><th className="num">Emitidas</th><th className="num">Liquidadas</th><th className="num">Vencidas</th><th className="num">Em aberto</th></tr></thead>
+            <tbody>
+              <tr><td>Cobrança pelo uso</td><td className="num">81</td><td className="num">67</td><td className="num">3</td><td className="num">R$ 67,2 mil</td></tr>
+              <tr><td>Multa</td><td className="num">6</td><td className="num">4</td><td className="num">1</td><td className="num">R$ 45,2 mil</td></tr>
+              <tr><td><b>Total</b></td><td className="num"><b>87</b></td><td className="num"><b>71</b></td><td className="num"><b>4</b></td><td className="num"><b>R$ 112,4 mil</b></td></tr>
+            </tbody>
+          </table>
+          <Note style={{ margin: 14, fontSize: 12 }}>O valor em aberto corresponde a 9,2% do valor emitido no exercício. Das 71 liquidadas, 68 estão quitadas e 3 pagas aguardam conciliação (retorno CNAB 240 e webhook PIX). As pendências que exigem ato do gestor estão nas filas abaixo: 3 divergências de conciliação e 1 guia apta à dívida ativa.</Note>
+        </Panel>
 
         {/* the ledger: every guia, both origins, lifecycle in the state column */}
         <Panel lead col={12} header={<>Guias de recolhimento <Sp /><Pill variant="label">multa + cobrança pelo uso</Pill><Btn sub to="/gestor/processo" style={{ padding: '6px 12px' }}>Processos sancionadores →</Btn></>}>
@@ -95,7 +71,7 @@ export default function Arrecadacao() {
         </Panel>
 
         <Note col={12}>
-          O <b>ciclo de vida</b> está na coluna de situação: emitida → registrada → paga (aguardando conciliação) → quitada; vencida → atualizada (segunda via com encargos, caso GR-2026-0301); substituída ou cancelada, sempre com vínculo à guia que a sucede; e a escalada terminal, a <b>inscrição em dívida ativa</b>. A multa em recurso (GR-2026-0288) permanece exigível porque o recurso corre <b>sem efeito suspensivo</b> (Portaria DAEE 4.905/2019; prazo parametrizável · conferir DOE); se o recurso for provido após o pagamento, o vínculo guia ↔ processo é o que torna a restituição rastreável.
+          O <b>ciclo de vida</b> está na coluna de situação: emitida → registrada → paga (aguardando conciliação) → quitada; vencida → atualizada (segunda via com encargos, caso GR-2026-0301); substituída ou cancelada, sempre com vínculo à guia que a sucede; e a etapa final, a <b>inscrição em dívida ativa</b>. A multa em recurso (GR-2026-0288) permanece exigível porque o recurso corre <b>sem efeito suspensivo</b> (Portaria DAEE 4.905/2019; prazo parametrizável · conferir DOE); se o recurso for provido após o pagamento, o vínculo guia ↔ processo é o que torna a restituição rastreável.
         </Note>
 
         {/* emissão: system act triggered by gestor act, never freehand */}
@@ -108,7 +84,7 @@ export default function Arrecadacao() {
             </div>
             <div className="lrow">
               <div className="lr-top"><span className="lr-title">Cobrança pelo uso · 2º tri/2026</span><Pill>lote periódico</Pill></div>
-              <div className="lr-sub">Calculada a partir dos <b>volumes validados</b> do período: 287 de 312 pontos consolidados. Os 25 restantes aguardam validação e entram no lote complementar; nenhuma guia nasce de volume retido.</div>
+              <div className="lr-sub">Calculada a partir dos <b>volumes validados</b> do período: 287 de 312 pontos consolidados. Os 25 restantes aguardam validação e entram no lote complementar; nenhuma guia é emitida a partir de volume retido.</div>
               <Row style={{ marginTop: 8 }}><Btn sub style={{ padding: '5px 12px' }}>Prévia do lote</Btn><Btn variant="act" style={{ padding: '5px 12px' }}>Emitir lote do período</Btn></Row>
             </div>
           </Body>
@@ -124,7 +100,7 @@ export default function Arrecadacao() {
               <tr><td>Drenagem direta (costeira)</td><td className="num">27</td><td className="num">2</td><td className="num">R$ 44,3 mil</td><td><Pill variant="warn">Atenção</Pill></td></tr>
             </tbody>
           </table>
-          <Note style={{ margin: 14, fontSize: 12 }}>O mesmo recorte territorial do dashboard, aplicado ao dinheiro: a inadimplência concentrada numa sub-bacia orienta a fiscalização, e o agregado (arrecadação destinada ao FEHIDRO) é o que o portal público recebe, sem dados pessoais.</Note>
+          <Note style={{ margin: 14, fontSize: 12 }}>O mesmo recorte territorial do dashboard, aplicado à arrecadação: a inadimplência concentrada numa sub-bacia orienta a fiscalização, e o agregado (arrecadação destinada ao FEHIDRO) é o que o portal público recebe, sem dados pessoais.</Note>
         </Panel>
 
         {/* conciliação queue: what the automatic return could not settle */}
@@ -152,7 +128,7 @@ export default function Arrecadacao() {
               </tr>
             </tbody>
           </table>
-          <Note style={{ margin: 14, fontSize: 12 }}>O retorno bancário (arquivo CNAB 240 ou API de cobrança com webhook; PIX dinâmico com confirmação instantânea) liquida sozinho o caso normal. O que sobra cai aqui: resolver uma divergência é <b>ato do gestor com justificativa</b>, gravado na trilha como qualquer outro verbo, seja compensar a diferença, exigir complemento ou transferir o pagamento à guia substituta.</Note>
+          <Note style={{ margin: 14, fontSize: 12 }}>O retorno bancário (arquivo CNAB 240 ou API de cobrança com webhook; PIX dinâmico com confirmação instantânea) liquida automaticamente o caso normal. O que resta ingressa nesta fila: resolver uma divergência é <b>ato do gestor com justificativa</b>, gravado na trilha como qualquer outro verbo, seja compensar a diferença, exigir complemento ou transferir o pagamento à guia substituta.</Note>
         </Panel>
 
         {/* dívida ativa: a calendar exception, lands in a queue, never silent */}
@@ -172,11 +148,11 @@ export default function Arrecadacao() {
               </tr>
             </tbody>
           </table>
-          <Note style={{ margin: 14, fontSize: 12 }}>Esgotado o prazo após o vencimento (prazo parametrizável · conferir DOE), o sistema abre a exceção de calendário e a guia <b>cai nesta fila</b>; a inscrição nunca ocorre em silêncio. O verbo é do gestor, datado e fundamentado, e a guia muda para o estado terminal preservando o histórico.</Note>
+          <Note style={{ margin: 14, fontSize: 12 }}>Esgotado o prazo após o vencimento (prazo parametrizável · conferir DOE), o sistema abre a exceção de calendário e a guia <b>é encaminhada a esta fila</b>; a inscrição nunca é automática. O verbo é do gestor, datado e fundamentado, e a guia muda para o estado definitivo preservando o histórico.</Note>
         </Panel>
 
         <Note col={12}>
-          <b>Ninguém marca "pago" à mão.</b> A situação da guia muda por conciliação bancária; o ajuste manual existe apenas como <b>ato do gestor com justificativa</b>, gravado na trilha de auditoria como qualquer outro verbo. É a mesma assimetria de poderes das demais telas, aplicada ao dinheiro: o outorgado paga e acompanha; emitir, atualizar, resolver divergência e inscrever em dívida ativa são atos do gestor.
+          <b>Não há baixa manual de pagamento.</b> A situação da guia muda por conciliação bancária; o ajuste manual existe apenas como <b>ato do gestor com justificativa</b>, gravado na trilha de auditoria como qualquer outro verbo. É a mesma assimetria de poderes das demais telas, aplicada à arrecadação: o outorgado paga e acompanha; emitir, atualizar, resolver divergência e inscrever em dívida ativa são atos do gestor.
         </Note>
 
         {/* immutable audit trail: system events and gestor acts, interleaved */}
@@ -189,7 +165,7 @@ export default function Arrecadacao() {
             <tr><td className="mono faint" style={{ fontSize: 11 }}>29/05 00:00</td><td>Sistema abriu exceção de calendário: GR-2026-0288 vencida sem liquidação (multa · PAS-07-2025-0019)</td></tr>
             <tr><td className="mono faint" style={{ fontSize: 11 }}>15/04 11:30</td><td>Sistema emitiu lote de cobrança 1º tri/2026 (81 guias, volumes validados) confirmado pelo gestor</td></tr>
           </tbody></table>
-          <Note style={{ margin: 14, fontSize: 12 }}>A trilha mistura deliberadamente eventos do sistema (conciliação, abertura de exceções) com atos do gestor (resolução de divergência, inscrição em dívida ativa). Como encargos e escaladas correm de datas, cada marco fica gravado e é imutável.</Note>
+          <Note style={{ margin: 14, fontSize: 12 }}>A trilha mistura deliberadamente eventos do sistema (conciliação, abertura de exceções) com atos do gestor (resolução de divergência, inscrição em dívida ativa). Como encargos e prazos contam-se de datas certas, cada marco fica gravado e é imutável.</Note>
         </Panel>
 
       </Bento>
