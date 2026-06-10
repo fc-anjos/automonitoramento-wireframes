@@ -153,7 +153,7 @@ export default function Processo() {
               <tr><td className="mono">1</td><td>Advertência com prazo de correção</td><td><Pill variant="label">superada · grau gravíssima</Pill></td></tr>
               <tr><td className="mono">2</td><td>Multa simples ou diária</td><td><Pill variant="bad">aplicada · diária</Pill></td></tr>
               <tr><td className="mono">3</td><td>Embargo provisório</td><td><Pill variant="warn">se a correção descumprir o prazo</Pill></td></tr>
-              <tr><td className="mono">4</td><td>Embargo definitivo · revogação da outorga</td><td><Link className="pill bad" to="/gestor/cadastro">Revogar por descumprimento</Link></td></tr>
+              <tr><td className="mono">4</td><td>Embargo definitivo · revogação da outorga</td><td><Link className="pill bad" to="/gestor/cadastro">Encaminhar revogação ao processo de outorga</Link></td></tr>
             </tbody>
           </table>
           <Body>
@@ -167,7 +167,7 @@ export default function Processo() {
                 <div className="lr-sub">Emitida pelo sistema no julgamento definitivo, com o valor já computado; o gestor confirma, não digita. <Link to="/gestor/arrecadacao">Acompanhar na Arrecadação</Link>.</div>
               </div>
             </div>
-            <Note style={{ fontSize: 12, marginTop: 12 }}>O embargo definitivo é o desfecho terminal e liga este processo ao Cadastro: executa o verbo <b>Revogar por descumprimento</b> que aquela tela já possui. Como em todo o sistema, nada se apaga; a outorga muda de estado com a trilha completa.</Note>
+            <Note style={{ fontSize: 12, marginTop: 12 }}>O embargo definitivo é o desfecho terminal e enseja a <b>revogação por descumprimento</b>, ato do processo de outorga, fora da plataforma: o sistema registra o encaminhamento na trilha e o cadastro espelhado reflete o novo estado. Como em todo o sistema, nada se apaga; a outorga muda de estado com a trilha completa.</Note>
           </Body>
         </Panel>
 

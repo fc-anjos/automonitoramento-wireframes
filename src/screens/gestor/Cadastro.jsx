@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom'
 import { GestorShell } from '../../components/shell.jsx'
-import { Bento, Panel, Body, Note, Pill, Btn, Sp, DataTable } from '../../components/ui.jsx'
+import { Bento, Panel, Body, Note, Pill, Sp, DataTable } from '../../components/ui.jsx'
 
-// The registry is the unbounded object (312 outorgas in the scenario); the rows
-// below are the loaded sample. DataTable adds the search / count / pager the
-// static sketch lacked.
+// The outorga registry lives in the SP-Águas outorga process, outside this
+// platform; this screen mirrors it read-only via integration. The registry is
+// still the unbounded object (312 outorgas in the scenario); the rows below
+// are the loaded sample. DataTable adds the search / count / pager.
 const OUTORGAS = [
   { id: 'OUT-07-2024-001234', outorgado: 'Indústria Cubatão S/A', forma: 'Autorização', faixa: 'A', faixaVar: 'act', mon: 'Telemetria', validade: '12/03/2029', estado: 'Vigente', estadoVar: 'ok', acao: 'Abrir', to: '/gestor/detalhe' },
   { id: 'OUT-07-2022-008301', outorgado: 'Serviço de Águas de Praia Grande', forma: 'Concessão', faixa: 'B', mon: 'Autodeclaração', validade: '17/07/2026', estado: 'A vencer · 40 dias', estadoVar: 'warn', acao: 'Triar renovação', to: '/gestor/apontamento' },
@@ -30,7 +31,7 @@ const top = (
     <div className="crumb">Dados / <b style={{ color: 'var(--ink)' }}>Cadastro & admin</b></div>
     <span className="sp" />
     <div className="input search" style={{ minHeight: 36 }}><span className="faint">Buscar outorga / outorgado…</span></div>
-    <Btn sub style={{ padding: '6px 12px' }}>+ Outorga</Btn>
+    <Pill variant="label">espelho · integração com o processo de outorga</Pill>
   </>
 )
 
@@ -38,13 +39,13 @@ export default function Cadastro() {
   return (
     <GestorShell tag="GESTOR · 08" title="Cadastro & administração" active="cadastro" top={top}>
       <Note style={{ marginBottom: 16 }}>
-        <b>Registro e ciclo de vida da outorga.</b> A outorga é uma licença com prazo: nasce no cadastro, vence, pode ser renovada, revista, revogada, e extingue-se ou perece sozinha por desuso. Esta tela concentra esse ciclo de vida do lado do gestor: o cadastro das outorgas, a fila de solicitações do outorgado (renovação, redução, transferência, desativação) que o gestor defere ou indefere, e a trilha de auditoria. Outorga não é apagada: ao encerrar, muda de estado e preserva o histórico. Os verbos de disposição (deferir, revisar, revogar) são exclusivos do gestor; o outorgado apenas solicita.
+        <b>O cadastro da outorga não vive nesta plataforma.</b> A outorga é emitida, renovada, revista, revogada e extinta no processo de outorga da SP-Águas; esta tela <b>espelha</b> esse cadastro por integração, em modo de leitura, e concentra o que é próprio da plataforma: os parâmetros por ponto que alimentam a reconciliação e os apontamentos, os perfis de acesso, as credenciais e a trilha de auditoria. As exceções de calendário (a vencer, dormente) continuam abertas aqui, como sinais de fiscalização; o desfecho é ato do processo de outorga e retorna pelo espelho.
       </Note>
 
       <Bento>
 
-        {/* the registry is the main object: each row carries the lifecycle state */}
-        <Panel lead col={12} header={<>Outorgas cadastradas <Sp /><Pill variant="label">ciclo de vida no estado</Pill></>}>
+        {/* the registry is the main object, mirrored: each row carries the lifecycle state */}
+        <Panel lead col={12} header={<>Cadastro de outorgas · espelho <Sp /><Pill variant="label">somente leitura · ciclo de vida no estado</Pill></>}>
           <DataTable
             columns={OUTORGA_COLS}
             rows={OUTORGAS}
@@ -57,55 +58,29 @@ export default function Cadastro() {
         </Panel>
 
         <Note col={12}>
-          O <b>estado</b> corresponde à etapa do ciclo de vida da outorga, e não a um status genérico. "A vencer" e "Dormente" são exceções dirigidas por calendário, abertas automaticamente pela reconciliação contra a própria data da outorga: a primeira chama renovação antes do vencimento; a segunda antecipa o perecimento, que opera de pleno direito após três anos de não uso. "Extinta" é o término do prazo sem pedido tempestivo de renovação. Nenhuma some por exclusão: muda de estado e fica registrada.
+          O <b>estado</b> corresponde à etapa do ciclo de vida da outorga, e não a um status genérico, e vem do espelho: a fonte é o cadastro mantido no processo de outorga. "A vencer" e "Dormente" são exceções dirigidas por calendário, abertas automaticamente pela reconciliação contra a própria data da outorga espelhada: a primeira chama renovação antes do vencimento; a segunda antecipa o perecimento, que opera de pleno direito após três anos de não uso. "Extinta" é o término do prazo sem pedido tempestivo de renovação, formalizado na fonte e refletido aqui. Nenhuma some por exclusão: muda de estado e fica registrada.
         </Note>
 
-        {/* solicitações: the gestor's CRUD verb over outorgado requests (defer/indefer) */}
-        <Panel col={8} header={<>Solicitações do outorgado <Sp /><Pill variant="label">a despachar</Pill></>}>
-          <table className="table">
-            <thead><tr><th>Protocolo</th><th>Outorga / outorgado</th><th>Tipo</th><th className="num">Recebida</th><th>Situação</th><th>Despacho</th></tr></thead>
-            <tbody>
-              <tr>
-                <td className="mono">SOL-2026-0461</td><td>07-0830 · Serviço de Águas de Praia Grande</td>
-                <td>Renovação</td><td className="num">02/06</td>
-                <td><Pill variant="warn">Em análise</Pill></td>
-                <td><Link className="pill ok" to="/gestor/apontamento">Deferir</Link> <Link className="pill bad" to="/gestor/apontamento">Indeferir</Link></td>
-              </tr>
-              <tr>
-                <td className="mono">SOL-2026-0448</td><td>07-1001 · Indústria Cubatão S/A</td>
-                <td>Redução de vazão</td><td className="num">28/05</td>
-                <td><Pill variant="warn">Em análise</Pill></td>
-                <td><Link className="pill ok" to="/gestor/apontamento">Deferir</Link> <Link className="pill bad" to="/gestor/apontamento">Indeferir</Link></td>
-              </tr>
-              <tr>
-                <td className="mono">SOL-2026-0432</td><td>07-0455 · Indústria Têxtil Mongaguá</td>
-                <td>Desativação</td><td className="num">22/05</td>
-                <td><Pill variant="warn">Aguardando comprovação</Pill></td>
-                <td><Link className="pill" to="/gestor/apontamento">Exigir relatório</Link></td>
-              </tr>
-              <tr>
-                <td className="mono">SOL-2026-0410</td><td>07-1042 · Petroquímica Baixada S/A</td>
-                <td>Transferência de titularidade</td><td className="num">15/05</td>
-                <td><Pill variant="ok">Deferida</Pill></td>
-                <td><Link className="pill" to="/gestor/detalhe">Ver</Link></td>
-              </tr>
-            </tbody>
-          </table>
-        </Panel>
-
-        {/* disposition panel: the lifecycle verbs the gestor can apply to a registry record */}
-        <Panel col={4} header={<>Disposição da outorga <Sp /><Pill variant="label">verbos do gestor</Pill></>}>
+        {/* outorga acts happen in the outorga process; this panel routes, never executes */}
+        <Panel col={12} header={<>Atos sobre a outorga <Sp /><Pill variant="label">fora da plataforma · refletidos pelo espelho</Pill></>}>
           <Body className="list">
-            <div className="lrow"><div className="lr-top"><span className="lr-title">Renovar</span><Pill>5 / 10 anos</Pill></div><div className="lr-sub">Defere a continuidade; preserva características técnicas e nova validade.</div></div>
-            <div className="lrow"><div className="lr-top"><span className="lr-title">Revisar</span><Pill>a qualquer tempo</Pill></div><div className="lr-sub">Ajusta limites ou condicionantes do registro vigente.</div></div>
-            <div className="lrow"><div className="lr-top"><span className="lr-title">Revogar</span><Pill variant="bad">por descumprimento</Pill></div><div className="lr-sub">Encerra por infração ou interesse público; não apaga, inativa.</div></div>
-            <div className="lrow"><div className="lr-top"><span className="lr-title">Declarar extinta</span><Pill>prazo vencido</Pill></div><div className="lr-sub">Término sem renovação tempestiva; estado terminal com histórico.</div></div>
-            <div className="lrow"><div className="lr-top"><span className="lr-title">Reconhecer perecimento</span><Pill variant="warn">3 anos sem uso</Pill></div><div className="lr-sub">A dormente caduca de pleno direito; o gestor formaliza a baixa.</div></div>
+            <div className="lrow">
+              <div className="lr-top"><span className="lr-title">Renovação, revisão e demais alterações</span><Link className="pill" to="/gestor/solicitacoes">Fila de solicitações</Link></div>
+              <div className="lr-sub">O pedido do outorgado entra pelo aplicativo, é instruído na fila de solicitações e encaminhado ao processo de outorga; o ato que altera a outorga é daquele processo, e a nova validade ou condicionante entra aqui pelo espelho, fechando a exceção "a vencer".</div>
+            </div>
+            <div className="lrow">
+              <div className="lr-top"><span className="lr-title">Revogação por descumprimento</span><Link className="pill bad" to="/gestor/processo">Via processo sancionador</Link></div>
+              <div className="lr-sub">O embargo definitivo enseja a revogação; a plataforma registra o encaminhamento na trilha e o espelho reflete o novo estado. Não há verbo de revogação nesta tela.</div>
+            </div>
+            <div className="lrow">
+              <div className="lr-top"><span className="lr-title">Extinção e perecimento</span><Pill variant="warn">antecipados pelas exceções</Pill></div>
+              <div className="lr-sub">As exceções "a vencer" e "dormente" antecipam o desfecho do lado da fiscalização; a baixa formal é do processo de outorga e retorna pelo espelho, com o histórico preservado.</div>
+            </div>
           </Body>
         </Panel>
 
         <Note col={12}>
-          O gestor detém os atos que alteram o registro; o outorgado apenas <b>solicita</b>. Deferir uma renovação grava nova validade e fecha a exceção "a vencer"; indeferir devolve o pedido com fundamento. A desativação fecha quando o outorgado comprova a remoção dos equipamentos, por isso a situação fica "aguardando comprovação", não deferida de imediato. Cada despacho é um ato datado na trilha.
+          O gestor não cria, não altera e não encerra outorga nesta plataforma; instrui, encaminha e fiscaliza. O que o sistema grava de próprio são os sinais de calendário, os encaminhamentos e a trilha, cada qual um ato datado.
         </Note>
 
         {/* users & roles: kept, narrowed to the role-asymmetry the firewall cares about */}
@@ -125,7 +100,7 @@ export default function Cadastro() {
             <tr><td className="mono faint" style={{ fontSize: 11 }}>05/06 16:40</td><td>Gestor classificou 07-1100 como gravíssima e lavrou auto</td></tr>
             <tr><td className="mono faint" style={{ fontSize: 11 }}>04/06 14:05</td><td>Sistema sinalizou 07-0830 a vencer (renovar até 17/07)</td></tr>
             <tr><td className="mono faint" style={{ fontSize: 11 }}>03/06 09:30</td><td>Sistema sinalizou 07-0455 dormente (sem uso ~24 meses)</td></tr>
-            <tr><td className="mono faint" style={{ fontSize: 11 }}>31/05 00:00</td><td>OUT-07-2018-009907 declarada extinta por prazo vencido</td></tr>
+            <tr><td className="mono faint" style={{ fontSize: 11 }}>31/05 00:00</td><td>Espelho refletiu OUT-07-2018-009907 extinta por prazo vencido</td></tr>
           </tbody></table>
         </Panel>
 
