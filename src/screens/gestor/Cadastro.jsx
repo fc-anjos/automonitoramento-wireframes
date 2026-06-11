@@ -39,7 +39,7 @@ export default function Cadastro() {
   return (
     <GestorShell tag="GESTOR · 08" title="Cadastro & administração" active="cadastro" top={top}>
       <Note style={{ marginBottom: 16 }}>
-        <b>O cadastro da outorga não vive nesta plataforma.</b> A outorga é emitida, renovada, revista, revogada e extinta no <b>Sistema de Outorga Eletrônica (SOE)</b>; esta tela <b>espelha</b> esse cadastro por integração, em modo de leitura, e concentra o que é próprio da plataforma: os parâmetros por ponto que alimentam a reconciliação e os apontamentos, os perfis de acesso, as credenciais e a trilha de auditoria. As exceções de calendário (a vencer, dormente) continuam abertas aqui, como sinais de fiscalização; o desfecho é formalizado no SOE e retorna pelo espelho.
+        <b>O cadastro da outorga não vive nesta plataforma.</b> A outorga é emitida, renovada, revista, revogada e extinta no <b>Sistema de Outorga Eletrônica (SOE)</b>; esta tela <b>espelha</b> esse cadastro por integração, em modo de leitura, e concentra o que é próprio da plataforma: os parâmetros por ponto que alimentam a reconciliação e os apontamentos, os perfis de acesso e as credenciais. Cada ato praticado aqui é gravado na <Link to="/gestor/auditoria">trilha de auditoria</Link>, que tem tela própria. As exceções de calendário (a vencer, dormente) continuam abertas aqui, como sinais de fiscalização; o desfecho é formalizado no SOE e retorna pelo espelho.
       </Note>
 
       <Bento>
@@ -93,20 +93,16 @@ export default function Cadastro() {
           </tbody></table>
         </Panel>
 
-        {/* immutable audit trail: who, when, which act */}
-        <Panel col={6} header={<>Últimos eventos <Sp /><Pill variant="label">cadastro espelhado</Pill></>}>
+        {/* local slice: cadastro + credential events only. the whole platform
+            ledger lives on GESTOR · 12, reached by "Abrir trilha". */}
+        <Panel col={6} header={<>Últimos eventos <Sp /><Pill variant="label">cadastro e credenciais</Pill><Link className="pill" to="/gestor/auditoria">Abrir trilha</Link></>}>
           <table className="table"><tbody>
-            <tr><td className="mono faint" style={{ fontSize: 11 }}>06/06 11:18</td><td>Gestor M. Souza recebeu SOL-2026-0461 (renovação · 07-0830)</td></tr>
-            <tr><td className="mono faint" style={{ fontSize: 11 }}>05/06 16:40</td><td>Gestor classificou 07-1100 como gravíssima e lavrou auto</td></tr>
+            <tr><td className="mono faint" style={{ fontSize: 11 }}>07/06 14:30</td><td>Gestor M. Souza criou usuário e emitiu convite (07-1042 · login experimental)</td></tr>
             <tr><td className="mono faint" style={{ fontSize: 11 }}>04/06 14:05</td><td>Sistema sinalizou 07-0830 a vencer (renovar até 17/07)</td></tr>
             <tr><td className="mono faint" style={{ fontSize: 11 }}>03/06 09:30</td><td>Sistema sinalizou 07-0455 dormente (sem uso ~24 meses)</td></tr>
             <tr><td className="mono faint" style={{ fontSize: 11 }}>31/05 00:00</td><td>Espelho refletiu OUT-07-2018-009907 extinta por prazo vencido</td></tr>
           </tbody></table>
         </Panel>
-
-        <Note col={12}>
-          Este painel mostra os últimos eventos do cadastro espelhado: quem, quando, origem e efeito. A trilha sustenta o devido processo porque prazos correm da ciência, e a data de cada marco precisa estar gravada e ser imutável.
-        </Note>
 
         {/* credentials: gestor acts over accounts, the modern heir of the sidecc password oficio */}
         <Panel col={7} header={<>Credenciais e acesso <Sp /><Pill variant="label">atos na trilha</Pill></>}>
