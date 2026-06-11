@@ -4,14 +4,16 @@ import { Bento, Panel, Body, Note, Pill, Svg, Meter, Row, Sp } from '../../compo
 export default function Publico() {
   return (
     <>
-      <DraftBanner tag="PORTAL · 01" title="Portal público de transparência" right="Dados agregados · LGPD" />
+      <DraftBanner tag="PORTAL · 01" title="Transparência da bacia" right="Dados agregados · LGPD" />
 
       {/* public site header */}
       <div style={{ background: 'var(--surface)', borderBottom: '1px solid var(--line)' }}>
         <div className="wrap" style={{ padding: '14px 24px', display: 'flex', alignItems: 'center', gap: 14 }}>
-          <div className="logo" style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 700, color: 'var(--ink)' }}><span style={{ width: 28, height: 28, borderRadius: 7, background: 'var(--act)', display: 'grid', placeItems: 'center', color: '#fff', font: '700 11px var(--mono)' }}>SP</span> SP-Águas · Automonitoramento</div>
+          <div className="logo" style={{ display: 'flex', alignItems: 'center', gap: 8, fontWeight: 700, color: 'var(--ink)' }}>
+            <span style={{ width: 28, height: 28, borderRadius: 7, background: 'var(--act)', display: 'grid', placeItems: 'center', color: '#fff', font: '700 11px var(--mono)' }}>SP</span>
+            SP-Águas · Automonitoramento
+          </div>
           <span className="sp" style={{ flex: 1 }} />
-          <a className="nav-i" style={{ display: 'none' }}>x</a>
           <span className="muted" style={{ fontSize: 13 }}>Indicadores</span>
           <span className="muted" style={{ fontSize: 13 }}>Mapa</span>
           <span className="muted" style={{ fontSize: 13 }}>Dados abertos</span>
@@ -30,19 +32,19 @@ export default function Publico() {
             <span className="eyebrow">Portal por bacia</span>
             <div className="input" style={{ minHeight: 32, fontSize: 12, display: 'inline-flex', width: 'auto' }}>Bacia: UGRHI-07 · Baixada Santista <span style={{ marginLeft: 8 }}>▾</span></div>
           </Row>
-          <h1 style={{ fontSize: 28, maxWidth: '22ch' }}>Uso da água outorgada na bacia</h1>
+          <h1 style={{ fontSize: 28, maxWidth: '22ch' }}>Transparência da bacia</h1>
           <p className="lede">Dados consolidados do sistema de automonitoramento, atualizados a partir das medições de telemetria e das autodeclarações. Valores agregados por sub-bacia, finalidade e período. O portal é publicado por bacia; na fase piloto, apenas a UGRHI-07 (Baixada Santista) está povoada.</p>
           <div className="muted" style={{ fontSize: 12.5 }}>Dados consolidados até 04/06/2026.</div>
         </header>
 
         <Bento>
 
-          {/* figures fold into one caption row; the map is the public headline */}
+          {/* bacia-em-números caption row */}
           <div className="muted col-12" style={{ fontSize: 13 }}>
             A bacia em números: <span className="mono">312</span> pontos monitorados · <span className="mono">14,2</span> de <span className="mono">19,4 hm³</span> outorgados captados no ano · <span className="mono">94,8%</span> dos pontos com dados nos últimos 30 dias
           </div>
 
-          {/* map = the public headline */}
+          {/* mapa público = public headline */}
           <Panel lead col={8} header={<>Mapa público da bacia <Sp /><Pill variant="label">agregado</Pill></>}>
             <Svg src="wireframe-mapa-publico.svg" ratio="760/577" label="Mapa público da bacia: uso agregado por sub-bacia, sem identificação individual de usuários" style={{ borderTop: '1.5px solid var(--ink)' }} />
           </Panel>
@@ -62,7 +64,7 @@ export default function Publico() {
             <Body><Svg src="wireframe-chart-comprometimento.svg" ratio="460/280" label="Comprometimento estrutural por sub-bacia: soma das outorgas dividida pela disponibilidade (Q7,10)" /></Body>
           </Panel>
 
-          {/* aggregate, anonymous count of usos em acompanhamento (no pins, no identities) */}
+          {/* aggregate anonymous count of usos em acompanhamento */}
           <Panel col={8} header={<>Usos em acompanhamento <Sp /><Pill variant="label">contagem agregada</Pill></>}>
             <Body>
               <div className="grid g-3">
@@ -98,34 +100,6 @@ export default function Publico() {
             </Body>
           </Panel>
 
-          {/* aggregate money rail: FEHIDRO destination, no personal data */}
-          <Panel col={8} header={<>Arrecadação destinada ao FEHIDRO <Sp /><Pill variant="label">agregado · exercício 2026</Pill></>}>
-            <Body>
-              <div className="grid g-3">
-                <div>
-                  <div className="k-value" style={{ font: '700 26px/1.1 var(--sketch)', color: 'var(--ink)' }}>R$ 1,21 mi</div>
-                  <div className="muted" style={{ fontSize: 12.5 }}>cobrado no exercício</div>
-                  <div className="faint" style={{ fontSize: 11.5 }}>87 guias emitidas · cobrança pelo uso e multas</div>
-                </div>
-                <div>
-                  <div className="k-value" style={{ font: '700 26px/1.1 var(--sketch)', color: 'var(--ink)' }}>R$ 1,10 mi</div>
-                  <div className="muted" style={{ fontSize: 12.5 }}>arrecadado (guias liquidadas)</div>
-                  <div className="faint" style={{ fontSize: 11.5 }}>R$ 112,4 mil em aberto após o vencimento</div>
-                </div>
-                <div>
-                  <div className="k-value" style={{ font: '700 26px/1.1 var(--sketch)', color: 'var(--ink)' }}>100%</div>
-                  <div className="muted" style={{ fontSize: 12.5 }}>destinado ao FEHIDRO</div>
-                  <div className="faint" style={{ fontSize: 11.5 }}>Lei estadual 12.183/2005 · Deliberação CBH-BS 157/2009</div>
-                </div>
-              </div>
-            </Body>
-          </Panel>
-          <Panel col={4} header="De onde vem">
-            <Body>
-              <Note style={{ fontSize: 12, marginTop: 0 }}>A cobrança pelo uso da água, alimentada pelos volumes declarados e medidos, e as multas do rito administrativo geram guias de recolhimento. O portal mostra apenas o <b>agregado destinado ao FEHIDRO</b>, sem identificar pagadores nem expor valores individuais (LGPD).</Note>
-            </Body>
-          </Panel>
-
           <Panel col={12} header="Dados abertos">
             <Body stack>
               <div className="mrow"><span className="ico">⤓</span><div className="msp"><b style={{ color: 'var(--ink)', fontSize: 13 }}>Volume mensal por sub-bacia</b><div className="muted" style={{ fontSize: 11.5 }}>CSV · agregado</div></div><span className="btn sub" style={{ padding: '4px 10px' }}>Baixar</span></div>
@@ -138,7 +112,7 @@ export default function Publico() {
         </Bento>
 
         <footer style={{ marginTop: 30, padding: '18px 0', borderTop: '1px solid var(--line)' }} className="row">
-          <span className="muted" style={{ fontSize: 12.5 }}>Sistema de Automonitoramento · SP-Águas / FEHIDRO · CBH-BS</span>
+          <span className="muted" style={{ fontSize: 12.5 }}>Sistema de Automonitoramento · SP-Águas · CBH-BS</span>
           <span className="sp" style={{ flex: 1 }} />
           <span className="faint mono" style={{ fontSize: 11 }}>Dados agregados conforme LGPD · valores fictícios (rascunho)</span>
         </footer>

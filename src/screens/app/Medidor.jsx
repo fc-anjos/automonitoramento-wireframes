@@ -88,7 +88,7 @@ export default function Medidor() {
             <PhoneLabel>Medidores da captação · estados, datas e verbos do ciclo de vida</PhoneLabel>
 
             <Note style={{ maxWidth: 340, margin: '16px auto 0', fontSize: 12 }}>
-              Mais de um medidor por captação é a regra, não a exceção, e a leitura é declarada <b>por equipamento</b>. Desativar <b>não apaga</b>: o medidor muda de estado e preserva as datas e o histórico de leituras, que continuam alimentando a reconciliação dos períodos em que esteve ativo.
+              Uma captação pode ter mais de um medidor, e a leitura é declarada <b>por equipamento</b>. Desativar muda o estado do medidor e preserva as datas e o histórico de leituras, que continuam alimentando a reconciliação dos períodos em que esteve ativo.
             </Note>
           </div>
 
@@ -161,7 +161,7 @@ export default function Medidor() {
         </Note>
 
         <Note style={{ maxWidth: 760, margin: '14px auto 0' }}>
-          A desativação nunca apaga o equipamento: ele muda de estado e preserva datas e histórico de leituras. Sem medidor ativo, o ponto declara por <b>medição alternativa (volume)</b> até que um novo equipamento seja cadastrado e deferido. Os dias entre remoção e reinstalação são imputados pela regra do volume máximo diário (ver Relatórios), o que torna a janela da troca curta por interesse do próprio outorgado.
+          A desativação muda o estado do equipamento e preserva datas e histórico de leituras. Sem medidor ativo, o ponto declara por <b>medição alternativa (volume)</b> até que um novo equipamento seja cadastrado e deferido. Os dias entre remoção e reinstalação são imputados pela regra do volume máximo diário (ver Relatórios).
         </Note>
       </div>
     </>

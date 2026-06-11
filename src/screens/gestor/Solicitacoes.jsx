@@ -1,8 +1,8 @@
 import { GestorShell } from '../../components/shell.jsx'
 import { Bento, Panel, Body, Note, Pill, Btn, Sp, Verb, DataTable } from '../../components/ui.jsx'
 
-// default dispatch verbs; a row may override with `verbos` (e.g. ausência is
-// acknowledged, not granted; telemetry advances by COT-R stage)
+// default dispatch verbs; a row may override with `verbos` (e.g. telemetry
+// advances by COT-R stage)
 const VERBOS_PADRAO = [
   { label: 'Deferir', cls: 'ok' },
   { label: 'Indeferir', cls: 'bad' },
@@ -15,16 +15,16 @@ const VERB_FORM = {
   'Deferir': {},
   'Indeferir': { note: 'O indeferimento é despacho com justificativa obrigatória; grava na trilha de auditoria e notifica o outorgado.' },
   'Pedir documento': { fields: ['Documento ou peça solicitada…', 'Justificativa do despacho…'], note: 'O pedido de documento suspende o prazo de análise até a peça chegar.' },
-  'Registrar ciência': { fields: ['Data da ciência · 10/06/2026', 'Observação ao calendário de declaração…'], note: 'A ciência registra o efeito-calendário da parada no período declaratório do ponto.' },
   'Deferir proposta': { fields: ['Prazo para interligação · 90 dias ▾', 'Justificativa do despacho…'] },
   'Pedir complemento': { fields: ['Documento ou peça solicitada…', 'Justificativa do despacho…'], note: 'O pedido de documento suspende o prazo de análise até a peça chegar.' },
   'Tornar operacional': { fields: ['Validação da transmissão · 72 h de série recebida', 'Justificativa do despacho…'], note: 'O login experimental passa a operacional por ato do gestor, após a validação da transmissão.' },
 }
 
+// Tipos de solicitação (Fundamentação §4): renovação · ampliação · redução ·
+// transferência · dispensa · desativação · inclusão/troca/desativação de medidor ·
+// interligação à telemetria (COT-R). Ausência antecipada migrou para gestor-justificativas.
 const SOLICITACOES = [
   { id: 'SOL-2026-0467', ponto: '07-1001 · Indústria Cubatão S/A', tipo: 'Medidor · troca', recebida: '05/06', situacao: 'Aguardando análise · HX-99213 substitui HX-2041', situacaoVar: 'warn' },
-  { id: 'SOL-2026-0464', ponto: '07-0712 · Laticínios Itanhaém', tipo: 'Ausência antecipada', recebida: '04/06', situacao: 'Aguardando ciência · parada 01/07 a 31/07', situacaoVar: 'warn',
-    verbos: [{ label: 'Registrar ciência', cls: 'ok' }, { label: 'Indeferir', cls: 'bad' }] },
   { id: 'SOL-2026-0461', ponto: '07-0830 · Serviço de Águas de Praia Grande', tipo: 'Renovação', recebida: '02/06', situacao: 'Aguardando análise · outorga vence 17/07', situacaoVar: 'warn' },
   { id: 'SOL-2026-0458', ponto: '07-1042 · Petroquímica Baixada S/A', tipo: 'Telemetria · interligação', recebida: '30/05', situacao: 'COT-R · proposta em análise', situacaoVar: 'warn',
     verbos: [{ label: 'Deferir proposta', cls: 'ok' }, { label: 'Indeferir', cls: 'bad' }, { label: 'Pedir complemento', cls: '' }] },
@@ -66,13 +66,13 @@ export default function Solicitacoes() {
   return (
     <GestorShell tag="GESTOR · 07" title="Solicitações" active="solicitacoes" top={top}>
       <Note style={{ marginBottom: 16 }}>
-        <b>A fila de pedidos do outorgado, agora em quatro famílias.</b> O outorgado protocola e o gestor despacha. O catálogo cobre pedidos sobre o ciclo de vida da <b>outorga</b> (renovação, ampliação, transferência, dispensa, desativação), que a plataforma recebe, instrui e encaminha ao <b>Sistema de Outorga Eletrônica (SOE)</b>, onde o ato se formaliza; sobre o <b>equipamento</b> (inclusão, troca e desativação de medidor), sobre o <b>calendário</b> (justificativa antecipada de ausência de declaração) e sobre o <b>canal</b> (interligação à telemetria, no rito do COT-R). Os verbos seguem o pedido: <b>deferir</b>, <b>indeferir</b>, <b>pedir documento</b> e, no caso das ausências, <b>registrar ciência</b>. Nada se apaga: ao decidir, o pedido muda de situação e fica arquivado com a trilha de quem despachou e quando.
+        <b>A fila de pedidos do outorgado, em três famílias.</b> O outorgado protocola e o gestor despacha. O catálogo cobre pedidos sobre o ciclo de vida da <b>outorga</b> (renovação, ampliação, redução, transferência, dispensa, desativação), que a plataforma recebe, instrui e encaminha ao <b>Sistema de Outorga Eletrônica (SOE)</b>, onde o ato se formaliza; sobre o <b>equipamento</b> (inclusão, troca e desativação de medidor); e sobre o <b>canal</b> (interligação à telemetria, no rito do COT-R). Os verbos seguem o pedido: <b>deferir</b>, <b>indeferir</b> e <b>pedir documento</b>. Nada se apaga: ao decidir, o pedido muda de situação e fica arquivado com a trilha de quem despachou e quando.
       </Note>
 
       <Bento>
 
         {/* the request queue is the main object: each row carries type, date and situation */}
-        <Panel lead col={12} header={<>Solicitações recebidas <Sp /><Pill variant="label">9 abertas</Pill></>}>
+        <Panel lead col={12} header={<>Solicitações recebidas <Sp /><Pill variant="label">8 abertas</Pill></>}>
           <DataTable
             columns={SOL_COLS}
             rows={SOLICITACOES}
@@ -84,28 +84,11 @@ export default function Solicitacoes() {
         </Panel>
 
         <Note col={12}>
-          A <b>situação</b> acompanha a etapa do pedido, e não um status genérico. "Aguardando análise" é o pedido recém-protocolado; "Em análise" é o que já está sob instrução, às vezes esperando uma peça do outorgado. As ausências antecipadas ficam em "Aguardando ciência" até o gestor reconhecê-las. Nas interligações à telemetria a situação exibe a <b>etapa do COT-R</b> de cada pedido (proposta em análise · deferida · login experimental · operacional), de modo que a fila mostra onde cada onboarding parou. "Deferida" e "Indeferida" são terminais, mas não somem: o pedido fica arquivado com o despacho fundamentado. Sem medidor ativo, como no 07-0455 após a desativação deferida em 30/04, o ponto declara por medição alternativa até novo equipamento deferido. A renovação do 07-0830 corre contra o calendário, porque a outorga vence em 17/07.
+          A <b>situação</b> acompanha a etapa do pedido, e não um status genérico. "Aguardando análise" é o pedido recém-protocolado; "Em análise" é o que já está sob instrução, às vezes esperando uma peça do outorgado. Nas interligações à telemetria a situação exibe a <b>etapa do COT-R</b> de cada pedido (proposta em análise · deferida · login experimental · operacional), de modo que a fila mostra onde cada onboarding parou. "Deferida" e "Indeferida" são terminais, mas não somem: o pedido fica arquivado com o despacho fundamentado. Sem medidor ativo, como no 07-0455 após a desativação deferida em 30/04, o ponto declara por medição alternativa até novo equipamento deferido. A renovação do 07-0830 corre contra o calendário, porque a outorga vence em 17/07.
         </Note>
 
-        {/* advance absence anchored on the live request: acknowledged, not granted */}
-        <Panel col={5} header={<>Ausência antecipada <Sp /><Pill variant="label">calendário</Pill></>}>
-          <Body>
-            <div className="list">
-              <div className="lrow">
-                <div className="lr-top"><span className="lr-title mono">SOL-2026-0464</span><Pill variant="warn">aguardando ciência</Pill></div>
-                <div className="lr-sub">07-0712 · Laticínios Itanhaém · parada total programada · 01/07 a 31/07</div>
-                <div className="lr-sub" style={{ marginTop: 4 }}>
-                  <Verb pill label="Registrar ciência" variant="ok" style={{ marginRight: 4 }} {...VERB_FORM['Registrar ciência']} />
-                  <Verb pill label="Indeferir" variant="bad" {...VERB_FORM['Indeferir']} />
-                </div>
-              </div>
-            </div>
-            <Note style={{ fontSize: 12, marginTop: 12 }}>A justificativa é protocolada <b>antes</b> do período sem captação. A ciência cobre o calendário do período e suspende a exceção de declaração ausente; o indeferimento devolve o período ao calendário comum.</Note>
-          </Body>
-        </Panel>
-
         {/* telemetry onboarding tracked on the live requests, each positioned on its COT-R stage */}
-        <Panel col={7} header={<>Interligação à telemetria <Sp /><Pill variant="label" className="mono">COT-R</Pill></>}>
+        <Panel col={12} header={<>Interligação à telemetria <Sp /><Pill variant="label" className="mono">COT-R</Pill></>}>
           <Body>
             <div className="list">
               <div className="lrow">
@@ -132,7 +115,7 @@ export default function Solicitacoes() {
                 </div>
               </div>
             </div>
-            <Note style={{ fontSize: 12, marginTop: 12 }}>O onboarding percorre as etapas do COT-R (proposta em análise → deferida → login experimental → operacional), e cada mudança de etapa é um despacho datado.</Note>
+            <Note style={{ fontSize: 12, marginTop: 12 }}>O onboarding percorre as etapas do COT-R (proposta em análise · deferida · login experimental · operacional), e cada mudança de etapa é um despacho datado.</Note>
           </Body>
         </Panel>
 
@@ -148,7 +131,7 @@ export default function Solicitacoes() {
         </Panel>
 
         <Note col={8}>
-          O despacho é exclusivo do gestor; ao outorgado cabe <b>solicitar</b>. Cada despacho é um ato datado e imutável na trilha, o que sustenta o devido processo, já que os prazos correm da ciência. <b>Pedir documento</b> suspende o prazo até a peça chegar. Nos pedidos sobre a <b>outorga</b>, o deferimento instrui o encaminhamento ao SOE e o novo estado retorna pelo cadastro espelhado. Registrar ciência é despacho de menor grau: não defere nem indefere, apenas reconhece. A renovação tempestiva tem efeito de silêncio positivo: o gestor que pretende indeferir precisa fazê-lo dentro do prazo, sob pena de renovação automática.
+          O despacho é do gestor; ao outorgado cabe <b>solicitar</b>. <b>Pedir documento</b> suspende o prazo até a peça chegar. Nos pedidos sobre a <b>outorga</b>, o deferimento instrui o encaminhamento ao SOE e o novo estado retorna pelo cadastro espelhado. A renovação tempestiva tem efeito de silêncio positivo: o gestor que pretende indeferir precisa fazê-lo dentro do prazo, sob pena de renovação automática.
         </Note>
 
       </Bento>

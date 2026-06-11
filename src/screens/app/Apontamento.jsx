@@ -18,7 +18,7 @@ export default function Apontamento() {
               <Notch />
               <StatusBar right="▰▰▰ 5G ▮" />
               <PScroll>
-                <AppBar title="Apontamento" back="/app/painel" />
+                <AppBar title="Apontamento" back="/app/inicio" />
 
                 {/* HEADER: tipagem completa do apontamento */}
                 <Card style={{ padding: 14 }}>
@@ -29,7 +29,7 @@ export default function Apontamento() {
                   <h2 style={{ fontSize: 17, marginTop: 6 }}>Pico de vazão acima do teto</h2>
                   <Row style={{ gap: 6, marginTop: 10, flexWrap: 'wrap' }}>
                     <Pill variant="label">Volume</Pill>
-                    <Pill variant="warn">grau média</Pill>
+                    <Pill variant="warn">grau leve</Pill>
                     <Pill variant="warn">fase Notificada</Pill>
                   </Row>
                   <div className="muted" style={{ fontSize: 12.5, marginTop: 10 }}>Vazão máx. instantânea 45 L/s · pico 53 L/s (118%) em 04/06</div>

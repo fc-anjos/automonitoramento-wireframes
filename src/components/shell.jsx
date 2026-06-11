@@ -46,11 +46,11 @@ export const AppBar = ({ title, back, menu }) => (
 
 // Bottom tab bar: identical across every app screen; only `active` differs.
 const APP_TABS = [
-  { key: 'inicio', label: 'Início', to: '/app/painel' },
-  { key: 'captacao', label: 'Captação', to: '/app/telemetria' },
+  { key: 'inicio', label: 'Início', to: '/app/inicio' },
   { key: 'apontamentos', label: 'Apontamentos', to: '/app/apontamentos' },
-  { key: 'pagamentos', label: 'Pagamentos', to: '/app/pagamentos' },
-  { key: 'perfil', label: 'Perfil', to: null }, // dead (was href="#")
+  { key: 'declaracao', label: 'Declaração', to: '/app/autodeclaracao' },
+  { key: 'solicitacoes', label: 'Solicitações', to: '/app/solicitacoes' },
+  { key: 'multas', label: 'Multas', to: '/app/multas' },
 ]
 export const AppTabBar = ({ active }) => (
   <div className="tabbar">
@@ -72,11 +72,14 @@ const GESTOR_NAV = [
   { key: 'dashboard', label: 'Dashboard', to: '/gestor/dashboard' },
   { key: 'mapa', label: 'Mapa', to: '/gestor/mapa' },
   { key: 'pontos', label: 'Pontos / outorgas', to: '/gestor/pontos' },
-  { key: 'apontamentos', label: 'Apontamentos', to: '/gestor/apontamentos' },
   { key: 'solicitacoes', label: 'Solicitações', to: '/gestor/solicitacoes' },
-  { key: 'arrecadacao', label: 'Arrecadação', to: '/gestor/arrecadacao' },
+  { sec: 'Fiscalização' },
+  { key: 'apontamentos', label: 'Apontamentos', to: '/gestor/apontamentos' },
+  { key: 'justificativas', label: 'Justificativas', to: '/gestor/justificativas' },
+  { key: 'multas', label: 'Multas', to: '/gestor/multas' },
   { sec: 'Dados' },
-  { key: 'cadastro', label: 'Cadastro & admin', to: '/gestor/cadastro' },
+  { key: 'outorgados', label: 'Outorgados', to: '/gestor/outorgados' },
+  { key: 'acessos', label: 'Acessos', to: '/gestor/acessos' },
   { key: 'relatorios', label: 'Relatórios', to: '/gestor/relatorios' },
   { key: 'auditoria', label: 'Auditoria', to: '/gestor/auditoria' },
 ]

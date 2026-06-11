@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
 import { GestorShell } from '../../components/shell.jsx'
-import { Bento, Panel, Body, Note, Pill, Btn, Sp, Row } from '../../components/ui.jsx'
+import { Bento, Panel, Body, Note, Pill, Btn, Sp, Row, DataTable } from '../../components/ui.jsx'
 
-// Reports stay here when the user needs an exportable cut. Operational queues
-// live in their own modules and expose exports from those modules.
+// Relatórios são cortes exportáveis. Acompanhamento diário aparece como painel
+// ou fila viva e chega aqui como exportação e corte histórico; consolidação
+// (volumes, totais, dados básicos, listagens para ofício) permanece relatório,
+// com filtros consistentes e saída em CSV e PDF.
 
 const top = (
   <>
@@ -13,6 +15,58 @@ const top = (
     <Pill variant="label">Exercício: 2026</Pill>
   </>
 )
+
+// Verificações de saúde do cadastro (decisão 6): condição · severidade · tratamento.
+// Grau: leve · grave · gravíssima (Lei 7.663/1991, art. 13). "média" não existe
+// na norma estadual.
+const SAUDE_ROWS = [
+  {
+    id: 'pendencias',
+    condicao: 'Usuário ativo sem uso ativo, uso sem portaria ativa, ou portaria sem frequência',
+    severidade: 'leve',
+    sevVar: 'warn',
+    tratamento: '/gestor/dashboard',
+    tratamentoLabel: 'Ver no Dashboard',
+  },
+  {
+    id: 'ato-vencido',
+    condicao: 'Uso com ato vencido (sem ato vigente após data final do ato)',
+    severidade: 'grave',
+    sevVar: 'bad',
+    tratamento: '/gestor/pontos',
+    tratamentoLabel: 'Ver fila de pontos',
+  },
+  {
+    id: 'sem-declaracao',
+    condicao: 'Ato vigente de uso ativo com início de declaração até a data corrente e nenhuma declaração cadastrada',
+    severidade: 'grave',
+    sevVar: 'bad',
+    tratamento: '/gestor/apontamentos',
+    tratamentoLabel: 'Fila de omissos',
+  },
+  {
+    id: 'sem-medidor',
+    condicao: 'Ato vigente de uso ativo com início de declaração até a data corrente e nenhum medidor cadastrado',
+    severidade: 'grave',
+    sevVar: 'bad',
+    tratamento: '/gestor/dashboard',
+    tratamentoLabel: 'Ver no Dashboard',
+  },
+]
+
+const SAUDE_COLS = [
+  { key: 'condicao', label: 'Condição' },
+  {
+    key: 'severidade',
+    label: 'Severidade',
+    render: (r) => <Pill variant={r.sevVar}>{r.severidade}</Pill>,
+  },
+  {
+    key: 'tratamento',
+    label: 'Tratamento',
+    render: (r) => <Link className="pill" to={r.tratamento}>{r.tratamentoLabel}</Link>,
+  },
+]
 
 const FILTERS = ['Status', 'Bacia', 'Dominialidade', 'UGRHI', 'Município', 'Período']
 const Filters = ({ list = FILTERS }) => (
@@ -42,38 +96,30 @@ export default function Relatorios() {
 
       <Bento>
 
-        {/* saúde cadastral: referential-integrity queries, absorbed by live surfaces */}
-        <Panel col={6} header={<>Saúde cadastral <Sp /><Pill variant="ok">painel + exportação</Pill></>}>
-          <Body className="list">
-            <div className="lrow">
-              <div className="lr-top"><span className="lr-title">Usuários com pendências de cadastro</span><Link className="pill" to="/gestor/dashboard">Ver no Dashboard</Link></div>
-              <div className="lr-sub">Usuário ativo sem uso ativo, uso sem portaria ativa, portaria sem frequência.</div>
-            </div>
-            <div className="lrow">
-              <div className="lr-top"><span className="lr-title">Usos com ato vencido</span><Link className="pill" to="/gestor/pontos">Ver fila</Link></div>
-              <div className="lr-sub">Sem ato vigente após a data final informada, por período de vencimento.</div>
-            </div>
-            <div className="lrow">
-              <div className="lr-top"><span className="lr-title">Atos sem declarações ou sem medidores</span><Link className="pill" to="/gestor/dashboard">Ver no Dashboard</Link></div>
-              <div className="lr-sub">Atos vigentes de usos ativos, com início de declaração até a data corrente e nenhuma declaração ou medidor cadastrado.</div>
-            </div>
-            <ExportRow act="Exportar corte histórico" />
-            <Note>
-              Estes indicadores ficam vivos no painel e nas listas operacionais: pendências de cadastro no painel de saúde de dados, atos vencidos como filtro dinâmico na lista de pontos, e atos sem declaração como estoque de omissos que antecede o apontamento de ausência. A exportação permanece para corte histórico e cobrança de regularização.
-            </Note>
-          </Body>
+        {/* saúde cadastral: verificações de integridade referencial convertidas em tabela (decisão 6) */}
+        <Panel col={12} header={<>Saúde cadastral <Sp /><Pill variant="ok">painel + exportação</Pill></>}>
+          <DataTable
+            columns={SAUDE_COLS}
+            rows={SAUDE_ROWS}
+            pageSize={6}
+            empty="Nenhuma condição de saúde cadastral."
+          />
+          <ExportRow act="Exportar corte histórico" />
+          <Note style={{ margin: 14, fontSize: 12 }}>
+            Estes indicadores ficam vivos no painel e nas listas operacionais: pendências de cadastro no painel de saúde de dados, atos vencidos como filtro dinâmico na lista de pontos, e atos sem declaração como estoque de omissos que antecede o apontamento de ausência. A exportação permanece para corte histórico e cobrança de regularização. Severidade conforme Lei 7.663/1991, art. 13: leve, grave, gravíssima.
+          </Note>
         </Panel>
 
-        {/* fiscalização: the anti-gaming query is promoted to a signal */}
-        <Panel col={6} header={<>Fiscalização <Sp /><Pill variant="warn">justificativas repetidas → sinal</Pill></>}>
+        {/* fiscalização: a consulta anti-gaming promovida a sinal */}
+        <Panel col={6} header={<>Fiscalização <Sp /><Pill variant="warn">justificativas repetidas: sinal</Pill></>}>
           <Body className="list">
             <div className="lrow">
               <div className="lr-top"><span className="lr-title">Justificativas repetidas</span><Link className="pill warn" to="/gestor/apontamentos">Sinal na triagem</Link></div>
               <div className="lr-sub">Justificativas repetidas por usuário ou por tipo, agrupadas, em período.</div>
             </div>
             <div className="lrow">
-              <div className="lr-top"><span className="lr-title">Infrações constatadas · deferidas · e recursos</span><Link className="pill" to="/gestor/processo">Visões do processo</Link></div>
-              <div className="lr-sub">Infrações constatadas, deferidas e recursos, por mês e dominialidade.</div>
+              <div className="lr-top"><span className="lr-title">Infrações constatadas, deferidas e recursos</span><Link className="pill" to="/gestor/processo">Visões do processo</Link></div>
+              <div className="lr-sub">Infrações constatadas, deferidas e em recurso, por mês e dominialidade.</div>
             </div>
             <Filters list={['Período', 'Dominialidade', 'Infração', 'Status']} />
             <ExportRow />
@@ -83,23 +129,23 @@ export default function Relatorios() {
           </Body>
         </Panel>
 
-        {/* volumes: the reports that carry calculation rules with money effect */}
-        <Panel lead col={7} header={<>Volumes <Sp /><Pill variant="label">outorgado × utilizado</Pill></>}>
+        {/* volumes: outorgado × utilizado; volumes alimentam fiscalização e consolidação */}
+        <Panel lead col={6} header={<>Volumes <Sp /><Pill variant="label">outorgado × utilizado</Pill></>}>
           <table className="table">
             <thead><tr><th>Relatório</th><th>Recorte</th><th>Saída</th></tr></thead>
             <tbody>
-              <tr><td>Ato · volume outorgado/utilizado</td><td className="mono">mês/ano · 05/2026</td><td><Pill variant="label">CSV · PDF</Pill></td></tr>
+              <tr><td>Ato: volume outorgado/utilizado</td><td className="mono">mês/ano · 05/2026</td><td><Pill variant="label">CSV · PDF</Pill></td></tr>
               <tr><td>Volume mensal por ato</td><td className="mono">mês/ano · 05/2026</td><td><Pill variant="label">CSV · PDF</Pill></td></tr>
               <tr><td>Volume anual</td><td className="mono">ano · 2026 · por tipo, bacia, dominialidade</td><td><Pill variant="label">CSV · PDF</Pill></td></tr>
             </tbody>
           </table>
           <Note style={{ margin: 14, fontSize: 12 }}>
-            As regras de cálculo ficam explícitas na memória do relatório: <b>atos sazonais</b> entram pelo volume outorgado do mês de maior valor; <b>períodos sem declaração</b> e dias entre remoção e reinstalação do medidor são imputados ao <b>volume máximo diário</b> no consumo anual. Como a imputação repercute na cobrança pelo uso, o cálculo aparece também discriminado na memória da guia (<Link to="/gestor/arrecadacao">Arrecadação</Link>).
+            As regras de cálculo ficam explícitas na memória do relatório: <b>atos sazonais</b> entram pelo volume outorgado do mês de maior valor; <b>períodos sem declaração</b> e dias entre remoção e reinstalação do medidor são imputados ao <b>volume máximo diário</b> no consumo anual. Os volumes calculados aqui alimentam os módulos de fiscalização e de consolidação.
           </Note>
         </Panel>
 
-        {/* consolidações e ofícios: genuinely reports, kept as reports */}
-        <Panel col={5} header={<>Consolidações e ofícios <Sp /><Pill variant="label">exportáveis</Pill></>}>
+        {/* consolidações e ofícios: genuinamente relatórios, mantidos como relatórios */}
+        <Panel col={12} header={<>Consolidações e ofícios <Sp /><Pill variant="label">exportáveis</Pill></>}>
           <Body className="list">
             <div className="lrow">
               <div className="lr-top"><span className="lr-title">Principais dados</span></div>

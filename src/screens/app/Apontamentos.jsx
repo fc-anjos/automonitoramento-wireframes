@@ -9,7 +9,7 @@ export default function Apontamentos() {
 
       <div className="wrap">
         <Note style={{ maxWidth: 760, margin: '0 auto 22px' }}>
-          <b>A lista do outorgado.</b> Reúne os apontamentos sobre o ponto deste usuário, cada um com a sua próxima ação. As naturezas diferem entre si. O pico de vazão é uma <b>exceção</b>: o sistema detectou e pede justificativa em prazo, sem presumir infração. O orçamento anual é um <b>sinal de gestão</b>, em que nada foi excedido; é um aviso para reduzir o ritmo e por isso não tem grau. A amostra ausente já foi encerrada. Cada linha abre o detalhe, em que o outorgado responde sem dar baixa.
+          <b>A lista do outorgado.</b> Reúne os apontamentos sobre o ponto deste usuário, cada um com a sua próxima ação. O pico de vazão é uma <b>exceção</b>: o sistema detectou e pede justificativa em prazo. O orçamento anual é um <b>sinal de gestão</b>: nada foi excedido, é um aviso para reduzir o ritmo, e não tem grau. A amostra ausente já foi encerrada. Cada linha abre o detalhe.
         </Note>
 
         <div className="phone-stage" style={{ justifyContent: 'center' }}>
@@ -18,7 +18,7 @@ export default function Apontamentos() {
               <Notch />
               <StatusBar right="▰▰▰ 5G ▮" />
               <PScroll>
-                <AppBar title="Apontamentos" back="/app/painel" />
+                <AppBar title="Apontamentos" back="/app/inicio" />
 
                 <Card style={{ padding: '12px 14px' }}>
                   <Row style={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
@@ -45,7 +45,7 @@ export default function Apontamentos() {
                         </div>
                         <div className="lr-sub">
                           <span className="pill label" style={{ padding: '0 7px', fontSize: 10.5 }}>Exceção</span>
-                          <span style={{ marginLeft: 6 }}>Volume · grau média · fase Notificada · pico 53 L/s (teto 45)</span>
+                          <span style={{ marginLeft: 6 }}>Volume · grau leve · fase Notificada · pico 53 L/s (teto 45)</span>
                         </div>
                       </Link>
 

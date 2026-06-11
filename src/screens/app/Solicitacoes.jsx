@@ -1,28 +1,93 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { DraftBanner, Phone, Notch, StatusBar, PScroll, AppBar, AppTabBar, HomeBar, PhoneLabel } from '../../components/shell.jsx'
-import { Card, Pill, Btn, Meter, Note, Panel, Body, Row, Sp } from '../../components/ui.jsx'
+import { Card, Pill, Btn, Meter, Note, Panel, Body, Row, Sp, DataTable } from '../../components/ui.jsx'
+
+// Tipos de solicitação (Fundamentação, seção 4 – "Tipos de solicitação"):
+//   renovação · ampliação · redução · transferência · dispensa · desativação
+//   inclusão/troca/desativação de medidor · interligação à telemetria (COT-R)
+// Justificativa de ausência de declaração NÃO aparece aqui: objeto separado em app-justificativas.
+
+// COT-R rito: ofício → proposta técnica → análise → deferimento → login experimental → login operacional
+
+const SOL_COLS = [
+  { key: 'num', label: 'Solicitação' },
+  { key: 'tipo', label: 'Tipo' },
+  { key: 'protocolo', label: 'Protocolada' },
+  {
+    key: 'estado', label: 'Estado',
+    render: (r) => <Pill variant={r.estadoVar}>{r.estado}</Pill>,
+  },
+]
+
+const SOL_ROWS = [
+  {
+    id: 'sol-01',
+    num: 'SOL-2026-0467',
+    tipo: 'Troca de medidor',
+    protocolo: '05/06/2026',
+    estado: 'em análise',
+    estadoVar: 'warn',
+  },
+  {
+    id: 'sol-02',
+    num: 'SOL-2026-0301',
+    tipo: 'Interligação à telemetria (COT-R)',
+    protocolo: '28/05/2026',
+    estado: 'proposta técnica',
+    estadoVar: 'warn',
+  },
+  {
+    id: 'sol-03',
+    num: 'SOL-2025-1182',
+    tipo: 'Redução',
+    protocolo: '14/11/2025',
+    estado: 'deferida',
+    estadoVar: 'ok',
+  },
+  {
+    id: 'sol-04',
+    num: 'SOL-2025-0890',
+    tipo: 'Ampliação',
+    protocolo: '03/08/2025',
+    estado: 'indeferida',
+    estadoVar: 'bad',
+  },
+]
+
+// Etapas do rito COT-R, com o passo atual marcado.
+// Etapa atual: proposta técnica (etapa 2)
+const COTR_RITO = [
+  { key: 'oficio', label: 'Ofício', sub: 'A SP-Águas oficia o outorgado a interligar o ponto.', data: '28/05', atual: false, futuro: false },
+  { key: 'proposta', label: 'Proposta técnica de transmissão', sub: 'Você descreve equipamentos e meio de transmissão; é esta a solicitação que se protocola aqui.', data: '30 dias', atual: true, futuro: false },
+  { key: 'analise', label: 'Análise e deferimento', sub: 'O gestor analisa a proposta e a defere ou pede ajuste.', data: 'a seguir', atual: false, futuro: true },
+  { key: 'exp', label: 'Login experimental', sub: 'Transmissão em teste, validada contra as leituras locais.', data: 'a seguir', atual: false, futuro: true },
+  { key: 'op', label: 'Login operacional', sub: 'O ponto passa a transmitir em caráter definitivo.', data: 'a seguir', atual: false, futuro: true },
+]
 
 export default function Solicitacoes() {
+  const [tab, setTab] = useState('catalogo') // 'catalogo' | 'minhas'
+
   return (
     <>
-      <DraftBanner tag="APP · 06" title="Solicitações e vencimento" />
+      <DraftBanner tag="APP · 06" title="Solicitações" />
 
       <div className="wrap">
         <Note style={{ maxWidth: 760, margin: '0 auto 22px' }}>
-          <b>O lado temporal da outorga.</b> A outorga vence, renova-se e perece por calendário, e não por volume. A tela lidera pelo vencimento próximo, com a renovação protocolada antes da data, e abre o catálogo de solicitações que o outorgado pode iniciar, cada uma com o seu estado. O catálogo cobre três famílias: os pedidos sobre a <b>outorga</b> (renovação, ampliação, transferência…), formalizados no Sistema de Outorga Eletrônica e refletidos aqui pelo estado espelhado; os pedidos sobre o <b>equipamento</b> (inclusão, troca e desativação de medidor) e os pedidos sobre a <b>rotina declaratória</b> (justificativa antecipada de ausência, interligação à telemetria).
+          <b>Catálogo e índice de solicitações do outorgado.</b> A tela apresenta dois modos: o <b>catálogo</b> lista os tipos disponíveis (renovação, ampliação, redução, transferência, dispensa, desativação, inclusão/troca/desativação de medidor e interligação à telemetria via COT-R); o índice <b>Minhas solicitações</b> traz as solicitações já protocoladas com seu estado. A justificativa de ausência de declaração é objeto separado, acessível pela aba "Justificativas".
         </Note>
 
         <div className="phone-stage" style={{ justifyContent: 'center' }}>
 
-          {/* PHONE 1: catalog of request types + in-progress states */}
+          {/* PHONE 1: catálogo + índice em abas */}
           <div>
             <Phone>
               <Notch />
               <StatusBar right="▰▰▰ 5G ▮" />
               <PScroll>
-                <AppBar title="Solicitações" back="/app/painel" />
+                <AppBar title="Solicitações" back="/app/inicio" />
 
-                {/* LEAD: vencimento próximo (inspirado no caso 07-0830) */}
+                {/* Validade da outorga – sinal de calendário */}
                 <Card style={{ padding: 14 }}>
                   <Row style={{ justifyContent: 'space-between', alignItems: 'baseline' }}>
                     <span className="eyebrow">Validade da outorga</span>
@@ -39,138 +104,122 @@ export default function Solicitacoes() {
                   <Btn block lg style={{ marginTop: 12 }}>Renovar outorga →</Btn>
                 </Card>
 
-                {/* AFFORDANCE: nova solicitação */}
-                <Btn block style={{ marginTop: 14 }}>+ Nova solicitação</Btn>
+                {/* Segmento: catálogo / minhas */}
+                <div className="seg" style={{ marginTop: 14 }}>
+                  <span className={`s${tab === 'catalogo' ? ' on' : ''}`}
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => setTab('catalogo')}>Catálogo</span>
+                  <span className={`s${tab === 'minhas' ? ' on' : ''}`}
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => setTab('minhas')}>Minhas solicitações</span>
+                </div>
 
-                {/* CATÁLOGO 1/3: pedidos sobre a outorga */}
-                <Panel style={{ marginTop: 14 }} header="Sobre sua outorga">
-                  <Body>
-                    <div className="list">
+                {tab === 'catalogo' && (
+                  <>
+                    {/* CATÁLOGO 1: pedidos sobre a outorga */}
+                    <Panel style={{ marginTop: 14 }} header="Sobre a outorga">
+                      <Body>
+                        <div className="list">
+                          <a className="lrow" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
+                            <div className="lr-top"><span className="lr-title">Renovação</span><Pill variant="warn">a fazer · vence em 40 dias</Pill></div>
+                            <div className="lr-sub">Prorrogar a validade antes do vencimento (17/07).</div>
+                          </a>
+                          <a className="lrow" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
+                            <div className="lr-top"><span className="lr-title">Ampliação</span><Pill variant="label">disponível</Pill></div>
+                            <div className="lr-sub">Solicitar aumento de vazão ou volume outorgado.</div>
+                          </a>
+                          <a className="lrow" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
+                            <div className="lr-top"><span className="lr-title">Redução</span><Pill variant="label">disponível</Pill></div>
+                            <div className="lr-sub">Diminuir o volume outorgado conforme o uso real.</div>
+                          </a>
+                          <a className="lrow" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
+                            <div className="lr-top"><span className="lr-title">Transferência</span><Pill variant="label">disponível</Pill></div>
+                            <div className="lr-sub">Transferir a titularidade da outorga.</div>
+                          </a>
+                          <a className="lrow" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
+                            <div className="lr-top"><span className="lr-title">Dispensa</span><Pill variant="label">disponível</Pill></div>
+                            <div className="lr-sub">Requerer dispensa de outorga para uso insignificante.</div>
+                          </a>
+                          <a className="lrow" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
+                            <div className="lr-top"><span className="lr-title">Desativação</span><Pill variant="label">disponível</Pill></div>
+                            <div className="lr-sub">Encerrar o uso e baixar a outorga (evita perecimento por inércia).</div>
+                          </a>
+                        </div>
+                      </Body>
+                    </Panel>
 
-                      <a className="lrow" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
-                        <div className="lr-top"><span className="lr-title">Renovação</span><span className="pill warn">a fazer · vence em 40 dias</span></div>
-                        <div className="lr-sub">Prorrogar a validade antes do vencimento (17/07).</div>
-                      </a>
+                    {/* CATÁLOGO 2: pedidos sobre o equipamento */}
+                    <Panel style={{ marginTop: 14 }} header="Sobre medidores">
+                      <Body>
+                        <div className="list">
+                          <Link className="lrow" to="/app/medidor" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
+                            <div className="lr-top"><span className="lr-title">Inclusão de medidor</span><Pill variant="label">equipamento</Pill></div>
+                            <div className="lr-sub">Cadastrar um novo medidor na captação.</div>
+                          </Link>
+                          <Link className="lrow" to="/app/medidor" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
+                            <div className="lr-top"><span className="lr-title">Troca de medidor</span><Pill variant="label">equipamento</Pill></div>
+                            <div className="lr-sub">Substituir medidor existente; leitura final e inicial vinculadas.</div>
+                          </Link>
+                          <Link className="lrow" to="/app/medidor" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
+                            <div className="lr-top"><span className="lr-title">Desativação de medidor</span><Pill variant="label">equipamento</Pill></div>
+                            <div className="lr-sub">Desativar medidor; histórico e vínculo preservados.</div>
+                          </Link>
+                        </div>
+                      </Body>
+                    </Panel>
 
-                      <a className="lrow" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
-                        <div className="lr-top"><span className="lr-title">Ampliação</span><span className="pill label">disponível</span></div>
-                        <div className="lr-sub">Pedir aumento de vazão ou volume outorgado.</div>
-                      </a>
+                    {/* CATÁLOGO 3: interligação à telemetria */}
+                    <Panel style={{ marginTop: 14 }} header="Interligação à telemetria">
+                      <Body>
+                        <div className="list">
+                          <a className="lrow" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
+                            <div className="lr-top"><span className="lr-title">Interligação COT-R</span><Pill variant="label">telemetria</Pill></div>
+                            <div className="lr-sub">Protocolar a proposta técnica de transmissão (SiDeCC-R).</div>
+                          </a>
+                        </div>
+                      </Body>
+                    </Panel>
+                  </>
+                )}
 
-                      <a className="lrow" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
-                        <div className="lr-top"><span className="lr-title">Redução</span><span className="pill label">disponível</span></div>
-                        <div className="lr-sub">Diminuir o volume outorgado conforme o uso real.</div>
-                      </a>
+                {tab === 'minhas' && (
+                  <Panel style={{ marginTop: 14 }} header={<>Minhas solicitações <Sp /><Pill variant="label">4</Pill></>}>
+                    <Body>
+                      <DataTable
+                        columns={SOL_COLS}
+                        rows={SOL_ROWS}
+                        search={['num', 'tipo', 'estado']}
+                        searchPlaceholder="Buscar solicitação…"
+                        universe={12}
+                        pageSize={4}
+                      />
+                    </Body>
+                  </Panel>
+                )}
 
-                      <a className="lrow" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
-                        <div className="lr-top"><span className="lr-title">Transferência</span><span className="pill label">disponível</span></div>
-                        <div className="lr-sub">Transferir a titularidade da outorga.</div>
-                      </a>
-
-                      <a className="lrow" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
-                        <div className="lr-top"><span className="lr-title">Dispensa</span><span className="pill label">disponível</span></div>
-                        <div className="lr-sub">Requerer dispensa de outorga para uso insignificante.</div>
-                      </a>
-
-                      <a className="lrow" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
-                        <div className="lr-top"><span className="lr-title">Desativação</span><span className="pill label">disponível</span></div>
-                        <div className="lr-sub">Encerrar o uso e baixar a outorga (evita perecimento por inércia).</div>
-                      </a>
-
-                    </div>
-                  </Body>
-                </Panel>
-
-                {/* CATÁLOGO 2/3: pedidos sobre o equipamento e a rotina declaratória */}
-                <Panel style={{ marginTop: 14 }} header="Sobre medição e declaração">
-                  <Body>
-                    <div className="list">
-
-                      <Link className="lrow" to="/app/medidor" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
-                        <div className="lr-top"><span className="lr-title">Medidor · inclusão, troca, desativação</span><span className="pill label">equipamento</span></div>
-                        <div className="lr-sub">Cadastrar um novo medidor na captação, substituir ou desativar um existente.</div>
-                      </Link>
-
-                      <a className="lrow" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
-                        <div className="lr-top"><span className="lr-title">Justificativa de ausência de declaração</span><span className="pill label">antecipada</span></div>
-                        <div className="lr-sub">Avisar, antes do período, que não haverá captação (paralisação total, férias coletivas, manutenção).</div>
-                      </a>
-
-                      <a className="lrow" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
-                        <div className="lr-top"><span className="lr-title">Interligação à telemetria</span><span className="pill label">COT-R</span></div>
-                        <div className="lr-sub">Protocolar a proposta técnica de transmissão e ligar o ponto à telemetria.</div>
-                      </a>
-
-                    </div>
-                  </Body>
-                </Panel>
-
-                {/* ESTADO: pedidos em andamento */}
-                <Panel style={{ marginTop: 14 }} header={<>Em andamento <Sp /><Pill variant="label">2</Pill></>}>
-                  <Body>
-                    <div className="list">
-                      <a className="lrow" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
-                        <div className="lr-top"><span className="lr-title">Redução de volume anual</span><span className="pill label">em análise</span></div>
-                        <div className="lr-sub">Protocolada em 12/05 · aguardando o gestor.</div>
-                      </a>
-                      <a className="lrow" style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}>
-                        <div className="lr-top"><span className="lr-title">Interligação à telemetria</span><span className="pill warn">proposta técnica até 27/06</span></div>
-                        <div className="lr-sub">Ofício recebido em 28/05 · proposta de transmissão em elaboração.</div>
-                      </a>
-                    </div>
-                  </Body>
-                </Panel>
-
-                {/* COT-R onboarding: the rite as a timeline, current step highlighted */}
-                <Panel style={{ marginTop: 14 }} header="Interligação à telemetria · rito COT-R">
-                  <Body>
-                    <div className="list">
-                      <div className="lrow">
-                        <div className="lr-top"><span className="lr-title">Ofício</span><span className="mono faint" style={{ fontSize: 11 }}>28/05</span></div>
-                        <div className="lr-sub">A SP-Águas oficia o outorgado a interligar o ponto.</div>
-                      </div>
-                      <div className="lrow" style={{ background: 'var(--act-soft)', margin: '0 -14px', paddingLeft: 14, paddingRight: 14 }}>
-                        <div className="lr-top"><span className="lr-title">Proposta técnica de transmissão</span><span className="pill warn" style={{ fontSize: 10.5 }}>30 dias</span></div>
-                        <div className="lr-sub">Você descreve equipamentos e meio de transmissão; é esta a solicitação que se protocola aqui.</div>
-                      </div>
-                      <div className="lrow">
-                        <div className="lr-top"><span className="lr-title faint">Análise e deferimento</span><span className="mono faint" style={{ fontSize: 11 }}>a seguir</span></div>
-                        <div className="lr-sub faint">O gestor analisa a proposta e a defere ou pede ajuste.</div>
-                      </div>
-                      <div className="lrow">
-                        <div className="lr-top"><span className="lr-title faint">Login experimental</span><span className="mono faint" style={{ fontSize: 11 }}>a seguir</span></div>
-                        <div className="lr-sub faint">Transmissão em teste, validada contra as leituras locais.</div>
-                      </div>
-                      <div className="lrow">
-                        <div className="lr-top"><span className="lr-title faint">Login operacional</span><span className="mono faint" style={{ fontSize: 11 }}>a seguir</span></div>
-                        <div className="lr-sub faint">O ponto passa a transmitir em caráter definitivo.</div>
-                      </div>
-                    </div>
-                  </Body>
-                </Panel>
               </PScroll>
-              <AppTabBar active="inicio" />
+              <AppTabBar active="solicitacoes" />
               <HomeBar />
             </Phone>
-            <PhoneLabel>Solicitações · catálogo de pedidos, cada um com estado</PhoneLabel>
+            <PhoneLabel>Solicitações · catálogo de tipos e índice de minhas solicitações</PhoneLabel>
 
             <Note style={{ maxWidth: 340, margin: '16px auto 0', fontSize: 12 }}>
-              A interligação à telemetria segue o rito do <b>COT-R</b>: ofício, proposta técnica em 30 dias, análise, deferimento, login experimental e login operacional. O que o outorgado protocola é a <b>proposta técnica de transmissão</b>; os demais passos são atos do gestor que o aplicativo apenas acompanha.
+              O catálogo restringe-se aos tipos previstos: renovação, ampliação, redução, transferência, dispensa, desativação, inclusão/troca/desativação de medidor e interligação à telemetria (COT-R). A justificativa de ausência de declaração fica em "Justificativas", objeto próprio com estados Aguardando avaliação, Aprovado e Reprovado.
             </Note>
           </div>
 
-          {/* PHONE 2: request detail; the equipment form itself lives in APP · 10 */}
+          {/* PHONE 2: detalhe de uma solicitação (exemplo: troca de medidor) */}
           <div>
             <Phone>
               <Notch />
               <StatusBar right="▰▰▰ 5G ▮" />
               <PScroll>
-                <AppBar title="Solicitação · SOL-2026-0467" back />
+                <AppBar title="SOL-2026-0467" back />
 
                 <Card style={{ padding: 14 }}>
                   <Row style={{ justifyContent: 'space-between', alignItems: 'center' }}>
                     <b style={{ fontSize: 13, color: 'var(--ink)' }}>Troca de medidor</b>
-                    <Pill variant="warn">aguardando análise</Pill>
+                    <Pill variant="warn">em análise</Pill>
                   </Row>
                   <div className="muted" style={{ fontSize: 12, marginTop: 6 }}>OUT-07-2024-001234 · ponto 07-1001 · Indústria Cubatão S/A</div>
                   <div className="mono faint" style={{ fontSize: 11.5, marginTop: 4 }}>Protocolada em 05/06/2026 · última atualização 10/06</div>
@@ -180,15 +229,24 @@ export default function Solicitacoes() {
                   <Body>
                     <div className="list">
                       <div className="lrow">
-                        <div className="lr-top"><span className="lr-title">Protocolada</span><span className="mono faint" style={{ fontSize: 11 }}>05/06</span></div>
+                        <div className="lr-top">
+                          <span className="lr-title">Protocolada</span>
+                          <span className="mono faint" style={{ fontSize: 11 }}>05/06</span>
+                        </div>
                         <div className="lr-sub">Solicitação recebida com medidor que sai, medidor que entra e foto da instalação.</div>
                       </div>
                       <div className="lrow" style={{ background: 'var(--act-soft)', margin: '0 -14px', paddingLeft: 14, paddingRight: 14 }}>
-                        <div className="lr-top"><span className="lr-title">Em análise</span><span className="pill warn" style={{ fontSize: 10.5 }}>fase atual</span></div>
+                        <div className="lr-top">
+                          <span className="lr-title">Em análise</span>
+                          <Pill variant="warn" style={{ fontSize: 10.5 }}>fase atual</Pill>
+                        </div>
                         <div className="lr-sub">Gestor confere dados do equipamento e leitura inicial antes de deferir.</div>
                       </div>
                       <div className="lrow">
-                        <div className="lr-top"><span className="lr-title faint">Despacho</span><span className="mono faint" style={{ fontSize: 11 }}>a seguir</span></div>
+                        <div className="lr-top">
+                          <span className="lr-title faint">Despacho</span>
+                          <span className="mono faint" style={{ fontSize: 11 }}>a seguir</span>
+                        </div>
                         <div className="lr-sub faint">Deferir, indeferir ou pedir complemento; cada despacho fica datado na trilha.</div>
                       </div>
                     </div>
@@ -206,7 +264,7 @@ export default function Solicitacoes() {
                 <Btn block lg to="/app/medidor" style={{ marginTop: 14 }}>Abrir cadastro de medidores →</Btn>
                 <Btn block sub style={{ marginTop: 8 }}>Anexar complemento</Btn>
               </PScroll>
-              <AppTabBar active="inicio" />
+              <AppTabBar active="solicitacoes" />
               <HomeBar />
             </Phone>
             <PhoneLabel>Detalhe da solicitação · estado, trilha e complemento</PhoneLabel>
@@ -216,86 +274,67 @@ export default function Solicitacoes() {
             </Note>
           </div>
 
-          {/* PHONE 3: justificativa antecipada de ausência (3.1.c) */}
+          {/* PHONE 3: rito COT-R em detalhe (interligação à telemetria) */}
           <div>
             <Phone>
               <Notch />
               <StatusBar right="▰▰▰ 5G ▮" />
               <PScroll>
-                <AppBar title="Justificativa de ausência" back />
+                <AppBar title="SOL-2026-0301" back />
 
-                <div className="seg">
-                  <span className="s on">Nova justificativa</span>
-                  <span className="s">Histórico</span>
-                </div>
-
-                {/* the differentiator: registered BEFORE the silent period */}
-                <Card style={{ marginTop: 14, padding: 12 }}>
+                <Card style={{ padding: 14 }}>
                   <Row style={{ justifyContent: 'space-between', alignItems: 'center' }}>
-                    <b style={{ fontSize: 13, color: 'var(--ink)' }}>Registro antecipado</b>
-                    <Pill variant="ok">antes do período</Pill>
+                    <b style={{ fontSize: 13, color: 'var(--ink)' }}>Interligação à telemetria (COT-R)</b>
+                    <Pill variant="warn">proposta técnica</Pill>
                   </Row>
-                  <div className="muted" style={{ fontSize: 11.5, marginTop: 4 }}>hoje 07/06 · o período declarado começa em 01/07</div>
+                  <div className="muted" style={{ fontSize: 12, marginTop: 6 }}>OUT-07-2024-001234 · ponto 07-1001 · Indústria Cubatão S/A</div>
+                  <div className="mono faint" style={{ fontSize: 11.5, marginTop: 4 }}>Ofício recebido 28/05 · proposta em elaboração · prazo: 27/06</div>
                 </Card>
 
-                <div className="stack" style={{ marginTop: 14 }}>
-                  <label className="field"><span>Início do período</span>
-                    <div className="input"><span className="mono" style={{ color: 'var(--ink)' }}>01/07/2026</span><span className="sp" style={{ flex: 1 }} />📅</div></label>
-                  <label className="field"><span>Fim do período</span>
-                    <div className="input"><span className="mono" style={{ color: 'var(--ink)' }}>31/07/2026</span><span className="sp" style={{ flex: 1 }} />📅</div></label>
-
-                  <div className="field"><span>Motivo</span>
-                    <div className="list">
-                      <div className="lrow"><div className="lr-top"><span className="lr-title">Paralisação total</span><span className="mono faint">○</span></div></div>
-                      <div className="lrow"><div className="lr-top"><span className="lr-title">Férias coletivas</span><Pill variant="act">●</Pill></div></div>
-                      <div className="lrow"><div className="lr-top"><span className="lr-title">Manutenção</span><span className="mono faint">○</span></div></div>
-                    </div>
-                  </div>
-
-                  <label className="field"><span>Observações (opcional)</span>
-                    <div className="input tall faint">Ex.: parada programada da linha de produção…</div></label>
-                </div>
-
-                <Btn block lg style={{ marginTop: 14 }}>Registrar justificativa →</Btn>
-
-                {/* the histórico tab content, sketched inline */}
-                <Panel style={{ marginTop: 16 }} header={<>Histórico de justificativas <Sp /><Pill variant="label">3</Pill></>}>
+                {/* COT-R rito: ofício → proposta técnica → análise → deferimento → login experimental → login operacional */}
+                <Panel style={{ marginTop: 14 }} header="Rito COT-R · etapas">
                   <Body>
                     <div className="list">
-                      <div className="lrow">
-                        <div className="lr-top"><span className="lr-title">01/07 a 31/07/2026 · férias coletivas</span><Pill variant="warn">registrada · aguarda período</Pill></div>
-                        <div className="lr-sub">Registrada em 07/06, antes do início do período.</div>
-                      </div>
-                      <div className="lrow">
-                        <div className="lr-top"><span className="lr-title">10/01 a 24/01/2026 · manutenção</span><Pill variant="ok">acatada</Pill></div>
-                        <div className="lr-sub">Substituição da adutora · acatada pelo gestor em 28/01.</div>
-                      </div>
-                      <div className="lrow">
-                        <div className="lr-top"><span className="lr-title">01/07 a 15/07/2025 · paralisação total</span><Pill variant="ok">acatada</Pill></div>
-                        <div className="lr-sub">Parada da planta · acatada pelo gestor em 21/07/2025.</div>
-                      </div>
+                      {COTR_RITO.map((e) => (
+                        <div
+                          key={e.key}
+                          className="lrow"
+                          style={e.atual ? { background: 'var(--act-soft)', margin: '0 -14px', paddingLeft: 14, paddingRight: 14 } : undefined}
+                        >
+                          <div className="lr-top">
+                            <span className={e.futuro ? 'lr-title faint' : 'lr-title'}>{e.label}</span>
+                            {e.atual
+                              ? <Pill variant="warn" style={{ fontSize: 10.5 }}>{e.data}</Pill>
+                              : <span className="mono faint" style={{ fontSize: 11 }}>{e.data}</span>}
+                          </div>
+                          <div className={e.futuro ? 'lr-sub faint' : 'lr-sub'}>{e.sub}</div>
+                        </div>
+                      ))}
                     </div>
                   </Body>
                 </Panel>
+
+                <Btn block lg style={{ marginTop: 14 }}>Enviar proposta técnica →</Btn>
+                <Btn block sub style={{ marginTop: 8 }}>Anexar documento</Btn>
               </PScroll>
-              <AppTabBar active="inicio" />
+              <AppTabBar active="solicitacoes" />
               <HomeBar />
             </Phone>
-            <PhoneLabel>Justificativa antecipada · período sem captação avisado antes</PhoneLabel>
+            <PhoneLabel>Interligação COT-R · rito completo, etapa atual destacada</PhoneLabel>
 
             <Note style={{ maxWidth: 340, margin: '16px auto 0', fontSize: 12 }}>
-              A justificativa antecipada inverte o fluxo do apontamento: em vez de responder a uma omissão já detectada, o outorgado avisa <b>antes</b> que não haverá captação nem declaração no período. O período avisado não gera exceção de declaração ausente; o acatamento, porém, é ato do gestor, e a justificativa fica no histórico mesmo quando não acatada.
+              O rito COT-R tem cinco etapas: ofício (ato da SP-Águas), proposta técnica de transmissão (ato do outorgado, prazo de 30 dias), análise e deferimento (ato do gestor), login experimental (transmissão em teste) e login operacional (transmissão definitiva). O que o outorgado protocola aqui é exclusivamente a <b>proposta técnica</b>; as demais etapas são atos do gestor, acompanhados como estados da solicitação.
             </Note>
           </div>
 
         </div>
 
         <Note style={{ maxWidth: 760, margin: '22px auto 0' }}>
-          Obrigações dirigidas por calendário: o pedido de <b>renovação</b> deve ser protocolado <b>antes</b> do vencimento. A outorga sem uso <b>perece em 3 anos</b>; se o usuário não capta mais, vale registrar a desativação para não perder o direito por inércia. A justificativa antecipada de ausência cobre o caso intermediário: o uso continua, mas há um período programado sem captação.
+          O pedido de <b>renovação</b> deve ser protocolado <b>antes</b> do vencimento. A outorga sem uso perece em 3 anos; se o uso cessou, vale registrar a desativação para não perder o direito por inércia. Os tipos disponíveis estão fixados pelo modelo de domínio com âncora normativa: renovação, ampliação, redução, transferência e dispensa derivam do ciclo de vida da outorga (Portaria DAEE 1.630/2017, arts. 29-35); inclusão, troca e desativação de medidor derivam do rito de automonitoramento (Portaria DAEE 5.578/2018 e TR §6.8); interligação à telemetria deriva do COT-R (Portaria DAEE 6.987/2018, art. 5º).
         </Note>
 
         <Note style={{ maxWidth: 760, margin: '14px auto 0' }}>
-          O outorgado <b>protocola</b> a solicitação; o deferimento é do gestor. A renovação tem efeito de silêncio positivo: se o gestor silenciar por 30 dias após o pedido tempestivo, renova-se automaticamente. Os demais tipos não têm silêncio positivo: medidor, justificativa e proposta técnica aguardam o despacho, e cada despacho fica datado na trilha.
+          O outorgado <b>protocola</b> a solicitação; o deferimento é do gestor. A renovação tem efeito de silêncio positivo: se o gestor silenciar por 30 dias após o pedido tempestivo, renova-se automaticamente. Os demais tipos não têm silêncio positivo: medidor e proposta técnica aguardam o despacho, e cada despacho fica datado na trilha.
         </Note>
       </div>
     </>

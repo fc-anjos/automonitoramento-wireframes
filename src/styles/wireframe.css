@@ -472,6 +472,24 @@ a[href] { cursor: pointer; }
 .seg .s { flex: 1; text-align: center; padding: 7px 6px; border-radius: var(--hand-2); font: 400 12px var(--sketch); color: var(--muted); }
 .seg .s.on { background: var(--act-soft); color: var(--ink); border: 1.5px solid var(--ink); font-weight: 700; }
 
+/* facet tabs (join facets of ONE object; sketch register, monochrome).
+   Distinct from `.seg` (route switch) and `.nav-i` (cross-object nav).
+   Heavier ink = active: the on tab carries an ink border, heavy weight and a
+   surface fill, sitting on the bottom rule via the -1.5px margin. */
+.tabs { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1.5px solid var(--ink); margin-bottom: 16px; }
+.tabs .tab-f {
+  font: 400 13px var(--sketch); color: var(--muted); text-decoration: none;
+  padding: 7px 14px; margin-bottom: -1.5px;
+  border: 1.5px solid transparent;
+  border-radius: var(--hand-2) var(--hand-2) 0 0;
+}
+.tabs .tab-f:hover { color: var(--ink); }
+.tabs .tab-f.on {
+  color: var(--ink); font-weight: 700;
+  border-color: var(--ink); border-bottom-color: var(--surface);
+  background: var(--surface);
+}
+
 /* mobile list rows */
 .mrow { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1.5px solid var(--line); }
 .mrow:last-child { border-bottom: 0; }

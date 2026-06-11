@@ -40,7 +40,7 @@ export default function Launcher() {
 
       <div className="wrap stack">
         <header className="stack" style={{ '--space': '10px' }}>
-          <div className="eyebrow">SP-Águas · FEHIDRO · CBH-BS · Bacia-piloto UGRHI-07</div>
+          <div className="eyebrow">SP-Águas · CBH-BS · Bacia-piloto UGRHI-07</div>
           <h1>Sistema de Automonitoramento de usos de recursos hídricos</h1>
           <p className="lede">Conjunto de wireframes que ilustra, para alinhamento de escopo com o fornecedor, as três superfícies descritas no Termo de Referência: o <b>aplicativo próprio unificado</b> (roteado por porte de usuário, Curva ABC), a <b>plataforma de consolidação e alerta</b> do gestor, e o <b>portal público de transparência</b>. Telas estáticas, intencionalmente cruas. Nenhum dado é real.</p>
         </header>

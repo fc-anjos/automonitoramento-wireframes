@@ -100,6 +100,25 @@ export const Verb = ({ label, variant, fields = ['Justificativa do despacho…']
   )
 }
 
+// ---- facet tabs -----------------------------------------------------------
+// Tabs join FACETS of one object (Detalhe·Identidade · Medição · Telemetria…).
+// Distinct from the phone `.seg` (route switch between objects) and from
+// sidebar `.nav-i` (cross-object navigation). Each tab is {key, label}; the
+// active key gets `.on` + aria-selected. `onSelect(key)` switches in-page; a
+// tab may instead carry `to` to route (renders a <Link>).
+export const Tabs = ({ tabs, active, onSelect, className }) => (
+  <div className={cx('tabs', className)} role="tablist">
+    {tabs.map((t) => {
+      const on = t.key === active
+      const cls = cx('tab-f', on && 'on')
+      const sel = on ? true : undefined
+      return t.to
+        ? <Link key={t.key} className={cls} role="tab" aria-selected={sel} to={t.to}>{t.label}</Link>
+        : <a key={t.key} className={cls} role="tab" aria-selected={sel} style={{ cursor: 'pointer' }} onClick={() => onSelect && onSelect(t.key)}>{t.label}</a>
+    })}
+  </div>
+)
+
 // ---- meter / progress -----------------------------------------------------
 // value: CSS width string e.g. '58%'. variant: 'warn' | 'bad'
 export const Meter = ({ value, variant, className, ...p }) => (
