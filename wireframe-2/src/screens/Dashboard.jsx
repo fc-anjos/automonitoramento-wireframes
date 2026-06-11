@@ -19,6 +19,7 @@ import {
 import { Button, Panel, Pill, Sp, Stat } from '../components/ui.jsx'
 import { useWorkbookContext } from '../components/workbookContext.jsx'
 import { geoData, geoProvenance } from '../geoData.js'
+import { oceanMass, oceanStyle } from '../mapLayers.js'
 import { buildMapPoints, numberValue, summarizeBySubBacia, summarizeRows } from '../monitoringSeeds.js'
 
 const fmt = new Intl.NumberFormat('pt-BR')
@@ -635,6 +636,7 @@ function DashboardBasinMap({ rows, subBaciaRows, onOpenSubBacia }) {
         attributionControl={false}
         zoomControl={false}
       >
+        <GeoJSON data={oceanMass} style={oceanStyle} interactive={false} />
         <GeoJSON data={geoData.rmbsMunicipios} style={{ color: '#8f8f8f', weight: 0.7, fillOpacity: 0.08, dashArray: '4 6' }} />
         <GeoJSON
           data={geoData.ugrhiSubBacias}

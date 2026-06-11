@@ -16,6 +16,7 @@ import {
   YAxis,
 } from 'recharts'
 import { geoData, geoProvenance } from '../geoData.js'
+import { oceanMass, oceanStyle } from '../mapLayers.js'
 import {
   buildMapPoints,
   scopedTransmission,
@@ -35,32 +36,6 @@ const subBaciaPatterns = {
   'Rio Cubatão': 'url(#wire-map-hatch-forward)',
   'Rio Itapanhaú': 'url(#wire-map-hatch-back)',
   'Drenagem direta ao oceano': 'url(#wire-map-hatch-cross)',
-}
-const oceanMass = {
-  type: 'FeatureCollection',
-  features: [{
-    type: 'Feature',
-    properties: { nome: 'Oceano Atlântico' },
-    geometry: {
-      type: 'Polygon',
-      coordinates: [[
-        [-47.24, -24.62],
-        [-47.24, -24.12],
-        [-47.12, -24.10],
-        [-46.99, -24.13],
-        [-46.83, -24.16],
-        [-46.67, -24.13],
-        [-46.51, -24.08],
-        [-46.36, -24.02],
-        [-46.22, -23.96],
-        [-46.08, -23.88],
-        [-45.94, -23.82],
-        [-45.78, -23.78],
-        [-45.78, -24.62],
-        [-47.24, -24.62],
-      ]],
-    },
-  }],
 }
 const statusColors = {
   crítico: '#2b2b2b',
@@ -129,10 +104,6 @@ function MapPatterns() {
           <rect width="11" height="11" fill="#f2f2f2"></rect>
           <path d="M0 0L11 11M11 0L0 11" stroke="#9c9c9c" stroke-width="0.9" opacity="0.58"></path>
         </pattern>
-        <pattern id="wire-map-ocean" patternUnits="userSpaceOnUse" width="13" height="13" patternTransform="rotate(-32)">
-          <rect width="13" height="13" fill="#e9e9e9"></rect>
-          <line x1="0" y1="0" x2="0" y2="13" stroke="#b1b1b1" stroke-width="1" opacity="0.55"></line>
-        </pattern>
       `
       svg.prepend(defs)
     }
@@ -155,16 +126,6 @@ function spEstadoStyle() {
     weight: 0.8,
     fillColor: '#fafafa',
     fillOpacity: 1,
-  }
-}
-
-function oceanStyle() {
-  return {
-    color: '#707070',
-    weight: 1.1,
-    fillColor: 'url(#wire-map-ocean)',
-    fillOpacity: 1,
-    dashArray: '6 5',
   }
 }
 
