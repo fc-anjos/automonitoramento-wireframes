@@ -37,11 +37,11 @@ const FILA_COLS = [
 // Fila própria de processos sancionadores: exceções e processos não se misturam
 // na mesma fila. O processo é objeto próprio (ver gestor/Processo.jsx), criado
 // quando o gestor lavra o auto; aqui a ordem é por prazo: defesas a julgar,
-// ciências pendentes, prazos a vencer. State-law deadlines render as params.
+// ciências pendentes, prazos a vencer.
 const PROCESSOS = [
   { num: 'PAS-07-2026-0042', codigo: '07-1100', nome: 'Indústria Química Cubatão', objeto: 'Indício de fraude na medição', grau: 'gravíssima', grauVar: 'bad', fase: 'Defesa a julgar', prazo: 'defesa protocolada em 18/06', dono: 'gestor', proxima: 'Julgar 1ª instância · decisão fundamentada' },
   { num: 'PAS-07-2026-0051', codigo: '07-1042', nome: 'Petroquímica Baixada S/A', objeto: 'Volume mensal acima do outorgado', grau: 'grave', grauVar: 'bad', fase: 'Ciência pendente', prazo: 'lavrado em 06/06 · aguarda ciência', dono: 'outorgado', proxima: 'Registrar ciência · marco do prazo' },
-  { num: 'PAS-07-2026-0012', codigo: '07-1100', nome: 'Indústria Química Cubatão', objeto: 'Captação continuada acima do volume outorgado', grau: 'gravíssima', grauVar: 'bad', fase: 'Defesa · prazo correndo', prazo: 'prazo parametrizável · conferir DOE', dono: 'outorgado', proxima: 'Aguardar defesa ou decurso do prazo' },
+  { num: 'PAS-07-2026-0012', codigo: '07-1100', nome: 'Indústria Química Cubatão', objeto: 'Captação continuada acima do volume outorgado', grau: 'gravíssima', grauVar: 'bad', fase: 'Defesa · prazo correndo', prazo: 'prazo do rito vigente', dono: 'outorgado', proxima: 'Aguardar defesa ou decurso do prazo' },
   { num: 'PAS-07-2025-0019', codigo: '07-1042', nome: 'Petroquímica Baixada S/A', objeto: 'Multa mantida em 1ª instância', grau: 'grave', grauVar: 'bad', fase: 'Recurso · 2ª instância', prazo: 'sem efeito suspensivo · guia exigível', dono: 'gestor', proxima: 'Julgar 2ª instância · definitivo' },
 ]
 
@@ -186,7 +186,7 @@ export default function Apontamentos() {
 
         {/* racional só em .note, fora da cromagem de produto */}
         <Note col={8} style={{ marginTop: 4 }}>
-          <b>A fila de tratamento.</b> Reúne os apontamentos que precisam de desfecho. As <b>exceções</b> se encerram por justificativa ou correção; os <b>atos administrativos</b> seguem o rito de ciência, defesa e julgamento. Uma exceção que escala para auto de infração permanece nesta lista e apenas avança de <b>fase</b>. O achado já vem classificado por tipo (volume, qualidade do dado, calendário ou condicionante) e o <b>grau</b> indica a gravidade, que define a ordem das linhas. Cada linha aponta o responsável pela próxima ação e o prazo, contado a partir da ciência.
+          <b>A fila de tratamento.</b> Reúne os apontamentos que precisam de desfecho. As <b>exceções</b> se encerram por justificativa ou correção. Quando o gestor lavra auto de infração, o apontamento conserva o vínculo e o pacote de evidência, mas o rito de defesa, julgamento e recurso passa a correr no <b>processo sancionador</b>, em fila própria. O achado já vem classificado por tipo (volume, qualidade do dado, calendário ou condicionante) e o <b>grau</b> indica a gravidade, que define a ordem das linhas. Cada linha aponta o responsável pela próxima ação e o prazo, contado a partir da ciência.
         </Note>
 
         <Note col={4} style={{ marginTop: 4 }}>
@@ -194,7 +194,7 @@ export default function Apontamentos() {
         </Note>
 
         <Note col={12} style={{ marginTop: 4 }}>
-          <b>Exceções e processos não se misturam na mesma fila.</b> A triagem de apontamentos ordena por gravidade o que ainda aguarda justificativa ou correção; o processo sancionador, criado quando o gestor lavra o auto, é objeto próprio, com número, evidência congelada na lavratura e rito com prazos, e ordena-se pelo que vence primeiro: defesas a julgar, ciências pendentes, prazos a vencer. Os prazos do rito estadual (Portaria DAEE 4.905/2019) aparecem como parâmetros: prazo parametrizável · conferir DOE.
+          <b>Exceções e processos não se misturam na mesma fila.</b> A triagem de apontamentos ordena por gravidade o que ainda aguarda justificativa ou correção; o processo sancionador, criado quando o gestor lavra o auto, é objeto próprio, com número, evidência congelada na lavratura e rito com prazos, e ordena-se pelo que vence primeiro: defesas a julgar, ciências pendentes, prazos a vencer. Os prazos do rito estadual (Portaria DAEE 4.905/2019) aparecem como regra vigente do processo, e cada marco fica datado na própria trilha do apontamento ou do processo.
         </Note>
 
       </Bento>

@@ -15,121 +15,60 @@ export default function Dashboard() {
   return (
     <GestorShell tag="GESTOR · 01" title="Dashboard de fiscalização" active="dashboard" top={top} bodyStack>
       <Note>
-        <b>Uma visão orientada por exceção.</b> A tela abre pela fila de triagem, o objeto que o gestor veio tratar; os totais por tipo são filtros sobre a fila, não cartões. O recorte (sub-bacia, município, finalidade, faixa de VM) aplica-se a toda a página, e os contadores estruturais da bacia ficam no fim.
+        <b>Uma visão orientada por exceção.</b> O dashboard resume prioridade, risco e cobertura da bacia; a operação detalhada fica nas telas de fila. O recorte (sub-bacia, município, finalidade, faixa de VM) aplica-se a toda a página, e cada bloco abre a lista completa correspondente.
       </Note>
 
       <Bento>
-        {/* TRIAGE: led by gravest first */}
-        <Panel lead col={12} header={<>Triagem por gravidade <Sp /><Pill>6 apontamentos abertos</Pill><Btn sub to="/gestor/apontamentos" style={{ padding: '6px 12px' }}>Todos os apontamentos →</Btn></>}>
-          {/* type chips filter the queue; they replace the old kpi tiles */}
-          <Row style={{ gap: 8, padding: '10px 14px 0', flexWrap: 'wrap' }}>
-            <Pill variant="act">todos · 6</Pill>
-            <Pill variant="label">volume · 2</Pill>
-            <Pill variant="label">calendário · 2</Pill>
-            <Pill variant="label">condicionante · 1</Pill>
-            <Pill variant="label">qualidade do dado · 1</Pill>
-          </Row>
-          {/* recorte applies to the whole page, not only the queue */}
-          <Row style={{ gap: 8, padding: '8px 14px 0', flexWrap: 'wrap' }}>
-            <div className="input" style={{ minHeight: 32, fontSize: 12 }}>Sub-bacia · todas ▾</div>
-            <div className="input" style={{ minHeight: 32, fontSize: 12 }}>Município · todos ▾</div>
-            <div className="input" style={{ minHeight: 32, fontSize: 12 }}>Finalidade · todas ▾</div>
-            <div className="input" style={{ minHeight: 32, fontSize: 12 }}>Faixa de VM · todas ▾</div>
-          </Row>
-          <table className="table">
-            <thead><tr><th>Apontamento</th><th>Ponto / outorgado</th><th>Tipo</th><th>Natureza</th><th>Grau</th><th className="num">Medido × outorgado</th><th>Fase</th><th>Abrir</th></tr></thead>
-            <tbody>
-              <tr>
-                <td>Indício de fraude na medição</td>
-                <td>07-1100 · Indústria Química Cubatão</td>
-                <td>Qualidade do dado</td>
-                <td><Pill variant="label">Ato administrativo</Pill></td>
-                <td><Pill variant="bad">gravíssima</Pill></td>
-                <td className="num">telemetria diverge · fluxo reverso</td>
-                <td>Autuada</td>
-                <td><Btn sub to="/gestor/apontamento" style={{ padding: '5px 12px' }}>Abrir →</Btn></td>
-              </tr>
-              <tr>
-                <td>Volume mensal acima do outorgado</td>
-                <td>07-1042 · Petroquímica Baixada S/A</td>
-                <td>Volume</td>
-                <td><Pill variant="label">Ato administrativo</Pill></td>
-                <td><Pill variant="bad">grave</Pill></td>
-                <td className="num">3 meses acima · reincidência</td>
-                <td>Em defesa/recurso</td>
-                <td><Btn sub to="/gestor/apontamento" style={{ padding: '5px 12px' }}>Abrir →</Btn></td>
-              </tr>
-              <tr>
-                <td>Pico de vazão acima do teto</td>
-                <td>07-1001 · Indústria Cubatão S/A</td>
-                <td>Volume</td>
-                <td><Pill variant="label">Exceção</Pill></td>
-                <td><Pill variant="warn">média</Pill></td>
-                <td className="num">53 / 45 L/s · 118%</td>
-                <td>Notificada</td>
-                <td><Btn sub to="/gestor/apontamento" style={{ padding: '5px 12px' }}>Abrir →</Btn></td>
-              </tr>
-              <tr>
-                <td>Outorga a vencer</td>
-                <td>07-0830 · Serviço de Águas de Praia Grande</td>
-                <td>Calendário</td>
-                <td><Pill variant="label">Exceção</Pill></td>
-                <td><Pill>sem grau</Pill></td>
-                <td className="num">vence em 40 dias (17/07)</td>
-                <td>Notificada</td>
-                <td><Btn sub to="/gestor/apontamento" style={{ padding: '5px 12px' }}>Abrir →</Btn></td>
-              </tr>
-              <tr>
-                <td>Calibração de hidrômetro vencida</td>
-                <td>07-0712 · Laticínios Itanhaém</td>
-                <td>Condicionante</td>
-                <td><Pill variant="label">Exceção</Pill></td>
-                <td><Pill variant="warn">leve</Pill></td>
-                <td className="num">vencida desde 01/05</td>
-                <td>Notificada</td>
-                <td><Btn sub to="/gestor/apontamento" style={{ padding: '5px 12px' }}>Abrir →</Btn></td>
-              </tr>
-              <tr>
-                <td>Sem uso há 2 anos (risco de perecimento)</td>
-                <td>07-0455 · Indústria Têxtil Mongaguá</td>
-                <td>Calendário</td>
-                <td><Pill variant="label">Exceção</Pill></td>
-                <td><Pill>sem grau</Pill></td>
-                <td className="num">sem declaração há ~24 meses</td>
-                <td>Detectada</td>
-                <td><Btn sub to="/gestor/apontamento" style={{ padding: '5px 12px' }}>Abrir →</Btn></td>
-              </tr>
-            </tbody>
-          </table>
+        <Panel lead col={12} header={<>Panorama de apontamentos <Sp /><Pill>6 abertos</Pill><Btn sub to="/gestor/apontamentos" style={{ padding: '6px 12px' }}>Abrir fila completa →</Btn></>}>
+          <Body>
+            <Row style={{ gap: 10, flexWrap: 'wrap' }}>
+              <div className="lrow" style={{ flex: '1 1 220px', minWidth: 220 }}>
+                <div className="lr-top"><span className="lr-title">Críticos</span><Pill variant="bad">2 graves+</Pill></div>
+                <div className="lr-sub">Fraude na medição e volume reincidente já estão em ato administrativo.</div>
+              </div>
+              <div className="lrow" style={{ flex: '1 1 220px', minWidth: 220 }}>
+                <div className="lr-top"><span className="lr-title">Exceções em prazo</span><Pill variant="warn">3</Pill></div>
+                <div className="lr-sub">Pico de vazão, condicionante vencida e outorga a vencer aguardam resposta ou correção.</div>
+              </div>
+              <div className="lrow" style={{ flex: '1 1 220px', minWidth: 220 }}>
+                <div className="lr-top"><span className="lr-title">Calendário</span><Pill variant="label">2</Pill></div>
+                <div className="lr-sub">Vencimento e dormência aparecem como exceções próprias, sem grau sancionador.</div>
+              </div>
+              <div className="lrow" style={{ flex: '1 1 220px', minWidth: 220 }}>
+                <div className="lr-top"><span className="lr-title">Sinais preventivos</span><Pill variant="label">3</Pill></div>
+                <div className="lr-sub">Projeções de risco ficam separadas dos apontamentos que exigem desfecho.</div>
+              </div>
+            </Row>
+            <Row style={{ gap: 8, marginTop: 12, flexWrap: 'wrap' }}>
+              <div className="input" style={{ minHeight: 32, fontSize: 12 }}>Sub-bacia · todas ▾</div>
+              <div className="input" style={{ minHeight: 32, fontSize: 12 }}>Município · todos ▾</div>
+              <div className="input" style={{ minHeight: 32, fontSize: 12 }}>Finalidade · todas ▾</div>
+              <div className="input" style={{ minHeight: 32, fontSize: 12 }}>Faixa de VM · todas ▾</div>
+            </Row>
+          </Body>
         </Panel>
 
         <Note col={12} style={{ marginTop: -2 }}>
-          A fila lidera pela <b>gravidade</b>: a fraude gravíssima (07-1100) e o volume grave reincidente (07-1042) vêm antes do pico de vazão de grau média e dos achados de calendário sem grau. Um pico isolado de telemetria é uma <b>exceção</b> com ação pedida ao usuário; não constitui infração consumada. O desvio sancionável corre como <b>ato administrativo</b>, caso dos dois primeiros da fila, que já seguem o rito. As exceções são tipadas (volume, calendário, condicionante, qualidade do dado) porque calendário e condicionante são dirigidos por data e por obrigação acessória, não por leitura de telemetria; o <b>grau</b> ordena dentro de cada tipo. A natureza define a tratativa: um <b>sinal de gestão</b> tem baixa automática quando o uso volta ao previsto; uma <b>exceção</b> aguarda justificativa em prazo.
+          O dashboard não repete a tabela de apontamentos: ele mostra a composição da fila e deixa a triagem detalhada para <Link to="/gestor/apontamentos">Apontamentos</Link>. Um pico isolado de telemetria é uma <b>exceção</b> com ação pedida ao usuário; não constitui infração consumada. O desvio sancionável corre como <b>ato administrativo</b>. A natureza define a tratativa: um <b>sinal de gestão</b> tem baixa automática quando o uso volta ao previsto; uma <b>exceção</b> aguarda justificativa em prazo.
         </Note>
 
         {/* sanction + money rails: own queues, never mixed with the triagem */}
-        <Panel col={7} header={<>Processos sancionadores <Sp /><Pill variant="label">rito próprio · ordenado por prazo</Pill><Btn sub to="/gestor/apontamentos" style={{ padding: '6px 12px' }}>Fila completa →</Btn></>}>
-          <table className="table">
-            <thead><tr><th>Processo</th><th>Ponto / outorgado</th><th>Fase do rito</th><th>Prazo / dono</th><th>Abrir</th></tr></thead>
-            <tbody>
-              <tr>
-                <td className="mono">PAS-07-2026-0042</td><td>07-1100 · Indústria Química Cubatão</td>
-                <td>Defesa a julgar</td><td>protocolada em 18/06 · <b>gestor</b></td>
-                <td><Btn sub to="/gestor/processo" style={{ padding: '5px 12px' }}>Abrir →</Btn></td>
-              </tr>
-              <tr>
-                <td className="mono">PAS-07-2026-0051</td><td>07-1042 · Petroquímica Baixada S/A</td>
-                <td>Ciência pendente</td><td>lavrado em 06/06 · <b>outorgado</b></td>
-                <td><Btn sub to="/gestor/processo" style={{ padding: '5px 12px' }}>Abrir →</Btn></td>
-              </tr>
-              <tr>
-                <td className="mono">PAS-07-2025-0019</td><td>07-1042 · Petroquímica Baixada S/A</td>
-                <td>Recurso · 2ª instância</td><td>sem efeito suspensivo · <b>gestor</b></td>
-                <td><Btn sub to="/gestor/processo" style={{ padding: '5px 12px' }}>Abrir →</Btn></td>
-              </tr>
-            </tbody>
-          </table>
-          <Note style={{ margin: 14, fontSize: 12 }}>Fila própria, fora da triagem de apontamentos: exceções e processos não se misturam na mesma fila. A ordem é pelo que vence primeiro (defesas a julgar, ciências pendentes, prazos a vencer), e os prazos do rito estadual aparecem como parâmetros: prazo parametrizável · conferir DOE.</Note>
+        <Panel col={7} header={<>Processos sancionadores <Sp /><Pill variant="label">rito próprio</Pill><Btn sub to="/gestor/apontamentos" style={{ padding: '6px 12px' }}>Fila completa →</Btn></>}>
+          <Body className="list">
+            <div className="lrow">
+              <div className="lr-top"><span className="lr-title mono">PAS-07-2026-0042</span><Pill variant="bad">defesa a julgar</Pill></div>
+              <div className="lr-sub">07-1100 · Indústria Química Cubatão · dono da próxima ação: gestor</div>
+            </div>
+            <div className="lrow">
+              <div className="lr-top"><span className="lr-title mono">PAS-07-2026-0051</span><Pill variant="warn">ciência pendente</Pill></div>
+              <div className="lr-sub">07-1042 · Petroquímica Baixada S/A · dono da próxima ação: outorgado</div>
+            </div>
+            <div className="lrow">
+              <div className="lr-top"><span className="lr-title mono">PAS-07-2025-0019</span><Pill variant="label">2ª instância</Pill></div>
+              <div className="lr-sub">Recurso sem efeito suspensivo · guia exigível enquanto aguarda decisão.</div>
+            </div>
+            <Note style={{ fontSize: 12 }}>Fila própria, fora da triagem de apontamentos: exceções e processos não se misturam. A ordem operacional é pelo que vence primeiro: defesas a julgar, ciências pendentes e prazos a vencer.</Note>
+          </Body>
         </Panel>
         <Panel col={5} header={<>Arrecadação <Sp /><Pill variant="label">emitidas × liquidadas</Pill><Btn sub to="/gestor/arrecadacao" style={{ padding: '6px 12px' }}>Abrir arrecadação →</Btn></>}>
           <table className="table"><tbody>
@@ -173,7 +112,7 @@ export default function Dashboard() {
               <tr><td>Transmissão (30d)</td><td className="num">94,8%</td></tr>
               <tr><td>Adesão declaratória</td><td className="num">87%</td></tr>
             </tbody></table>
-            <Note style={{ margin: 14, fontSize: 12 }}>Contadores estruturais, não filas de ação. A meta de transmissão é ≥ 95%; a bacia está em 94,8%, e as lacunas viram apontamentos de qualidade do dado quando passam do limiar.</Note>
+            <Note style={{ margin: 14, fontSize: 12 }}>A cobertura resume a saúde operacional da bacia. A meta de transmissão é ≥ 95%; a bacia está em 94,8%, e as lacunas viram apontamentos de qualidade do dado quando passam do limiar.</Note>
           </Panel>
           <Panel header={<>Qualidade do dado da bacia <Sp /><Pill variant="label">agregado · 24h</Pill></>}>
             <table className="table"><tbody>

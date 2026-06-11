@@ -88,7 +88,7 @@ export const Verb = ({ label, variant, fields = ['Justificativa do despacho…']
               </div>
             ))}
             {note && <Note style={{ fontSize: 12 }}>{note}</Note>}
-            <div className="modal-foot">Esboço de baixa fidelidade · campos ilustrativos; o formulário definitivo será especificado no detalhamento do TR.</div>
+            <div className="modal-foot">Revise os campos, registre a justificativa e confirme para gravar o ato na trilha.</div>
             <Row style={{ gap: 8, justifyContent: 'flex-end' }}>
               <Btn sub onClick={() => setOpen(false)}>Cancelar</Btn>
               <Btn variant="act" onClick={() => setOpen(false)}>{confirm || label}</Btn>

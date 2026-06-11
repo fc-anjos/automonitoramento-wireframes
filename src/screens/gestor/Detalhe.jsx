@@ -38,7 +38,7 @@ export default function Detalhe() {
           <hr className="div" />
           <div className="grid g-4">
             <div><div className="muted" style={{ fontSize: 11 }}>Nº da outorga</div><div className="mono" style={{ color: 'var(--ink)' }}>OUT-07-2024-001234</div></div>
-            <div><div className="muted" style={{ fontSize: 11 }}>ID SiDeCC</div><div className="mono" style={{ color: 'var(--ink)' }}>SDC-998877</div></div>
+            <div><div className="muted" style={{ fontSize: 11 }}>ID de origem</div><div className="mono" style={{ color: 'var(--ink)' }}>SDC-998877</div></div>
             <div><div className="muted" style={{ fontSize: 11 }}>Finalidade</div><div className="mono" style={{ color: 'var(--ink)' }}>Industrial</div></div>
             <div><div className="muted" style={{ fontSize: 11 }}>Fonte</div><div className="mono" style={{ color: 'var(--ink)' }}>Superficial</div></div>
             <div><div className="muted" style={{ fontSize: 11 }}>Município</div><div className="mono" style={{ color: 'var(--ink)' }}>Cubatão</div></div>
@@ -116,7 +116,7 @@ export default function Detalhe() {
                 <div className="lr-sub" style={{ marginTop: 4 }}>Próxima ação: nenhuma · tratativa: encerrada</div>
               </Link>
             </div>
-            <Note style={{ fontSize: 12, marginTop: 12 }}>Cada linha é um apontamento tipado pela <b>natureza</b> (sinal de gestão, exceção, ato administrativo), pelo <b>grau</b> e pela <b>fase</b> da tramitação. Um sinal de gestão apenas acompanha e tem baixa automática; uma exceção aguarda justificativa em prazo; um ato administrativo segue rito próprio. Abrir um apontamento dá ao gestor os verbos de disposição: notificar, classificar, autuar, julgar. O sinal de gestão não tem grau, porque nada foi excedido ainda.</Note>
+            <Note style={{ fontSize: 12, marginTop: 12 }}>Cada linha é um apontamento tipado pela <b>natureza</b> (sinal de gestão, exceção, ato administrativo), pelo <b>grau</b> e pela <b>fase</b> da tramitação. Um sinal de gestão apenas acompanha e tem baixa automática; uma exceção aguarda justificativa em prazo; um ato administrativo segue rito próprio. Abrir um apontamento dá ao gestor os verbos de triagem e disposição: notificar, analisar justificativa, autuar, registrar regularização ou encerrar. O julgamento fica no processo sancionador quando houver auto lavrado.</Note>
           </Body>
         </Panel>
 
@@ -162,7 +162,7 @@ export default function Detalhe() {
                 <tr><td>Tolerância de falhas</td><td className="num"><Pill variant="ok">≤ 5,0% · dentro</Pill></td></tr>
               </tbody>
             </table>
-            <Note style={{ fontSize: 12, marginTop: 10 }}>O indicador de <b>98,6%</b> deriva desta conta: amostras <b>recebidas × esperadas</b> no passo de 5 min. A lacuna do dia 20 foi suprida por declaração manual no SiDeCC (contingência da telemetria) e retificada. Acima da tolerância, abre-se exceção de falha de transmissão. Trilha de auditoria na aba <b>Cadastro</b>.</Note>
+            <Note style={{ fontSize: 12, marginTop: 10 }}>O indicador de <b>98,6%</b> deriva desta conta: amostras <b>recebidas × esperadas</b> no passo de 5 min. A lacuna do dia 20 foi suprida por declaração manual de contingência e retificada. Acima da tolerância vigente da SP-Águas, abre-se exceção de falha de transmissão, com marcos registrados na trilha.</Note>
           </Body>
         </Panel>
 
@@ -177,7 +177,7 @@ export default function Detalhe() {
             </tbody>
           </table>
           <Note style={{ margin: 14, fontSize: 12 }}>
-            Uma captação pode ter <b>mais de um medidor</b>, e cada equipamento tem ciclo de vida próprio: tipo, número de série, fabricante, modelo, diâmetro e as datas de <b>inclusão</b> e <b>desativação</b>. O cadastro e a troca são atos do <b>outorgado</b>, no aplicativo, com as leituras de remoção e de reinstalação que fecham a série de cada aparelho; o gestor confere. A troca guarda o <b>vínculo de sucessão</b> entre o aparelho desativado e o substituto, e a série de volumes da captação segue contínua. Desativar não apaga: o medidor muda de estado e preserva o histórico de leituras.
+            Uma captação pode ter <b>mais de um medidor</b>, e cada equipamento tem ciclo de vida próprio: tipo, número de série, fabricante, modelo, diâmetro e as datas de <b>inclusão</b> e <b>desativação</b>. O cadastro e a troca entram como <b>solicitações do outorgado</b>, no aplicativo, com as leituras de remoção e de reinstalação que fecham a série de cada aparelho; o gestor confere e defere. A troca guarda o <b>vínculo de sucessão</b> entre o aparelho desativado e o substituto, e a série de volumes da captação segue contínua. Desativar não apaga: o medidor muda de estado e preserva o histórico de leituras.
           </Note>
         </Panel>
 
@@ -222,7 +222,7 @@ export default function Detalhe() {
               ))}
             </div>
             <Note style={{ fontSize: 12, marginTop: 12 }}>
-              Visão de calendário do volume diário estimado, no padrão do acesso interno do SiDeCC. Os dias acima do <b>permitido</b> (3.000 m³/dia sob a regra de estiagem) ficam marcados; o dia 04 carrega também o pico de vazão da exceção aberta. Cada célula abre a <b>visão hora a hora</b> do dia, que confronta volume e horas de captação contra o regime outorgado. Dias futuros aparecem como previstos.
+              Visão operacional do volume diário estimado. Os dias acima do <b>permitido</b> (3.000 m³/dia sob a regra de estiagem) ficam marcados; o dia 04 carrega também o pico de vazão da exceção aberta. Cada célula abre a <b>visão hora a hora</b> do dia, que confronta volume e horas de captação contra o regime outorgado. Dias futuros aparecem como previstos.
             </Note>
           </Body>
         </Panel>

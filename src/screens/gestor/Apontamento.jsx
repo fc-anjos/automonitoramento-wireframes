@@ -8,7 +8,7 @@ const top = (
     <span className="sp" />
     <Pill variant="warn">Exceção · grau média</Pill>
     <Pill variant="label">fase Notificada</Pill>
-    <Btn sub style={{ padding: '6px 12px' }}>Exportar trilha</Btn>
+    <Btn sub to="/gestor/auditoria" style={{ padding: '6px 12px' }}>Ver trilha</Btn>
   </>
 )
 
@@ -79,20 +79,19 @@ export default function Apontamento() {
           <Body>
             <Row style={{ gap: 10, flexDirection: 'column', alignItems: 'stretch' }}>
               <Btn block>Notificar</Btn>
-              <Btn block>Classificar grau</Btn>
+              <Btn block>Analisar justificativa</Btn>
               {/* lavrar creates the processo vinculado (gestor/Processo.jsx) */}
               <Btn block to="/gestor/processo">Lavrar auto de infração</Btn>
-              <Btn block>Registrar ciência</Btn>
-              <Btn block>Julgar (procede / improcede)</Btn>
+              <Btn block>Registrar ciência assistida</Btn>
               <Btn block>Registrar regularização</Btn>
               <Btn block sub>Encerrar (arquivar com trilha)</Btn>
             </Row>
-            <Note style={{ fontSize: 12, marginTop: 12 }}>Os poderes são assimétricos: o app do outorgado só oferece tomar ciência, justificar, anexar e comprovar. Os verbos de disposição existem apenas aqui, e cada um gera um registro datado na trilha. <b>Lavrar auto de infração cria um processo vinculado</b> (GESTOR · 09), com número, linha do tempo e prazos próprios; o apontamento permanece como objeto de detecção e triagem.</Note>
+            <Note style={{ fontSize: 12, marginTop: 12 }}>Os poderes são assimétricos: o app do outorgado só oferece tomar ciência, justificar, anexar e comprovar. Os verbos de disposição existem apenas aqui, e cada um gera um registro datado na trilha. <b>Lavrar auto de infração cria um processo vinculado</b> (GESTOR · 09), com número, linha do tempo, prazos próprios e julgamento; o apontamento permanece como objeto de detecção, triagem e regularização.</Note>
           </Body>
         </Panel>
 
         {/* AUDIT TRAIL: quem, quando, qual ato */}
-        <Panel col={8} header={<>Trilha de auditoria <Sp /><Pill variant="label">quem · quando · qual ato</Pill></>}>
+        <Panel col={8} header={<>Últimos eventos <Sp /><Pill variant="label">quem · quando · qual ato</Pill><Link className="pill" to="/gestor/auditoria">Abrir trilha</Link></>}>
           <table className="table">
             <thead><tr><th>Data / hora</th><th>Ator</th><th>Ato registrado</th></tr></thead>
             <tbody>

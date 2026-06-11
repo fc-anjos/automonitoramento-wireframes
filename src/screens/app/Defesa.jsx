@@ -83,7 +83,7 @@ export default function Defesa() {
                   <Meter variant="warn" value="20%" style={{ marginTop: 10 }} />
                   <Row style={{ justifyContent: 'space-between', marginTop: 6 }}>
                     <small className="mono faint">ciência em 06/06</small>
-                    <small className="mono">prazo parametrizável · conferir DOE</small>
+                    <small className="mono">prazo vigente do rito</small>
                   </Row>
                 </Card>
 
@@ -104,7 +104,7 @@ export default function Defesa() {
               O prazo de defesa só corre a partir da <b>ciência</b>, e o envio da defesa devolve um <b>protocolo com recibo</b>, que fica no histórico do processo. O pacote de evidência foi <b>congelado na lavratura</b>: o que você contesta é exatamente o que o gestor viu.
             </Note>
             <Note style={{ maxWidth: 340, margin: '12px auto 0', fontSize: 12 }}>
-              Os prazos do rito estadual (Portaria DAEE 4.905/2019) aparecem como <b>parâmetros</b>, nunca como constantes: prazo parametrizável · conferir DOE.
+              Os prazos do rito estadual (Portaria DAEE 4.905/2019) aparecem como <b>parâmetros institucionais</b>, nunca como constantes na tela do usuário.
             </Note>
           </div>
 
@@ -145,7 +145,7 @@ export default function Defesa() {
                   <Meter variant="warn" value="35%" style={{ marginTop: 10 }} />
                   <Row style={{ justifyContent: 'space-between', marginTop: 6 }}>
                     <small className="mono faint">decisão em 14/07</small>
-                    <small className="mono">prazo parametrizável · conferir DOE</small>
+                    <small className="mono">prazo vigente do rito</small>
                   </Row>
                   <Btn block lg style={{ marginTop: 12 }}>Interpor recurso</Btn>
                 </Card>

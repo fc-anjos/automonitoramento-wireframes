@@ -8,7 +8,7 @@ export default function Autodeclaracao() {
 
       <div className="wrap">
         <Note style={{ maxWidth: 760, margin: '0 auto 22px' }}>
-          <b>Fluxo do pequeno/médio usuário, em autovigilância.</b> Entrada manual da leitura de cada medidor da captação, com <b>modo offline</b> (sincroniza depois), <b>geolocalização</b> do ponto e <b>foto</b> do medidor como comprovação. Periodicidade conforme a faixa. A declaração carrega um <b>tipo</b>: leitura de rotina · leitura ao remover equipamento · leitura ao reinstalar equipamento · medição alternativa (volume). A troca de medidor é registrada pelo par remover/reinstalar, e não em texto livre. A checagem de plausibilidade contra a própria outorga é um <b>sinal de gestão</b>: o outorgado se autorregula antes que qualquer limite seja excedido e nada chega ao gestor, porque o sinal tem baixa automática quando a leitura volta ao esperado. Não se confunde com uma exceção (que aguardaria justificativa em prazo) nem com um ato administrativo (que seguiria rito próprio).
+          <b>Fluxo do pequeno/médio usuário, com acompanhamento do próprio uso.</b> Entrada manual da leitura de cada medidor da captação, com <b>modo offline</b> (sincroniza depois), <b>geolocalização</b> do ponto e <b>foto</b> do medidor como comprovação. Periodicidade conforme a faixa. A declaração carrega um <b>tipo</b>: leitura de rotina · leitura ao remover equipamento · leitura ao reinstalar equipamento · medição alternativa (volume). A troca de medidor é registrada pelo par remover/reinstalar, e não em texto livre. A checagem de plausibilidade contra a própria outorga é um <b>sinal de gestão</b>: o outorgado acompanha o consumo antes que qualquer limite seja excedido e nada chega ao gestor, porque o sinal tem baixa automática quando a leitura volta ao esperado. Não se confunde com uma exceção (que aguardaria justificativa em prazo) nem com um ato administrativo (que seguiria rito próprio).
         </Note>
 
         <div className="phone-stage" style={{ justifyContent: 'center' }}>
@@ -90,7 +90,7 @@ export default function Autodeclaracao() {
                   {/* plausibility check against the user's own outorga limits: sinal de gestao */}
                   <Card style={{ padding: 12 }}>
                     <Row style={{ justifyContent: 'space-between', alignItems: 'center' }}><b style={{ fontSize: 13, color: 'var(--ink)' }}>Dentro da sua outorga</b><Pill variant="ok">Plausível</Pill></Row>
-                    <div className="muted" style={{ fontSize: 11, marginTop: 2 }}>Sinal de gestão · autovigilância</div>
+                    <div className="muted" style={{ fontSize: 11, marginTop: 2 }}>Sinal de gestão · acompanhamento do uso</div>
                     <div className="mrow"><span className="msp muted" style={{ fontSize: 12 }}>Captado no mês</span><span className="mono" style={{ fontSize: 12 }}>~210 m³ · 2 medidores (limite ~1.500/mês)</span></div>
                     <div className="mrow"><span className="msp muted" style={{ fontSize: 12 }}>Acumulado no ano</span><span className="mono" style={{ fontSize: 12 }}>1.142 / 18.000 m³ · 6%</span></div>
                     <Meter value="6%" style={{ marginTop: 6 }} />
@@ -130,7 +130,7 @@ export default function Autodeclaracao() {
         </Note>
 
         <Note style={{ maxWidth: 760, margin: '14px auto 0', fontSize: 12.5 }}>
-          O volume declarado alimenta a <b>cobrança pelo uso da água</b> (FEHIDRO). Declarar a menos não reduz a conta. A <b>subdeclaração</b> é, ao mesmo tempo, erro de cobrança e infração, sujeita a apuração retroativa. A plausibilidade mostrada na tela é só autovigilância do próprio usuário; ela não substitui a reconciliação que o gestor faz do declarado contra o outorgado.
+          O volume declarado alimenta a <b>cobrança pelo uso da água</b> (FEHIDRO). Declarar a menos não reduz a conta. A <b>subdeclaração</b> é, ao mesmo tempo, erro de cobrança e infração, sujeita a apuração retroativa. A plausibilidade mostrada na tela é só apoio ao acompanhamento do próprio usuário; ela não substitui a reconciliação que o gestor faz do declarado contra o outorgado.
         </Note>
 
         <Note style={{ maxWidth: 760, margin: '14px auto 0', fontSize: 12.5 }}>

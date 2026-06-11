@@ -2,21 +2,18 @@ import { Link } from 'react-router-dom'
 import { GestorShell } from '../../components/shell.jsx'
 import { Bento, Panel, Body, Note, Pill, Btn, Sp, Row } from '../../components/ui.jsx'
 
-// parity target: the SiDeCC "Relatórios" admin page (~15 queries). the argument
-// of this screen is paridade de informação, não de forma: what is operational
-// became a live surface elsewhere; what is genuinely a report stays here,
-// filterable and exportable, with the legacy calculation rules made explicit.
+// Reports stay here when the user needs an exportable cut. Operational queues
+// live in their own modules and expose exports from those modules.
 
 const top = (
   <>
     <div className="crumb">Dados / <b style={{ color: 'var(--ink)' }}>Relatórios e exportações</b></div>
     <span className="sp" />
-    <Pill variant="label">paridade · página Relatórios do SiDeCC</Pill>
+    <Pill variant="label">catálogo de consultas</Pill>
     <Pill variant="label">Exercício: 2026</Pill>
   </>
 )
 
-// the SiDeCC filter set, kept as the parity contract for every consulta
 const FILTERS = ['Status', 'Bacia', 'Dominialidade', 'UGRHI', 'Município', 'Período']
 const Filters = ({ list = FILTERS }) => (
   <Row style={{ gap: 8, flexWrap: 'wrap' }}>
@@ -40,13 +37,13 @@ export default function Relatorios() {
   return (
     <GestorShell tag="GESTOR · 11" title="Relatórios e exportações" active="relatorios" top={top} bodyStack>
       <Note>
-        <b>Paridade de informação, não de forma.</b> Toda consulta da página de relatórios do SiDeCC tem equivalente aqui, mas nem toda virou relatório: o que é <b>operacional</b> (pendências de cadastro, atos vencidos, atos sem declaração) vive como painel ou fila em outra tela e aparece nesta página apenas como exportação e corte histórico; o que é <b>consolidação</b> (volumes, totais, dados básicos, listagens para ofício) permanece relatório, com os mesmos filtros do legado e saída em CSV e PDF.
+        <b>Relatórios são cortes exportáveis.</b> O que é acompanhamento diário aparece como painel ou fila viva e chega aqui como exportação e corte histórico; o que é <b>consolidação</b> (volumes, totais, dados básicos, listagens para ofício) permanece relatório, com filtros consistentes e saída em CSV e PDF.
       </Note>
 
       <Bento>
 
         {/* saúde cadastral: referential-integrity queries, absorbed by live surfaces */}
-        <Panel col={6} header={<>Saúde cadastral <Sp /><Pill variant="ok">absorvido · painel dinâmico</Pill></>}>
+        <Panel col={6} header={<>Saúde cadastral <Sp /><Pill variant="ok">painel + exportação</Pill></>}>
           <Body className="list">
             <div className="lrow">
               <div className="lr-top"><span className="lr-title">Usuários com pendências de cadastro</span><Link className="pill" to="/gestor/dashboard">Ver no Dashboard</Link></div>
@@ -62,7 +59,7 @@ export default function Relatorios() {
             </div>
             <ExportRow act="Exportar corte histórico" />
             <Note>
-              No SiDeCC eram consultas manuais; aqui são contadores permanentes, com drill-down: pendências de cadastro no painel de saúde de dados, atos vencidos como filtro dinâmico na lista de pontos, e atos sem declaração como estoque de omissos que antecede o apontamento de ausência. A exportação permanece para corte histórico e cobrança de regularização.
+              Estes indicadores ficam vivos no painel e nas listas operacionais: pendências de cadastro no painel de saúde de dados, atos vencidos como filtro dinâmico na lista de pontos, e atos sem declaração como estoque de omissos que antecede o apontamento de ausência. A exportação permanece para corte histórico e cobrança de regularização.
             </Note>
           </Body>
         </Panel>
@@ -81,7 +78,7 @@ export default function Relatorios() {
             <Filters list={['Período', 'Dominialidade', 'Infração', 'Status']} />
             <ExportRow />
             <Note>
-              A justificativa reciclada mês a mês deixa de ser achado de relatório e passa a indicador de recorrência na fila de apontamentos; o relatório serve à análise de período. As consultas planas de infrações do legado viraram visões do módulo de processo sancionador, em que cada linha abre o processo com rito, prazos e evidência congelada.
+              A justificativa reciclada mês a mês vira indicador de recorrência na fila de apontamentos; o relatório serve à análise de período. As infrações constatadas, deferidas e em recurso são visões do módulo de processo sancionador, em que cada linha abre o processo com rito, prazos e evidência congelada.
             </Note>
           </Body>
         </Panel>
@@ -97,7 +94,7 @@ export default function Relatorios() {
             </tbody>
           </table>
           <Note style={{ margin: 14, fontSize: 12 }}>
-            Duas regras de cálculo herdadas das notas de rodapé do SiDeCC, aqui tornadas explícitas: <b>atos sazonais</b> entram pelo volume outorgado do mês de maior valor; <b>períodos sem declaração</b> e dias entre remoção e reinstalação do medidor são imputados ao <b>volume máximo diário</b> no consumo anual. Regra do sistema legado, tratada como <b>parâmetro configurável</b>; fundamento normativo a confirmar com a SP-Águas na Etapa 1. Como a imputação repercute na cobrança pelo uso, o cálculo aparece discriminado na memória da guia (<Link to="/gestor/arrecadacao">Arrecadação</Link>).
+            As regras de cálculo ficam explícitas na memória do relatório: <b>atos sazonais</b> entram pelo volume outorgado do mês de maior valor; <b>períodos sem declaração</b> e dias entre remoção e reinstalação do medidor são imputados ao <b>volume máximo diário</b> no consumo anual. Como a imputação repercute na cobrança pelo uso, o cálculo aparece também discriminado na memória da guia (<Link to="/gestor/arrecadacao">Arrecadação</Link>).
           </Note>
         </Panel>
 
@@ -126,7 +123,7 @@ export default function Relatorios() {
         </Panel>
 
         <Note col={12}>
-          <b>Exportar também é ato registrado.</b> Cada geração de relatório grava na trilha de auditoria quem extraiu, com quais filtros e quando; relatórios com dados pessoais do outorgado circulam apenas no perfil do gestor, e o que o portal público recebe são os agregados, observada a LGPD.
+          <b>Exportar também é ato registrado.</b> Cada geração de relatório grava quem extraiu, com quais filtros e quando; relatórios com dados pessoais do outorgado circulam apenas no perfil do gestor, e as divulgações públicas usam recortes agregados, observada a LGPD.
         </Note>
 
       </Bento>

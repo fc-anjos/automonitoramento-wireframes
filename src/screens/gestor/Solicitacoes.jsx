@@ -66,7 +66,7 @@ export default function Solicitacoes() {
   return (
     <GestorShell tag="GESTOR · 07" title="Solicitações" active="solicitacoes" top={top}>
       <Note style={{ marginBottom: 16 }}>
-        <b>A fila de pedidos do outorgado, agora em quatro famílias.</b> O outorgado protocola e o gestor despacha. O catálogo cobre os pedidos sobre o ciclo de vida da <b>outorga</b> (renovação, ampliação, transferência, dispensa, desativação), que a plataforma recebe, instrui e encaminha ao processo de outorga, onde o ato se formaliza; sobre o <b>equipamento</b> (inclusão, troca e desativação de medidor), sobre o <b>calendário</b> (justificativa antecipada de ausência de declaração) e sobre o <b>canal</b> (interligação à telemetria, no rito do COT-R). Os verbos seguem o pedido: <b>deferir</b>, <b>indeferir</b>, <b>pedir documento</b> e, no caso das ausências, <b>registrar ciência</b>. Nada se apaga: ao decidir, o pedido muda de situação e fica arquivado com a trilha de quem despachou e quando.
+        <b>A fila de pedidos do outorgado, agora em quatro famílias.</b> O outorgado protocola e o gestor despacha. O catálogo cobre pedidos sobre o ciclo de vida da <b>outorga</b> (renovação, ampliação, transferência, dispensa, desativação), que a plataforma recebe, instrui e encaminha ao <b>Sistema de Outorga Eletrônica (SOE)</b>, onde o ato se formaliza; sobre o <b>equipamento</b> (inclusão, troca e desativação de medidor), sobre o <b>calendário</b> (justificativa antecipada de ausência de declaração) e sobre o <b>canal</b> (interligação à telemetria, no rito do COT-R). Os verbos seguem o pedido: <b>deferir</b>, <b>indeferir</b>, <b>pedir documento</b> e, no caso das ausências, <b>registrar ciência</b>. Nada se apaga: ao decidir, o pedido muda de situação e fica arquivado com a trilha de quem despachou e quando.
       </Note>
 
       <Bento>
@@ -137,7 +137,7 @@ export default function Solicitacoes() {
         </Panel>
 
         {/* immutable trail of dispatches */}
-        <Panel col={4} header={<>Trilha de despachos <Sp /><Pill variant="label" className="mono">imutável</Pill></>}>
+        <Panel col={4} header={<>Últimos despachos <Sp /><Pill variant="label">atos datados</Pill></>}>
           <Body className="list">
             <div className="lrow"><div className="lr-sub"><span className="mono faint">06/06 11:18</span> · recebida SOL-2026-0461 (renovação · 07-0830)</div></div>
             <div className="lrow"><div className="lr-sub"><span className="mono faint">05/06 09:12</span> · recebida SOL-2026-0467 (medidor · troca · 07-1001)</div></div>
@@ -148,7 +148,7 @@ export default function Solicitacoes() {
         </Panel>
 
         <Note col={8}>
-          O despacho é exclusivo do gestor; ao outorgado cabe <b>solicitar</b>. Cada despacho é um ato datado e imutável na trilha, o que sustenta o devido processo, já que os prazos correm da ciência. <b>Pedir documento</b> suspende o prazo até a peça chegar. Nos pedidos sobre a <b>outorga</b>, o deferimento é encaminhado ao processo de outorga e o novo estado entra pelo cadastro espelhado. Registrar ciência é despacho de menor grau: não defere nem indefere, apenas reconhece. A renovação tempestiva tem efeito de silêncio positivo: o gestor que pretende indeferir precisa fazê-lo dentro do prazo, sob pena de renovação automática.
+          O despacho é exclusivo do gestor; ao outorgado cabe <b>solicitar</b>. Cada despacho é um ato datado e imutável na trilha, o que sustenta o devido processo, já que os prazos correm da ciência. <b>Pedir documento</b> suspende o prazo até a peça chegar. Nos pedidos sobre a <b>outorga</b>, o deferimento instrui o encaminhamento ao SOE e o novo estado retorna pelo cadastro espelhado. Registrar ciência é despacho de menor grau: não defere nem indefere, apenas reconhece. A renovação tempestiva tem efeito de silêncio positivo: o gestor que pretende indeferir precisa fazê-lo dentro do prazo, sob pena de renovação automática.
         </Note>
 
       </Bento>

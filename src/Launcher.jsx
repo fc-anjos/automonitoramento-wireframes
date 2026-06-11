@@ -2,7 +2,7 @@
 // draft banner, intro, three surface sections, each a grid of cards whose
 // thumbnail is the real screen component rendered scaled.
 import { useNavigate } from 'react-router-dom'
-import { SURFACES, screensBySurface } from './screens.jsx'
+import { SCREENS, SURFACES, screensBySurface } from './screens.jsx'
 
 function LaunchCard({ screen }) {
   const navigate = useNavigate()
@@ -54,7 +54,7 @@ export default function Launcher() {
         </div>
 
         <div className="note">
-          <b>Convenção de navegação.</b> As pílulas de navegação conduzem à tela exemplar de cada módulo. Os verbos de ação (deferir, indeferir, registrar ciência…) abrem um <b>esboço de baixa fidelidade</b> do despacho, ilustrativo dos campos exigidos e do efeito jurídico do ato; não especificam o formulário definitivo, que será detalhado no TR.
+          <b>Convenção de navegação.</b> As pílulas de navegação conduzem à tela exemplar de cada módulo. Os verbos de ação (deferir, indeferir, registrar ciência…) abrem um <b>esboço de baixa fidelidade</b> do despacho, ilustrativo dos campos exigidos, da justificativa e do efeito jurídico do ato.
         </div>
 
         {SURFACES.map((surface, i) => (
@@ -76,7 +76,7 @@ export default function Launcher() {
         ))}
 
         <footer style={{ marginTop: 40, paddingTop: 18, borderTop: '1px solid var(--line)' }} className="legend">
-          <span className="mono faint">17 telas · 3 superfícies · Bacia-piloto UGRHI-07 (Baixada Santista)</span>
+          <span className="mono faint">{SCREENS.length} telas · 3 superfícies · Bacia-piloto UGRHI-07 (Baixada Santista)</span>
         </footer>
       </div>
     </>

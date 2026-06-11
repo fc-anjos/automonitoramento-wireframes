@@ -21,6 +21,7 @@ import GestorCadastro from './screens/gestor/Cadastro.jsx'
 import GestorProcesso from './screens/gestor/Processo.jsx'
 import GestorArrecadacao from './screens/gestor/Arrecadacao.jsx'
 import GestorRelatorios from './screens/gestor/Relatorios.jsx'
+import GestorAuditoria from './screens/gestor/Auditoria.jsx'
 import PortalPublico from './screens/portal/Publico.jsx'
 
 export const SURFACES = [
@@ -64,12 +65,13 @@ export const SCREENS = [
   { id: 'gestor-pontos', surface: 'gestor', num: 'GESTOR · 03', path: '/gestor/pontos', title: 'Pontos / outorgas', blurb: 'Lista filtrável de pontos e outorgas: usuário, sub-bacia, finalidade, faixa de VM e status.', Component: GestorPontos },
   { id: 'gestor-detalhe', surface: 'gestor', num: 'GESTOR · 04', path: '/gestor/detalhe', title: 'Detalhe do ponto / outorgado', blurb: 'Outorga, fonte, VM outorgado × medido, série temporal e medidores da captação.', Component: GestorDetalhe },
   { id: 'gestor-apontamentos', surface: 'gestor', num: 'GESTOR · 05', path: '/gestor/apontamentos', title: 'Apontamentos', blurb: 'Fila de apontamentos a partir das regras: excesso de volume, ausência de transmissão, fraude, vazão reversa.', Component: GestorApontamentos },
-  { id: 'gestor-apontamento', surface: 'gestor', num: 'GESTOR · 06', path: '/gestor/apontamento', title: 'Apontamento (gestor)', blurb: 'A mesma peça do lado de quem dispõe: fases, trilha de auditoria e verbos do gestor (notificar, autuar, julgar, encerrar).', Component: GestorApontamento },
+  { id: 'gestor-apontamento', surface: 'gestor', num: 'GESTOR · 06', path: '/gestor/apontamento', title: 'Apontamento (gestor)', blurb: 'A mesma peça do lado de quem dispõe: fases, trilha e verbos do gestor (notificar, analisar justificativa, autuar, encerrar).', Component: GestorApontamento },
   { id: 'gestor-solicitacoes', surface: 'gestor', num: 'GESTOR · 07', path: '/gestor/solicitacoes', title: 'Solicitações', blurb: 'Fila de pedidos do outorgado: renovação, ampliação, redução, transferência, dispensa e desativação.', Component: GestorSolicitacoes },
-  { id: 'gestor-cadastro', surface: 'gestor', num: 'GESTOR · 08', path: '/gestor/cadastro', title: 'Cadastro & administração', blurb: 'Cadastro de outorgas espelhado do processo de outorga (somente leitura), perfis de acesso, credenciais e trilha de auditoria.', Component: GestorCadastro },
+  { id: 'gestor-cadastro', surface: 'gestor', num: 'GESTOR · 08', path: '/gestor/cadastro', title: 'Cadastro & administração', blurb: 'Cadastro de outorgas espelhado do SOE (somente leitura), perfis de acesso, credenciais e atos rastreáveis.', Component: GestorCadastro },
   { id: 'gestor-processo', surface: 'gestor', num: 'GESTOR · 09', path: '/gestor/processo', title: 'Processo sancionador', blurb: 'Do auto de infração à decisão: enquadramento e grau, rito com prazos, evidência congelada na lavratura e penalidade.', Component: GestorProcesso },
   { id: 'gestor-arrecadacao', surface: 'gestor', num: 'GESTOR · 10', path: '/gestor/arrecadacao', title: 'Arrecadação', blurb: 'Guias de multa e de cobrança pelo uso: emissão, conciliação bancária, divergências, inadimplência e dívida ativa.', Component: GestorArrecadacao },
-  { id: 'gestor-relatorios', surface: 'gestor', num: 'GESTOR · 11', path: '/gestor/relatorios', title: 'Relatórios e exportações', blurb: 'Paridade com a página de relatórios do SiDeCC: saúde cadastral e fiscalização viram painéis dinâmicos; volumes, consolidações e listagens de ofício seguem exportáveis.', Component: GestorRelatorios },
+  { id: 'gestor-relatorios', surface: 'gestor', num: 'GESTOR · 11', path: '/gestor/relatorios', title: 'Relatórios e exportações', blurb: 'Catálogo de consultas exportáveis: saúde cadastral, fiscalização, volumes, consolidações e listagens de ofício.', Component: GestorRelatorios },
+  { id: 'gestor-auditoria', surface: 'gestor', num: 'GESTOR · 12', path: '/gestor/auditoria', title: 'Auditoria', blurb: 'A trilha imutável como tela própria: todo ato de disposição e evento do sistema, em qualquer fluxo, com quem, quando e qual ato. As demais telas mostram só o recorte do seu objeto.', Component: GestorAuditoria },
 
   { id: 'portal-publico', surface: 'portal', num: 'PORTAL · 01', path: '/portal/publico', title: 'Transparência da bacia', blurb: 'Indicadores agregados de uso, mapa público e dados abertos para download.', Component: PortalPublico },
 ]

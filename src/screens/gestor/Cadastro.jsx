@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom'
 import { GestorShell } from '../../components/shell.jsx'
 import { Bento, Panel, Body, Note, Pill, Sp, DataTable } from '../../components/ui.jsx'
 
-// The outorga registry lives in the SP-Águas outorga process, outside this
-// platform; this screen mirrors it read-only via integration. The registry is
+// The outorga registry lives in the Sistema de Outorga Eletrônica (SOE),
+// outside this platform; this screen mirrors it read-only via integration. The registry is
 // still the unbounded object (312 outorgas in the scenario); the rows below
 // are the loaded sample. DataTable adds the search / count / pager.
 const OUTORGAS = [
@@ -31,7 +31,7 @@ const top = (
     <div className="crumb">Dados / <b style={{ color: 'var(--ink)' }}>Cadastro & admin</b></div>
     <span className="sp" />
     <div className="input search" style={{ minHeight: 36 }}><span className="faint">Buscar outorga / outorgado…</span></div>
-    <Pill variant="label">espelho · integração com o processo de outorga</Pill>
+    <Pill variant="label">espelho · integração com SOE</Pill>
   </>
 )
 
@@ -39,7 +39,7 @@ export default function Cadastro() {
   return (
     <GestorShell tag="GESTOR · 08" title="Cadastro & administração" active="cadastro" top={top}>
       <Note style={{ marginBottom: 16 }}>
-        <b>O cadastro da outorga não vive nesta plataforma.</b> A outorga é emitida, renovada, revista, revogada e extinta no processo de outorga da SP-Águas; esta tela <b>espelha</b> esse cadastro por integração, em modo de leitura, e concentra o que é próprio da plataforma: os parâmetros por ponto que alimentam a reconciliação e os apontamentos, os perfis de acesso, as credenciais e a trilha de auditoria. As exceções de calendário (a vencer, dormente) continuam abertas aqui, como sinais de fiscalização; o desfecho é ato do processo de outorga e retorna pelo espelho.
+        <b>O cadastro da outorga não vive nesta plataforma.</b> A outorga é emitida, renovada, revista, revogada e extinta no <b>Sistema de Outorga Eletrônica (SOE)</b>; esta tela <b>espelha</b> esse cadastro por integração, em modo de leitura, e concentra o que é próprio da plataforma: os parâmetros por ponto que alimentam a reconciliação e os apontamentos, os perfis de acesso, as credenciais e a trilha de auditoria. As exceções de calendário (a vencer, dormente) continuam abertas aqui, como sinais de fiscalização; o desfecho é formalizado no SOE e retorna pelo espelho.
       </Note>
 
       <Bento>
@@ -58,15 +58,15 @@ export default function Cadastro() {
         </Panel>
 
         <Note col={12}>
-          O <b>estado</b> corresponde à etapa do ciclo de vida da outorga, e não a um status genérico, e vem do espelho: a fonte é o cadastro mantido no processo de outorga. "A vencer" e "Dormente" são exceções dirigidas por calendário, abertas automaticamente pela reconciliação contra a própria data da outorga espelhada: a primeira chama renovação antes do vencimento; a segunda antecipa o perecimento, que opera de pleno direito após três anos de não uso. "Extinta" é o término do prazo sem pedido tempestivo de renovação, formalizado na fonte e refletido aqui. Nenhuma some por exclusão: muda de estado e fica registrada.
+          O <b>estado</b> corresponde à etapa do ciclo de vida da outorga, e não a um status genérico, e vem do espelho: a fonte é o cadastro mantido no SOE. "A vencer" e "Dormente" são exceções dirigidas por calendário, abertas automaticamente pela reconciliação contra a própria data da outorga espelhada: a primeira chama renovação antes do vencimento; a segunda antecipa o perecimento, que opera de pleno direito após três anos de não uso. "Extinta" é o término do prazo sem pedido tempestivo de renovação, formalizado na fonte e refletido aqui. Nenhuma some por exclusão: muda de estado e fica registrada.
         </Note>
 
-        {/* outorga acts happen in the outorga process; this panel routes, never executes */}
+        {/* outorga acts happen in SOE; this panel routes, never executes */}
         <Panel col={12} header={<>Atos sobre a outorga <Sp /><Pill variant="label">fora da plataforma · refletidos pelo espelho</Pill></>}>
           <Body className="list">
             <div className="lrow">
               <div className="lr-top"><span className="lr-title">Renovação, revisão e demais alterações</span><Link className="pill" to="/gestor/solicitacoes">Fila de solicitações</Link></div>
-              <div className="lr-sub">Instruídas na fila de solicitações e encaminhadas ao processo de outorga.</div>
+              <div className="lr-sub">Instruídas na fila de solicitações e encaminhadas ao SOE para formalização.</div>
             </div>
             <div className="lrow">
               <div className="lr-top"><span className="lr-title">Revogação por descumprimento</span><Link className="pill bad" to="/gestor/processo">Via processo sancionador</Link></div>
@@ -74,7 +74,7 @@ export default function Cadastro() {
             </div>
             <div className="lrow">
               <div className="lr-top"><span className="lr-title">Extinção e perecimento</span><a className="pill">Ver histórico · OUT-07-2018-009907</a></div>
-              <div className="lr-sub">Formalizados no processo de outorga; OUT-07-2018-009907 extinta por prazo vencido em 31/05.</div>
+              <div className="lr-sub">Formalizados no SOE; OUT-07-2018-009907 extinta por prazo vencido em 31/05.</div>
             </div>
           </Body>
         </Panel>
@@ -86,7 +86,7 @@ export default function Cadastro() {
         {/* users & roles: kept, narrowed to the role-asymmetry the firewall cares about */}
         <Panel col={6} header={<>Perfis de acesso <Sp /><Pill variant="label">por papel</Pill></>}>
           <table className="table"><tbody>
-            <tr><td><b style={{ color: 'var(--ink)' }}>Gestor · SP-Águas</b><div className="muted" style={{ fontSize: 11.5 }}>defere, revisa, revoga, autua</div></td><td className="num"><Pill>4 contas</Pill></td></tr>
+            <tr><td><b style={{ color: 'var(--ink)' }}>Gestor · SP-Águas</b><div className="muted" style={{ fontSize: 11.5 }}>instrui, fiscaliza, despacha</div></td><td className="num"><Pill>4 contas</Pill></td></tr>
             <tr><td><b style={{ color: 'var(--ink)' }}>Analista de dados</b><div className="muted" style={{ fontSize: 11.5 }}>ingestão · consistência · sem disposição</div></td><td className="num"><Pill>6 contas</Pill></td></tr>
             <tr><td><b style={{ color: 'var(--ink)' }}>Outorgado (app)</b><div className="muted" style={{ fontSize: 11.5 }}>própria outorga · solicita, não despacha</div></td><td className="num"><Pill>312 contas</Pill></td></tr>
             <tr><td><b style={{ color: 'var(--ink)' }}>Leitura pública</b><div className="muted" style={{ fontSize: 11.5 }}>portal de transparência</div></td><td className="num"><Pill>aberto</Pill></td></tr>
@@ -94,7 +94,7 @@ export default function Cadastro() {
         </Panel>
 
         {/* immutable audit trail: who, when, which act */}
-        <Panel col={6} header={<>Trilha de auditoria <Sp /><Pill variant="label" className="mono">imutável</Pill></>}>
+        <Panel col={6} header={<>Últimos eventos <Sp /><Pill variant="label">cadastro espelhado</Pill></>}>
           <table className="table"><tbody>
             <tr><td className="mono faint" style={{ fontSize: 11 }}>06/06 11:18</td><td>Gestor M. Souza recebeu SOL-2026-0461 (renovação · 07-0830)</td></tr>
             <tr><td className="mono faint" style={{ fontSize: 11 }}>05/06 16:40</td><td>Gestor classificou 07-1100 como gravíssima e lavrou auto</td></tr>
@@ -105,7 +105,7 @@ export default function Cadastro() {
         </Panel>
 
         <Note col={12}>
-          A trilha registra <b>quem, quando e qual ato</b>, e mistura deliberadamente atos do gestor (despachos, classificação) com eventos do sistema (a abertura automática das exceções de calendário). É ela que sustenta o devido processo: como os prazos correm da ciência, a data de cada marco precisa estar gravada e ser imutável.
+          Este painel mostra os últimos eventos do cadastro espelhado: quem, quando, origem e efeito. A trilha sustenta o devido processo porque prazos correm da ciência, e a data de cada marco precisa estar gravada e ser imutável.
         </Note>
 
         {/* credentials: gestor acts over accounts, the modern heir of the sidecc password oficio */}
@@ -145,7 +145,7 @@ export default function Cadastro() {
         </Panel>
 
         <Note col={12}>
-          Criação e inativação de usuários são <b>atos do gestor</b>, datados na trilha de auditoria como qualquer despacho. O mecanismo de autenticação (convite por e-mail, recuperação de conta ou gov.br) é <b>decisão a explicitar no TR</b>, não a omitir: o equivalente moderno pode superar o desenho do SiDeCC (ofício de senha, prazo, AR, reenvio), mas a escolha precisa estar escrita. Para os usuários de telemetria, a credencial segue o rito do COT-R: é criada como <b>login experimental</b> e só passa a <b>login operacional</b>, por ato do gestor, após a validação da transmissão.
+          Criação e inativação de usuários são <b>atos do gestor</b>, datados na trilha de auditoria como qualquer despacho. O mecanismo de autenticação (convite por e-mail, recuperação de conta ou gov.br) fica como decisão institucional da SP-Águas, mas cada emissão de convite, recuperação e inativação precisa ser rastreável. Para os usuários de telemetria, a credencial segue o rito do COT-R: é criada como <b>login experimental</b> e só passa a <b>login operacional</b>, por ato do gestor, após a validação da transmissão.
         </Note>
 
       </Bento>

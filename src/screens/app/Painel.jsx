@@ -255,7 +255,7 @@ export default function Painel() {
         </div>
 
         <Note style={{ maxWidth: 760, margin: '22px auto 0' }}>
-          <b>O painel é roteado por captação, não por outorgado.</b> O outorgado que detém mais de um ponto de captação, caso da Indústria Cubatão (2 captações), alterna entre eles pelo seletor no cartão de identificação; cada captação carrega o próprio limite, a própria frequência de declaração e os próprios medidores. O usuário de captação única, como o de Praia Grande ao lado, não vê seletor.
+          <b>O painel é roteado por captação, não por outorgado.</b> O outorgado que detém mais de um ponto de captação, caso da Indústria Cubatão (2 captações), alterna entre eles pelo seletor no cartão de identificação; cada captação carrega o próprio limite, a própria frequência de declaração e os próprios medidores. Para o usuário de captação única, como o de Praia Grande ao lado, o painel já abre direto na captação.
         </Note>
 
         <Note style={{ maxWidth: 760, margin: '14px auto 0' }}>

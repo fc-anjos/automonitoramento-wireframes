@@ -78,6 +78,7 @@ const GESTOR_NAV = [
   { sec: 'Dados' },
   { key: 'cadastro', label: 'Cadastro & admin', to: '/gestor/cadastro' },
   { key: 'relatorios', label: 'Relatórios', to: '/gestor/relatorios' },
+  { key: 'auditoria', label: 'Auditoria', to: '/gestor/auditoria' },
 ]
 export const GestorSidebar = ({ active }) => (
   <aside className="app-side">

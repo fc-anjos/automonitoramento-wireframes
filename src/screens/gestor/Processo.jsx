@@ -5,8 +5,8 @@ import { Bento, Card, Panel, Body, Note, Pill, Btn, Row, Grid, Sp, Verb } from '
 // the processo sancionador is its own object, created when the gestor lavra o
 // auto from an apontamento: own number, own timeline, own prazos. the two
 // objects reference each other; the apontamento keeps detection and triage.
-// state-law deadlines (portaria daee 4.905/2019) render as parameters, never
-// as constants: the primary source is a scanned pdf without a text layer.
+// state-law deadlines (portaria daee 4.905/2019) render as current rules,
+// never as constants embedded in the workflow.
 
 const top = (
   <>
@@ -14,7 +14,6 @@ const top = (
     <span className="sp" />
     <Pill variant="bad">Ato administrativo · grau gravíssima</Pill>
     <Pill variant="label">fase Defesa</Pill>
-    <Btn sub style={{ padding: '6px 12px' }}>Exportar trilha</Btn>
   </>
 )
 
@@ -40,7 +39,7 @@ export default function Processo() {
             <div><div className="muted" style={{ fontSize: 11 }}>Lavrado em</div><div className="mono" style={{ color: 'var(--ink)' }}>05/06 16:40</div></div>
             <div><div className="muted" style={{ fontSize: 11 }}>Ciência em</div><div className="mono" style={{ color: 'var(--ink)' }}>09/06 14:30</div></div>
             <div><div className="muted" style={{ fontSize: 11 }}>Fase atual</div><div className="mono" style={{ color: 'var(--ink)' }}>Defesa · prazo correndo</div></div>
-            <div><div className="muted" style={{ fontSize: 11 }}>Prazo de defesa</div><div className="mono" style={{ color: 'var(--ink)' }}>parametrizável · conferir DOE</div></div>
+            <div><div className="muted" style={{ fontSize: 11 }}>Prazo de defesa</div><div className="mono" style={{ color: 'var(--ink)' }}>rito vigente</div></div>
             <div><div className="muted" style={{ fontSize: 11 }}>Dono da próxima ação</div><div className="mono" style={{ color: 'var(--ink)' }}>outorgado (defesa)</div></div>
             <div><div className="muted" style={{ fontSize: 11 }}>Evidência</div><div className="mono" style={{ color: 'var(--ink)' }}>congelada na lavratura</div></div>
           </Grid>
@@ -98,7 +97,7 @@ export default function Processo() {
               </div>
               <div className="lrow" style={{ background: 'var(--act-soft)', margin: '0 -14px', paddingLeft: 14, paddingRight: 14 }}>
                 <div className="lr-top"><span className="lr-title">Defesa</span><span className="pill warn" style={{ fontSize: 10.5 }}>fase atual</span></div>
-                <div className="lr-sub">Outorgado apresenta defesa com anexos e protocolo · prazo parametrizável · conferir DOE.</div>
+                <div className="lr-sub">Outorgado apresenta defesa com anexos e protocolo · prazo do rito vigente.</div>
               </div>
               <div className="lrow">
                 <div className="lr-top"><span className="lr-title faint">Julgamento de 1ª instância</span><span className="mono faint" style={{ fontSize: 11 }}>a seguir</span></div>
@@ -106,7 +105,7 @@ export default function Processo() {
               </div>
               <div className="lrow">
                 <div className="lr-top"><span className="lr-title faint">Recurso</span><Pill variant="bad" style={{ fontSize: 10.5 }}>sem efeito suspensivo</Pill></div>
-                <div className="lr-sub faint">Prazo parametrizável · conferir DOE.</div>
+                <div className="lr-sub faint">Prazo do rito vigente.</div>
               </div>
               <div className="lrow">
                 <div className="lr-top"><span className="lr-title faint">Julgamento de 2ª instância → Definitivo</span><span className="mono faint" style={{ fontSize: 11 }}>a seguir</span></div>
@@ -154,27 +153,27 @@ export default function Processo() {
               <tr><td className="mono">1</td><td>Advertência com prazo de correção</td><td><Pill variant="label">superada · grau gravíssima</Pill></td></tr>
               <tr><td className="mono">2</td><td>Multa simples ou diária</td><td><Pill variant="bad">aplicada · diária</Pill></td></tr>
               <tr><td className="mono">3</td><td>Embargo provisório</td><td><Pill variant="warn">não aplicado · prazo de correção correndo</Pill></td></tr>
-              <tr><td className="mono">4</td><td>Embargo definitivo · revogação da outorga</td><td><Verb pill label="Encaminhar revogação ao processo de outorga" variant="bad" note="O encaminhamento se dá a partir do embargo definitivo; a revogação é ato do processo de outorga e o novo estado entra pelo cadastro espelhado." /></td></tr>
+              <tr><td className="mono">4</td><td>Embargo definitivo · revogação da outorga</td><td><Verb pill label="Encaminhar revogação ao SOE" variant="bad" note="O encaminhamento se dá a partir do embargo definitivo; a revogação é formalizada no Sistema de Outorga Eletrônica e o novo estado entra pelo cadastro espelhado." /></td></tr>
             </tbody>
           </table>
           <Body>
             <div className="list">
               <div className="lrow">
                 <div className="lr-top"><span className="lr-title">Valor computado</span><Pill variant="label">base × grau × modificadores</Pill></div>
-                <div className="lr-sub">Base do grau gravíssima R$ 10.000,00/dia · agravante +20% → <b>R$ 12.000,00 por dia de infração</b> · sem dobra por reincidência. Valores ilustrativos · parametrizáveis · conferir DOE.</div>
+                <div className="lr-sub">Base do grau gravíssima R$ 10.000,00/dia · agravante +20% → <b>R$ 12.000,00 por dia de infração</b> · sem dobra por reincidência. Valores ilustrativos, calculados pela regra vigente e preservados no histórico do processo.</div>
               </div>
               <div className="lrow">
                 <div className="lr-top"><span className="lr-title">Guia de recolhimento</span><Pill variant="label">ainda não emitida</Pill></div>
                 <div className="lr-sub">Emitida pelo sistema no julgamento definitivo, com o valor já computado; o gestor confirma, não digita. <Link to="/gestor/arrecadacao">Acompanhar na Arrecadação</Link>.</div>
               </div>
             </div>
-            <Note style={{ fontSize: 12, marginTop: 12 }}>O embargo definitivo é o desfecho último do rito e enseja a <b>revogação por descumprimento</b>, ato do processo de outorga, fora da plataforma: o sistema registra o encaminhamento na trilha e o cadastro espelhado reflete o novo estado. Como em todo o sistema, nada se apaga; a outorga muda de estado com a trilha completa.</Note>
+            <Note style={{ fontSize: 12, marginTop: 12 }}>O embargo definitivo é o desfecho último do rito e enseja a <b>revogação por descumprimento</b>, formalizada no SOE, fora desta plataforma: o sistema registra o encaminhamento na trilha e o cadastro espelhado reflete o novo estado. Como em todo o sistema, nada se apaga; a outorga muda de estado com a trilha completa.</Note>
           </Body>
         </Panel>
 
         {/* asymmetry + audit reminder, mirroring the sibling screens */}
         <Note col={12}>
-          A assimetria de verbos se mantém no rito: o outorgado <b>toma ciência, apresenta defesa, interpõe recurso, paga e comprova a correção</b>, sempre pelo aplicativo; lavrar, julgar nas duas instâncias e encerrar são atos do gestor e só existem aqui. Cada marco é gravado na trilha de auditoria imutável, com quem, quando e qual ato, porque os prazos correm da ciência e a data de cada marco precisa ser incontestável.
+          A assimetria de verbos se mantém no rito: o outorgado <b>toma ciência, apresenta defesa, interpõe recurso, paga e comprova a correção</b>, sempre pelo aplicativo; lavrar, julgar nas duas instâncias e encerrar são atos do gestor e só existem aqui. Cada marco é gravado na trilha de auditoria, com quem, quando e qual ato, porque os prazos correm da ciência e a data de cada marco precisa ser incontestável.
         </Note>
 
       </Bento>

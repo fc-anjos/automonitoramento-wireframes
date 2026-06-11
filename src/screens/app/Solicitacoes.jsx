@@ -9,7 +9,7 @@ export default function Solicitacoes() {
 
       <div className="wrap">
         <Note style={{ maxWidth: 760, margin: '0 auto 22px' }}>
-          <b>O lado temporal da outorga.</b> A outorga vence, renova-se e perece por calendário, e não por volume. A tela lidera pelo vencimento próximo, com a renovação feita antes da data, e abre o catálogo de solicitações que o outorgado pode protocolar, cada uma com o seu estado. O catálogo cobre três famílias: os pedidos sobre a <b>outorga</b> (renovação, ampliação, transferência…), os pedidos sobre o <b>equipamento</b> (inclusão, troca e desativação de medidor) e os pedidos sobre a <b>rotina declaratória</b> (justificativa antecipada de ausência, interligação à telemetria).
+          <b>O lado temporal da outorga.</b> A outorga vence, renova-se e perece por calendário, e não por volume. A tela lidera pelo vencimento próximo, com a renovação protocolada antes da data, e abre o catálogo de solicitações que o outorgado pode iniciar, cada uma com o seu estado. O catálogo cobre três famílias: os pedidos sobre a <b>outorga</b> (renovação, ampliação, transferência…), formalizados no Sistema de Outorga Eletrônica e refletidos aqui pelo estado espelhado; os pedidos sobre o <b>equipamento</b> (inclusão, troca e desativação de medidor) e os pedidos sobre a <b>rotina declaratória</b> (justificativa antecipada de ausência, interligação à telemetria).
         </Note>
 
         <div className="phone-stage" style={{ justifyContent: 'center' }}>
@@ -159,77 +159,60 @@ export default function Solicitacoes() {
             </Note>
           </div>
 
-          {/* PHONE 2: medidor lifecycle request (3.1.a) */}
+          {/* PHONE 2: request detail; the equipment form itself lives in APP · 10 */}
           <div>
             <Phone>
               <Notch />
               <StatusBar right="▰▰▰ 5G ▮" />
               <PScroll>
-                <AppBar title="Solicitação · Medidor" back />
+                <AppBar title="Solicitação · SOL-2026-0467" back />
 
                 <Card style={{ padding: 14 }}>
-                  <div className="muted" style={{ fontSize: 12 }}>Outorga · ponto</div>
-                  <div className="mono" style={{ fontSize: 13, color: 'var(--ink)' }}>OUT-07-2024-001234 · 07-1001 · Indústria Cubatão S/A</div>
+                  <Row style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+                    <b style={{ fontSize: 13, color: 'var(--ink)' }}>Troca de medidor</b>
+                    <Pill variant="warn">aguardando análise</Pill>
+                  </Row>
+                  <div className="muted" style={{ fontSize: 12, marginTop: 6 }}>OUT-07-2024-001234 · ponto 07-1001 · Indústria Cubatão S/A</div>
+                  <div className="mono faint" style={{ fontSize: 11.5, marginTop: 4 }}>Protocolada em 05/06/2026 · última atualização 10/06</div>
                 </Card>
 
-                {/* the three verbs of the equipment lifecycle */}
-                <div className="seg" style={{ marginTop: 14 }}>
-                  <span className="s">Inclusão</span>
-                  <span className="s on">Troca</span>
-                  <span className="s">Desativação</span>
-                </div>
-
-                {/* current equipment set: one captação, more than one medidor */}
-                <Panel style={{ marginTop: 14 }} header={<>Medidores desta captação <Sp /><Pill variant="label">2</Pill></>}>
+                <Panel style={{ marginTop: 14 }} header="Andamento">
                   <Body>
                     <div className="list">
                       <div className="lrow">
-                        <div className="lr-top"><span className="lr-title mono">HID-88412</span><Pill variant="ok">ativo</Pill></div>
-                        <div className="lr-sub">Hidrômetro · incluído em 03/02/2023 · selecionado para troca</div>
+                        <div className="lr-top"><span className="lr-title">Protocolada</span><span className="mono faint" style={{ fontSize: 11 }}>05/06</span></div>
+                        <div className="lr-sub">Solicitação recebida com medidor que sai, medidor que entra e foto da instalação.</div>
+                      </div>
+                      <div className="lrow" style={{ background: 'var(--act-soft)', margin: '0 -14px', paddingLeft: 14, paddingRight: 14 }}>
+                        <div className="lr-top"><span className="lr-title">Em análise</span><span className="pill warn" style={{ fontSize: 10.5 }}>fase atual</span></div>
+                        <div className="lr-sub">Gestor confere dados do equipamento e leitura inicial antes de deferir.</div>
                       </div>
                       <div className="lrow">
-                        <div className="lr-top"><span className="lr-title mono faint">HID-71240</span><Pill variant="label">desativado</Pill></div>
-                        <div className="lr-sub faint">Hidrômetro · incluído em 15/01/2019 · desativado em 03/02/2023</div>
+                        <div className="lr-top"><span className="lr-title faint">Despacho</span><span className="mono faint" style={{ fontSize: 11 }}>a seguir</span></div>
+                        <div className="lr-sub faint">Deferir, indeferir ou pedir complemento; cada despacho fica datado na trilha.</div>
                       </div>
                     </div>
                   </Body>
                 </Panel>
 
-                {/* sidecc equipment fields for the incoming medidor */}
-                <div className="stack" style={{ marginTop: 14 }}>
-                  <div className="eyebrow">Novo medidor</div>
-                  <label className="field"><span>Tipo</span>
-                    <div className="input"><span style={{ color: 'var(--ink)' }}>Hidrômetro</span><span className="sp" style={{ flex: 1 }} />▾</div></label>
-                  <label className="field"><span>Unidade de medida</span>
-                    <div className="input"><span style={{ color: 'var(--ink)' }}>m³</span><span className="sp" style={{ flex: 1 }} />▾</div></label>
-                  <label className="field"><span>Número de série</span>
-                    <div className="input mono" style={{ color: 'var(--ink)' }}>B24-009731</div></label>
-                  <label className="field"><span>Fabricante</span>
-                    <div className="input" style={{ color: 'var(--ink)' }}>Hidromedição Brasil</div></label>
-                  <label className="field"><span>Modelo</span>
-                    <div className="input mono" style={{ color: 'var(--ink)' }}>WS-50 Woltmann</div></label>
-                  <label className="field"><span>Diâmetro (mm)</span>
-                    <div className="input mono" style={{ color: 'var(--ink)' }}>50</div></label>
-                  <label className="field"><span>Data de inclusão</span>
-                    <div className="input"><span className="mono" style={{ color: 'var(--ink)' }}>10/06/2026</span><span className="sp" style={{ flex: 1 }} />📅</div></label>
-                </div>
+                <Panel style={{ marginTop: 14 }} header={<>Resumo técnico <Sp /><Pill variant="label">campos em Medidores</Pill></>}>
+                  <Body>
+                    <div className="mrow"><span className="msp muted" style={{ fontSize: 12 }}>Medidor que sai</span><span className="mono" style={{ fontSize: 12 }}>HID-88412 · leitura final informada</span></div>
+                    <div className="mrow"><span className="msp muted" style={{ fontSize: 12 }}>Medidor que entra</span><span className="mono" style={{ fontSize: 12 }}>B24-009731 · leitura inicial informada</span></div>
+                    <div className="mrow"><span className="msp muted" style={{ fontSize: 12 }}>Comprovação</span><span className="mono" style={{ fontSize: 12 }}>foto da instalação anexada</span></div>
+                  </Body>
+                </Panel>
 
-                {/* swap closes one equipment and opens another, with closing/opening readings */}
-                <Card style={{ marginTop: 14, padding: 12 }}>
-                  <b style={{ fontSize: 13, color: 'var(--ink)' }}>Efeito da troca</b>
-                  <div className="mrow"><span className="msp muted" style={{ fontSize: 12 }}>HID-88412 recebe</span><span className="mono" style={{ fontSize: 12 }}>data de desativação + leitura final</span></div>
-                  <div className="mrow"><span className="msp muted" style={{ fontSize: 12 }}>B24-009731 recebe</span><span className="mono" style={{ fontSize: 12 }}>data de inclusão + leitura inicial</span></div>
-                </Card>
-
-                <Btn block lg style={{ marginTop: 14 }}>Protocolar solicitação →</Btn>
+                <Btn block lg to="/app/medidor" style={{ marginTop: 14 }}>Abrir cadastro de medidores →</Btn>
+                <Btn block sub style={{ marginTop: 8 }}>Anexar complemento</Btn>
               </PScroll>
               <AppTabBar active="inicio" />
               <HomeBar />
             </Phone>
-            <PhoneLabel>Medidor · inclusão, troca e desativação de equipamento</PhoneLabel>
+            <PhoneLabel>Detalhe da solicitação · estado, trilha e complemento</PhoneLabel>
 
             <Note style={{ maxWidth: 340, margin: '16px auto 0', fontSize: 12 }}>
-              Uma captação pode ter <b>mais de um medidor</b>, e cada equipamento carrega as próprias datas de inclusão e desativação; nada se sobrescreve. A troca não apaga o medidor antigo: desativa um e inclui o outro, com as leituras de fechamento e abertura, e é isso que mantém a série de volumes contínua e auditável.
+              A tela de solicitações acompanha <b>estado, prazos e despachos</b>. O formulário completo do equipamento fica em <Link to="/app/medidor">Medidores</Link>, onde inclusão, troca e desativação compartilham o mesmo cadastro técnico.
             </Note>
           </div>
 

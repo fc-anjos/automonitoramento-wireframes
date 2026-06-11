@@ -33,7 +33,7 @@ const GUIAS = [
   { titulo: 'Multa · processo sancionador', pill: 'vence em 12 dias', pillVar: 'warn', origem: 'Multa', sub: 'PAS-2026-0017 · registrada · venc. 19/06 · R$ 11.485,00' },
   { titulo: 'Cobrança pelo uso · 2º trim/2026', pill: 'emitida', pillVar: 'label', origem: 'Cobrança', sub: 'período abr–jun/2026 · aguardando registro no banco · venc. 30/06 · R$ 4.812,30' },
   { titulo: 'Cobrança pelo uso · 1º trim/2026', pill: 'paga · em conciliação', pillVar: 'act', origem: 'Cobrança', sub: 'período jan–mar/2026 · paga em 06/06 · aguarda retorno do banco' },
-  { titulo: 'Cobrança pelo uso · 3º trim/2025', pill: '2ª via com encargos', pillVar: 'bad', origem: 'Cobrança', sub: 'vencida em 31/10/2025 · atualizada · novo venc. 30/06' },
+  { titulo: 'Cobrança pelo uso · 3º trim/2025', pill: 'atualizada com encargos', pillVar: 'bad', origem: 'Cobrança', sub: 'vencida em 31/10/2025 · instrumento substituto · novo venc. 30/06' },
   { titulo: 'Cobrança pelo uso · 4º trim/2025', pill: 'quitada', pillVar: 'ok', origem: 'Cobrança', sub: 'liquidada em 15/01 · comprovante disponível', faint: true },
 ]
 
@@ -65,7 +65,7 @@ export default function Pagamentos() {
                   <Row style={{ gap: 6, marginTop: 8, flexWrap: 'wrap' }}>
                     <Pill variant="warn">2 a vencer</Pill>
                     <Pill variant="act">1 em conciliação</Pill>
-                    <Pill variant="bad">1 vencida · 2ª via</Pill>
+                    <Pill variant="bad">1 vencida · atualizada</Pill>
                     <Pill variant="ok">1 quitada</Pill>
                   </Row>
                 </Card>
@@ -94,7 +94,7 @@ export default function Pagamentos() {
               <HomeBar />
             </Phone>
             <PhoneLabel>Carteira de guias · cada linha abre o detalhe ao lado</PhoneLabel>
-            <Note style={{ marginTop: 14, fontSize: 12, maxWidth: 300 }}>O ciclo de vida da guia: <b>emitida → registrada → paga (aguardando conciliação) → quitada</b>; vencida → <b>atualizada</b> (segunda via com encargos); substituída ou cancelada. A etapa final, inscrição em dívida ativa após o prazo, é uma exceção de calendário: ingressa numa fila do gestor; a inscrição nunca é automática.</Note>
+            <Note style={{ marginTop: 14, fontSize: 12, maxWidth: 300 }}>O ciclo de vida da guia: <b>emitida → registrada → paga (aguardando conciliação) → quitada</b>; vencida → <b>atualizada</b> (instrumento substituto com encargos); substituída ou cancelada. A etapa final, inscrição em dívida ativa após o prazo, é uma exceção de calendário: ingressa numa fila do gestor; a inscrição nunca é automática.</Note>
           </div>
 
           {/* DETALHE: a guia da multa, com boleto, pix e vínculo com o processo */}
@@ -146,7 +146,7 @@ export default function Pagamentos() {
                   <div className="muted" style={{ fontSize: 12 }}>Disponível após a liquidação, confirmada por conciliação bancária. Nas guias quitadas, o comprovante fica neste bloco, com data e trilha.</div>
                 </Card>
 
-                <Note style={{ marginTop: 12, fontSize: 12 }}>Pagar a multa <b>não encerra o processo</b> se a correção da irregularidade continuar pendente; o cumprimento exige os dois. Prazos do rito: prazo parametrizável · conferir DOE (Portaria DAEE 4.905/2019).</Note>
+                <Note style={{ marginTop: 12, fontSize: 12 }}>Pagar a multa <b>não encerra o processo</b> se a correção da irregularidade continuar pendente; o cumprimento exige os dois. Os prazos exibidos seguem o rito vigente definido pela SP-Águas.</Note>
               </PScroll>
               <AppTabBar />
               <HomeBar />
@@ -158,7 +158,7 @@ export default function Pagamentos() {
         </div>
 
         <Note style={{ maxWidth: 780, margin: '22px auto 0' }}>
-          <b>Não há baixa manual de pagamento.</b> A situação da guia muda por <b>conciliação bancária</b>: retorno do banco arrecadador (arquivo retorno CNAB 240 ou API de cobrança com webhook) para o boleto registrado, e webhook do prestador de pagamento para o PIX dinâmico, com confirmação instantânea. O ajuste manual existe apenas como ato do gestor com justificativa, gravado na trilha de auditoria como qualquer outro verbo; é a mesma assimetria de poderes dos demais fluxos, aplicada à arrecadação.
+          <b>Não há baixa manual de pagamento.</b> A situação da guia muda por <b>conciliação bancária</b>: retorno do banco arrecadador (arquivo retorno CNAB 240 ou API de cobrança com webhook) para o boleto registrado, e webhook do prestador de pagamento para o PIX dinâmico, com confirmação instantânea. Retorno em valor diferente ou em guia substituída não quita automaticamente; vira pendência para tratativa do gestor, com justificativa e saldo registrado na trilha de auditoria.
         </Note>
       </div>
     </>

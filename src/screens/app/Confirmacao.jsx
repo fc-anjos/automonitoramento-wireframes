@@ -5,11 +5,11 @@ import { Card, Pill, Btn, Note, Row } from '../../components/ui.jsx'
 export default function Confirmacao() {
   return (
     <>
-      <DraftBanner tag="APP · 04" title="Histórico & confirmação" />
+      <DraftBanner tag="APP · 04" title="Comprovantes & histórico" />
 
       <div className="wrap">
         <Note style={{ maxWidth: 780, margin: '0 auto 22px' }}>
-          <b>O que o histórico registra.</b> Esta aba registra, em ordem, tudo que aconteceu com o ponto: cada <b>declaração</b> (que recebe <b>protocolo</b> próprio), cada <b>apontamento</b> e cada confirmação do outorgado (ciência, justificativa, retificação). As declarações agrupam-se <b>por período</b>, uma leitura por medidor: o período fica completo quando todo medidor ativo declarou, e a completude é derivada do conjunto, ninguém a edita. Nada é apagado; ao baixar, o item fica arquivado com a trilha. À esquerda, o comprovante da declaração enviada; ao centro, o comprovante de ciência de um apontamento; à direita, a linha do tempo do ponto.
+          <b>O que o histórico registra.</b> Esta aba combina duas visões do mesmo registro: o <b>comprovante</b> de cada ato enviado pelo outorgado e a <b>linha do tempo</b> do ponto. Entram aqui cada declaração (com protocolo próprio), cada apontamento e cada ato de resposta do outorgado (ciência, justificativa, retificação). As declarações agrupam-se <b>por período</b>, uma leitura por medidor: o período fica completo quando todo medidor ativo declarou, e a completude é derivada do conjunto. Nada é apagado; ao baixar, o item fica arquivado com a trilha.
         </Note>
 
         <div className="phone-stage" style={{ justifyContent: 'center' }}>
@@ -166,8 +166,8 @@ export default function Confirmacao() {
                   <span className="faint">›</span>
                 </Link>
 
-                {/* trilha de confirmações do outorgado */}
-                <div className="eyebrow" style={{ margin: '16px 0 6px' }}>Confirmações enviadas</div>
+                {/* receipts for acts sent by the outorgado */}
+                <div className="eyebrow" style={{ margin: '16px 0 6px' }}>Recibos e atos enviados</div>
 
                 <div className="mrow"><span className="ico">✓</span><div className="msp"><b style={{ fontSize: 13, color: 'var(--ink)' }}>Ciência do pico de vazão</b><div className="muted" style={{ fontSize: 11.5 }}>05/06 · 09:41</div></div><span className="faint">›</span></div>
                 <div className="mrow"><span className="ico">✓</span><div className="msp"><b style={{ fontSize: 13, color: 'var(--ink)' }}>Retificação da amostra ausente</b><div className="muted" style={{ fontSize: 11.5 }}>03/06 · 15:35</div></div><span className="faint">›</span></div>

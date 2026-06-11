@@ -2,10 +2,11 @@ import { Link } from 'react-router-dom'
 import { GestorShell } from '../../components/shell.jsx'
 import { Bento, Panel, Body, Note, Pill, Btn, Sp, Row, Verb, DataTable } from '../../components/ui.jsx'
 
-// the only mutation in the ledger: replacing an overdue guia with a 2ª via
+// the only mutation in the ledger: replacing an overdue guia with an updated
+// instrument while preserving the original link.
 const SEGUNDA_VIA = {
-  fields: ['Novo vencimento · 30 dias ▾'],
-  note: 'A guia vencida é substituída por 2ª via com encargos; a guia original permanece vinculada à substituta.',
+  fields: ['Novo vencimento do instrumento atualizado · 30 dias ▾'],
+  note: 'A guia vencida é substituída por instrumento atualizado com encargos; a guia original permanece vinculada à substituta.',
 }
 
 // guias are the unbounded object here (87 issued in the exercise across the
@@ -13,14 +14,14 @@ const SEGUNDA_VIA = {
 // same table: multa (processo sancionador) and cobrança pelo uso (períodos).
 // a row keeps `to` only when a real destination exists (GR-2026-0291 → its own
 // processo); view actions without a screen render as dead pills, and the one
-// mutation ("Atualizar (2ª via)") carries `verb` and opens the dispatch stub.
+// mutation ("Atualizar guia") carries `verb` and opens the dispatch stub.
 const GUIAS = [
   { id: 'GR-2026-0291', outorgado: '07-1100 · Indústria Química Cubatão', origem: 'Multa · PAS-07-2026-0007', origemVar: 'bad', valor: 'R$ 90.460,00', venc: '10/07/2026', estado: 'Registrada', acao: 'Ver processo', to: '/gestor/processo' },
-  { id: 'GR-2026-0288', outorgado: '07-1042 · Petroquímica Baixada S/A', origem: 'Multa · PAS-07-2025-0019 · em recurso', origemVar: 'bad', valor: 'R$ 45.230,00', venc: '29/05/2026', estado: 'Vencida · 12 dias', estadoVar: 'bad', acao: 'Atualizar (2ª via)', verb: SEGUNDA_VIA },
+  { id: 'GR-2026-0288', outorgado: '07-1042 · Petroquímica Baixada S/A', origem: 'Multa · PAS-07-2025-0019 · em recurso', origemVar: 'bad', valor: 'R$ 45.230,00', venc: '29/05/2026', estado: 'Vencida · 12 dias', estadoVar: 'bad', acao: 'Atualizar guia', verb: SEGUNDA_VIA },
   { id: 'GR-2026-0275', outorgado: '07-1001 · Indústria Cubatão S/A', origem: 'Cobrança pelo uso · 1º tri/2026', valor: 'R$ 18.940,00', venc: '15/05/2026', estado: 'Quitada · PIX', estadoVar: 'ok', acao: 'Comprovante' },
   { id: 'GR-2026-0274', outorgado: '07-0830 · Serviço de Águas de Praia Grande', origem: 'Cobrança pelo uso · 1º tri/2026', valor: 'R$ 31.205,00', venc: '15/05/2026', estado: 'Paga · em conciliação', estadoVar: 'act', acao: 'Ver retorno' },
-  { id: 'GR-2026-0269', outorgado: '07-0712 · Laticínios Itanhaém', origem: 'Cobrança pelo uso · 1º tri/2026', valor: 'R$ 2.184,00', venc: '15/05/2026', estado: 'Substituída · ver GR-2026-0301', estadoVar: 'label', acao: 'Ver vínculo' },
-  { id: 'GR-2026-0301', outorgado: '07-0712 · Laticínios Itanhaém', origem: 'Cobrança pelo uso · 1º tri/2026 · 2ª via', valor: 'R$ 2.243,00', venc: '20/06/2026', estado: 'Registrada', acao: 'Acompanhar' },
+  { id: 'GR-2026-0269', outorgado: '07-0712 · Laticínios Itanhaém', origem: 'Cobrança pelo uso · 1º tri/2026', valor: 'R$ 2.184,00', venc: '15/05/2026', estado: 'Substituída · saldo preservado', estadoVar: 'label', acao: 'Ver vínculo' },
+  { id: 'GR-2026-0301', outorgado: '07-0712 · Laticínios Itanhaém', origem: 'Cobrança pelo uso · 1º tri/2026 · instrumento atualizado', valor: 'R$ 2.243,00', venc: '20/06/2026', estado: 'Registrada', acao: 'Acompanhar' },
   { id: 'GR-2025-0188', outorgado: '07-0455 · Indústria Têxtil Mongaguá', origem: 'Cobrança pelo uso · 4º tri/2025', valor: 'R$ 1.412,00', venc: '15/02/2026', estado: 'Inscrita em dívida ativa', estadoVar: 'bad', acao: 'Ver histórico' },
   { id: 'GR-2026-0244', outorgado: '07-1001 · Indústria Cubatão S/A', origem: 'Cobrança pelo uso · 4º tri/2025', valor: 'R$ 17.880,00', venc: '15/02/2026', estado: 'Quitada · CNAB', estadoVar: 'ok', acao: 'Comprovante' },
 ]
@@ -67,7 +68,7 @@ export default function Arrecadacao() {
               <tr><td><b>Total</b></td><td className="num"><b>87</b></td><td className="num"><b>71</b></td><td className="num"><b>4</b></td><td className="num"><b>R$ 112,4 mil</b></td></tr>
             </tbody>
           </table>
-          <Note style={{ margin: 14, fontSize: 12 }}>O valor em aberto corresponde a 9,2% do valor emitido no exercício. Das 71 liquidadas, 68 estão quitadas e 3 pagas aguardam conciliação (retorno CNAB 240 e webhook PIX). As pendências que exigem ato do gestor estão nas filas abaixo: 3 divergências de conciliação e 1 guia apta à dívida ativa.</Note>
+          <Note style={{ margin: 14, fontSize: 12 }}>O valor em aberto corresponde a 9,2% do valor emitido no exercício. Das 71 liquidadas, 68 estão quitadas e 3 pagas aguardam conciliação (retorno CNAB 240 e webhook PIX). As pendências que exigem ato do gestor estão nas filas abaixo: 3 retornos não conciliados e 1 guia apta à dívida ativa.</Note>
         </Panel>
 
         {/* the ledger: every guia, both origins, lifecycle in the state column */}
@@ -84,7 +85,7 @@ export default function Arrecadacao() {
         </Panel>
 
         <Note col={12}>
-          O <b>ciclo de vida</b> está na coluna de situação: emitida → registrada → paga (aguardando conciliação) → quitada; vencida → atualizada (segunda via com encargos, caso GR-2026-0301); substituída ou cancelada, sempre com vínculo à guia que a sucede; e a etapa final, a <b>inscrição em dívida ativa</b>. A multa em recurso (GR-2026-0288) permanece exigível porque o recurso corre <b>sem efeito suspensivo</b> (Portaria DAEE 4.905/2019; prazo parametrizável · conferir DOE); se o recurso for provido após o pagamento, o vínculo guia ↔ processo é o que torna a restituição rastreável.
+          O <b>ciclo de vida</b> está na coluna de situação: emitida → registrada → paga (aguardando conciliação) → quitada; vencida → atualizada (instrumento substituto com encargos, caso GR-2026-0301); substituída ou cancelada, sempre com vínculo à guia que a sucede; e a etapa final, a <b>inscrição em dívida ativa</b>. A multa em recurso (GR-2026-0288) permanece exigível porque o recurso corre <b>sem efeito suspensivo</b>; os prazos seguem o rito vigente da SP-Águas. Se o recurso for provido após o pagamento, o vínculo guia ↔ processo é o que torna a restituição rastreável.
         </Note>
 
         {/* emissão: system act triggered by gestor act, never freehand */}
@@ -118,31 +119,31 @@ export default function Arrecadacao() {
         </Panel>
 
         {/* conciliação queue: what the automatic return could not settle */}
-        <Panel col={7} header={<>Fila de conciliação <Sp /><Pill variant="warn">3 divergências</Pill></>}>
+        <Panel col={7} header={<>Retornos não conciliados <Sp /><Pill variant="warn">3 pendências</Pill></>}>
           <table className="table">
-            <thead><tr><th>Guia</th><th>Outorgado</th><th>Divergência</th><th className="num">Guia × pago</th><th>Resolução</th></tr></thead>
+            <thead><tr><th>Guia</th><th>Outorgado</th><th>Retorno</th><th className="num">Esperado × retornado</th><th>Tratativa</th></tr></thead>
             <tbody>
               <tr>
                 <td className="mono">GR-2026-0263</td><td>07-0830 · Serviço de Águas de Praia Grande</td>
-                <td><Pill variant="warn">Pagamento a maior</Pill></td>
+                <td><Pill variant="warn">Valor retornado acima do esperado</Pill></td>
                 <td className="num">R$ 1.248,00 × R$ 1.284,00</td>
-                <td><Verb pill label="Resolver com justificativa" note="A resolução de divergência é ato com justificativa, gravado na trilha." /></td>
+                <td><Verb pill label="Apurar saldo/crédito" note="O retorno não quita nem compensa automaticamente; o gestor formaliza a tratativa contábil com justificativa." /></td>
               </tr>
               <tr>
                 <td className="mono">GR-2026-0258</td><td>07-0712 · Laticínios Itanhaém</td>
-                <td><Pill variant="warn">Pagamento a menor</Pill></td>
+                <td><Pill variant="warn">Valor retornado abaixo do esperado</Pill></td>
                 <td className="num">R$ 2.184,00 × R$ 2.000,00</td>
-                <td><Verb pill label="Resolver com justificativa" note="A resolução de divergência é ato com justificativa, gravado na trilha." /></td>
+                <td><Verb pill label="Exigir complemento" note="A guia permanece pendente até conciliação do valor devido ou ato formal que reconheça a baixa parcial e o saldo." /></td>
               </tr>
               <tr>
                 <td className="mono">GR-2026-0269</td><td>07-0712 · Laticínios Itanhaém</td>
-                <td><Pill variant="bad">Pagamento após substituição</Pill></td>
+                <td><Pill variant="bad">Retorno em guia substituída</Pill></td>
                 <td className="num">paga a guia substituída</td>
-                <td><Verb pill label="Resolver com justificativa" note="A resolução de divergência é ato com justificativa, gravado na trilha." /></td>
+                <td><Verb pill label="Vincular à guia vigente" note="O retorno é tratado contra a guia atualizada sem apagar a substituída nem quitar automaticamente eventual saldo." /></td>
               </tr>
             </tbody>
           </table>
-          <Note style={{ margin: 14, fontSize: 12 }}>O retorno bancário (arquivo CNAB 240 ou API de cobrança com webhook; PIX dinâmico com confirmação instantânea) liquida automaticamente o caso normal. O que resta ingressa nesta fila: resolver uma divergência é <b>ato do gestor com justificativa</b>, gravado na trilha como qualquer outro verbo, seja compensar a diferença, exigir complemento ou transferir o pagamento à guia substituta.</Note>
+          <Note style={{ margin: 14, fontSize: 12 }}>O retorno bancário (arquivo CNAB 240 ou API de cobrança com webhook; PIX dinâmico com confirmação instantânea) liquida automaticamente apenas o caso normal: guia identificada, valor esperado e instrumento vigente. O que resta ingressa nesta fila como <b>retorno não conciliado</b>. Nenhum desses casos quita, compensa ou encerra a obrigação por si só; a tratativa é ato do gestor, com justificativa, saldo, crédito ou complemento explicitados na trilha.</Note>
         </Panel>
 
         {/* dívida ativa: a calendar exception, lands in a queue, never silent */}
@@ -162,24 +163,24 @@ export default function Arrecadacao() {
               </tr>
             </tbody>
           </table>
-          <Note style={{ margin: 14, fontSize: 12 }}>Esgotado o prazo após o vencimento (prazo parametrizável · conferir DOE), o sistema abre a exceção de calendário e a guia <b>é encaminhada a esta fila</b>; a inscrição nunca é automática. O verbo é do gestor, datado e fundamentado, e a guia muda para o estado definitivo preservando o histórico.</Note>
+          <Note style={{ margin: 14, fontSize: 12 }}>Esgotado o prazo institucional após o vencimento, definido pela regra vigente, o sistema abre a exceção de calendário e a guia <b>é encaminhada a esta fila</b>; a inscrição nunca é automática. O verbo é do gestor, datado e fundamentado, e a guia muda para o estado definitivo preservando o histórico.</Note>
         </Panel>
 
         <Note col={12}>
-          <b>Não há baixa manual de pagamento.</b> A situação da guia muda por conciliação bancária; o ajuste manual existe apenas como <b>ato do gestor com justificativa</b>, gravado na trilha de auditoria como qualquer outro verbo. É a mesma assimetria de poderes das demais telas, aplicada à arrecadação: o outorgado paga e acompanha; emitir, atualizar, resolver divergência e inscrever em dívida ativa são atos do gestor.
+          <b>Não há baixa manual de pagamento.</b> A situação da guia muda por conciliação bancária; o ajuste manual existe apenas como <b>ato do gestor com justificativa</b>, gravado na trilha de auditoria como qualquer outro verbo. É a mesma assimetria de poderes das demais telas, aplicada à arrecadação: o outorgado paga e acompanha; emitir, atualizar, tratar retorno não conciliado e inscrever em dívida ativa são atos do gestor.
         </Note>
 
         {/* immutable audit trail: system events and gestor acts, interleaved */}
-        <Panel col={12} header={<>Trilha de auditoria <Sp /><Pill variant="label" className="mono">imutável</Pill></>}>
+        <Panel col={12} header={<>Últimos eventos de arrecadação <Sp /><Pill variant="label">atos e eventos</Pill></>}>
           <table className="table"><tbody>
-            <tr><td className="mono faint" style={{ fontSize: 11 }}>10/06 07:02</td><td>Sistema conciliou retorno CNAB 240: 14 guias liquidadas, 1 divergência aberta (GR-2026-0258 · pagamento a menor)</td></tr>
-            <tr><td className="mono faint" style={{ fontSize: 11 }}>09/06 15:21</td><td>Gestor M. Souza resolveu GR-2026-0263 (pagamento a maior) com justificativa: diferença compensada na guia seguinte</td></tr>
-            <tr><td className="mono faint" style={{ fontSize: 11 }}>06/06 10:44</td><td>Sistema emitiu GR-2026-0301 (2ª via com encargos) por ato do gestor, em substituição à GR-2026-0269</td></tr>
+            <tr><td className="mono faint" style={{ fontSize: 11 }}>10/06 07:02</td><td>Sistema conciliou retorno CNAB 240: 14 guias liquidadas, 1 retorno não conciliado aberto (GR-2026-0258 · valor abaixo do esperado)</td></tr>
+            <tr><td className="mono faint" style={{ fontSize: 11 }}>09/06 15:21</td><td>Gestor M. Souza apurou GR-2026-0263 (valor acima do esperado) com justificativa: saldo registrado para tratativa contábil</td></tr>
+            <tr><td className="mono faint" style={{ fontSize: 11 }}>06/06 10:44</td><td>Sistema emitiu GR-2026-0301 (instrumento atualizado com encargos) por ato do gestor, em substituição à GR-2026-0269</td></tr>
             <tr><td className="mono faint" style={{ fontSize: 11 }}>02/06 09:15</td><td>Gestor M. Souza inscreveu GR-2025-0188 em dívida ativa, com fundamento, a partir da fila de exceção de calendário</td></tr>
             <tr><td className="mono faint" style={{ fontSize: 11 }}>29/05 00:00</td><td>Sistema abriu exceção de calendário: GR-2026-0288 vencida sem liquidação (multa · PAS-07-2025-0019)</td></tr>
             <tr><td className="mono faint" style={{ fontSize: 11 }}>15/04 11:30</td><td>Sistema emitiu lote de cobrança 1º tri/2026 (81 guias, volumes validados) confirmado pelo gestor</td></tr>
           </tbody></table>
-          <Note style={{ margin: 14, fontSize: 12 }}>A trilha mistura deliberadamente eventos do sistema (conciliação, abertura de exceções) com atos do gestor (resolução de divergência, inscrição em dívida ativa). Como encargos e prazos contam-se de datas certas, cada marco fica gravado e é imutável.</Note>
+          <Note style={{ margin: 14, fontSize: 12 }}>A trilha mistura deliberadamente eventos do sistema (conciliação, abertura de exceções) com atos do gestor (tratativa de retorno não conciliado, inscrição em dívida ativa). Como encargos e prazos contam-se de datas certas, cada marco fica gravado e é imutável.</Note>
         </Panel>
 
       </Bento>
