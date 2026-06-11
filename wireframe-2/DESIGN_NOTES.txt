@@ -1,0 +1,119 @@
+Wireframe 2 navigation standard
+
+This prototype uses a workbook model. The grid is the application surface.
+
+Canonical domain chain
+
+The legacy SiDeCC data model clarifies the hierarchy:
+
+Outorgado / Usuario
+  -> Uso / Interferencia
+    -> Portaria / Ato
+      -> Medidor
+        -> Declaracao
+
+Uso / Interferencia is the primary operational record. It carries the geography
+and monitoring identity: tipo de uso, recurso hidrico, municipio, bacia,
+dominialidade, identificacao SiDeCC and coordinates. A point is a geographic
+or field-inspection lens over a Uso. A Portaria or Ato is the authorization
+attached to a Uso. Medidor and Declaracao are lower-level children.
+
+1. Workbook tabs change the base table.
+
+Examples: Dashboard, Usos, Outorgados, Portarias, Justificativas,
+Apontamentos, Autos / Processos, Relatorios, Administracao.
+Clicking one of these changes the base dataset and the route.
+
+Any workbook tab that exposes a child table, such as Portarias, must carry
+the parent columns: Uso, Outorgado, Identificacao SiDeCC, Sub-bacia and
+Municipio.
+
+2. Recortes change a saved table configuration on the same base table.
+
+Examples on Usos: Uso em atencao, Todos os usos, Sem declaracao, COT-R pendente,
+Calibracao vencida, A vencer. Examples on Justificativas: Aguardando avaliacao,
+Aprovadas, Recorrentes.
+
+A recorte is a named table configuration: filters, columns, order, grouping,
+pinned fields and default action. It does not change the base object.
+
+Every primary table also has a protected "Sem recorte" baseline. It is not a
+saved recorte and cannot be edited or deleted. It means no filters, all fields,
+default order and no grouping. It gives the user a universal escape hatch when
+saved recortes become too specific.
+
+3. Filters live inside recortes.
+
+Sub-bacia, municipio, estado de vazao, transmissao, ciclo, fase and prazo are
+conditions in the recorte builder. They should not appear as separate toolbar
+chips unless the prototype implements real anchored dropdowns for them. The
+recorte rail is the single home for filter, column, order and grouping state.
+
+4. Drilldown tabs belong to the selected Uso/Interferencia.
+
+Examples: Identidade do uso, Portarias / atos, Roteamento, Medidores,
+Declaracoes, Telemetria, Justificativas, Solicitacoes, Apontamentos, Autos,
+Linha do tempo, Auditoria.
+
+Clicking one of these keeps the selected parent and changes the scoped child
+sheet in the lower pane. Child tables are not free-floating in primary
+navigation. If a global child table is ever needed, it must carry parent columns:
+Uso/Interferencia, Identificacao SiDeCC, Portaria/Ato, Outorgado, Sub-bacia and
+Municipio.
+
+5. Actions are commands.
+
+Notificar, Gerar excecao, Atualizar roteamento, Julgar, Exportar and similar
+verbs belong in command bars or row actions, not in horizontal navigation.
+
+6. Histories are domain tables, audit is system trace.
+
+Each domain facet can have its own history, such as roteamento, medidores,
+declaracoes and telemetria. Linha do tempo is a consolidated domain chronology
+for the selected Uso. Auditoria is the formal system trace: actor, timestamp,
+operation, source and effect.
+
+7. Label discipline.
+
+Do not label a base table "Pontos / outorgas". Use "Usos monitorados" for
+the canonical operating table. Use "Ponto" only in map, coordinate, field
+inspection or captacao context. Use "Portaria" or "Ato" for the authorization
+row attached to a Uso.
+
+8. Index and show are separate reading modes.
+
+The homepage is Dashboard operacional: a supervisory triage surface over the
+same Usos monitorados dataset, with map, deadlines, sub-bacia status and
+operational health. It routes work back to the workbook tabs. It should not
+surface Curva ABC or roteamento as a dashboard category: users in the monitored
+universe already carry their declaration or telemetry obligation. Classification
+and frequency history remain in the Uso detail; the landing page should focus
+on continuity of data, reconciliation against outorgado/permitido, deadlines,
+exceptions, medidores and cadastral parity.
+
+Usos monitorados remains the canonical workbook index. Selecting a row opens a
+right inspector with the minimum context and next action. Opening the record
+expands that inspector into a resizable panel with the full hierarchy.
+Workspace mode uses the whole surface for the selected Uso. A permanent bottom
+show panel is not the default because it makes both the index and the record
+harder to read.
+
+9. Primary tabs share one workspace pattern.
+
+Every primary tab uses the same pattern: index table, row inspector, resizable
+record panel and full workspace mode. Hidden or orphan routes should redirect
+to the owning workbook tab. Multas/guias, for example, belong under Autos /
+Processos unless they return as a visible top-level workbook tab.
+
+10. Prototype commands must not look like navigation.
+
+11. Display modes are not recortes.
+
+Tabela, Mapa and Indicadores are display modes for the active recorte. They
+change how the same rows are rendered; they do not own filters, columns, order
+or grouping. Dashboard may expose a map panel as a landing view, but Mapa still
+means a geographic lens over Usos, not a separate domain object.
+
+Top tabs navigate. Row selection opens context. Panel mode buttons change the
+local layout. Child tabs change scoped tables. Commands that are not wired in
+this prototype remain visible only as disabled toolbar controls.

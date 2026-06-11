@@ -27,6 +27,28 @@ function LaunchCard({ screen }) {
   )
 }
 
+function VersionCard({ href, num, title, blurb }) {
+  return (
+    <a className="launch-card" href={href}>
+      <div className="thumb" aria-hidden="true">
+        <div style={{ padding: 18, fontFamily: 'var(--comm)' }}>
+          <div className="eyebrow" style={{ marginBottom: 10 }}>Protótipo navegável</div>
+          <div style={{ height: 10, width: '72%', background: '#bdbdbd', marginBottom: 10 }} />
+          <div style={{ height: 10, width: '48%', background: '#d4d4d4', marginBottom: 18 }} />
+          <div className="grid g-3">
+            <div style={{ height: 44, background: '#e1e1e1', border: '1px solid #d0d0d0' }} />
+            <div style={{ height: 44, background: '#e1e1e1', border: '1px solid #d0d0d0' }} />
+            <div style={{ height: 44, background: '#e1e1e1', border: '1px solid #d0d0d0' }} />
+          </div>
+        </div>
+      </div>
+      <span className="num">{num}</span>
+      <h3>{title}</h3>
+      <p>{blurb}</p>
+    </a>
+  )
+}
+
 export default function Launcher() {
   return (
     <>
@@ -56,6 +78,30 @@ export default function Launcher() {
         <div className="note">
           <b>Convenção de navegação.</b> As pílulas de navegação conduzem à tela exemplar de cada módulo. Os verbos de ação (deferir, indeferir, registrar ciência…) abrem um <b>esboço de baixa fidelidade</b> do despacho, ilustrativo dos campos exigidos, da justificativa e do efeito jurídico do ato.
         </div>
+
+        <section className="stack">
+          <div className="row" style={{ alignItems: 'baseline' }}>
+            <h2>Versões do protótipo <span className="pill">publicadas juntas</span></h2>
+            <span className="sp" style={{ flex: 1 }} />
+          </div>
+          <p className="muted" style={{ margin: 0 }}>A versão 1 permanece como índice de telas por superfície. A versão 2 abre o console gestor em padrão workbook.</p>
+          <div className="grid g-2">
+            <VersionCard
+              href="./"
+              num="VERSÃO 1"
+              title="Índice de telas por superfície"
+              blurb="Aplicativo do outorgado, plataforma gestora e portal público no conjunto original de wireframes."
+            />
+            <VersionCard
+              href="./v2/"
+              num="VERSÃO 2"
+              title="Console gestor em workbook"
+              blurb="Protótipo gestor alternativo, com navegação por abas, tabelas densas, inspetor lateral e recortes operacionais."
+            />
+          </div>
+        </section>
+
+        <hr className="div" />
 
         {SURFACES.map((surface, i) => (
           <div key={surface.id}>
