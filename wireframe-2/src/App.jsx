@@ -5,6 +5,7 @@ import Apontamentos from './screens/Apontamentos.jsx'
 import Dashboard from './screens/Dashboard.jsx'
 import GenericTable from './screens/GenericTable.jsx'
 import Justificativas from './screens/Justificativas.jsx'
+import Multas from './screens/Multas.jsx'
 import Outorgados from './screens/Outorgados.jsx'
 import Portarias from './screens/Portarias.jsx'
 import Processos from './screens/Processos.jsx'
@@ -114,7 +115,7 @@ export default function App() {
       <Route path="/apontamentos" element={<Page><Apontamentos /></Page>} />
       <Route path="/processos" element={<Page><Processos /></Page>} />
       <Route path="/autos" element={<Navigate to="/processos" replace />} />
-      <Route path="/multas" element={<Navigate to="/processos" replace />} />
+      <Route path="/multas" element={<Page><Multas /></Page>} />
       <Route path="/relatorios" element={<Page><GenericTable dataset="relatorios" title="Relatórios" meta="consultas exportáveis" rows={relatorios} columns={[
         { key: 'id', label: 'ID' },
         { key: 'nome', label: 'Relatório' },

@@ -11,6 +11,7 @@ const workbookTabs = [
   ['/justificativas', 'Justificativas'],
   ['/apontamentos', 'Apontamentos'],
   ['/processos', 'Autos / Processos'],
+  ['/multas', 'Multas'],
   ['/relatorios', 'Relatórios'],
   ['/admin', 'Administração'],
 ]

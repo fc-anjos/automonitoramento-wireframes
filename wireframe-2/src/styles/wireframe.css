@@ -1234,6 +1234,245 @@ body.dragging-panel {
 .command-item small {
   line-height: 1.2;
 }
+.process-note {
+  margin: 10px 13px 13px;
+  padding: 10px 12px;
+  border: 1.5px dashed var(--ink);
+  border-radius: var(--hand-2);
+  background: #fff;
+  display: grid;
+  gap: 4px;
+}
+.process-note b {
+  font-size: 13px;
+}
+.process-note span {
+  color: var(--muted);
+  line-height: 1.35;
+}
+.payment-workspace {
+  min-height: 0;
+  overflow: auto;
+}
+.payment-rail {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 0 13px 13px;
+}
+.payment-rail > div {
+  border: 1.5px solid var(--ink);
+  border-radius: var(--hand-2);
+  background: #fff;
+  padding: 10px;
+  min-width: 0;
+}
+.payment-rail span,
+.modal-doc-list span {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+.payment-rail b {
+  display: block;
+  margin: 4px 0;
+  word-break: break-word;
+}
+.payment-rail small,
+.modal-doc-list small {
+  color: var(--muted);
+  line-height: 1.25;
+}
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: rgba(255, 255, 255, .72);
+}
+.action-modal {
+  width: min(760px, 100%);
+  max-height: min(760px, calc(100vh - 44px));
+  display: grid;
+  grid-template-rows: auto auto minmax(0, auto) auto minmax(0, 1fr) auto auto;
+  border: 2.5px solid var(--ink);
+  border-radius: var(--hand-2);
+  background: var(--surface);
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, .12);
+  overflow: hidden;
+}
+.workflow-modal {
+  width: min(820px, 100%);
+}
+.action-modal > header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-bottom: 1.5px solid var(--ink);
+  background: #fff;
+}
+.action-modal > header span {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+.action-modal > header b {
+  display: block;
+  font-size: 20px;
+}
+.action-modal > header button {
+  margin-left: auto;
+}
+.action-modal > p {
+  margin: 0;
+  padding: 12px 14px;
+  border-bottom: 1.5px solid var(--line);
+  line-height: 1.4;
+}
+.workflow-state {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 12px 14px;
+  border-bottom: 1.5px solid var(--line);
+}
+.workflow-state > div {
+  border: 1.5px solid var(--line);
+  border-radius: var(--hand-2);
+  background: #fff;
+  padding: 9px 10px;
+}
+.workflow-state span,
+.workflow-form span,
+.workflow-checklist span {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: uppercase;
+}
+.workflow-state b {
+  display: block;
+  margin-top: 3px;
+}
+.action-modal .fields {
+  padding: 10px 14px;
+  border-bottom: 1.5px solid var(--line);
+}
+.workflow-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 12px 14px;
+  border-bottom: 1.5px solid var(--line);
+}
+.workflow-form label {
+  display: grid;
+  gap: 5px;
+  min-width: 0;
+}
+.workflow-form label:has(textarea) {
+  grid-column: 1 / -1;
+}
+.workflow-form input,
+.workflow-form select,
+.workflow-form textarea {
+  width: 100%;
+  min-width: 0;
+  border: 1.5px solid var(--ink);
+  border-radius: var(--hand-2);
+  background: #fff;
+  padding: 8px 9px;
+  font: inherit;
+}
+.workflow-form textarea {
+  min-height: 76px;
+  resize: vertical;
+}
+.workflow-form .check-field {
+  grid-template-columns: 22px minmax(0, 1fr);
+  align-items: center;
+}
+.workflow-form .check-field span {
+  grid-column: 2;
+  grid-row: 1;
+}
+.workflow-form .check-field input {
+  grid-column: 1;
+  grid-row: 1;
+  width: 18px;
+  height: 18px;
+  padding: 0;
+}
+.modal-doc-list {
+  min-height: 0;
+  overflow: auto;
+  display: grid;
+  gap: 7px;
+  padding: 12px 14px;
+  border-bottom: 1.5px solid var(--line);
+}
+.modal-doc-list > b {
+  margin-bottom: 2px;
+}
+.modal-doc-list > div {
+  display: grid;
+  grid-template-columns: 84px minmax(0, 1fr) 150px;
+  gap: 8px;
+  align-items: start;
+  padding: 8px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--hand-2);
+  background: #fff;
+}
+.modal-doc-list strong {
+  min-width: 0;
+  word-break: break-word;
+}
+.action-modal .process-note {
+  margin: 10px 14px;
+}
+.workflow-checklist {
+  display: grid;
+  gap: 7px;
+  padding: 10px 14px;
+  border-bottom: 1.5px solid var(--line);
+}
+.workflow-checklist > div {
+  display: grid;
+  grid-template-columns: 74px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  padding: 7px 9px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--hand-2);
+  background: #fff;
+}
+.workflow-checklist > div.met {
+  border-color: #2f6f4e;
+}
+.workflow-checklist > div.pending {
+  border-color: #a85a42;
+}
+.workflow-checklist b {
+  min-width: 0;
+}
+.action-modal > footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 14px;
+  border-top: 1.5px solid var(--ink);
+  background: #fff;
+}
+.action-modal > footer .btn:disabled {
+  opacity: .48;
+  cursor: not-allowed;
+}
 .workbook-grid > .sheet > .datatable {
   height: 100%;
 }

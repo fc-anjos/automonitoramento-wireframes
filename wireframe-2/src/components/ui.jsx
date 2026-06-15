@@ -728,7 +728,7 @@ export const CommandStrip = ({ commands = [] }) => {
         const enabled = command.enabled !== false
         return (
           <div className="command-item" key={command.label}>
-            <button className={cx('btn', command.sub && 'sub')} type="button" disabled={!enabled} title={!enabled ? command.reason : command.note}>
+            <button className={cx('btn', command.sub && 'sub')} type="button" disabled={!enabled} title={!enabled ? command.reason : command.note} onClick={command.onClick}>
               {command.label}
             </button>
             {!enabled && command.reason && <small>{command.reason}</small>}
